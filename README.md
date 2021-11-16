@@ -1,6 +1,6 @@
 # SearXNG
 
-builds custom SearXNG container with a changed simple theme, settings.yml and bundled with filtron binary; This project builds on top of https://github.com/searxng/searxng (SearXNG vs SearX: https://github.com/searxng/searxng/issues/46) as well as https://github.com/dalf/filtron.
+Builds base image from alpine with python packages needed for SearXNG to work. This speeds up SearXNG builds, since the python packages do not need to be rebuild every time.
 
 
 
@@ -20,12 +20,8 @@ GitLab : https://paulgo.dev/paulgoio/searxng
 
 * Clone this repo: ```git clone https://github.com/paulgoio/searxng.git```
 
-* After making your changes make sure to update `searxng.min.css` as well as `searxng-rtl.min.css` by running `update.sh` (docker needed)
+* Switch to `base` branch: ```git checkout base```
 
-* You can build the docker container locally by running: ```docker build --pull -f ./Dockerfile -t searxng-dev:latest .```
+* Make your changes to Dockerfile and requirements.txt
 
-* Debug the local container with: ```docker run -it --rm -p 8080:8080 searxng-dev:latest```
-
-
-
-This is the base image to speed up SearXNG build times. It basically already builds are the python packages ahead of time
+* Build image: ```docker build --pull -f ./Dockerfile -t searxng-dev:base .```
