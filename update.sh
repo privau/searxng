@@ -25,6 +25,12 @@ cd build
 make themes.all
 cd ..
 
+echo "delete old searxng logo"
+rm -f build/searx/static/themes/simple/img/searxng.png
+
+echo "copy new searxng logo in place"
+cp -v src/images/searxng.png build/searx/static/themes/simple/img/
+
 echo "cp build files back to fork src folder"
 rm -rf src/css/*
 cp -r -v build/searx/static/themes/simple/css/* src/css/
