@@ -6,20 +6,6 @@ Builds custom SearXNG container with a changed simple theme, settings.yml and bu
 Production Server / Instance : https://search.vojkovic.xyz/
 
 
-### Basic Example
-
-* ```docker run -it --rm -p 8080:8080 paulgoio/searxng:production```
-
-* After that just visit http://127.0.0.1:8080 in your browser and stop the server with ctrl-c
-
-
-
-### Production Setup
-
-Check out the `docker-compose.yml` file in this repo for reference
-
-
-
 ### Development
 
 * Clone this repo: ```git clone https://github.com/codingbrock/vsearch.git```
@@ -48,13 +34,13 @@ Check out the `docker-compose.yml` file in this repo for reference
 
 * ```BASE_URL``` : set the base url (for example example.org would have `https://example.org/` as base)
 
-* ```NAME``` : set the name of the instance, which is for example displayed in the title of the site (for example `PaulGO`)
+* ```NAME``` : set the name of the instance, which is for example displayed in the title of the site (for example `vSearch`)
 
 * ```CONTACT``` : set instance maintainer contact (for example `mailto:user@example.org`)
 
-* ```ISSUE_URL``` : set issue url for custom SearXNG repo (for example `https://github.com/paulgoio/searxng/issues` !Without trailing /)
+* ```ISSUE_URL``` : set issue url for custom SearXNG repo (for example `https://github.com/codingbrock/vsearch/issues` !Without trailing /)
 
-* ```GIT_URL``` : set git url for custom SearXNG repo (for example `https://github.com/paulgoio/searxng`)
+* ```GIT_URL``` : set git url for custom SearXNG repo (for example `https://github.com/codingbrock/vsearch`)
 
 * ```GIT_BRANCH``` : set git branch for custom SearXNG repo (for example `main`)
 
