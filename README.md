@@ -1,19 +1,9 @@
 # SearXNG
 
-builds custom SearXNG container with a changed simple theme, settings.yml and bundled with filtron binary; This project builds on top of https://github.com/searxng/searxng (SearXNG vs SearX: https://github.com/searxng/searxng/issues/46) as well as https://github.com/dalf/filtron.
+Builds custom SearXNG container with a changed simple theme, settings.yml and bundled with filtron binary; This project builds on top of https://github.com/searxng/searxng (SearXNG vs SearX: https://github.com/searxng/searxng/issues/46) as well as https://github.com/dalf/filtron.)
 
-
-
-### Project Links
 
 Production Server / Instance : https://search.vojkovic.xyz/
-
-DockerHub : https://hub.docker.com/r/paulgoio/searxng
-
-GitHub : https://github.com/paulgoio/searxng
-
-GitLab : https://paulgo.dev/paulgoio/searxng
-
 
 
 ### Basic Example
@@ -32,7 +22,7 @@ Check out the `docker-compose.yml` file in this repo for reference
 
 ### Development
 
-* Clone this repo: ```git clone https://github.com/paulgoio/searxng.git```
+* Clone this repo: ```git clone https://github.com/codingbrock/vsearch.git```
 
 * After making your changes in `src/less` make sure to update `src/css` by running `update.sh` (python, npm and make needed)
 
