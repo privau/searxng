@@ -6,7 +6,7 @@ builds custom SearXNG container with a changed simple theme, settings.yml and bu
 
 ### Project Links
 
-Production Server / Instance : https://search.vojkovic.xyz/stats
+Production Server / Instance : https://search.vojkovic.xyz/
 
 DockerHub : https://hub.docker.com/r/paulgoio/searxng
 
