@@ -24,6 +24,7 @@ COPY ./src/run.sh /usr/local/bin/run.sh
 COPY --from=builder /go/src/github.com/searxng/filtron/filtron /usr/local/bin/filtron
 COPY ./src/rules.json /etc/filtron/rules.json
 
+
 # make run.sh executable, remove css maps (since the builder does not support css maps for now), copy uwsgi server ini, set default settings, precompile static theme files
 RUN cp -r -v dockerfiles/uwsgi.ini /etc/uwsgi/; \
 rm -rf searx/static/themes/simple/css/searxng.min.css.map; \
@@ -40,6 +41,11 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/Referrer-Policy: no-referrer/d" \
 -e "/static_use_hash:/s/false/true/g" \
 -e "s/    use_mobile_ui: false/    use_mobile_ui: true/g" \
+-e "/disabled: false/d" \
+-e "/name: google/s/$/\n    disabled: false/g" \
+-e "/name: bing/s/$/\n    disabled: false/g" \
+-e "/name: wikipedia/s/$/\n    disabled: false/g" \
+-e "/name: qwant/s/$/\n    disabled: true/g" \
 -e "/name: btdigg/s/$/\n    disabled: true/g" \
 -e "/name: deviantart/s/$/\n    disabled: true/g" \
 -e "/name: vimeo/s/$/\n    disabled: true/g" \
