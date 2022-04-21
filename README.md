@@ -8,7 +8,11 @@ Production Server / Instance : https://search.vojkovic.xyz/
 
 This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant closed access for multiple countries, one being Singapore. You can read their statement on the matter [here](https://twitter.com/QwantCom/status/1339149434572206080). Therefore, I have deactivated Qwant as a default search engine until Qwant allows Singaporean users to access their service.
 
+### Basic Usage
 
+* ```docker run -it --rm -p 8080:8080 vojkovic/vsearch:production```
+
+* After that just visit http://127.0.0.1:8080 in your browser and stop the server with ctrl-c.
 
 ### Development
 
