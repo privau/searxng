@@ -1,5 +1,7 @@
 # SearXNG
 
+A Fork of https://github.com/paulgoio/searxng
+
 Builds custom SearXNG container with a changed simple theme, settings.yml and bundled with filtron binary; This project builds on top of https://github.com/searxng/searxng (SearXNG vs SearX: https://github.com/searxng/searxng/issues/46) as well as https://github.com/dalf/filtron.)
 
 Production Server / Instance : https://search.vojkovic.xyz/
