@@ -1,3 +1,0 @@
-include:
-  - project: paulgoio/templates
-    file: build.yml
