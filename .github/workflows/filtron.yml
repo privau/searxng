@@ -4,8 +4,7 @@ name: filtron
 
 on:  
   push:
-  pull_request:
-    branches: [ filtron ]
+    branches: filtron
 
 jobs:
 
@@ -31,8 +30,10 @@ jobs:
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
+
         with:
           context: ./
+          branches: filtron
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/vsearch:filtron
