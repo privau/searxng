@@ -94,13 +94,12 @@
 }
 
 .search_box {
-  border: 1px solid var(--color-search-border);
-  box-shadow: var(--color-search-shadow);
   border-radius: 2em;
   width: @search-width;
   display: inline-flex;
   flex-direction: row;
   white-space: nowrap;
+  box-shadow: 0 2px 8px rgb(34 38 46 / 25%);
 }
 
 .search_box:hover,
@@ -288,7 +287,7 @@ html.no-js #clear_search.hide_if_nojs {
 
   #search_view:focus-within {
     display: block;
-    background-color: var(--color-base-background);
+    background-color: var(--color-search-background);
     position: absolute;
     top: 0;
     height: 100%;
@@ -296,9 +295,6 @@ html.no-js #clear_search.hide_if_nojs {
     z-index: 10000;
 
     .search_box {
-      border-top: none;
-      border-left: none;
-      border-right: none;
       width: 100%;
       border-radius: 0;
       box-shadow: none;
