@@ -18,7 +18,7 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 ### Development
 
-* Clone this repo: ```git clone https://github.com/codingbrock/vsearch.git```
+* Clone this repo: ```git clone https://github.com/vojkovic/vsearch.git```
 
 * After making your changes in `src/less` make sure to update `src/css` by running `update.sh` (python, npm and make needed)
 
@@ -48,9 +48,9 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 * ```CONTACT``` : set instance maintainer contact (for example `mailto:user@example.org`)
 
-* ```ISSUE_URL``` : set issue url for custom SearXNG repo (for example `https://github.com/codingbrock/vsearch/issues` !Without trailing /)
+* ```ISSUE_URL``` : set issue url for custom SearXNG repo (for example `https://github.com/vojkovic/vsearch/issues` !Without trailing /)
 
-* ```GIT_URL``` : set git url for custom SearXNG repo (for example `https://github.com/codingbrock/vsearch`)
+* ```GIT_URL``` : set git url for custom SearXNG repo (for example `https://github.com/vojkovic/vsearch`)
 
 * ```GIT_BRANCH``` : set git branch for custom SearXNG repo (for example `main`)
 
