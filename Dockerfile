@@ -6,7 +6,7 @@ FROM registry.paulgo.dev/paulgoio/searxng:filtron as builder
 # use prebuild alpine image with needed python packages from base branch
 FROM registry.paulgo.dev/paulgoio/searxng:base
 ENV GID=991 UID=991 IMAGE_PROXY=true MORTY_KEY= MORTY_URL= REDIS_URL= LIMITER= BASE_URL= NAME=vSearch CONTACT=https://vojkovic.xyz ISSUE_URL=https://github.com/vojkovic/vsearch/issues GIT_URL=https://github.com/vojkovic/vsearch GIT_BRANCH=main FILTRON=true PROXY1= PROXY2= PROXY3= \
-UPSTREAM_COMMIT=6db568bf69b7145451ff90e14da0e49fb5b6269b
+UPSTREAM_COMMIT=85c1c14fd7e8ff217ff57509cf9d58ec92f7af9a
 WORKDIR /usr/local/searxng
 
 # install build deps and git clone searxng as well as setting the version
