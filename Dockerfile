@@ -1,11 +1,6 @@
-# use prebuild filtron image from filtron branch
-FROM registry.paulgo.dev/paulgoio/searxng:filtron as builder
-
-
-
 # use prebuild alpine image with needed python packages from base branch
 FROM registry.paulgo.dev/paulgoio/searxng:base
-ENV GID=991 UID=991 IMAGE_PROXY=true MORTY_KEY= MORTY_URL= REDIS_URL= LIMITER= BASE_URL= NAME=vSearch CONTACT=https://vojkovic.xyz ISSUE_URL=https://github.com/vojkovic/vsearch/issues GIT_URL=https://github.com/vojkovic/vsearch GIT_BRANCH=main FILTRON=true PROXY1= PROXY2= PROXY3= \
+ENV GID=991 UID=991 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME=vSearch CONTACT=https://vojkovic.xyz ISSUE_URL=https://github.com/vojkovic/vsearch/issues GIT_URL= https://github.com/vojkovic/vsearch GIT_BRANCH= PROXY1= PROXY2= PROXY3= \
 UPSTREAM_COMMIT=85c1c14fd7e8ff217ff57509cf9d58ec92f7af9a
 WORKDIR /usr/local/searxng
 
@@ -21,14 +16,9 @@ RUN addgroup -g ${GID} searxng \
 # copy custom simple themes, run.sh, limiter2 and filtron
 COPY ./src/css/* searx/static/themes/simple/css/
 COPY ./src/run.sh /usr/local/bin/run.sh
-COPY --from=builder /go/src/github.com/searxng/filtron/filtron /usr/local/bin/filtron
-COPY ./src/rules.json /etc/filtron/rules.json
-
 
 # make run.sh executable, remove css maps (since the builder does not support css maps for now), copy uwsgi server ini, set default settings, precompile static theme files
 RUN cp -r -v dockerfiles/uwsgi.ini /etc/uwsgi/; \
-rm -rf searx/static/themes/simple/css/searxng.min.css.map; \
-rm -rf searx/static/themes/simple/css/searxng-rtl.min.css.map; \
 chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
