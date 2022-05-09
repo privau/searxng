@@ -1,4 +1,4 @@
-name: dockerbuild-base
+name: build-base
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
     - name: Check Out Repo 
       uses: actions/checkout@v2
       with:
-         ref: base
+        ref: base
         
     - name: Set up Docker Buildx
       id: buildx
