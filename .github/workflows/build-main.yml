@@ -1,7 +1,6 @@
-name: docker
+name: build-main
 
 on:
-  push:
   schedule:
     - cron:  '*/5 * * * *'
   workflow_dispatch:
