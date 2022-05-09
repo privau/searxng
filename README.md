@@ -8,7 +8,7 @@ Production Server / Instance : https://search.vojkovic.xyz
 
 ### Development
 
-* Clone this repo: ```git clone https://github.com/codingbrock/vsearch.git```
+* Clone this repo: ```git clone https://github.com/vojkovic/vsearch.git```
 
 * Switch to `base` branch: ```git checkout base```
 
