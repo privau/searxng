@@ -2,7 +2,7 @@ name: SHA-Update
 
 on:
   schedule:
-    - cron:  '*/5 * * * *'
+    - cron:  '59 * * * *'
   workflow_dispatch:
 
 jobs:
