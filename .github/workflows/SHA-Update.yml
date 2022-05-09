@@ -2,7 +2,7 @@ name: SHA-Update
 
 on:
   schedule:
-    - cron:  '59 * * * *'
+    - cron:  '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Create local changes
       run: |
-        git ls-remote https://github.com/searxng/searxng |  head -1 | cut -f 1 | sed -e "s/.*/UPSTREAM_COMMIT=&/" | sed -i '9r/dev/stdin' Dockerfile && sed -i '9d' ./Dockerfile
+        git ls-remote https://github.com/searxng/searxng |  head -1 | cut -f 1 | sed -e "s/.*/UPSTREAM_COMMIT=&/" | sed -i '4r/dev/stdin' Dockerfile && sed -i '4d' ./Dockerfile
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
