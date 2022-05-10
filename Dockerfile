@@ -1,7 +1,7 @@
 # use prebuild alpine image with needed python packages from base branch
 FROM vojkovic/vsearch:base
 ENV GID=991 UID=991 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME=vSearch CONTACT=mailto:brock@vojkovic.xyz ISSUE_URL=https://github.com/vojkovic/vsearch/issues GIT_URL=https://github.com/vojkovic/vsearch GIT_BRANCH=main PROXY1= PROXY2= PROXY3= \
-UPSTREAM_COMMIT=85c1c14fd7e8ff217ff57509cf9d58ec92f7af9a
+UPSTREAM_COMMIT=2bc836e85d25a3bf50a2004a56100e4b090e79f9
 WORKDIR /usr/local/searxng
 
 # install build deps and git clone searxng as well as setting the version
