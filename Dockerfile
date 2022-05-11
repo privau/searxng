@@ -17,7 +17,7 @@ RUN addgroup -g ${GID} searxng \
 COPY ./src/css/* searx/static/themes/simple/css/
 COPY ./src/run.sh /usr/local/bin/run.sh
 
-# make run.sh executable, remove css maps (since the builder does not support css maps for now), copy uwsgi server ini, set default settings, precompile static theme files
+# make run.sh executable, copy uwsgi server ini, set default settings, precompile static theme files
 RUN cp -r -v dockerfiles/uwsgi.ini /etc/uwsgi/; \
 chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
