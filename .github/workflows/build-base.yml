@@ -31,7 +31,7 @@ jobs:
         context: ./
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/vsearch:base
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/searxng:base
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
