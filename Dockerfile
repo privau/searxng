@@ -64,5 +64,5 @@ find /usr/local/searxng/searx/static -a \( -name '*.html' -o -name '*.css' -o -n
 
 # expose port and set tini as CMD; default user is searxng
 USER searxng
-EXPOSE 8080
+EXPOSE 7070
 CMD ["/sbin/tini","--","run.sh"]
