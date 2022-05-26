@@ -5,7 +5,6 @@ A Fork of https://github.com/paulgoio/searxng
 Builds custom SearXNG container with a changed simple theme, settings.yml and bundled with filtron binary; This project builds on top of https://github.com/searxng/searxng (SearXNG vs SearX: https://github.com/searxng/searxng/issues/46) as well as https://github.com/dalf/filtron.)
 
 Production Server / Instance : https://search.vojkovic.xyz/
-Note: the production instance is extremely bleeding edge with updates from upstream being pushed in ~10m. During this update, the instance restarts, which causes a ~20s downtime. If this has happened to you, please try trying in half a minute. Thank you!
 
 ## FAQ
 
@@ -19,9 +18,9 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 ### Basic Usage
 
-* ```docker run -it --rm -p 8080:8080 vojkovic/searxng:production```
+* ```docker run -it --rm -p 7070:7070 vojkovic/searxng:production```
 
-* After that just visit http://127.0.0.1:8080 in your browser and stop the server with ctrl-c.
+* After that just visit http://127.0.0.1:7070 in your browser and stop the server with ctrl-c.
 
 ### Development
 
@@ -31,7 +30,7 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 * You can build the docker container locally by running (check out base branch for the alpine base with the needed python packages): ```docker build --pull -f ./Dockerfile -t searxng-dev:latest .```
 
-* Debug the local container with: ```docker run -it --rm -p 8080:8080 searxng-dev:latest```
+* Debug the local container with: ```docker run -it --rm -p 7070:7070 searxng-dev:latest```
 
 
 
@@ -55,4 +54,4 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 * ```GIT_BRANCH``` : set git branch for custom SearXNG repo (for example `main`)
 
-* ```PROXY1``` ```PROXY2``` ```PROXY3``` : set proxy server that are applied as round robin for all engines (for example `http://example.org:8080`)
+* ```PROXY1``` ```PROXY2``` ```PROXY3``` : set proxy server that are applied as round robin for all engines (for example `http://example.org:7070`)
