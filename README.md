@@ -18,9 +18,9 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 ### Basic Usage
 
-* ```docker run -it --rm -p 7070:7070 vojkovic/searxng:production```
+* ```docker run -it --rm -p 8080:8080 vojkovic/searxng:production```
 
-* After that just visit http://127.0.0.1:7070 in your browser and stop the server with ctrl-c.
+* After that just visit http://127.0.0.1:8080 in your browser and stop the server with ctrl-c.
 
 ### Development
 
@@ -30,7 +30,7 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 * You can build the docker container locally by running (check out base branch for the alpine base with the needed python packages): ```docker build --pull -f ./Dockerfile -t searxng-dev:latest .```
 
-* Debug the local container with: ```docker run -it --rm -p 7070:7070 searxng-dev:latest```
+* Debug the local container with: ```docker run -it --rm -p 8080:8080 searxng-dev:latest```
 
 
 
@@ -54,4 +54,4 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 * ```GIT_BRANCH``` : set git branch for custom SearXNG repo (for example `main`)
 
-* ```PROXY1``` ```PROXY2``` ```PROXY3``` : set proxy server that are applied as round robin for all engines (for example `http://example.org:7070`)
+* ```PROXY1``` ```PROXY2``` ```PROXY3``` : set proxy server that are applied as round robin for all engines (for example `http://example.org:8080`)
