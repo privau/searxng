@@ -23,7 +23,7 @@ chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
 -e "/autocomplete_min:/s/4/0/g" \
--e "/port:/s/8888/7070/g" \
+-e "/port:/s/8888/8080/g" \
 -e "/bind_address:/s/127.0.0.1/0.0.0.0/g" \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
 -e "/X-Content-Type-Options: nosniff/d" \
@@ -64,5 +64,5 @@ find /usr/local/searxng/searx/static -a \( -name '*.html' -o -name '*.css' -o -n
 
 # expose port and set tini as CMD; default user is searxng
 USER searxng
-EXPOSE 7070
+EXPOSE 8080
 CMD ["/sbin/tini","--","run.sh"]
