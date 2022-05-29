@@ -36,7 +36,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/disabled: false/d" \
 -e "/name: google/s/$/\n    disabled: false/g" \
 -e "/name: wikipedia/s/$/\n    disabled: false/g" \
--e "/name: wikidata/s/$/\n    disabled: false/g" \
+-e "/name: wikidata/s/$/\n    disabled: true/g" \
 -e "/name: duckduckgo/s/$/\n    disabled: true/g" \
 -e "/name: currency/s/$/\n    disabled: true/g" \
 -e "/name: qwant/s/$/\n    disabled: true/g" \
