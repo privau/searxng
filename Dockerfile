@@ -30,6 +30,8 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/X-XSS-Protection: 1; mode=block/d" \
 -e "/X-Robots-Tag: noindex, nofollow/d" \
 -e "/Referrer-Policy: no-referrer/d" \
+-e "/map:/d" \
+-e "/files:/d" \
 -e "/social media:/d" \
 -e "/static_use_hash:/s/false/true/g" \
 -e "s/    use_mobile_ui: false/    use_mobile_ui: true/g" \
