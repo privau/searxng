@@ -30,11 +30,13 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/X-XSS-Protection: 1; mode=block/d" \
 -e "/X-Robots-Tag: noindex, nofollow/d" \
 -e "/Referrer-Policy: no-referrer/d" \
+-e "/social media:/d" \
 -e "/static_use_hash:/s/false/true/g" \
 -e "s/    use_mobile_ui: false/    use_mobile_ui: true/g" \
 -e "/disabled: false/d" \
 -e "/name: google/s/$/\n    disabled: false/g" \
 -e "/name: wikipedia/s/$/\n    disabled: false/g" \
+-e "/name: wikidata/s/$/\n    disabled: false/g" \
 -e "/name: duckduckgo/s/$/\n    disabled: true/g" \
 -e "/name: currency/s/$/\n    disabled: true/g" \
 -e "/name: qwant/s/$/\n    disabled: true/g" \
@@ -42,7 +44,6 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: deviantart/s/$/\n    disabled: true/g" \
 -e "/name: vimeo/s/$/\n    disabled: true/g" \
 -e "/name: openairepublications/s/$/\n    disabled: true/g" \
--e "/name: wikidata/s/$/\n    disabled: true/g" \
 -e "/name: library of congress/s/$/\n    disabled: true/g" \
 -e "/name: dictzone/s/$/\n    disabled: true/g" \
 -e "/name: brave/s/$/\n    disabled: true/g" \

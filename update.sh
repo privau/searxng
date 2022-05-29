@@ -14,10 +14,11 @@ else
 fi
 
 echo "delete upstream simple theme definitions"
-rm -f build/searx/static/themes/simple/src/less/definitions.less build/searx/static/themes/simple/src/less/search.less
+rm -f build/searx/static/themes/simple/src/less/definitions.less build/searx/static/themes/simple/src/less/search.less build/searx/static/themes/simple/src/less/autocomplete.less
 
 echo "copy fork simple theme definitions in place"
 cp -v src/less/definitions.less build/searx/static/themes/simple/src/less/definitions.less
+cp -v src/less/autocomplete.less build/searx/static/themes/simple/src/less/autocomplete.less
 cp -v src/less/search.less build/searx/static/themes/simple/src/less/search.less
 
 echo "build themes with upstream scripts"
