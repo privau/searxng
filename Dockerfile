@@ -1,7 +1,7 @@
 # use prebuild alpine image with needed python packages from base branch
 FROM vojkovic/searxng:base
 ENV GID=991 UID=991 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME= CONTACT=mailto:brockv@tuta.io ISSUE_URL=https://github.com/vojkovic/searxng/issues GIT_URL=https://github.com/vojkovic/searxng GIT_BRANCH=main PROXY1= PROXY2= PROXY3= \
-UPSTREAM_COMMIT=61ee915064aff9de47186e978e45194543e3bddb
+UPSTREAM_COMMIT=78968843a8bbe6f844855fe2391a896a9cd8be7a
 WORKDIR /usr/local/searxng
 
 # install build deps and git clone searxng as well as setting the version
