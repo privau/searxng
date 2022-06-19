@@ -8,9 +8,9 @@ Production Server / Instance : https://search.vojkovic.xyz/
 
 ## FAQ
 
-### Are you logging requests?
+### Do you have a privacy policy?
 
-As off May 11th, I am no longer logging any requests.
+Yes! You can find it [here](https://search.vojkovic.xyz/privacy/).
 
 ### Why does Quant not work?
 
