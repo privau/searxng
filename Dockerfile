@@ -1,6 +1,6 @@
 # use prebuild alpine image with needed python packages from base branch
 FROM vojkovic/searxng:base
-ENV GID=991 UID=991 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME= CONTACT=mailto:brockv@tuta.io ISSUE_URL=https://github.com/vojkovic/searxng/issues GIT_URL=https://github.com/vojkovic/searxng GIT_BRANCH=main PROXY1= PROXY2= PROXY3= \
+ENV GID=991 UID=991 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME= PRIVACYPOLICY=https://search.vojkovic.xyz/privacy CONTACT=mailto:brockv@tuta.io ISSUE_URL=https://github.com/vojkovic/searxng/issues GIT_URL=https://github.com/vojkovic/searxng GIT_BRANCH=main PROXY1= PROXY2= PROXY3= \
 UPSTREAM_COMMIT=8f7cb4ad6fa3f9dec4b89807a32fa69e0e72bb84
 WORKDIR /usr/local/searxng
 
