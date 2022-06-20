@@ -21,9 +21,11 @@ COPY ./src/run.sh /usr/local/bin/run.sh
 RUN cp -r -v dockerfiles/uwsgi.ini /etc/uwsgi/; \
 chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
+-e "s/ultrasecretkey/$(openssl rand -hex 16)/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
 -e "/autocomplete_min:/s/4/0/g" \
 -e "/port:/s/8888/8080/g" \
+-e "/static_use_hash: false/s//&\n  infinite_scroll: true/g" \
 -e "/bind_address:/s/127.0.0.1/0.0.0.0/g" \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
 -e "/X-Content-Type-Options: nosniff/d" \
