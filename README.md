@@ -46,6 +46,8 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 * ```NAME``` : set the name of the instance, which is for example displayed in the title of the site (for example `SearXNG`)
 
+* ```PRIVACYPOLICY``` : set URL of privacy policy of the instance (for example `https://example.org/privacy-policy`)
+
 * ```CONTACT``` : set instance maintainer contact (for example `mailto:user@example.org`)
 
 * ```ISSUE_URL``` : set issue url for custom SearXNG repo (for example `https://github.com/vojkovic/searxng/issues` !Without trailing /)
