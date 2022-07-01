@@ -4,7 +4,7 @@ ENV GID=991 UID=991 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME= PROXY1=
 PRIVACYPOLICY=https://search.vojkovic.xyz/privacy \
 CONTACT=mailto:brockv@tuta.io ISSUE_URL=https://github.com/vojkovic/searxng/issues \
 GIT_URL=https://github.com/vojkovic/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=094354f234e0e81e240bb98050c3f0ca34facc84
+UPSTREAM_COMMIT=0e6124fb5a9b599d6624d34823ef6303fee0ec26
 
 WORKDIR /usr/local/searxng
 
