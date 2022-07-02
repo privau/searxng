@@ -991,6 +991,30 @@ article[data-vim-selected].category-social {
   }
 }
 
+/*
+  remove the preferences text
+*/
+@media screen {
+  .link_on_top_preferences {
+    span {
+      display: none;
+    }
+  }
+}
+
+/*
+  remove preferences icon in results menu
+*/
+@media screen {
+  body.results_endpoint {
+    #links_on_top {
+      .link_on_top_preferences {
+        display: none;
+      }
+    }
+  }
+}
+
 pre code {
   white-space: pre-wrap;
 }
