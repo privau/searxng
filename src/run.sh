@@ -55,6 +55,12 @@ if [ ! -z "${PRIVACYPOLICY}" ]; then
     searx/settings.yml;
 fi
 
+# set donation url
+if [ ! -z "${DONATION_URL}" ]; then
+    sed -i -e "s+donation_url: false+donation_url: ${DONATION_URL}+g" \
+    searx/settings.yml;
+fi
+
 # set contact url
 if [ ! -z "${CONTACT}" ]; then
     sed -i -e "s+contact_url: false+contact_url: ${CONTACT}+g" \

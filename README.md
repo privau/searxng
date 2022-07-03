@@ -52,6 +52,8 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 * ```ISSUE_URL``` : set issue url for custom SearXNG repo (for example `https://github.com/vojkovic/searxng/issues` !Without trailing /)
 
+* ```DONATION_URL``` : set URL of the donation link of the instance (for example `https://docs.searxng.org/donate.html`). Leave empty to disable.
+
 * ```GIT_URL``` : set git url for custom SearXNG repo (for example `https://github.com/vojkovic/searxng`)
 
 * ```GIT_BRANCH``` : set git branch for custom SearXNG repo (for example `main`)

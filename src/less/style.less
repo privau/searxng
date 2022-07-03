@@ -971,12 +971,11 @@ article[data-vim-selected].category-social {
 }
 
 /*
-  hide donate & about buttons
+  hide about button
 */
 @media screen {
   #links_on_top {
-    .link_on_top_about,
-    .link_on_top_donate {
+    .link_on_top_about {
       display: none;
     }
   }
@@ -992,10 +991,12 @@ article[data-vim-selected].category-social {
 }
 
 /*
-  remove the preferences text
+  remove the link text
 */
 @media screen {
-  .link_on_top_preferences {
+  .link_on_top_preferences,
+  .link_on_top_about,
+  .link_on_top_donate {
     span {
       display: none;
     }
@@ -1003,12 +1004,14 @@ article[data-vim-selected].category-social {
 }
 
 /*
-  remove preferences icon in results menu
+  remove icons in results menu
 */
 @media screen {
   body.results_endpoint {
     #links_on_top {
-      .link_on_top_preferences {
+      .link_on_top_preferences,
+      .link_on_top_about,
+      .link_on_top_donate {
         display: none;
       }
     }

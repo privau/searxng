@@ -2,6 +2,7 @@
 FROM vojkovic/searxng:base
 ENV GID=991 UID=991 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME= PROXY1= PROXY2= PROXY3= \
 PRIVACYPOLICY=https://search.vojkovic.xyz/privacy \
+DONATION_URL= \
 CONTACT=mailto:brockv@tuta.io ISSUE_URL=https://github.com/vojkovic/searxng/issues \
 GIT_URL=https://github.com/vojkovic/searxng GIT_BRANCH=main \
 UPSTREAM_COMMIT=4ef62637256d4b2966ff7f0be0051e02d545f756
@@ -30,6 +31,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/port:/s/8888/8080/g" \
 -e "/simple_style:/s/auto/dark/g" \
 -e "/static_use_hash: false/s//&\n  infinite_scroll: true/g" \
+-e "s+donation_url: https://docs.searxng.org/donate.html+donation_url: false+g" \
 -e "/bind_address:/s/127.0.0.1/0.0.0.0/g" \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
 -e "/X-Content-Type-Options: nosniff/d" \
