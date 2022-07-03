@@ -581,6 +581,7 @@ article[data-vim-selected].category-social {
     border: 1px solid var(--color-sidebar-border);
     padding: 1rem;
     font-size: 0.9em;
+    margin-bottom: 2em;
     .rounded-corners;
 
     h2 {
@@ -631,7 +632,7 @@ article[data-vim-selected].category-social {
 }
 
 #search_url {
-  margin-top: 8px;
+  margin-top: 16px;
 
   div.selectable_url {
     pre {
@@ -1014,6 +1015,17 @@ article[data-vim-selected].category-social {
       .link_on_top_donate {
         display: none;
       }
+    }
+  }
+}
+
+/*
+  hide footer in results menu
+*/
+@media screen {
+  body.results_endpoint {
+    footer {
+      display: none;
     }
   }
 }
