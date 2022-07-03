@@ -2,7 +2,7 @@
 
 A Fork of https://github.com/paulgoio/searxng
 
-Builds custom SearXNG container with a changed simple theme and settings.yml. This project builds on top of https://github.com/searxng/searxng (SearXNG vs SearX: https://github.com/searxng/searxng/issues/46)
+Builds a custom SearXNG container with a changed simple theme and settings.yml. This project builds on top of https://github.com/searxng/searxng (SearXNG vs SearX: https://github.com/searxng/searxng/issues/46)
 
 Production Server / Instance : https://search.vojkovic.xyz/
 
@@ -20,15 +20,15 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 * ```docker run -i --restart unless-stopped -p 8080:8080 vojkovic/searxng:production```
 
-* After that just visit http://127.0.0.1:8080 in your browser and stop the server with ctrl-c.
+* After that, just visit http://127.0.0.1:8080 in your browser and stop the server with ctrl-c.
 
 ### Development
 
 * Clone this repo: ```git clone https://github.com/vojkovic/searxng.git```
 
-* After making your changes in `src/less` make sure to update `src/css` by running `update.sh` (python, npm and make needed)
+* After making your changes in `src/less` make sure to update `src/css` by running `update.sh` (python, npm and make needed).
 
-* You can build the docker container locally by running (check out base branch for the alpine base with the needed python packages): ```docker build --pull -f ./Dockerfile -t searxng-dev:latest .```
+* You can build the docker container locally by running (check out the base branch for the alpine base with the needed python packages): ```docker build --pull -f ./Dockerfile -t searxng-dev:latest .```
 
 * Debug the local container with: ```docker run -it --rm -p 8080:8080 searxng-dev:latest```
 
