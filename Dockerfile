@@ -46,7 +46,6 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/disabled: false/d" \
 -e "/name: google/s/$/\n    disabled: false/g" \
 -e "/name: wikipedia/s/$/\n    disabled: false/g" \
--e "/name: bing/s/$/\n    disabled: false/g" \
 -e "/name: wikidata/s/$/\n    disabled: true/g" \
 -e "/name: duckduckgo/s/$/\n    disabled: true/g" \
 -e "/name: currency/s/$/\n    disabled: true/g" \
@@ -58,7 +57,8 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: library of congress/s/$/\n    disabled: true/g" \
 -e "/name: dictzone/s/$/\n    disabled: true/g" \
 -e "/name: brave/s/$/\n    disabled: true/g" \
--e "/name: genius/s/$/\n    disabled: true/g" \
+-e "/name: lingva/s/$/\n    disabled: true/g" \
+-e "/name: genius/s/$/\n    disabled: true/g" \ 
 -e "/name: artic/s/$/\n    disabled: true/g" \
 -e "/name: flickr/s/$/\n    disabled: true/g" \
 -e "/name: unsplash/s/$/\n    disabled: true/g" \
@@ -69,6 +69,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: bing news/s/$/\n    disabled: true/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
+-e "/shortcut: bi/{n;s/.*/    disabled: false/}" \
 searx/settings.yml; \
 su searxng -c "/usr/bin/python3 -m compileall -q searx"; \
 find /usr/local/searxng/searx/static -a \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.ttf' -o -name '*.eot' \) \
