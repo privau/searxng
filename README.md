@@ -4,13 +4,13 @@ A Fork of https://github.com/paulgoio/searxng
 
 Builds a custom SearXNG container with a changed simple theme and settings.yml. This project builds on top of https://github.com/searxng/searxng (SearXNG vs SearX: https://github.com/searxng/searxng/issues/46)
 
-Production Server / Instance : https://search.vojkovic.xyz/
+Production Server / Instance : https://priv.au/
 
 ## FAQ
 
 ### Do you have a privacy policy?
 
-Yes! You can find it [here](https://search.vojkovic.xyz/privacy/).
+Yes! You can find it [here](https://priv.au/privacy/).
 
 ### Why does Quant not work?
 
