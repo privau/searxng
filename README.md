@@ -57,5 +57,3 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 * ```GIT_URL``` : set git url for custom SearXNG repo (for example `https://github.com/vojkovic/searxng`)
 
 * ```GIT_BRANCH``` : set git branch for custom SearXNG repo (for example `main`)
-
-* ```PROXY1``` ```PROXY2``` ```PROXY3``` : set proxy server that are applied as round robin for all engines (for example `http://example.org:8080`)
