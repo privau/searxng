@@ -51,6 +51,8 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: currency/s/$/\n    disabled: true/g" \
 -e "/name: qwant/s/$/\n    disabled: true/g" \
 -e "/name: btdigg/s/$/\n    disabled: true/g" \
+-e "/name: sepiasearch/s/$/\n    disabled: true/g" \
+-e "/name: dailymotion/s/$/\n    disabled: true/g" \
 -e "/name: deviantart/s/$/\n    disabled: true/g" \
 -e "/name: vimeo/s/$/\n    disabled: true/g" \
 -e "/name: openairepublications/s/$/\n    disabled: true/g" \
