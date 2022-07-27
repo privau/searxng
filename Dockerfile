@@ -3,7 +3,7 @@ FROM vojkovic/searxng:base
 ENV GID=991 UID=991 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME= \
 PRIVACYPOLICY=https://priv.au/privacy \
 DONATION_URL= \
-CONTACT=mailto:brockv@tuta.io ISSUE_URL=https://github.com/vojkovic/searxng/issues \
+CONTACT=https://vojkovic.xyz ISSUE_URL=https://github.com/vojkovic/searxng/issues \
 GIT_URL=https://github.com/vojkovic/searxng GIT_BRANCH=main \
 UPSTREAM_COMMIT=50ec821e8c5b099947d657722b1879fc8c03bcfa
 
