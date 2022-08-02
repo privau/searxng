@@ -31,6 +31,7 @@
 
   input {
     display: none;
+    padding: 0.9rem !important;
   }
 
   label {
@@ -314,11 +315,33 @@ html.no-js #clear_search.hide_if_nojs {
   }
 }
 
+@media screen and (max-width: @small-phone) {
+  .category {
+    label {
+      div.category_name {
+        display: none;
+      }
+
+      svg {
+        display: inline;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: @ultra-small-phone) {
   #search_header {
     grid-template-areas:
       "search search"
       "categories categories";
+  }
+
+  #search_box {
+    border-radius: 0;
+  }
+
+  .category label {
+    padding: 0.7rem !important;
   }
 
   #search_logo {
