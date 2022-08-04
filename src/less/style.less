@@ -847,6 +847,14 @@ article[data-vim-selected].category-social {
   }
 }
 
+@media screen and (max-width: @tablet) {
+  // hide suggestions and result count on mobile devices.
+  #suggestions,
+  #result_count {
+    display: none;
+  }
+}
+
 @media screen and (min-width: @phone) and (max-width: @tablet) {
 
   // when .center-aligment-yes, see style-center.less

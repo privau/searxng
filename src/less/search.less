@@ -273,12 +273,8 @@ html.no-js #clear_search.hide_if_nojs {
     margin: 0;
 
     label {
-      padding: 1rem !important;
+      padding: 0.9rem !important;
       margin: 0 !important;
-
-      svg {
-        display: none;
-      }
     }
   }
 
@@ -315,9 +311,23 @@ html.no-js #clear_search.hide_if_nojs {
   }
 }
 
-@media screen and (max-width: @small-phone) {
+@media screen and (max-width: calc(@small-phone + 2em)) {
   .category {
     label {
+      padding: 0.8rem !important;
+
+      svg {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: calc(@small-phone - 10em)) {
+  .category {
+    label {
+      padding: 0.7rem !important;
+
       div.category_name {
         display: none;
       }
@@ -330,6 +340,10 @@ html.no-js #clear_search.hide_if_nojs {
 }
 
 @media screen and (max-width: @ultra-small-phone) {
+  #search_logo {
+    display: none;
+  }
+
   #search_header {
     grid-template-areas:
       "search search"
@@ -339,13 +353,19 @@ html.no-js #clear_search.hide_if_nojs {
   #search_box {
     border-radius: 0;
   }
+}
 
+@media screen and (max-width: calc(@ultra-small-phone + 10em)) {
   .category label {
     padding: 0.7rem !important;
   }
+}
 
-  #search_logo {
-    display: none;
+@media screen and (max-width: calc(@ultra-small-phone)) {
+  .category {
+    label {
+      padding: 0.5rem !important;
+    }
   }
 }
 
