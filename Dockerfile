@@ -5,7 +5,7 @@ PRIVACYPOLICY=https://priv.au/privacy \
 DONATION_URL= \
 CONTACT=https://vojkovic.xyz ISSUE_URL=https://github.com/vojkovic/searxng/issues \
 GIT_URL=https://github.com/vojkovic/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=7c9c112484ff091a7c11df1dbb645616b57d662f
+UPSTREAM_COMMIT=225f8caaf9c4ab42e4272e3deb44664bb84b6c13
 
 WORKDIR /usr/local/searxng
 
@@ -38,7 +38,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/X-XSS-Protection: 1; mode=block/d" \
 -e "/X-Robots-Tag: noindex, nofollow/d" \
 -e "/Referrer-Policy: no-referrer/d" \
--e "/map:/d" \
+-e "/news:/{n;s/.*//}" \
 -e "/files:/d" \
 -e "/social media:/d" \
 -e "/static_use_hash:/s/false/true/g" \
