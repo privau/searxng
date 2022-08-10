@@ -5,7 +5,7 @@ PRIVACYPOLICY=https://priv.au/privacy \
 DONATION_URL= \
 CONTACT=https://vojkovic.xyz ISSUE_URL=https://github.com/vojkovic/searxng/issues \
 GIT_URL=https://github.com/vojkovic/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=24210fb10b9fe295c5994bbb5f02ecfe6f098e61
+UPSTREAM_COMMIT=07342899e5412d5ba03195f1ebbb7cb5ea525556
 
 WORKDIR /usr/local/searxng
 
@@ -13,7 +13,7 @@ WORKDIR /usr/local/searxng
 RUN addgroup -g ${GID} searxng \
 && adduser -u ${UID} -D -h /usr/local/searxng -s /bin/sh -G searxng searxng \
 && git config --global --add safe.directory /usr/local/searxng \
-&& git clone https://github.com/vojkovic/searxng-dev . \
+&& git clone https://github.com/searxng/searxng . \
 && git reset --hard ${UPSTREAM_COMMIT} \
 && chown -R searxng:searxng . \
 && su searxng -c "/usr/bin/python3 -m searx.version freeze"
