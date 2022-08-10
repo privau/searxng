@@ -15,7 +15,7 @@ jobs:
         fetch-depth: 0
     - name: Create local changes
       run: |
-        git ls-remote https://github.com/searxng/searxng |  head -1 | cut -f 1 | sed -e "s/.*/UPSTREAM_COMMIT=&/" | sed -i '8r/dev/stdin' Dockerfile && sed -i '8d' ./Dockerfile
+        git ls-remote https://github.com/vojkovic/searxng-dev |  head -1 | cut -f 1 | sed -e "s/.*/UPSTREAM_COMMIT=&/" | sed -i '8r/dev/stdin' Dockerfile && sed -i '8d' ./Dockerfile
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
