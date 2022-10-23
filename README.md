@@ -18,7 +18,7 @@ This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant c
 
 ### Basic Usage
 
-* ```docker run -d --restart always -p 127.0.0.1:7070:8080 --name searxng vojkovic/searxng:production```
+* ```docker run -d --restart always -p 127.0.0.1:8080:8080 --name searxng vojkovic/searxng:production```
 
 * After that, just visit http://127.0.0.1:8080 in your browser and stop the server with ctrl-c.
 
