@@ -48,7 +48,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: google/s/$/\n    disabled: false/g" \
 -e "/name: wikipedia/s/$/\n    disabled: false/g" \
 -e "/name: wikidata/s/$/\n    disabled: true/g" \
--e "/name: duckduckgo/s/$/\n    disabled: true/g" \
+-e "/name: duckduckgo/s/$/\n    disabled: false/g" \
 -e "/name: currency/s/$/\n    disabled: true/g" \
 -e "/name: qwant/s/$/\n    disabled: true/g" \
 -e "/name: btdigg/s/$/\n    disabled: true/g" \
@@ -59,7 +59,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: openairepublications/s/$/\n    disabled: true/g" \
 -e "/name: library of congress/s/$/\n    disabled: true/g" \
 -e "/name: dictzone/s/$/\n    disabled: true/g" \
--e "/name: brave/s/$/\n    disabled: true/g" \
+-e "/name: brave/s/$/\n    disabled: false/g" \
 -e "/name: lingva/s/$/\n    disabled: true/g" \
 -e "/name: genius/s/$/\n    disabled: true/g" \ 
 -e "/name: artic/s/$/\n    disabled: true/g" \
