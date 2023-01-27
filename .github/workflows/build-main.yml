@@ -1,8 +1,8 @@
 name: build-main
 
 on:
-#  schedule:
-#   - cron:  '50 * * * *'
+  schedule:
+   - cron:  '50 * * * *'
   workflow_dispatch:
 
 jobs:
