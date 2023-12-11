@@ -28,7 +28,7 @@ link_token = true
 # checked if e.g. the "user agent" suggests a bot (e.g. curl).
 
 pass_ip = [
-  '2001:0bc8:1200:0004:0208:a2ff:fe0c:67ea/64', # Allow https://cryptcheck.fr to scan.
+  '2001:bc8:1200:4:208:a2ff:fe0c:67ea/64', # Allow https://cryptcheck.fr to scan.
   '2001:19f0:4400:459f:71b9:9532:fb2d:9d65/64',
   '66.42.52.144/32'      # Allow my own private server to query. For things like testing TLS and setting up searx.space locally without being limited.
   # '192.168.0.0/16',      # IPv4 private network
