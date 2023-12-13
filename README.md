@@ -4,7 +4,10 @@ Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-resp
 
 Global Instance - 🌐 Worldwide : https://priv.au/
 
+---
+
 European Instance - 🇩🇪 Frankfurt, Germany : https://eu.priv.au/
+
 Asian / OCE Instance - 🇸🇬 Singapore : https://as.priv.au/
 
 ## FAQ
