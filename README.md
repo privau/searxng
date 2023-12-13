@@ -1,14 +1,21 @@
 # SearXNG
 
-Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-respecting metasearch engine with a custom theme and settings.yml. Includes the regular SearXNG and catppuccin themes by default.
+Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-respecting metasearch engine. Includes a suite of custom themes from catppuccin, paulgoio, and the default SearXNG themes.
 
-Production Server / Instance : https://priv.au/
+Global Instance - 🌐 Worldwide : https://priv.au/
+
+European Instance - 🇩🇪 Frankfurt, Germany : https://eu.priv.au/
+Asian / OCE Instance - 🇸🇬 Singapore : https://as.priv.au/
 
 ## FAQ
 
+### Where geographically is priv.au hosted?
+
+When you connect to priv.au, the location of your DNS resolver will determine which of our instances across the globe you will connect to, generally the closest will be chosen. You are able to bypass this selection process by connecting directly to a geographic instance, using the links above.
+
 ### Why does the Qwant engine not work?
 
-This SearXNG instance is hosted on a VPS in Singapore. In December 2020, Qwant closed access for multiple countries, one being Singapore. You can read their statement on the matter [here](https://twitter.com/QwantCom/status/1339149434572206080). I have deactivated Qwant as a default search engine until Qwant allows Singaporean users to access their service. If you attempt to use Qwant you will receive an Access Denied error. 
+If Qwant is returning an 'Access Denied' error, you're most likely connecting to our Singaporean instance. In December 2020, Qwant closed access for multiple countries, one being Singapore. You can read their statement on the matter [here](https://twitter.com/QwantCom/status/1339149434572206080). To bypass this block, you connect to a different instance in a different country.
 
 ## Basic Usage
 
