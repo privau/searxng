@@ -64,6 +64,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: wikiversity/s/$/\n    disabled: true/g" \
 -e "/name: wikiquote/s/$/\n    disabled: true/g" \
 -e "/name: wikisource/s/$/\n    disabled: true/g" \
+-e "/name: wikicommons.images/s/$/\n    disabled: true/g" \
 -e "/name: duckduckgo/s/$/\n    disabled: true/g" \
 -e "/name: pinterest/s/$/\n    disabled: true/g" \
 -e "/name: piped/s/$/\n    disabled: true/g" \
