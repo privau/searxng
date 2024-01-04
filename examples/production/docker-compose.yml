@@ -17,7 +17,7 @@ services:
       - DAC_OVERRIDE
 
   searxng:
-    image: searxng-dev:latest
+    image: vojkovic/searxng:production
     restart: unless-stopped
     ports:
       - "127.0.0.1:7070:8080"
@@ -33,10 +33,9 @@ services:
       - PRIVACYPOLICY=https://priv.au/privacy/
       - IMAGE_PROXY=true
       - CONTACT=https://vojk.au/
-      - SEARCH_DEFAULT_LANG=en-US
+      - SEARCH_DEFAULT_LANG=en
       - SEARCH_ENGINE_ACCESS_DENIED=60
       - PUBLIC_INSTANCE=true
 
 volumes:
   redis-data:
-

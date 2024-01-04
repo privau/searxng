@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  searxng:
+    image: searxng-dev:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    environment:
+      - PRIVACYPOLICY=https://priv.au/privacy/
+      - IMAGE_PROXY=true
+      - CONTACT=https://vojk.au/
+      - SEARCH_DEFAULT_LANG=en-US
+
+volumes:
+  redis-data:
+
