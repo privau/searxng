@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# set custom version string
-# regex matches default frozen version string with the eight character truncated git hash.
-# replaces the version string with our own.
-sed -i "s/\([0-9]\{4\}\.[0-9]\{1,2\}\.[0-9]\{1,2\}+[a-f0-9]\{9\}\)/$(date +'%Y.%-m.%d')$(code=$(curl -s https://ipapi.co/continent_code); [ $? -eq 0 ] && echo "+$code" | tr '[:upper:]' '[:lower:]';)/" \
-searx/version_frozen.py
 
 # enable built in image proxy
 if [ ! -z "${IMAGE_PROXY}" ]; then

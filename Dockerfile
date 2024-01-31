@@ -28,6 +28,12 @@ RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light',
 && sed -i "s/SIMPLE_STYLE = ('auto', 'light', 'dark')/SIMPLE_STYLE = ('light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha')/" /usr/local/searxng/searx/settings_defaults.py \
 && sed -i "s/{%- for name in \['auto', 'light', 'dark'\] -%}/{%- for name in \['light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha'\] -%}/" /usr/local/searxng/searx/templates/simple/preferences/theme.html
 
+
+# set custom version string
+# regex matches default frozen version string with the eight character truncated git hash.
+# replaces the version string with our own.
+RUN sed -i -E "s/([0-9]{4}\.[0-9]{1,2}\.[0-9]{1,2}\+[a-f0-9]{9})/$(date -d '\1' +'%Y.%-m.%d')/" searx/version_frozen.py
+
 # include footer message
 # RUN sed -i "s|<footer>|<footer>\n        {{ _('Has priv.au been useful to you recently? Please consider starring our ') }} <a href=\"{{ searx_git_url }}\">{{ _('GitHub.') }}</a>|g" searx/templates/simple/base.html
 
