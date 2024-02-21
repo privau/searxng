@@ -18,6 +18,9 @@ RUN addgroup -g ${GID} searxng \
 && chown -R searxng:searxng . \
 && su searxng -c "/usr/bin/python3 -m searx.version freeze"
 
+# add bind-tools
+RUN apk update && apk add bind-tools
+
 # copy custom simple themes, run.sh, limiter.toml
 COPY ./src/css/* searx/static/themes/simple/css/
 COPY ./src/run.sh /usr/local/bin/run.sh
