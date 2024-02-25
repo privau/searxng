@@ -43,6 +43,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/port:/s/8888/8080/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
 -e "/infinite_scroll:/s/false/true/g" \
+-e "/query_in_title:/s/false/true/g" \
 -e "s+donation_url: https://docs.searxng.org/donate.html+donation_url: false+g" \
 -e "/bind_address:/s/127.0.0.1/0.0.0.0/g" \
 -e '/default_lang:/s/ ""/ en/g' \
