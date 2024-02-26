@@ -1,5 +1,5 @@
 # use alpine as base for searx and set workdir as well as env vars
-FROM alpine:3.19.1
+FROM alpine:3.18.6
 
 COPY ./requirements.txt .
 
