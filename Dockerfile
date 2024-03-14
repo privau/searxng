@@ -5,7 +5,7 @@ PRIVACYPOLICY=https://priv.au/privacy/ \
 DONATION_URL= \
 CONTACT=https://vojk.au \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=542f7d0d7bd1a12e1884ba4a1508b40e2514d472
+UPSTREAM_COMMIT=74f6dfb576e66e17d3f968b252dfeee0a20eaf28
 
 WORKDIR /usr/local/searxng
 
