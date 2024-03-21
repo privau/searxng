@@ -4,7 +4,25 @@ on:
   workflow_dispatch:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t test-image .
+
+      - name: Run Docker container
+        run: docker run -d -p 8080:8080 test-image
+
+      - name: Test /healthz endpoint
+        run: |
+          sleep 10  # Wait for the container to start
+          curl http://localhost:8080/healthz
+
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -31,18 +49,3 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Pull Docker image
-        run: docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/searxng:production
-
-      - name: Run Docker container
-        run: docker run -d -p 8080:8080 ${{ secrets.DOCKER_HUB_USERNAME }}/searxng:production
-
-      - name: Test /healthz endpoint
-        run: |
-          sleep 10  # Wait for the container to start
-          curl http://localhost:8080/healthz
