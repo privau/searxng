@@ -1,7 +1,7 @@
 # use prebuild alpine image with needed python packages from base branch
 FROM vojkovic/searxng:base
 ENV GID=991 UID=991 UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME=PrivAU SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
-PRIVACYPOLICY=https://priv.au/privacy/ \
+PRIVACYPOLICY=/privacy \
 DONATION_URL= \
 CONTACT=https://vojk.au \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
@@ -18,10 +18,7 @@ RUN addgroup -g ${GID} searxng \
 && chown -R searxng:searxng . \
 && su searxng -c "/usr/bin/python3 -m searx.version freeze"
 
-# add bind-tools
-RUN apk update && apk add bind-tools
-
-# copy custom simple themes, run.sh, limiter.toml
+# copy custom simple themes, run.sh, limiter.toml, pages
 COPY ./src/css/* searx/static/themes/simple/css/
 COPY ./src/run.sh /usr/local/bin/run.sh
 COPY ./src/limiter.toml /etc/searxng/limiter.toml
@@ -30,6 +27,10 @@ COPY ./src/limiter.toml /etc/searxng/limiter.toml
 RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark'\]/s/choices=\['', 'auto', 'light', 'dark'\]/choices=\['', 'light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha'\]/" /usr/local/searxng/searx/preferences.py \
 && sed -i "s/SIMPLE_STYLE = ('auto', 'light', 'dark')/SIMPLE_STYLE = ('light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha')/" /usr/local/searxng/searx/settings_defaults.py \
 && sed -i "s/{%- for name in \['auto', 'light', 'dark'\] -%}/{%- for name in \['light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha'\] -%}/" /usr/local/searxng/searx/templates/simple/preferences/theme.html
+
+# make patch to allow the privacy policy page
+COPY ./src/pages/privacy searx/static/pages/privacy
+RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ \n@app.route('\/privacy', methods=\['GET'\])\ndef privacy_policy():return send_from_directory(os.path.join(app.root_path,settings['ui']['static_path'],'pages','privacy'),'index.html',mimetype='text\/html',)\n" /usr/local/searxng/searx/webapp.py
 
 # include footer message
 # RUN sed -i "s|<footer>|<footer>\n        {{ _('Has priv.au been useful to you recently? Please consider starring our ') }} <a href=\"{{ searx_git_url }}\">{{ _('GitHub.') }}</a>|g" searx/templates/simple/base.html
