@@ -20,13 +20,11 @@ searxng.ready(function () {
       const link = el.href || el.querySelector('a').href;
       const host = new URL(link).host;
       const icon = document.createElement('img');
+      const currentDomain = window.location.hostname;
 
       icon.className = 'favicon';
       icon.alt = host;
-      // icon.src = `https://priv.au/favicon/${host}`;
-
-      // If the favicon fails to load or hasn't yet laoded, use a default icon
-      icon.src = `https://priv.au/favicon/${host}`;
+      icon.src = `https://${currentDomain}/favicon/${host}`;
       icon.onerror = () => {
         icon.src = defaultFavicon;
       };
