@@ -16,7 +16,10 @@ fi
 echo "Replace fork simple theme definitions."
 cp -v src/less/* build/searx/static/themes/simple/src/less/
 
-echo "Build themes with upstream scripts."
+echo "Copy javascript snippets"
+cp -v src/js-snippets/* build/searx/static/themes/simple/src/js/main/
+
+echo "Build static files."
 cd build
 make themes.all
 cd ..
@@ -24,3 +27,5 @@ cd ..
 echo "Copy build files back to fork src folder."
 rm -rf src/css/*
 cp -r -v build/searx/static/themes/simple/css/* src/css/
+
+cp -r -v build/searx/static/themes/simple/js/* src/js/

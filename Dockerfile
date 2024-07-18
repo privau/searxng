@@ -20,6 +20,7 @@ RUN addgroup -g ${GID} searxng \
 
 # copy custom simple themes, run.sh, limiter.toml, pages
 COPY ./src/css/* searx/static/themes/simple/css/
+COPY ./src/js/* searx/static/themes/simple/js/
 COPY ./src/run.sh /usr/local/bin/run.sh
 COPY ./src/limiter.toml /etc/searxng/limiter.toml
 
@@ -33,7 +34,7 @@ COPY ./src/pages/privacy searx/static/pages/privacy
 RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ \n@app.route('\/privacy', methods=\['GET'\])\ndef privacy_policy():return send_from_directory(os.path.join(app.root_path,settings['ui']['static_path'],'pages','privacy'),'index.html',mimetype='text\/html',)\n" /usr/local/searxng/searx/webapp.py
 
 # include footer message
-# RUN sed -i "s|<footer>|<footer>\n        {{ _('Has priv.au been useful to you recently? Please consider starring our ') }} <a href=\"{{ searx_git_url }}\">{{ _('GitHub.') }}</a>|g" searx/templates/simple/base.html
+RUN sed -i "s|<footer>|<footer>\n        {{ _('Favicons in results are currently experimental. Open an issue on the ') }} <a href=\"{{ searx_git_url }}\">{{ _('GitHub') }}</a> if you run into any issues.|g" searx/templates/simple/base.html
 
 # make run.sh executable, copy uwsgi server ini, set default settings, precompile static theme files
 RUN cp -r -v dockerfiles/uwsgi.ini /etc/uwsgi/; \
