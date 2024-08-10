@@ -5,7 +5,7 @@ PRIVACYPOLICY=privacy \
 DONATION_URL= \
 CONTACT=https://vojk.au \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=f1c05e7c16e59a8d5d98640bc057958ea268cddf
+UPSTREAM_COMMIT=c06af826afec9fa9ddd393fab303052ee01d7fe7
 
 WORKDIR /usr/local/searxng
 
@@ -13,7 +13,7 @@ WORKDIR /usr/local/searxng
 RUN addgroup -g ${GID} searxng \
 && adduser -u ${UID} -D -h /usr/local/searxng -s /bin/sh -G searxng searxng \
 && git config --global --add safe.directory /usr/local/searxng \
-&& git clone https://github.com/searxng/searxng . \
+&& git clone https://github.com/privau/searxng-favicon . \
 && git reset --hard ${UPSTREAM_COMMIT} \
 && chown -R searxng:searxng . \
 && su searxng -c "/usr/bin/python3 -m searx.version freeze"
@@ -42,6 +42,7 @@ chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
 -e "/autocomplete_min:/s/4/0/g" \
+-e "/favicon_resolver:/s/\"\"/\"google\"/g" \
 -e "/port:/s/8888/8080/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
 -e "/infinite_scroll:/s/false/true/g" \
