@@ -25,5 +25,8 @@
   "forwardPorts": [8080],
   "portsAttributes": {
     "8080": {"label": "SearXNG"}
-  }
+  },
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ]
 }

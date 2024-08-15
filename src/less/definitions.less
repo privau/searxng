@@ -911,6 +911,103 @@
   --color-doc-code-background: #fff;
 }
 
+.brave-themes() {
+  --color-base-font: #a1b2ba;
+  --color-base-font-rgb: 161, 178, 186;
+  --color-base-background: #17191e;
+  --color-base-background-mobile: #171717;
+  --color-url-font: #7c91ff;
+  --color-url-visited-font: #7166a9;
+  --color-header-background: #17191e;
+  --color-header-border: #62757e;
+  --color-footer-background: #171717;
+  --color-footer-border: #21272a;
+  --color-sidebar-border: #62757e;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #171717;
+  --color-backtotop-font: #a1b2ba;
+  --color-backtotop-border: #21272a;
+  --color-backtotop-background: #171717;
+  --color-btn-background: #7c91ff;
+  --color-btn-font: #17191e;
+  --color-show-btn-background: #171717;
+  --color-show-btn-font: #a1b2ba;
+  --color-search-border: transparent;
+  --color-search-shadow: 0 1px 3px rgba(23, 23, 23, 0.24);
+  --color-search-shadow-hover: 0 4px 12px rgba(23, 23, 23, 0.9);
+  --color-search-background: #242731;
+  --color-search-font: #fff;
+  --color-search-background-hover: #ff6022;
+  --color-error: #e11f3d;
+  --color-error-background: #620f18;
+  --color-warning: #f1d561;
+  --color-warning-background: #b18c00;
+  --color-success: #94df91;
+  --color-success-background: #02a820;
+  --color-categories-item-selected-font: #ff6022;
+  --color-categories-item-border-selected: #ff6022;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: transparent;
+  --color-autocomplete-shadow: 0 4px 12px rgba(23, 23, 23, 0.9);
+  --color-autocomplete-background: #242731;
+  --color-autocomplete-background-hover: #171717;
+  --color-answer-font: #fff;
+  --color-answer-background: #171717;
+  --color-result-background: #17191e;
+  --color-result-border: #62757e;
+  --color-result-url-font: #a1b2ba;
+  --color-result-vim-selected: #171717;
+  --color-result-vim-arrow: #7c91ff;
+  --color-result-description-highlight-font: #a1b2ba;
+  --color-result-link-font: #7c91ff;
+  --color-result-link-font-highlight: #7c91ff;
+  --color-result-link-visited-font: #7166a9;
+  --color-result-publishdate-font: #a1b2ba;
+  --color-result-engines-font: #a1b2ba;
+  --color-result-search-url-border: #62757e;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: #becad0;
+  --color-result-detail-background: #000;
+  --color-result-detail-hr: #62757e;
+  --color-result-detail-link: #7c91ff;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-result-image-span-font: #a1b2ba;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #62757e;
+  --color-settings-engine-description-font: #a1b2ba;
+  --color-settings-table-group-background: #171717;
+  --color-toolkit-badge-font: #17191e;
+  --color-toolkit-badge-background: #a1b2ba;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #62757e;
+  --color-toolkit-dialog-background: #17191e;
+  --color-toolkit-tabs-label-border: #17191e;
+  --color-toolkit-tabs-section-border: #62757e;
+  --color-toolkit-select-background: #242731;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #62757e;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #242731;
+  --color-toolkit-checkbox-onoff-on-background: #242731;
+  --color-toolkit-checkbox-onoff-on-mark-background: #ff6022;
+  --color-toolkit-checkbox-onoff-on-mark-color: #17191e;
+  --color-toolkit-checkbox-onoff-off-mark-background: #a1b2ba;
+  --color-toolkit-checkbox-onoff-off-mark-color: #17191e;
+  --color-toolkit-checkbox-label-background: #17191e;
+  --color-toolkit-checkbox-label-border: #62757e;
+  --color-toolkit-checkbox-input-border: #7c91ff;
+  --color-toolkit-engine-tooltip-border: #62757e;
+  --color-toolkit-engine-tooltip-background: #17191e;
+  --color-toolkit-loader-border: rgba(0, 0, 0, 0.2);
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #17191e;
+  --color-doc-code-background: #7c91ff;
+}
+
 :root {
   .light-themes();
 }
@@ -948,6 +1045,11 @@
 // kagi Theme by preferences
 :root.theme-kagi {
   .kagi-themes();
+}
+
+// brave Theme by preferences
+:root.theme-brave {
+  .brave-themes();
 }
 
 /// Dark Theme (autoswitch based on device pref)
