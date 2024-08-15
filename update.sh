@@ -15,9 +15,7 @@ fi
 
 echo "Replace fork simple theme definitions."
 cp -v src/less/* build/searx/static/themes/simple/src/less/
-
-# For javascript source files 
-#cp -v src/js/* build/searx/static/themes/simple/src/js/main/
+cp -v src/js/* build/searx/static/themes/simple/src/js/main/
 
 echo "Build static files."
 cd build
