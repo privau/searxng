@@ -36,12 +36,15 @@ RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ 
 # include footer message
 # RUN sed -i "s|<footer>|<footer>\n        {{ _('Favicons in results are currently experimental. Open an issue on the ') }} <a href=\"{{ searx_git_url }}\">{{ _('GitHub') }}</a> if you run into any issues.|g" searx/templates/simple/base.html
 
+# fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
+RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
+
 # make run.sh executable, copy uwsgi server ini, set default settings, precompile static theme files
 RUN cp -r -v dockerfiles/uwsgi.ini /etc/uwsgi/; \
 chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
--e "/autocomplete_min:/s/4/2/g" \
+-e "/autocomplete_min:/s/4/0/g" \
 -e "/favicon_resolver:/s/\"\"/\"google\"/g" \
 -e "/port:/s/8888/8080/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
