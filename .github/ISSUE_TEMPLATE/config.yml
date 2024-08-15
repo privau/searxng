@@ -1,0 +1,4 @@
+issue_template:
+  - name: Theme Request
+    about: Request a new theme for priv.au
+    filename: theme-request.md
