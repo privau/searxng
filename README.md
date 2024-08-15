@@ -2,7 +2,7 @@
 
 Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-respecting metasearch engine. Includes a suite of custom themes from catppuccin, paulgoio, kagi, brave, moa, and the default SearXNG themes.
 
-Don't see your favorite theme? [Submit a theme request!](https://github.com/privau/searxng/issues/new)
+Don't see your favorite theme? [Submit a theme request!](https://github.com/privau/searxng/issues/new?assignees=&labels=bug&projects=&template=theme-request.md)
 
 Global Instance - 🌐 Worldwide : https://priv.au/
 
