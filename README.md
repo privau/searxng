@@ -1,6 +1,8 @@
 # SearXNG
 
-Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-respecting metasearch engine. Includes a suite of custom themes from catppuccin, paulgoio, and the default SearXNG themes.
+Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-respecting metasearch engine. Includes a suite of custom themes from catppuccin, paulgoio, kagi, brave, moa, and the default SearXNG themes.
+
+Don't see your favorite theme? [Submit a theme request!](https://github.com/privau/searxng/issues/new)
 
 Global Instance - 🌐 Worldwide : https://priv.au/
 
@@ -30,13 +32,15 @@ If Qwant is returning an 'Access Denied' error, you're most likely connecting to
 
 * Clone this repo: ```git clone https://github.com/privau/searxng.git```
 
-* After making your changes to the theme in `src/less` make sure to update `src/css` by running `update.sh`. This step requires python, npm and make.
+* Make your changes to the theme within `src/less`
+
+* Build the static files by running `update.sh`. This step requires python, npm and make. It's recommended to run this within the development container.
 
 * You can build the docker container locally by running (check out the base branch for the alpine base with the needed python packages): ```docker build --pull -f ./Dockerfile -t searxng-dev:latest .```
 
 * Run the local container with: ```docker run -it --rm -p 8080:8080 searxng-dev:latest```
 
-* Alternatively, you can build and run the docker container using `./development.sh`
+* Alternatively, you can build the static files, build the docker image and run the docker container using `./development.sh`
 
 ## Environment Variables (all optional: if not set -> using default settings)
 

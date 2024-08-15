@@ -18,16 +18,18 @@ RUN addgroup -g ${GID} searxng \
 && chown -R searxng:searxng . \
 && su searxng -c "/usr/bin/python3 -m searx.version freeze"
 
-# copy custom simple themes, run.sh, limiter.toml, pages
-COPY ./src/css/* searx/static/themes/simple/css/
-COPY ./src/js/* searx/static/themes/simple/js/
+# copy custom simple themes
+COPY ./out/css/* searx/static/themes/simple/css/
+COPY ./out/js/* searx/static/themes/simple/js/
+
+# copy run.sh and limiter.toml
 COPY ./src/run.sh /usr/local/bin/run.sh
 COPY ./src/limiter.toml /etc/searxng/limiter.toml
 
 # make our patches to searxng's code to allow for the custom theming
-RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark'\]/s/choices=\['', 'auto', 'light', 'dark'\]/choices=\['', 'light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave'\]/" /usr/local/searxng/searx/preferences.py \
-&& sed -i "s/SIMPLE_STYLE = ('auto', 'light', 'dark')/SIMPLE_STYLE = ('light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave')/" /usr/local/searxng/searx/settings_defaults.py \
-&& sed -i "s/{%- for name in \['auto', 'light', 'dark'\] -%}/{%- for name in \['light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave'\] -%}/" /usr/local/searxng/searx/templates/simple/preferences/theme.html
+RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark'\]/s/choices=\['', 'auto', 'light', 'dark'\]/choices=\['', 'light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa'\]/" /usr/local/searxng/searx/preferences.py \
+&& sed -i "s/SIMPLE_STYLE = ('auto', 'light', 'dark')/SIMPLE_STYLE = ('light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa')/" /usr/local/searxng/searx/settings_defaults.py \
+&& sed -i "s/{%- for name in \['auto', 'light', 'dark'\] -%}/{%- for name in \['light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa'\] -%}/" /usr/local/searxng/searx/templates/simple/preferences/theme.html
 
 # make patch to allow the privacy policy page
 COPY ./src/pages/privacy searx/static/pages/privacy
