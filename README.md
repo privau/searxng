@@ -8,6 +8,8 @@ Global Instance - 🌐 Worldwide : https://priv.au/
 
 ---
 
+American Instance - 🇺🇸 Chicago, United States : https://na.priv.au/
+
 European Instance - 🇩🇪 Frankfurt, Germany : https://eu.priv.au/
 
 Asian / OCE Instance - 🇸🇬 Singapore : https://as.priv.au/
