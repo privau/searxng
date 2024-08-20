@@ -47,7 +47,7 @@ chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
 -e "/autocomplete_min:/s/4/0/g" \
--e "/favicon_resolver:/s/\"\"/\"google\"/g" \
+-e "/favicon_resolver:/s/\"\"/\"duckduckgo\"/g" \
 -e "/port:/s/8888/8080/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
 -e "/infinite_scroll:/s/false/true/g" \
