@@ -8,11 +8,20 @@ Global Instance - 🌐 Worldwide : https://priv.au/
 
 ---
 
-American Instance - 🇺🇸 Chicago, United States : https://na.priv.au/
+America, Vultr - 🇺🇸 Chicago, United States : https://na.priv.au/
 
-European Instance - 🇩🇪 Frankfurt, Germany : https://eu.priv.au/
+America, DigitalOcean - 🇺🇸 San Francisco, United States : https://na2.priv.au/
 
-Asian / OCE Instance - 🇸🇬 Singapore : https://as.priv.au/
+Europe, Vultr - 🇩🇪 Frankfurt, Germany : https://eu.priv.au/
+
+Europe, DigitalOcean - 🇬🇧 London, United Kingdom : https://eu2.priv.au/
+
+Asia, Vultr - 🇸🇬 Singapore : https://as.priv.au/
+
+Asia, DigitalOcean - 🇮🇳 Bangalore, India : https://as2.priv.au/
+
+Australia, DigitalOcean - 🇦🇺 Sydney, Australia : https://au.priv.au/
+
 
 ## FAQ
 
