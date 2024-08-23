@@ -86,7 +86,15 @@ if [ ! -z "${PUBLIC_INSTANCE}" ]; then
     searx/settings.yml;
 fi
 
-# auto gen random key for every unique container
+# auto gen random key for every unique container if SECRET_KEY not set
+if [ -z "${SECRET_KEY}" ]; then
+    sed -i -e "s/ultrasecretkey/$(openssl rand -hex 16)/g" \
+    searx/settings.yml;
+else # set SECRET_KEY
+    sed -i -e "s/ultrasecretkey/${SECRET_KEY}/g" \
+    searx/settings.yml;
+fi
+
 sed -i -e "s/ultrasecretkey/$(openssl rand -hex 16)/g" \
 searx/settings.yml
 
