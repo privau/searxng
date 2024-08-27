@@ -1,0 +1,24 @@
+{% extends "simple/base.html" %}
+{% block content %}
+<div class="dialog-modal">
+    <div class="center">
+        <h1>{{ title }}</h1>
+
+        <form method="POST" class="result">
+            <label><h4>{{ question }}</h4></label><br>
+
+            <br>
+            <input type="hidden" name="captcha_answer" value="{{ captcha_answer }}">
+            <input type="hidden" name="q" value="{{ query }}">
+            <input type="hidden" name="language" value="{{ current_language }}">
+            <input type="hidden" name="time_range" value="{{ time_range }}">
+            <input type="hidden" name="safesearch" value="{{ safesearch }}">
+            <input type="hidden" name="theme" value="{{ theme }}">
+            <br>
+
+            <button type="submit" id="copy_url" class="category_button"><h3>Continue</h3></button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

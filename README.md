@@ -61,8 +61,6 @@ If Qwant is returning an 'Access Denied' error, you're most likely connecting to
 
 * ```LIMITER``` : limit bot traffic; this option also requires redis to be set up
 
-* ```CAPTCHA``` : enable captcha for search requests (default: off)
-
 * ```BASE_URL``` : Sets the base url (for example: example.org would have `https://example.org/` as base)
 
 * ```NAME``` : Sets the name of the instance, which is for example displayed in the title of the site (for example `SearXNG`)

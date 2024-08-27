@@ -5,7 +5,7 @@ PRIVACYPOLICY=privacy \
 DONATION_URL= \
 CONTACT=https://vojk.au \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=e818039a69061cf88fc071e79c8ea156c1d2f481
+UPSTREAM_COMMIT=f3acc085b709a9aba45ddb801a85466d56d1fbe4
 
 WORKDIR /usr/local/searxng
 
@@ -37,6 +37,11 @@ RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ 
 
 # include footer message
 # RUN sed -i "s|<footer>|<footer>\n        {{ _('Favicons in results are currently experimental. Open an issue on the ') }} <a href=\"{{ searx_git_url }}\">{{ _('GitHub') }}</a> if you run into any issues.|g" searx/templates/simple/base.html
+
+# include patches to enable captcha (disabled)
+#COPY ./src/captcha/captcha.html searx/templates/simple/captcha.html
+#COPY ./src/captcha/captcha.py searx/captcha.py
+#RUN sed -i '/search = SearchWithPlugins(search_query, request.user_plugins, request)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale, render)):\n            return captcha_response\n' /usr/local/searxng/searx/webapp.py
 
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
