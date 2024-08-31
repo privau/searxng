@@ -19,7 +19,7 @@ jobs:
       - name: Test /healthz endpoint
         run: |
           sleep 10  # Wait for the container to start
-          curl http://localhost:8080/healthz
+          curl http://localhost:8080/healthz | grep "OK"
 
   build:
     needs: test

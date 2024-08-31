@@ -2,7 +2,7 @@ name: build
 
 on:
   schedule:
-    - cron: '10 * * * *'
+    - cron: '5 * * * *'
   push:
     branches:
       - main
@@ -13,7 +13,48 @@ on:
   workflow_dispatch:
 
 jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+
+    #- name: Update the SHA sum.
+    #  run: |
+    #    git ls-remote https://github.com/searxng/searxng |  head -1 | cut -f 1 | sed -e "s/.*/UPSTREAM_COMMIT=&/" | sed -i '8r/dev/stdin' Dockerfile && sed -i '8d' ./Dockerfile
+        
+    - name: Push changes
+      uses: actions-js/push@master
+      with:
+        author_name: 'github-actions[bot'
+        author_email: '41898282+github-actions[bot]@users.noreply.github.com'
+        message: '[feat] Update SearXNG to Latest'
+        github_token: ${{ secrets.PAT_TOKEN }}
+
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+        ref: base
+
+    #- name: Copy requirements.txt
+    #  run: |
+    #    git checkout base
+    #    curl https://raw.githubusercontent.com/searxng/searxng/master/requirements.txt > requirements.txt
+        
+    - name: Push changes
+      uses: actions-js/push@master
+      with:
+        author_name: 'github-actions[bot'
+        author_email: '41898282+github-actions[bot]@users.noreply.github.com'
+        message: '[feat] Update requirements.txt to Latest'
+        branch: 'base'
+        github_token: ${{ secrets.PAT_TOKEN }}
+
   test:
+    needs: update
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Repo
@@ -61,7 +102,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64,linux/386
+          platforms: linux/amd64
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/searxng:base
 
       - name: Check Out Main Repo
@@ -78,7 +119,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64,linux/386
+          platforms: linux/amd64
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/searxng:production
 
       - name: Image digest
