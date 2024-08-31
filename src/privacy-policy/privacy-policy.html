@@ -1,0 +1,84 @@
+{% extends "simple/base.html" %}
+{% block content %}
+<style>
+  .box {
+    background: var(--color-search-background);
+    border: 1px solid var(--color-search-border);
+    border-radius: 1rem;
+    margin: 2.5em auto 5em auto;
+    padding: 0 6rem 5em;
+    max-width: 90vw;
+    width: 500px;
+    text-align: justify;
+    line-height: 1.6em;
+    color: var(--color-base-font);
+  }
+
+  .box h1, .box h6 {
+    text-align: center;
+  }
+
+  .box h2 {
+    margin-top: 3rem;
+    line-height: 1em;
+  }
+
+  .box b {
+    color: var(--color-warning);
+  }
+
+  .box br {
+    content: " ";
+    display: block;
+    margin: 10px 0;
+  }
+
+  .box .link {
+    color: var(--color-warning);
+    text-decoration: underline;
+    font-weight: bolder;
+  }
+
+  .box .mainpicture {
+    max-width: 15em;
+    max-height: 15em;
+    margin-top: 5em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+<div class="box">
+  <img src="../favicon.ico" class="mainpicture" draggable="false">
+  <h1>PRIVACY POLICY</h1>
+  <h6>
+    Your privacy is important to us. This policy explains how we handle your information.
+  </h6>
+  <h2>1. Logging Policy</h2>
+  <p>
+    We <b>never log</b> your search queries, user agent information, or your unmasked IP address. <br>
+    We do use the <b>inbuilt SearXNG rate limiter</b>, which keeps a <b>SHA256 hash of a salted IP address</b> for a max period of <b>10 minutes</b>, solely for operational purposes. You can review the source of the rate limiter on <a class="link" href="https://github.com/searxng/searxng/blob/master/searx/botdetection/ip_limit.py">GitHub</a>.
+  </p>
+  <h2>2. Cookies and Local Storage</h2>
+  <p>
+    We use <b>cookies</b> only to improve your experience, like saving your preferences. We will <b>never</b> use these to track you and we'll <b>never</b> use third-party cookies. You can see your saved cookies in <a class="link" href="/preferences">Preferences</a>. <br>
+  </p>
+  <h2>3. TLS Termination</h2>
+  <p>
+    We <b>always</b> handle TLS termination ourselves and <b>never</b> use third-party services, such as Cloudflare, AWS CloudFront, Lambda, etc. This way, your search queries are <b>encrypted</b> from your browser to our servers. <br>
+    We utilise our <b>own network</b> of global servers to provide you with the best possible experience.
+  </p>
+  <h2>4. Changes to Privacy Policy</h2>
+  <p>
+    We may <b>update</b> this Privacy Policy at any time. Any changes will be <b>prominently posted</b> on this page, and it's up to you to <b>check for updates</b> on a regular basis. <br>
+  </p>
+  <h2>5. Contact Us</h2>
+  <p>
+    If you have any questions or concerns regarding data protection, please contact the Data Protection Officer via email at: <b>dpo @ priv.au</b> <br>
+  </p>
+  <h2>6. Effective Date</h2>
+  <p>
+    This Privacy Policy is effective as of <b>2024-09-01</b>.<br>
+  </p>
+</div>
+{% endblock %}

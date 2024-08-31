@@ -32,8 +32,8 @@ RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light',
 && sed -i "s/{%- for name in \['auto', 'light', 'dark'\] -%}/{%- for name in \['light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night'\] -%}/" /usr/local/searxng/searx/templates/simple/preferences/theme.html
 
 # make patch to allow the privacy policy page
-COPY ./src/pages/privacy searx/static/pages/privacy
-RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ \n@app.route('\/privacy', methods=\['GET'\])\ndef privacy_policy():return send_from_directory(os.path.join(app.root_path,settings['ui']['static_path'],'pages','privacy'),'index.html',mimetype='text\/html',)\n" /usr/local/searxng/searx/webapp.py
+COPY ./src/privacy-policy/privacy-policy.html searx/templates/simple/privacy-policy.html
+RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ \n@app.route('\/privacy', methods=\['GET'\])\ndef privacy_policy():return render('privacy-policy.html')\n" /usr/local/searxng/searx/webapp.py
 
 # include footer message
 # RUN sed -i "s|<footer>|<footer>\n        {{ _('Favicons in results are currently experimental. Open an issue on the ') }} <a href=\"{{ searx_git_url }}\">{{ _('GitHub') }}</a> if you run into any issues.|g" searx/templates/simple/base.html
