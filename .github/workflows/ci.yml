@@ -160,5 +160,5 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            - ${{ env.MAIN_PROD_TAG }}
-            - ${{ env.MAIN_GITHUB_PROD_TAG }}
+            ${{ env.MAIN_PROD_TAG }}
+            ${{ env.MAIN_GITHUB_PROD_TAG }}
