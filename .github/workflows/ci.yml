@@ -15,10 +15,10 @@ on:
 env:
   BASE_TEST_TAG: vojkovic/searxng:base-test
   BASE_PROD_TAG: vojkovic/searxng:base
-  BASE_GITHUB_PROD_TAG: ghcr.io/vojkovic/searxng:base
+  BASE_GITHUB_PROD_TAG: ghcr.io/privau/searxng:base
   MAIN_TEST_TAG: vojkovic/searxng:production-test
   MAIN_PROD_TAG: vojkovic/searxng:production
-  MAIN_GITHUB_PROD_TAG: ghcr.io/vojkovic/searxng:production
+  MAIN_GITHUB_PROD_TAG: ghcr.io/privau/searxng:production
 
 jobs:
   update:

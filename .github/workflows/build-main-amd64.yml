@@ -7,7 +7,7 @@ on:
 env:
   MAIN_TEST_TAG: vojkovic/searxng:production-test
   MAIN_PROD_TAG: vojkovic/searxng:production
-  MAIN_GITHUB_PROD_TAG: ghcr.io/vojkovic/searxng:production
+  MAIN_GITHUB_PROD_TAG: ghcr.io/privau/searxng:production
 
 jobs:
   build:
