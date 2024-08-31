@@ -23,7 +23,9 @@ def render_captcha(raw_text_query, search_query, selected_locale, render, captch
     return render(
         'captcha.html',
         title="Click to Continue",
-        question="We're currently experiencing a high volume of traffic. Please prove you're not a robot.",
+        line1="priv.au is under heavy attack.",
+        line2="This safeguard will be removed once the attack subsides.",
+        button="Continue",
         captcha_answer=captcha_answer,
         query=raw_text_query.getQuery(),
         time_range=search_query.time_range or '',

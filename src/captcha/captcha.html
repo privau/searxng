@@ -5,7 +5,8 @@
         <h1>{{ title }}</h1>
 
         <form method="POST" class="result">
-            <label><h4>{{ question }}</h4></label><br>
+            <label>{{ line1 }}</label>
+            <label><h6>{{ line2 }}</h6></label><br>
 
             <br>
             <input type="hidden" name="captcha_answer" value="{{ captcha_answer }}">
@@ -16,7 +17,7 @@
             <input type="hidden" name="theme" value="{{ theme }}">
             <br>
 
-            <button type="submit" id="copy_url" class="category_button"><h3>Continue</h3></button>
+            <button type="submit" id="copy_url" class="category_button"><h3>{{ button }}</h3></button>
         </form>
         </div>
     </div>
