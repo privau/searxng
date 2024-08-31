@@ -3,6 +3,13 @@ name: build
 on:
   schedule:
     - cron: '10 * * * *'
+  push:
+    branches:
+      - main
+    paths:
+      - Dockerfile
+      - 'src/**'
+      - '.github/workflows/build.yml'
   workflow_dispatch:
 
 jobs:
@@ -21,7 +28,7 @@ jobs:
       - name: Test /healthz endpoint
         run: |
           sleep 10
-          curl http://localhost:8080/healthz | grep "DOESNOTEXIST
+          curl http://localhost:8080/healthz | grep "DOESNOTEXIST"
 
   build:
     needs: test
