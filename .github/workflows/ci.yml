@@ -15,8 +15,10 @@ on:
 env:
   BASE_TEST_TAG: vojkovic/searxng:base-test
   BASE_PROD_TAG: vojkovic/searxng:base
+  BASE_GITHUB_PROD_TAG: ghcr.io/vojkovic/searxng:base
   MAIN_TEST_TAG: vojkovic/searxng:production-test
   MAIN_PROD_TAG: vojkovic/searxng:production
+  MAIN_GITHUB_PROD_TAG: ghcr.io/vojkovic/searxng:production
 
 jobs:
   update:
@@ -69,6 +71,13 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Check Out Repo
         uses: actions/checkout@v4
         with:
@@ -100,7 +109,9 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ env.BASE_PROD_TAG }}
+          tags: |
+            ${{ env.BASE_PROD_TAG }}
+            ${{ env.BASE_GITHUB_PROD_TAG }}
 
   build-main:
     needs: build-base
@@ -111,6 +122,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check Out Repo
         uses: actions/checkout@v4
@@ -141,4 +159,6 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ env.MAIN_PROD_TAG }}
+          tags: |
+            - ${{ env.MAIN_PROD_TAG }}
+            - ${{ env.MAIN_GITHUB_PROD_TAG }}

@@ -3,26 +3,14 @@ name: build-main-amd64
 on:
   workflow_dispatch:
 
+
+env:
+  MAIN_TEST_TAG: vojkovic/searxng:production-test
+  MAIN_PROD_TAG: vojkovic/searxng:production
+  MAIN_GITHUB_PROD_TAG: ghcr.io/vojkovic/searxng:production
+
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check Out Repo
-        uses: actions/checkout@v4
-
-      - name: Build Docker image
-        run: docker build -t test-image .
-
-      - name: Run Docker container
-        run: docker run -d -p 8080:8080 test-image
-
-      - name: Test /healthz endpoint
-        run: |
-          sleep 10  # Wait for the container to start
-          curl http://localhost:8080/healthz | grep "OK"
-
   build:
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -31,12 +19,30 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Check Out Repo
         uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v3
+
+      - name: Build Test Main Image
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          context: ./
+          file: ./Dockerfile
+          tags: ${{ env.MAIN_TEST_TAG }}
+
+      - name: Test Main Image
+        run: docker run -d -p 8080:8080 ${{ env.MAIN_TEST_TAG }} && sleep 5 && curl http://localhost:8080/healthz | grep "OK" && docker stop $(docker ps -q --filter ancestor=${{ env.MAIN_TEST_TAG }})
 
       - name: Build and push
         id: docker_build
@@ -45,7 +51,6 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/searxng:production
-
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+          tags: |
+            ${{ env.MAIN_PROD_TAG }}
+            ${{ env.MAIN_GITHUB_PROD_TAG }}
