@@ -1,15 +1,15 @@
 name: update
 
 on:
-schedule:
-- cron: '7 * * * *'
+  #schedule:
+  #- cron: '7 * * * *'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v4
       with:
         persist-credentials: false
         fetch-depth: 0
@@ -26,7 +26,7 @@ jobs:
         message: '[feat] Update SearXNG to Latest'
         github_token: ${{ secrets.PAT_TOKEN }}
 
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v4
       with:
         persist-credentials: false
         fetch-depth: 0
