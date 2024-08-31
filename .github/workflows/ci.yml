@@ -1,4 +1,4 @@
-name: build
+name: ci
 
 on:
   schedule:
@@ -11,6 +11,12 @@ on:
       - 'src/**'
       - '.github/workflows/build.yml'
   workflow_dispatch:
+
+env:
+  BASE_TEST_TAG: vojkovic/searxng:base-test
+  BASE_PROD_TAG: vojkovic/searxng:base
+  MAIN_TEST_TAG: vojkovic/searxng:production-test
+  MAIN_PROD_TAG: vojkovic/searxng:production
 
 jobs:
   update:
@@ -53,26 +59,8 @@ jobs:
         branch: 'base'
         github_token: ${{ secrets.PAT_TOKEN }}
 
-  test:
+  build-base:
     needs: update
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check Out Repo
-        uses: actions/checkout@v4
-
-      - name: Build Docker image
-        run: docker build -t test-image .
-
-      - name: Run Docker container
-        run: docker run -d -p 8080:8080 test-image
-
-      - name: Test /healthz endpoint
-        run: |
-          sleep 10
-          curl http://localhost:8080/healthz | grep "OK"
-
-  build:
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -92,35 +80,61 @@ jobs:
           platforms: linux/amd64,linux/arm64
 
       - name: Set up Docker Buildx
-        id: buildbasex
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push
-        id: docker_buildbase
+      - name: Build and push Test Base Image
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          tags: ${{ env.BASE_TEST_TAG }}
+
+      - name: Test Base Image
+        run: docker run --rm ${{ env.BASE_TEST_TAG }} /bin/sh -c "echo 'Hello World'"
+
+      - name: Build Production Base Image
         uses: docker/build-push-action@v6
         with:
           context: ./
           file: ./Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/searxng:base
+          tags: ${{ env.BASE_PROD_TAG }}
 
-      - name: Check Out Main Repo
+  build-main:
+    needs: build-base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Check Out Repo
         uses: actions/checkout@v4
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+
       - name: Set up Docker Buildx
-        id: buildmainx
         uses: docker/setup-buildx-action@v3
 
+      - name: Build and push Test Main Image
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          tags: ${{ env.MAIN_TEST_TAG }}
+
+      - name: Test Main Image
+        run: docker run -d -p 8080:8080 ${{ env.MAIN_TEST_TAG }} && sleep 5 && curl http://localhost:8080/healthz | grep "OK" && docker stop $(docker ps -q --filter ancestor=${{ env.MAIN_TEST_TAG }})
+
       - name: Build and push
-        id: docker_buildmain
         uses: docker/build-push-action@v6
         with:
           context: ./
           file: ./Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/searxng:production
-
-      - name: Image digest
-        run: echo ${{ steps.docker_buildmain.outputs.digest }}
+          tags: ${{ env.MAIN_PROD_TAG }}
