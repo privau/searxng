@@ -28,7 +28,7 @@ jobs:
       - name: Test /healthz endpoint
         run: |
           sleep 10
-          curl http://localhost:8080/healthz | grep "DOESNOTEXIST"
+          curl http://localhost:8080/healthz | grep "OK"
 
   build:
     needs: test
