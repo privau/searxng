@@ -1101,6 +1101,102 @@
   --color-doc-code-background: #4d5a6f;
 }
 
+.night-themes {
+  --color-base-font: #eaecf0;
+  --color-base-font-rgb: rgb(234, 236, 240);
+  --color-base-background: #101418;
+  --color-base-background-mobile: #101418;
+  --color-url-font: #6d8af2;
+  --color-url-visited-font: #977dbd;
+  --color-header-background: #101418;
+  --color-header-border: #3c4043;
+  --color-footer-background: #101418;
+  --color-footer-border: #212327;
+  --color-sidebar-border: #3c4043;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #101418;
+  --color-backtotop-font: #eaecf0;
+  --color-backtotop-border: #212327;
+  --color-backtotop-background: #111213;
+  --color-btn-background: #447ff5;
+  --color-btn-font: #101418;
+  --color-show-btn-background: #202122;
+  --color-show-btn-font: #eaecf0;
+  --color-search-border: #3c4043;
+  --color-search-shadow: 0 2px 8px #20212241;
+  --color-search-background: #111213;
+  --color-search-font: #fff;
+  --color-search-background-hover: #447ff5;
+  --color-error: #f55b5b;
+  --color-error-background: darken(#db3434, 40%);
+  --color-warning: #f1d561;
+  --color-warning-background: darken(#dbba34, 40%);
+  --color-success: #79f56e;
+  --color-success-background: darken(#42db34, 40%);
+  --color-categories-item-selected-font: #6d8af2;
+  --color-categories-item-border-selected: #447ff5;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: #3c4043;
+  --color-autocomplete-shadow: 0 4px 12px #20212241;
+  --color-autocomplete-background: #111213;
+  --color-autocomplete-background-hover: #202122;
+  --color-answer-font: #fff;
+  --color-answer-background: #202122;
+  --color-result-background: #111213;
+  --color-result-border: #3c4043;
+  --color-result-url-font: #eaecf0;
+  --color-result-vim-selected: #202122;
+  --color-result-vim-arrow: #6d8af2;
+  --color-result-description-highlight-font: #eaecf0;
+  --color-result-link-font: #6d8af2;
+  --color-result-link-font-highlight: #447ff5;
+  --color-result-link-visited-font: #977dbd;
+  --color-result-publishdate-font: #eaecf0;
+  --color-result-engines-font: #eaecf0;
+  --color-result-search-url-border: #3c4043;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #101418;
+  --color-result-detail-hr: #3c4043;
+  --color-result-detail-link: #6d8af2;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: #202122;
+  --color-result-image-span-font: #eaecf0;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #3c4043;
+  --color-settings-engine-description-font: #eaecf0;
+  --color-settings-table-group-background: #202122;
+  --color-toolkit-badge-font: #101418;
+  --color-toolkit-badge-background: #eaecf0;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #3c4043;
+  --color-toolkit-dialog-background: #101418;
+  --color-toolkit-tabs-label-border: #101418;
+  --color-toolkit-tabs-section-border: #3c4043;
+  --color-toolkit-select-background: #303134;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #3c4043;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #303134;
+  --color-toolkit-checkbox-onoff-on-background: #303134;
+  --color-toolkit-checkbox-onoff-on-mark-background: #6d8af2;
+  --color-toolkit-checkbox-onoff-on-mark-color: #101418;
+  --color-toolkit-checkbox-onoff-off-mark-background: #eaecf0;
+  --color-toolkit-checkbox-onoff-off-mark-color: #101418;
+  --color-toolkit-checkbox-label-background: #101418;
+  --color-toolkit-checkbox-label-border: #3c4043;
+  --color-toolkit-checkbox-input-border: #6d8af2;
+  --color-toolkit-engine-tooltip-border: #3c4043;
+  --color-toolkit-engine-tooltip-background: #101418;
+  --color-toolkit-loader-border: #202122;
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #101418;
+  --color-doc-code-background: #6d8af2;
+}
+
 :root {
   .light-themes();
 }
@@ -1148,6 +1244,11 @@
 // moa Theme by preferences
 :root.theme-moa {
   .moa-themes();
+}
+
+// night Theme by preferences
+:root.theme-night {
+  .night-themes();
 }
 
 /// Dark Theme (autoswitch based on device pref)
