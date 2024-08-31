@@ -14,7 +14,6 @@ RUN apk -U upgrade \
     libxml2-dev \
     openssl-dev \
     tar \
-    git \
  && apk add --no-cache \
     ca-certificates \
     python3 \
@@ -25,6 +24,7 @@ RUN apk -U upgrade \
     tini \
     uwsgi \
     uwsgi-python3 \
+    git \
     brotli \
 && pip install --no-cache --break-system-packages -r requirements.txt \
 && apk del build-dependencies \
