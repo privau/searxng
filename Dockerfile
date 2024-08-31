@@ -26,6 +26,6 @@ RUN apk -U upgrade \
     uwsgi \
     uwsgi-python3 \
     brotli \
-&& pip install --no-cache -r requirements.txt \
+&& pip install --no-cache --break-system-packages -r requirements.txt \
 && apk del build-dependencies \
 && rm -rf /var/cache/apk/* /root/.cache
