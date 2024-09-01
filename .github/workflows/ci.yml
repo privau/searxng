@@ -38,7 +38,7 @@ jobs:
       run: |
         if [ "${{ github.event_name }}" != "schedule" ]; then
           echo "This run was triggered by ${GITHUB_EVENT_NAME}. Skipping the job."
-          echo "is-up-to-date=false" >> $GITHUB_ENV
+          echo "::set-output name=is-up-to-date::false"
           exit 0
         fi
         REMOTE_COMMIT=$(git ls-remote https://github.com/${{ env.SOURCE_REPO }} ${{ env.SOURCE_REPO_BRANCH }} | awk '{print $1}')
@@ -47,10 +47,10 @@ jobs:
         echo "Local commit: $LOCAL_COMMIT"
         if [ "$REMOTE_COMMIT" = "$LOCAL_COMMIT" ]; then
           echo "Repository is up to date. Skipping build process."
-          echo "is-up-to-date=true" >> $GITHUB_ENV
-          exit 0
+          echo "::set-output name=is-up-to-date::true"
         else
-          echo "is-up-to-date=false" >> $GITHUB_ENV
+          echo "Repository is not up to date."
+          echo "::set-output name=is-up-to-date::false"
         fi
 
   update:
