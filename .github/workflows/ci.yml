@@ -38,7 +38,7 @@ jobs:
       run: |
         if [ "${{ github.event_name }}" != "schedule" ]; then
           echo "This run was triggered by ${GITHUB_EVENT_NAME}. Skipping the job."
-          echo "is-up-to-date=true" >> $GITHUB_ENV
+          echo "is-up-to-date=false" >> $GITHUB_ENV
           exit 0
         fi
         REMOTE_COMMIT=$(git ls-remote https://github.com/${{ env.SOURCE_REPO }} ${{ env.SOURCE_REPO_BRANCH }} | awk '{print $1}')
