@@ -2,7 +2,7 @@ name: ci
 
 on:
   schedule:
-    - cron: '5 * * * *'
+    - cron: '*/5 * * * *'
   push:
     branches:
       - main
@@ -21,7 +21,35 @@ env:
   MAIN_GITHUB_PROD_TAG: ghcr.io/privau/searxng:production
 
 jobs:
+  update-required:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check if the event is a schedule
+      run: |
+        if [ "${{ github.event_name }}" != "schedule" ]; then
+          echo "This run was triggered by ${GITHUB_EVENT_NAME}. Skipping the job."
+          exit 0
+        fi
+
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+
+    - name: Check for remote changes
+      id: check_changes
+      run: |
+        REMOTE_COMMIT=$(git ls-remote https://github.com/searxng/searxng HEAD | awk '{print $1}')
+        LOCAL_COMMIT=$(grep -m1 "UPSTREAM_COMMIT=" Dockerfile | cut -d'=' -f2)
+        echo "Remote commit: $REMOTE_COMMIT"
+        echo "Local commit: $LOCAL_COMMIT"
+        if [ "$REMOTE_COMMIT" = "$LOCAL_COMMIT" ] && [ "${{ github.event_name }}" = "schedule" ]; then
+          echo "Repository is up to date. Skipping build process."
+          exit 2
+        fi
+
   update:
+    needs: update-required
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -31,7 +59,7 @@ jobs:
 
     #- name: Update the SHA sum.
     #  run: |
-    #    git ls-remote https://github.com/searxng/searxng |  head -1 | cut -f 1 | sed -e "s/.*/UPSTREAM_COMMIT=&/" | sed -i '8r/dev/stdin' Dockerfile && sed -i '8d' ./Dockerfile
+    #    git ls-remote https://github.com/searxng/searxng | head -1 | cut -f 1 | sed -e "s/.*/UPSTREAM_COMMIT=&/" | sed -i '8r/dev/stdin' Dockerfile && sed -i '8d' ./Dockerfile
         
     - name: Push changes
       uses: actions-js/push@master
