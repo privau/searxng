@@ -23,34 +23,38 @@ env:
 jobs:
   update-required:
     runs-on: ubuntu-latest
+    outputs:
+      is-up-to-date: ${{ steps.check-for-changes.outputs.is-up-to-date }}
     steps:
-    - name: Check if the event is a schedule
-      run: |
-        if [ "${{ github.event_name }}" != "schedule" ]; then
-          echo "This run was triggered by ${GITHUB_EVENT_NAME}. Skipping the job."
-          exit 0
-        fi
-
     - uses: actions/checkout@v4
       with:
         persist-credentials: false
         fetch-depth: 0
 
     - name: Check for remote changes
-      id: check_changes
+      id: check-for-changes
       run: |
+        if [ "${{ github.event_name }}" != "schedule" ]; then
+          echo "This run was triggered by ${GITHUB_EVENT_NAME}. Skipping the job."
+          echo "is-up-to-date=false" >> $GITHUB_ENV
+          exit 0
+        fi
         # REMOTE_COMMIT=$(git ls-remote https://github.com/searxng/searxng HEAD | awk '{print $1}')
         REMOTE_COMMIT="8043bf25dc78335db1c19d7c66ffb542aaf6e491"
         LOCAL_COMMIT=$(grep -m1 "UPSTREAM_COMMIT=" Dockerfile | cut -d'=' -f2)
         echo "Remote commit: $REMOTE_COMMIT"
         echo "Local commit: $LOCAL_COMMIT"
-        if [ "$REMOTE_COMMIT" = "$LOCAL_COMMIT" ] && [ "${{ github.event_name }}" = "schedule" ]; then
+        if [ "$REMOTE_COMMIT" = "$LOCAL_COMMIT" ]; then
           echo "Repository is up to date. Skipping build process."
-          exit 2
+          echo "is-up-to-date=true" >> $GITHUB_ENV
+          exit 0
+        else
+          echo "is-up-to-date=false" >> $GITHUB_ENV
         fi
 
   update:
     needs: update-required
+    if: needs.update-required.outputs.is-up-to-date == 'false'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -61,7 +65,7 @@ jobs:
     #- name: Update the SHA sum.
     #  run: |
     #    git ls-remote https://github.com/searxng/searxng | head -1 | cut -f 1 | sed -e "s/.*/UPSTREAM_COMMIT=&/" | sed -i '8r/dev/stdin' Dockerfile && sed -i '8d' ./Dockerfile
-        
+
     - name: Push changes
       uses: actions-js/push@master
       with:
@@ -80,7 +84,7 @@ jobs:
     #  run: |
     #    git checkout base
     #    curl https://raw.githubusercontent.com/searxng/searxng/master/requirements.txt > requirements.txt
-        
+
     - name: Push changes
       uses: actions-js/push@master
       with:
@@ -92,6 +96,7 @@ jobs:
 
   build-base:
     needs: update
+    if: needs.update-required.outputs.is-up-to-date == 'false'
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -144,6 +149,7 @@ jobs:
 
   build-main:
     needs: build-base
+    if: needs.update-required.outputs.is-up-to-date == 'false'
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
