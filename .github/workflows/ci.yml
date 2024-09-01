@@ -39,7 +39,8 @@ jobs:
     - name: Check for remote changes
       id: check_changes
       run: |
-        REMOTE_COMMIT=$(git ls-remote https://github.com/searxng/searxng HEAD | awk '{print $1}')
+        # REMOTE_COMMIT=$(git ls-remote https://github.com/searxng/searxng HEAD | awk '{print $1}')
+        REMOTE_COMMIT="8043bf25dc78335db1c19d7c66ffb542aaf6e491"
         LOCAL_COMMIT=$(grep -m1 "UPSTREAM_COMMIT=" Dockerfile | cut -d'=' -f2)
         echo "Remote commit: $REMOTE_COMMIT"
         echo "Local commit: $LOCAL_COMMIT"
