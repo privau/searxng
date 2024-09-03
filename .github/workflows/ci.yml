@@ -192,8 +192,12 @@ jobs:
         run: |
           docker run -d -p 8080:8080 ${{ env.MAIN_TEST_TAG }}
           sleep 5 # Give the container some time to start
-          curl http://localhost:8080/healthz | grep "OK" # Check if the container is healthy
-          curl http://localhost:8080/search?q=github | grep "Let's build from here" # Check if the container is responding to requests
+          curl http://localhost:8080/healthz > input.txt
+          cat input.txt
+          grep "OK" input.txt
+          curl http://localhost:8080/search?q=github > input.txt
+          cat input.txt
+          grep "Let's build from here" input.txt
           docker rm -f $(docker ps -q --filter ancestor=${{ env.MAIN_TEST_TAG }}) # Stop the container
 
       - name: Build and push
