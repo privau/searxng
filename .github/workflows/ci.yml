@@ -197,7 +197,7 @@ jobs:
           grep "OK" input.txt
           curl http://localhost:8080/search?q=github > input.txt
           cat input.txt
-          grep "Let's build from here" input.txt
+          grep "data-copied-text" input.txt
           docker rm -f $(docker ps -q --filter ancestor=${{ env.MAIN_TEST_TAG }}) # Stop the container
 
       - name: Build and push
