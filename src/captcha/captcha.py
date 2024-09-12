@@ -4,6 +4,7 @@
 
 import hashlib
 from ipaddress import ip_address
+from os import environ
 
 from flask import redirect, url_for
 from searx import limiter
@@ -39,7 +40,7 @@ def handle_captcha(request, secret_key, raw_text_query, search_query, selected_l
     match, _ = ip_lists.pass_ip(ip, limiter.get_cfg())
 
     # Check if the IP is in the whitelist
-    if not match:
+    if not match and environ.get('CAPTCHA'):
         # make sure captcha_token is a valid HMAC
         captcha_token = request.cookies.get('captcha_token')
         ip_hash = hashlib.sha256(ip.packed).digest()

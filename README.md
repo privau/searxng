@@ -82,3 +82,7 @@ If Qwant is returning an 'Access Denied' error, you're most likely connecting to
 * ```PUBLIC_INSTANCE``` : Sets the public_instance parameter, which enables features designed for public instances. Requires the limiter to be enabled, which also requires redis. Required to be used on public production instances. Leave empty to disable.
 
 * ```SECRET_KEY``` : Sets the secret key for the instance. If not set, a random key will be generated on startup.
+
+* ```FOOTER_MESSAGE``` : Sets the footer message of the instance.
+
+* ```CAPTCHA``` : Enables the captcha for the instance if set.

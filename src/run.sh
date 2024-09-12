@@ -35,6 +35,9 @@ fi
 if [ ! -z "${PRIVACYPOLICY}" ]; then
     sed -i -e "s+privacypolicy_url: false+privacypolicy_url: ${PRIVACYPOLICY}+g" \
     searx/settings.yml;
+else # set to 'privacy'
+    sed -i -e "s+privacypolicy_url: false+privacypolicy_url: privacy+g" \
+    searx/settings.yml;
 fi
 
 # set donation url

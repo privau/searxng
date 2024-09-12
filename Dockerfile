@@ -1,9 +1,10 @@
 # use prebuild alpine image with needed python packages from base branch
 FROM vojkovic/searxng:base
-ENV GID=991 UID=991 UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= NAME=PrivAU SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED=0 PUBLIC_INSTANCE= \
-PRIVACYPOLICY=privacy \
+ENV GID=991 UID=991 UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= CAPTCHA= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED=0 PUBLIC_INSTANCE= \
+PRIVACYPOLICY= \
 DONATION_URL= \
 CONTACT=https://vojk.au \
+FOOTER_MESSAGE='' \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
 UPSTREAM_COMMIT=7a047945f1019377ef19ce1a0efb74372a965030
 
@@ -36,12 +37,12 @@ COPY ./src/privacy-policy/privacy-policy.html searx/templates/simple/privacy-pol
 RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ \n@app.route('\/privacy', methods=\['GET'\])\ndef privacy_policy():return render('privacy-policy.html')\n" /usr/local/searxng/searx/webapp.py
 
 # include footer message
-# RUN sed -i "s|<footer>|<footer>\n        {{ _('Favicons in results are currently experimental. Open an issue on the ') }} <a href=\"{{ searx_git_url }}\">{{ _('GitHub') }}</a> if you run into any issues.|g" searx/templates/simple/base.html
+RUN sed -i "s|<footer>|<footer>\n${FOOTER_MESSAGE}|g" searx/templates/simple/base.html
 
 # include patches to enable captcha (disabled)
-# COPY ./src/captcha/captcha.html searx/templates/simple/captcha.html
-# COPY ./src/captcha/captcha.py searx/captcha.py
-# RUN sed -i '/search = SearchWithPlugins(search_query, request.user_plugins, request)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale, render)):\n            return captcha_response\n' /usr/local/searxng/searx/webapp.py
+COPY ./src/captcha/captcha.html searx/templates/simple/captcha.html
+COPY ./src/captcha/captcha.py searx/captcha.py
+RUN sed -i '/search = SearchWithPlugins(search_query, request.user_plugins, request)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale, render)):\n            return captcha_response\n' /usr/local/searxng/searx/webapp.py
 
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
