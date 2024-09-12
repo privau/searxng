@@ -77,7 +77,7 @@ If Qwant is returning an 'Access Denied' error, you're most likely connecting to
 
 * ```GIT_BRANCH``` : Sets the Git branch of the repository specified in `GIT_URL`. (for example `main`)
 
-* ```SEARCH_ENGINE_ACCESS_DENIED``` : Sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_ACCESS_DENIED exception, by default this value is set to ```86400``` (i.e. 1 day)
+* ```SEARCH_ENGINE_ACCESS_DENIED``` : Sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_ACCESS_DENIED exception, by default this value is set to ```60``` (i.e. 1 minute)
 
 * ```PUBLIC_INSTANCE``` : Sets the public_instance parameter, which enables features designed for public instances. Requires the limiter to be enabled, which also requires redis. Required to be used on public production instances. Leave empty to disable.
 

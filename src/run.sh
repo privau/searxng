@@ -81,6 +81,9 @@ fi
 if [ ! -z "${SEARCH_ENGINE_ACCESS_DENIED}" ]; then
     sed -i -e "/    SearxEngineAccessDenied/s/86400/${SEARCH_ENGINE_ACCESS_DENIED}/g" \
     searx/settings.yml;
+else # set to 60 seconds
+    sed -i -e "/    SearxEngineAccessDenied/s/86400/60/g" \
+    searx/settings.yml;
 fi
 
 # enable public_instance mode
