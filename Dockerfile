@@ -36,10 +36,7 @@ RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light',
 COPY ./src/privacy-policy/privacy-policy.html searx/templates/simple/privacy-policy.html
 RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ \n@app.route('\/privacy', methods=\['GET'\])\ndef privacy_policy():return render('privacy-policy.html')\n" /usr/local/searxng/searx/webapp.py
 
-# include footer message
-RUN sed -i "s|<footer>|<footer>\n${FOOTER_MESSAGE}|g" searx/templates/simple/base.html
-
-# include patches to enable captcha (disabled)
+# include patches for captcha
 COPY ./src/captcha/captcha.html searx/templates/simple/captcha.html
 COPY ./src/captcha/captcha.py searx/captcha.py
 RUN sed -i '/search = SearchWithPlugins(search_query, request.user_plugins, request)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale, render)):\n            return captcha_response\n' /usr/local/searxng/searx/webapp.py

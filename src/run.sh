@@ -98,5 +98,11 @@ else # set SECRET_KEY
     searx/settings.yml;
 fi
 
+# set footer message
+if [ ! -z "${FOOTER_MESSAGE}" ]; then
+    sed -i "s|<footer>|<footer>\n${FOOTER_MESSAGE}|g" \
+    searx/templates/simple/base.html
+fi
+
 # start uwsgi with SearXNG workload
 exec uwsgi --master --http-socket "0.0.0.0:8080" "/etc/uwsgi/uwsgi.ini"
