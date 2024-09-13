@@ -1,6 +1,6 @@
 # use prebuild alpine image with needed python packages from base branch
 FROM vojkovic/searxng:base
-ENV GID=991 UID=991 UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= CAPTCHA= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
+ENV GID=991 UID=991 UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= CAPTCHA= AUTHORIZED_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
 PRIVACYPOLICY= \
 DONATION_URL= \
 CONTACT=https://vojk.au \
@@ -40,6 +40,10 @@ RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ 
 COPY ./src/captcha/captcha.html searx/templates/simple/captcha.html
 COPY ./src/captcha/captcha.py searx/captcha.py
 RUN sed -i '/search = SearchWithPlugins(search_query, request.user_plugins, request)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale, render)):\n            return captcha_response\n' /usr/local/searxng/searx/webapp.py
+
+# include patches for authorized api access
+COPY ./src/auth/auth.py searx/auth.py
+RUN sed -i -e "/if output_format not in settings\['search'\]\['formats'\]:/a\\        from searx.auth import valid_api_key\n\        if (not valid_api_key(request)):" \    -e 's|flask.abort(403)|    flask.abort(403)|' /usr/local/searxng/searx/webapp.py
 
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml

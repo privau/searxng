@@ -86,3 +86,5 @@ If Qwant is returning an 'Access Denied' error, you're most likely connecting to
 * ```FOOTER_MESSAGE``` : Sets the footer message of the instance.
 
 * ```CAPTCHA``` : Enables the captcha for the instance if set.
+
+* ```AUTHORIZED_API``` : Set to enable the Authorized API. Allows all search formats, i.e. json,csv,rss behind a token. Token file is located at `/auth_tokens.txt`. Loaded once, you need to restart the container to reload the tokens.
