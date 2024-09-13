@@ -2,6 +2,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """This module implements functions needed for the Authorized API."""
 
+from os import environ
+
 valid_tokens_set = None
 
 def load_tokens():
