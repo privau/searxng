@@ -79,12 +79,12 @@ If Qwant is returning an 'Access Denied' error, you're most likely connecting to
 
 * ```SEARCH_ENGINE_ACCESS_DENIED``` : Sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_ACCESS_DENIED exception, by default this value is set to ```60``` (i.e. 1 minute)
 
-* ```PUBLIC_INSTANCE``` : Sets the public_instance parameter, which enables features designed for public instances. Requires the limiter to be enabled, which also requires redis. Required to be used on public production instances. Leave empty to disable.
+* ```PUBLIC_INSTANCE``` : Sets the public_instance parameter, which enables features designed for public instances. Requires the limiter to be enabled, which also requires redis. Required to be used on public production instances. Leave empty to disable. (Default: `false`)
 
 * ```SECRET_KEY``` : Sets the secret key for the instance. If not set, a random key will be generated on startup.
 
-* ```FOOTER_MESSAGE``` : Sets the footer message of the instance.
+* ```FOOTER_MESSAGE``` : Sets the footer message of the instance. (Default: empty)
 
-* ```CAPTCHA``` : Enables the captcha for the instance if set.
+* ```CAPTCHA``` : Enables the captcha for the instance if set. (Default: `false`)
 
-* ```AUTHORIZED_API``` : Set to enable the Authorized API. Allows all search formats, i.e. json,csv,rss behind a token. Token file is located at `/auth_tokens.txt`. Loaded once, you need to restart the container to reload the tokens.
+* ```AUTHORIZED_API``` : Set to enable the Authorized API. Allows all search formats, i.e. json,csv,rss behind a token. Token file is located at `/auth_tokens.txt`. Loaded once, you need to restart the container to reload the tokens. (Default: `false`)

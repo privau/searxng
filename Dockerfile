@@ -44,7 +44,7 @@ RUN sed -i '/search = SearchWithPlugins(search_query, request.user_plugins, requ
 # include patches for authorized api access
 COPY ./src/auth/auth.py searx/auth.py
 RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a\\        from searx.auth import valid_api_key\\n        if (not valid_api_key(request)):" -e 's|flask.abort(403)|    flask.abort(403)|' /usr/local/searxng/searx/webapp.py
-RUN sed -i "/# methods applied on /a\\    from searx.auth import valid_api_key\\n    if (valid_api_key(request)):\\n        return None" /usr/local/searxng/searx/limiter.py
+RUN sed -i "/3\. If the IP is not in either list, the request is not blocked\./a\\    from searx.auth import valid_api_key\\n    if (valid_api_key(request)):\\n        return None" searx/limiter.py
 
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
