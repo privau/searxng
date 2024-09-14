@@ -12,7 +12,7 @@ def load_tokens():
         try:
             with open("/auth_tokens.txt") as file:
                 valid_tokens_set = {line.strip() for line in file}
-        except FileNotFoundError:
+        except Exception:
             valid_tokens_set = set()
     return valid_tokens_set
 
