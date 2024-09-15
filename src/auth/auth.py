@@ -24,8 +24,8 @@ def valid_api_key(request):
     return auth in get_tokens()
 
 def auth_search_key(request, key):
-    if not valid_api_key(request):
-        return abort(403)
+    if not environ.get('AUTHORIZED_API'):
+        return False
     
     with current_app.test_client() as client:
         headers = {'Authorization': f'Bearer {key}'}
