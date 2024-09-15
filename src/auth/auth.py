@@ -11,7 +11,7 @@ def get_tokens():
     global valid_tokens_set
     if valid_tokens_set is None:
         try:
-            with open("/root/searxng-favicon/auth_tokens.txt") as file:
+            with open("/auth_tokens.txt") as file:
                 valid_tokens_set = {line.strip() for line in file}
         except Exception:
             valid_tokens_set = set()
