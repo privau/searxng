@@ -25,7 +25,7 @@ def valid_api_key(request):
 
 def auth_search_key(request, key):
     if not environ.get('AUTHORIZED_API'):
-        return False
+        return flask.abort(403)
     
     with current_app.test_client() as client:
         headers = {'Authorization': f'Bearer {key}'}
