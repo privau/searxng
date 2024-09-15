@@ -2,15 +2,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """This module implements functions needed for the Authorized API."""
 
+from flask import current_app, abort
 from os import environ
 
 valid_tokens_set = None
 
-def load_tokens():
+def get_tokens():
     global valid_tokens_set
     if valid_tokens_set is None:
         try:
-            with open("/auth_tokens.txt") as file:
+            with open("/root/searxng-favicon/auth_tokens.txt") as file:
                 valid_tokens_set = {line.strip() for line in file}
         except Exception:
             valid_tokens_set = set()
@@ -20,4 +21,17 @@ def valid_api_key(request):
     if not environ.get('AUTHORIZED_API'):
         return False
     auth = request.headers.get('Authorization', '')[7:]
-    return auth and auth in load_tokens()
+    return auth in get_tokens()
+
+def auth_search_key(request, key):
+    if not valid_api_key(request):
+        return abort(403)
+    
+    with current_app.test_client() as client:
+        headers = {'Authorization': f'Bearer {key}'}
+        if request.method == 'GET':
+            response = client.get('/search', query_string=request.args, headers=headers)
+        elif request.method == 'POST':
+            response = client.post('/search', data=request.form, headers=headers)
+    
+    return response
