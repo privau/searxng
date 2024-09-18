@@ -6,7 +6,7 @@ DONATION_URL= \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=60555123bc6b928e59339ca6d65ae967a65a272a
+UPSTREAM_COMMIT=c436ec4df641bc08e9753aee3bea8ed81bc906b9
 
 WORKDIR /usr/local/searxng
 
@@ -23,9 +23,10 @@ RUN addgroup -g ${GID} searxng \
 COPY ./out/css/* searx/static/themes/simple/css/
 COPY ./out/js/* searx/static/themes/simple/js/
 
-# copy run.sh and limiter.toml
+# copy run.sh, limiter.toml and favicons.toml
 COPY ./src/run.sh /usr/local/bin/run.sh
 COPY ./src/limiter.toml /etc/searxng/limiter.toml
+COPY ./src/favicons.toml /etc/searxng/favicons/favicons.toml
 
 # make our patches to searxng's code to allow for the custom theming
 RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark'\]/s/choices=\['', 'auto', 'light', 'dark'\]/choices=\['', 'light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night'\]/" /usr/local/searxng/searx/preferences.py \
@@ -56,7 +57,7 @@ chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
 -e "/autocomplete_min:/s/4/0/g" \
--e "/favicon_resolver:/s/\"\"/\"duckduckgo\"/g" \
+-e "/favicon_resolver:/s/\"\"/\"google\"/g" \
 -e "/port:/s/8888/8080/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
 -e "/infinite_scroll:/s/false/true/g" \

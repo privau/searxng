@@ -1,0 +1,23 @@
+[favicons]
+
+cfg_schema = 1   # config's schema version no.
+
+[favicons.proxy]
+
+# [favicons.proxy.resolver_map]
+#
+# The available favicon resolvers are registered here.
+#
+# "duckduckgo" = "searx.favicons.resolvers.duckduckgo"
+# "allesedv" = "searx.favicons.resolvers.allesedv"
+# "google" = "searx.favicons.resolvers.google"
+# "yandex" = "searx.favicons.resolvers.yandex"
+
+[favicons.cache]
+
+db_url = "/tmp/faviconcache.db"
+HOLD_TIME = 5184000 # 60 days
+LIMIT_TOTAL_BYTES = 2147483648 # 2 GB
+BLOB_MAX_BYTES = 40960 # 40 KB
+MAINTENANCE_MODE = "auto"
+MAINTENANCE_PERIOD = 600
