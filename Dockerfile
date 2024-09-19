@@ -6,7 +6,7 @@ DONATION_URL= \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=ae08112b18c433e33cc4d9cfb2fc025016378449
+UPSTREAM_COMMIT=ba1f9eeff599369185bbe6cfd08abe8277aa1743
 
 WORKDIR /usr/local/searxng
 
@@ -26,7 +26,7 @@ COPY ./out/js/* searx/static/themes/simple/js/
 # copy run.sh, limiter.toml and favicons.toml
 COPY ./src/run.sh /usr/local/bin/run.sh
 COPY ./src/limiter.toml /etc/searxng/limiter.toml
-COPY ./src/favicons.toml /etc/searxng/favicons/favicons.toml
+COPY ./src/favicons.toml /etc/searxng/favicons.toml
 
 # make our patches to searxng's code to allow for the custom theming
 RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark'\]/s/choices=\['', 'auto', 'light', 'dark'\]/choices=\['', 'light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night'\]/" /usr/local/searxng/searx/preferences.py \

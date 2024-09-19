@@ -4,14 +4,14 @@ cfg_schema = 1   # config's schema version no.
 
 [favicons.proxy]
 
-# [favicons.proxy.resolver_map]
-#
+[favicons.proxy.resolver_map]
+
 # The available favicon resolvers are registered here.
-#
-# "duckduckgo" = "searx.favicons.resolvers.duckduckgo"
-# "allesedv" = "searx.favicons.resolvers.allesedv"
-# "google" = "searx.favicons.resolvers.google"
-# "yandex" = "searx.favicons.resolvers.yandex"
+
+"duckduckgo" = "searx.favicons.resolvers.duckduckgo"
+"allesedv" = "searx.favicons.resolvers.allesedv"
+"google" = "searx.favicons.resolvers.google"
+"yandex" = "searx.favicons.resolvers.yandex"
 
 [favicons.cache]
 
