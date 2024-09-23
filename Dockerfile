@@ -6,7 +6,7 @@ DONATION_URL= \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=90e3a8c760ecc7ad9d129348bb782fd2f2522d95
+UPSTREAM_COMMIT=932650d1ed9ea7f7b0fe0d1636ca8a37e0664890
 
 WORKDIR /usr/local/searxng
 
