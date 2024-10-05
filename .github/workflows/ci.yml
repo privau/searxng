@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 env:
-  SOURCE_REPO: privau/searxng-favicon
+  SOURCE_REPO: searxng/searxng
   SOURCE_REPO_BRANCH: master
   BASE_TEST_TAG: vojkovic/searxng:base-test
   BASE_PROD_TAG: vojkovic/searxng:base

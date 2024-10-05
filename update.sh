@@ -5,11 +5,11 @@ echo "Building theme from master branch searxng/searxng."
 echo "Cloning latest searxng/searxng"
 if [ ! -d build ]
 then
-    git clone https://github.com/privau/searxng-favicon.git build
+    git clone https://github.com/searxng/searxng.git build
 else
     cd build
     git restore .
-    git pull https://github.com/privau/searxng-favicon.git
+    git pull https://github.com/searxng/searxng.git
     cd ..
 fi
 
