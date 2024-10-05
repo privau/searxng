@@ -29,9 +29,9 @@ COPY ./src/limiter.toml /etc/searxng/limiter.toml
 COPY ./src/favicons.toml /etc/searxng/favicons.toml
 
 # make our patches to searxng's code to allow for the custom theming
-RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark'\]/s/choices=\['', 'auto', 'light', 'dark'\]/choices=\['', 'light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night'\]/" /usr/local/searxng/searx/preferences.py \
-&& sed -i "s/SIMPLE_STYLE = ('auto', 'light', 'dark')/SIMPLE_STYLE = ('light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night')/" /usr/local/searxng/searx/settings_defaults.py \
-&& sed -i "s/{%- for name in \['auto', 'light', 'dark'\] -%}/{%- for name in \['light', 'dark', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night'\] -%}/" /usr/local/searxng/searx/templates/simple/preferences/theme.html
+RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark', 'black'\]/s/choices=\['', 'auto', 'light', 'dark', 'black'\]/choices=\['', 'light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night'\]/" /usr/local/searxng/searx/preferences.py \
+&& sed -i "s/SIMPLE_STYLE = ('auto', 'light', 'dark', 'black')/SIMPLE_STYLE = ('light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night')/" /usr/local/searxng/searx/settings_defaults.py \
+&& sed -i "s/{%- for name in \['auto', 'light', 'dark', 'black'\] -%}/{%- for name in \['light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night'\] -%}/" /usr/local/searxng/searx/templates/simple/preferences/theme.html
 
 # make patch to allow the privacy policy page
 COPY ./src/privacy-policy/privacy-policy.html searx/templates/simple/privacy-policy.html
