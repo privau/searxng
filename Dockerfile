@@ -26,7 +26,7 @@ RUN apk -U upgrade \
     uwsgi-python3 \
     git \
     brotli \
-    py3-pydantic-core \
+    py3-pydantic \
 && pip install --no-cache --break-system-packages -r requirements.txt \
 && apk del build-dependencies \
 && rm -rf /var/cache/apk/* /root/.cache
