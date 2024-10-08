@@ -8,9 +8,11 @@ Global Instance - 🌐 Worldwide : https://priv.au/
 
 ---
 
-America, Vultr - 🇺🇸 Chicago, United States : https://na.priv.au/
+America, Cloudie - 🇺🇸 Fremont, United States : https://na.priv.au/
 
-America, DigitalOcean - 🇺🇸 San Francisco, United States : https://na2.priv.au/
+America, Cloudie - 🇨🇦 Toronto, Canada : https://na2.priv.au/
+
+America, Cloudie - 🇺🇸 Ashburn, United States : https://na3.priv.au/
 
 Europe, Vultr - 🇩🇪 Frankfurt, Germany : https://eu.priv.au/
 
