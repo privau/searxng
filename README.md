@@ -16,7 +16,7 @@ America, Cloudie - 🇺🇸 Ashburn, United States : https://na3.priv.au/
 
 Europe, Vultr - 🇩🇪 Frankfurt, Germany : https://eu.priv.au/
 
-Europe, DigitalOcean - 🇬🇧 London, United Kingdom : https://eu2.priv.au/
+Europe, Lagrange - 🇬🇧 London, United Kingdom : https://eu2.priv.au/
 
 Asia, Vultr - 🇸🇬 Singapore : https://as.priv.au/
 
