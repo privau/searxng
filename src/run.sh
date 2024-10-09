@@ -103,7 +103,7 @@ fi
 
 # set footer message
 if [ ! -z "${FOOTER_MESSAGE}" ]; then
-    sed -i "s|<footer>|<footer>\n${FOOTER_MESSAGE}|g" \
+    sed -i "/<footer>/,/{{/ { /${FOOTER_MESSAGE}/! s|<p>[^{{]*|<p>${FOOTER_MESSAGE}| }" \
     searx/templates/simple/base.html
 fi
 
