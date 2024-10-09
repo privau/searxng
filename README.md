@@ -14,7 +14,7 @@ America, Cloudie - 🇨🇦 Toronto, Canada : https://na2.priv.au/
 
 America, Cloudie - 🇺🇸 Ashburn, United States : https://na3.priv.au/
 
-Europe, Vultr - 🇩🇪 Frankfurt, Germany : https://eu.priv.au/
+Europe, iFog - 🇨🇭 Zurich, Switzerland : https://eu.priv.au/
 
 Europe, Lagrange - 🇬🇧 London, United Kingdom : https://eu2.priv.au/
 
