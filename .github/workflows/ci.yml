@@ -85,8 +85,8 @@ jobs:
     - name: Copy requirements.txt
       run: |
         git checkout base
-        # curl -v -fsSL https://raw.githubusercontent.com/${{ env.SOURCE_REPO }}/${{ env.SOURCE_REPO_BRANCH }}/requirements.txt -o requirements.txt
-        # git add requirements.txt
+        curl -v -fsSL https://raw.githubusercontent.com/${{ env.SOURCE_REPO }}/${{ env.SOURCE_REPO_BRANCH }}/requirements.txt -o requirements.txt
+        git add requirements.txt
 
     - name: Push changes
       uses: actions-js/push@master
