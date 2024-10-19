@@ -18,12 +18,15 @@ Europe, iFog - 🇨🇭 Zurich, Switzerland : https://eu.priv.au/
 
 Europe, Lagrange - 🇬🇧 London, United Kingdom : https://eu2.priv.au/
 
-Asia, Vultr - 🇸🇬 Singapore : https://as.priv.au/
+Asia, DigitalOcean - 🇸🇬 Singapore : https://as.priv.au/
 
 Asia, DigitalOcean - 🇮🇳 Bangalore, India : https://as2.priv.au/
 
 Australia, DigitalOcean - 🇦🇺 Sydney, Australia : https://au.priv.au/
 
+Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au2.priv.au/
+
+Australia, BinaryLane - 🇦🇺 Perth, Australia : https://au3.priv.au/
 
 ## FAQ
 
