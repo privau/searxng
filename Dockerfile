@@ -1,5 +1,6 @@
-# use prebuild alpine image with needed python packages from base branch
-FROM vojkovic/searxng:base
+# use alpine as base for searx and set workdir as well as env vars
+FROM alpine:3.20 AS base
+
 ENV GID=991 UID=991 UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= CAPTCHA= AUTHORIZED_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
 PRIVACYPOLICY= \
 DONATION_URL= \
@@ -7,6 +8,37 @@ CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
 UPSTREAM_COMMIT=b14d885f235512572531a5336eb26a97f133f0aa
+
+COPY ./requirements.txt .
+
+# install build deps and git clone searxng as well as setting the version
+RUN apk -U upgrade \
+&& apk add --no-cache -t build-dependencies \
+    build-base \
+    py3-setuptools \
+    python3-dev \
+    libffi-dev \
+    libxslt-dev \
+    libxml2-dev \
+    openssl-dev \
+    tar \
+ && apk add --no-cache \
+    ca-certificates \
+    python3 \
+    py3-pip \
+    libxml2 \
+    libxslt \
+    openssl \
+    tini \
+    uwsgi \
+    uwsgi-python3 \
+    git \
+    brotli \
+&& pip install --no-cache --break-system-packages -r requirements.txt \
+&& apk del build-dependencies \
+&& rm -rf /var/cache/apk/* /root/.cache
+
+FROM base AS searxng
 
 WORKDIR /usr/local/searxng
 
