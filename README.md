@@ -8,15 +8,15 @@ Global Instance - 🌐 Worldwide : https://priv.au/
 
 ---
 
-America, Cloudie - 🇺🇸 Fremont, United States : https://na.priv.au/
+America, DigitalOcean - 🇺🇸 New York, United States : https://na.priv.au/
 
-America, Cloudie - 🇨🇦 Toronto, Canada : https://na2.priv.au/
-
-America, Cloudie - 🇺🇸 Ashburn, United States : https://na3.priv.au/
+America, DigitalOcean - 🇺🇸 San Francisco, United States : https://na2.priv.au/
 
 Europe, iFog - 🇨🇭 Zurich, Switzerland : https://eu.priv.au/
 
 Europe, Lagrange - 🇬🇧 London, United Kingdom : https://eu2.priv.au/
+
+Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu3.priv.au/
 
 Asia, DigitalOcean - 🇸🇬 Singapore : https://as.priv.au/
 
