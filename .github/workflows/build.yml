@@ -20,8 +20,6 @@ env:
 
 jobs:
   build:
-    needs: update
-    if: needs.check-update-required.outputs.is-up-to-date == 'false'
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
