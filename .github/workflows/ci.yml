@@ -3,20 +3,14 @@ name: ci
 on:
   schedule:
     - cron: '*/10 * * * *'
-  push:
-    branches:
-      - main
-    paths:
-      - 'src/**'
-      - '.github/workflows/ci.yml'
   workflow_dispatch:
 
 env:
   SOURCE_REPO: searxng/searxng
   SOURCE_REPO_BRANCH: master
-  MAIN_TEST_TAG: vojkovic/searxng:test
-  MAIN_LATEST_TAG: vojkovic/searxng:latest
-  MAIN_GITHUB_LATEST_TAG: ghcr.io/privau/searxng:latest
+  TEST_TAG: vojkovic/searxng:test
+  LATEST_TAG: vojkovic/searxng:latest
+  GITHUB_LATEST_TAG: ghcr.io/privau/searxng:latest
 
 jobs:
   check-update-required:
@@ -73,63 +67,3 @@ jobs:
         author_email: '41898282+github-actions[bot]@users.noreply.github.com'
         message: 'upd: latest upstream commit'
         github_token: ${{ secrets.PAT_TOKEN }}
-
-  build-main:
-    needs: update
-    if: needs.check-update-required.outputs.is-up-to-date == 'false'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: vojkovic
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Check Out Repo
-        uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: linux/amd64,linux/arm64
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Test Main Image
-        uses: docker/build-push-action@v6
-        with:
-          load: true
-          context: ./
-          file: ./Dockerfile
-          tags: ${{ env.MAIN_TEST_TAG }}
-
-      - name: Test Main Image
-        run: |
-          docker run -d -p 8080:8080 ${{ env.MAIN_TEST_TAG }}
-          sleep 5 # Give the container some time to start
-          curl http://localhost:8080/healthz > input.txt
-          cat input.txt
-          grep "OK" input.txt
-          curl http://localhost:8080/search?q=github > input.txt
-          cat input.txt
-          grep "data-copied-text" input.txt
-          docker rm -f $(docker ps -q --filter ancestor=${{ env.MAIN_TEST_TAG }}) # Stop the container
-
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          context: ./
-          file: ./Dockerfile
-          push: true
-          platforms: linux/amd64,linux/arm64
-          tags: |
-            ${{ env.MAIN_LATEST_TAG }}
-            ${{ env.MAIN_GITHUB_LATEST_TAG }}

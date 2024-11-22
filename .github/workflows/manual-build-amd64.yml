@@ -1,13 +1,13 @@
-name: build-main-amd64
+name: build-amd64
 
 on:
   workflow_dispatch:
 
 
 env:
-  MAIN_TEST_TAG: vojkovic/searxng:test
-  MAIN_LATEST_TAG: vojkovic/searxng:latest
-  MAIN_GITHUB_LATEST_TAG: ghcr.io/privau/searxng:latest
+  TEST_TAG: vojkovic/searxng:test
+  LATEST_TAG: vojkovic/searxng:latest
+  GITHUB_LATEST_TAG: ghcr.io/privau/searxng:latest
 
 jobs:
   build:
@@ -39,11 +39,11 @@ jobs:
           load: true
           context: ./
           file: ./Dockerfile
-          tags: ${{ env.MAIN_TEST_TAG }}
+          tags: ${{ env.TEST_TAG }}
 
       - name: Test Main Image
         run: |
-          docker run -d -p 8080:8080 ${{ env.MAIN_TEST_TAG }}
+          docker run -d -p 8080:8080 ${{ env.TEST_TAG }}
           sleep 5 # Give the container some time to start
           curl http://localhost:8080/healthz > input.txt
           cat input.txt
@@ -51,7 +51,7 @@ jobs:
           curl http://localhost:8080/search?q=github > input.txt
           cat input.txt
           grep "data-copied-text" input.txt
-          docker rm -f $(docker ps -q --filter ancestor=${{ env.MAIN_TEST_TAG }}) # Stop the container
+          docker rm -f $(docker ps -q --filter ancestor=${{ env.TEST_TAG }}) # Stop the container
 
       - name: Build and push
         id: docker_build
@@ -61,5 +61,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ env.MAIN_LATEST_TAG }}
-            ${{ env.MAIN_GITHUB_LATEST_TAG }}
+            ${{ env.LATEST_TAG }}
+            ${{ env.GITHUB_LATEST_TAG }}
