@@ -101,6 +101,12 @@ else # set SECRET_KEY
     searx/settings.yml;
 fi
 
+# set OPENMETRICS_PASSWORD if exists
+if [ ! -z "${OPENMETRICS_PASSWORD}" ]; then
+    sed -i -e "s+open_metrics: ''+open_metrics: ${OPENMETRICS_PASSWORD}+g" \
+    searx/settings.yml;
+fi
+
 # set footer message
 if [ ! -z "${FOOTER_MESSAGE}" ]; then
     sed -i "/<footer>/,/{{/ { /${FOOTER_MESSAGE}/! s|<p>[^{{]*|<p>${FOOTER_MESSAGE}| }" \
