@@ -25,7 +25,7 @@ def valid_api_key(request):
 
     auth = request.headers.get('Authorization', '')[7:]
 
-    if auth is None and request.path.split('/')[1].startswith('search'):
+    if auth is None:
         auth = request.path.split('/')[0]
 
     return auth in get_tokens()
