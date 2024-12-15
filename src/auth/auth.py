@@ -28,7 +28,7 @@ def auth_search_key(request, key):
         return flask.abort(403)
     
     with current_app.test_client() as client:
-        headers = {'Authorization': f'Bearer {key}'}
+        headers = {'Authorization': f'Bearer {key}','User-Agent': 'AuthorizedAPI'}
         if request.method == 'GET':
             response = client.get('/search', query_string=request.args, headers=headers)
         elif request.method == 'POST':
