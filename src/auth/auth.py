@@ -22,12 +22,13 @@ def get_tokens():
 def valid_api_key(request):
     if not environ.get('AUTHORIZED_API'):
         return False
+
     auth = request.headers.get('Authorization', '')[7:]
 
-    if request.path.split('/')[2].startswith('search'):
-        auth = request.path.split('/')[1]
+    if auth is None and request.path.split('/')[1].startswith('search'):
+        auth = request.path.split('/')[0]
 
-    return auth in get_tokens() 
+    return auth in get_tokens()
 
 def auth_search_key(request, key):
     if not environ.get('AUTHORIZED_API'):
