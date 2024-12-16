@@ -2,6 +2,7 @@
 FROM alpine:3.20 AS base
 
 ENV GID=991 UID=991 UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true REDIS_URL= LIMITER= BASE_URL= CAPTCHA= AUTHORIZED_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
+GOOGLE_DEFAULT=true BING_DEFAULT= \
 OPENMETRICS_PASSWORD= \
 PRIVACYPOLICY= \
 DONATION_URL= \
@@ -109,7 +110,6 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/static_use_hash:/s/false/true/g" \
 -e "s/    use_mobile_ui: false/    use_mobile_ui: true/g" \
 -e "/disabled: false/d" \
--e "/name: google/s/$/\n    disabled: false/g" \
 -e "/name: wikipedia/s/$/\n    disabled: false/g" \
 -e "/name: wikidata/s/$/\n    disabled: true/g" \
 -e "/name: wikispecies/s/$/\n    disabled: true/g" \
@@ -152,7 +152,6 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: bing news/s/$/\n    disabled: true/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
--e "/shortcut: bi/{n;s/.*/    disabled: true/}" \
 searx/settings.yml; \
 su searxng -c "/usr/bin/python3 -m compileall -q searx"; \
 find /usr/local/searxng/searx/static -a \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.ttf' -o -name '*.eot' \) \

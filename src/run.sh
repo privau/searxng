@@ -107,6 +107,24 @@ if [ ! -z "${OPENMETRICS_PASSWORD}" ]; then
     searx/settings.yml;
 fi
 
+# set GOOGLE_DEFAULT if exists
+if [ ! -z "${GOOGLE_DEFAULT}" ]; then
+    sed -i -e "/name: google/s/$/\n    disabled: false/g" \
+    searx/settings.yml;
+else # set to disabled
+    sed -i -e "/name: google/s/$/\n    disabled: true/g" \
+    searx/settings.yml;
+fi
+
+# set BING_DEFAULT if exists
+if [ ! -z "${BING_DEFAULT}" ]; then
+    sed -i -e "/shortcut: bi/{n;s/.*/    disabled: false/}" \
+    searx/settings.yml;
+else # set to disabled
+    sed -i -e "/shortcut: bi/{n;s/.*/    disabled: true/}" \
+    searx/settings.yml;
+fi
+
 # set footer message
 if [ ! -z "${FOOTER_MESSAGE}" ]; then
     sed -i "/<footer>/,/{{/ { /${FOOTER_MESSAGE}/! s|<p>[^{{]*|<p>${FOOTER_MESSAGE}| }" \
