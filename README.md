@@ -18,6 +18,8 @@ Europe, Lagrange - 🇬🇧 London, United Kingdom : https://eu2.priv.au/
 
 Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu3.priv.au/
 
+Europe, Anexia - 🇩🇪 Nuremberg, Germany : https://eu4.priv.au/
+
 Asia, DigitalOcean - 🇸🇬 Singapore : https://as.priv.au/
 
 Asia, DigitalOcean - 🇮🇳 Bangalore, India : https://as2.priv.au/
