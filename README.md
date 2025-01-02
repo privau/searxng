@@ -20,8 +20,6 @@ Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu3.priv.au
 
 Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au
 
-Australia, BinaryLane - 🇦🇺 Perth, Australia : https://au2.priv.au
-
 ## FAQ
 
 ### Where geographically is priv.au hosted?
