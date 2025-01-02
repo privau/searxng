@@ -8,9 +8,7 @@ Global Instance - 🌐 Worldwide : https://priv.au/
 
 ---
 
-America, DigitalOcean - 🇺🇸 New York, United States : https://na.priv.au/
-
-America, DigitalOcean - 🇺🇸 San Francisco, United States : https://na2.priv.au/
+America, iFog - 🇺🇸 Fremont, United States : https://na.priv.au/
 
 Europe, iFog - 🇨🇭 Zurich, Switzerland : https://eu.priv.au/
 
@@ -18,17 +16,9 @@ Europe, Lagrange - 🇬🇧 London, United Kingdom : https://eu2.priv.au/
 
 Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu3.priv.au/
 
-Europe, Anexia - 🇩🇪 Nuremberg, Germany : https://eu4.priv.au/
+Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au/
 
-Asia, DigitalOcean - 🇸🇬 Singapore : https://as.priv.au/
-
-Asia, DigitalOcean - 🇮🇳 Bangalore, India : https://as2.priv.au/
-
-Australia, DigitalOcean - 🇦🇺 Sydney, Australia : https://au.priv.au/
-
-Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au2.priv.au/
-
-Australia, BinaryLane - 🇦🇺 Perth, Australia : https://au3.priv.au/
+Australia, BinaryLane - 🇦🇺 Perth, Australia : https://au2.priv.au/
 
 ## FAQ
 
