@@ -4,21 +4,23 @@ Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-resp
 
 Don't see your favorite theme? [Submit a theme request!](https://github.com/privau/searxng/issues/new?assignees=&labels=bug&projects=&template=theme-request.md)
 
-Global Instance - 🌐 Worldwide : https://priv.au/
+Global Instance - 🌐 Worldwide : https://priv.au
 
 ---
 
-America, iFog - 🇺🇸 Fremont, United States : https://na.priv.au/
+America, iFog - 🇺🇸 Fremont, United States : https://na.priv.au
 
-Europe, iFog - 🇨🇭 Zurich, Switzerland : https://eu.priv.au/
+Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au
 
-Europe, Lagrange - 🇬🇧 London, United Kingdom : https://eu2.priv.au/
+Europe, iFog - 🇨🇭 Zurich, Switzerland : https://eu.priv.au
 
-Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu3.priv.au/
+Europe, Lagrange - 🇬🇧 London, United Kingdom : https://eu2.priv.au
 
-Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au/
+Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu3.priv.au
 
-Australia, BinaryLane - 🇦🇺 Perth, Australia : https://au2.priv.au/
+Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au
+
+Australia, BinaryLane - 🇦🇺 Perth, Australia : https://au2.priv.au
 
 ## FAQ
 
