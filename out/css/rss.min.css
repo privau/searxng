@@ -1,1 +1,1753 @@
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}.night-themes{--color-base-font:#eaecf0;--color-base-font-rgb:#eaecf0;--color-base-background:#101418;--color-base-background-mobile:#101418;--color-url-font:#6d8af2;--color-url-visited-font:#977dbd;--color-header-background:#101418;--color-header-border:#3c4043;--color-footer-background:#101418;--color-footer-border:#212327;--color-sidebar-border:#3c4043;--color-sidebar-font:#fff;--color-sidebar-background:#101418;--color-backtotop-font:#eaecf0;--color-backtotop-border:#212327;--color-backtotop-background:#111213;--color-btn-background:#447ff5;--color-btn-font:#101418;--color-show-btn-background:#202122;--color-show-btn-font:#eaecf0;--color-search-border:#3c4043;--color-search-shadow:0 2px 8px #20212241;--color-search-background:#111213;--color-search-font:#fff;--color-search-background-hover:#447ff5;--color-error:#f55b5b;--color-error-background:#390a0a;--color-warning:#f1d561;--color-warning-background:#39300a;--color-success:#79f56e;--color-success-background:#0e390a;--color-categories-item-selected-font:#6d8af2;--color-categories-item-border-selected:#447ff5;--color-autocomplete-font:#fff;--color-autocomplete-border:#3c4043;--color-autocomplete-shadow:0 4px 12px #20212241;--color-autocomplete-background:#111213;--color-autocomplete-background-hover:#202122;--color-answer-font:#fff;--color-answer-background:#202122;--color-result-background:#111213;--color-result-border:#3c4043;--color-result-url-font:#eaecf0;--color-result-vim-selected:#202122;--color-result-vim-arrow:#6d8af2;--color-result-description-highlight-font:#eaecf0;--color-result-link-font:#6d8af2;--color-result-link-font-highlight:#447ff5;--color-result-link-visited-font:#977dbd;--color-result-publishdate-font:#eaecf0;--color-result-engines-font:#eaecf0;--color-result-search-url-border:#3c4043;--color-result-search-url-font:#fff;--color-result-detail-font:#fff;--color-result-detail-label-font:lightgray;--color-result-detail-background:#101418;--color-result-detail-hr:#3c4043;--color-result-detail-link:#6d8af2;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:#202122;--color-result-image-span-font:#eaecf0;--color-result-image-span-font-selected:#222;--color-result-image-background:#222;--color-settings-tr-hover:#3c4043;--color-settings-engine-description-font:#eaecf0;--color-settings-table-group-background:#202122;--color-toolkit-badge-font:#101418;--color-toolkit-badge-background:#eaecf0;--color-toolkit-kbd-font:#000;--color-toolkit-kbd-background:#fff;--color-toolkit-dialog-border:#3c4043;--color-toolkit-dialog-background:#101418;--color-toolkit-tabs-label-border:#101418;--color-toolkit-tabs-section-border:#3c4043;--color-toolkit-select-background:#303134;--color-toolkit-select-border:#555;--color-toolkit-select-background-hover:#3c4043;--color-toolkit-input-text-font:#fff;--color-toolkit-checkbox-onoff-off-background:#303134;--color-toolkit-checkbox-onoff-on-background:#303134;--color-toolkit-checkbox-onoff-on-mark-background:#6d8af2;--color-toolkit-checkbox-onoff-on-mark-color:#101418;--color-toolkit-checkbox-onoff-off-mark-background:#eaecf0;--color-toolkit-checkbox-onoff-off-mark-color:#101418;--color-toolkit-checkbox-label-background:#101418;--color-toolkit-checkbox-label-border:#3c4043;--color-toolkit-checkbox-input-border:#6d8af2;--color-toolkit-engine-tooltip-border:#3c4043;--color-toolkit-engine-tooltip-background:#101418;--color-toolkit-loader-border:#202122;--color-toolkit-loader-borderleft:rgba(255, 255, 255, 0);--color-doc-code:#101418;--color-doc-code-background:#6d8af2;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root{--color-base-font:#444;--color-base-font-rgb:68,68,68;--color-base-background:#fff;--color-base-background-mobile:#f2f5f8;--color-url-font:#334999;--color-url-visited-font:#9822c3;--color-header-background:#fdfbff;--color-header-border:#ddd;--color-footer-background:#fdfbff;--color-footer-border:#ddd;--color-sidebar-border:#ddd;--color-sidebar-font:#000;--color-sidebar-background:#fff;--color-backtotop-font:#444;--color-backtotop-border:#ddd;--color-backtotop-background:#fff;--color-btn-background:#3050ff;--color-btn-font:#fff;--color-show-btn-background:#bbb;--color-show-btn-font:#000;--color-search-border:#bbb;--color-search-shadow:0 2px 8px rgba(34, 38, 46, 0.25);--color-search-background:#fff;--color-search-font:#222;--color-search-background-hover:#3050ff;--color-error:#db3434;--color-error-background:#fae1e1;--color-warning:#dbba34;--color-warning-background:#faf5e1;--color-success:#42db34;--color-success-background:#e3fae1;--color-categories-item-selected-font:#3050ff;--color-categories-item-border-selected:#3050ff;--color-autocomplete-font:#000;--color-autocomplete-border:#bbb;--color-autocomplete-shadow:0 2px 8px rgba(34, 38, 46, 0.25);--color-autocomplete-background:#fff;--color-autocomplete-background-hover:#e3e3e3;--color-answer-font:#444;--color-answer-background:#fff;--color-result-background:#fff;--color-result-border:#ddd;--color-result-url-font:#000;--color-result-vim-selected:#f7f7f7;--color-result-vim-arrow:#000bbb;--color-result-description-highlight-font:#000;--color-result-link-font:#000bbb;--color-result-link-font-highlight:#000bbb;--color-result-link-visited-font:#9822c3;--color-result-publishdate-font:#777;--color-result-engines-font:#545454;--color-result-search-url-border:#ddd;--color-result-search-url-font:#000;--color-result-image-span-font:#444;--color-result-image-span-font-selected:#fff;--color-result-image-background:#fff;--color-settings-tr-hover:#ebebeb;--color-settings-engine-description-font:#545454;--color-settings-table-group-background:#0001;--color-result-detail-font:#fff;--color-result-detail-label-font:lightgray;--color-result-detail-background:#242424;--color-result-detail-hr:#555;--color-result-detail-link:#8af;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:rgba(0, 0, 0, 0);--color-toolkit-badge-font:#fff;--color-toolkit-badge-background:#545454;--color-toolkit-kbd-font:#fff;--color-toolkit-kbd-background:#000;--color-toolkit-dialog-border:#ddd;--color-toolkit-dialog-background:#fff;--color-toolkit-tabs-label-border:#fff;--color-toolkit-tabs-section-border:#ddd;--color-toolkit-select-background:#e1e1e1;--color-toolkit-select-border:#ddd;--color-toolkit-select-background-hover:#bbb;--color-toolkit-input-text-font:#222;--color-toolkit-checkbox-onoff-off-background:#ddd;--color-toolkit-checkbox-onoff-on-background:#ddd;--color-toolkit-checkbox-onoff-on-mark-background:#3050ff;--color-toolkit-checkbox-onoff-on-mark-color:#fff;--color-toolkit-checkbox-onoff-off-mark-background:#aaa;--color-toolkit-checkbox-onoff-off-mark-color:#fff;--color-toolkit-checkbox-label-background:#ddd;--color-toolkit-checkbox-label-border:#ddd;--color-toolkit-checkbox-input-border:#3050ff;--color-toolkit-engine-tooltip-border:#ddd;--color-toolkit-engine-tooltip-background:#fff;--color-toolkit-loader-border:rgba(0, 0, 0, 0.2);--color-toolkit-loader-borderleft:rgba(255, 255, 255, 0);--color-doc-code:#003;--color-doc-code-background:#ddeaff;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc;--color-bar-chart-primary:#5bc0de;--color-bar-chart-secondary:#deb15b;--color-image-resolution-background:rgba(0, 0, 0, 0.5);--color-image-resolution-font:#fff;--color-loading-indicator:rgba(255, 255, 255, 0.2);--color-loading-indicator-gap:#fff;--color-line-number:#64708d}:root.theme-dark{--color-base-font:#bbb;--color-base-font-rgb:187,187,187;--color-base-background:#222428;--color-base-background-mobile:#222428;--color-url-font:#8af;--color-url-visited-font:#c09cd9;--color-header-background:#1e1e22;--color-header-border:#333;--color-footer-background:#1e1e22;--color-footer-border:#333;--color-sidebar-border:#555;--color-sidebar-font:#fff;--color-sidebar-background:#292c34;--color-backtotop-font:#bbb;--color-backtotop-border:#333;--color-backtotop-background:#2b2e36;--color-btn-background:#58f;--color-btn-font:#222;--color-show-btn-background:#555;--color-show-btn-font:#fff;--color-search-border:#555;--color-search-shadow:0 2px 8px rgba(34, 38, 46, 0.25);--color-search-background:#2b2e36;--color-search-font:#fff;--color-search-background-hover:#58f;--color-error:#f55b5b;--color-error-background:#390a0a;--color-warning:#f1d561;--color-warning-background:#39300a;--color-success:#79f56e;--color-success-background:#0e390a;--color-categories-item-selected-font:#58f;--color-categories-item-border-selected:#58f;--color-autocomplete-font:#fff;--color-autocomplete-border:#555;--color-autocomplete-shadow:0 2px 8px rgba(34, 38, 46, 0.25);--color-autocomplete-background:#2b2e36;--color-autocomplete-background-hover:#1e1e22;--color-answer-font:#bbb;--color-answer-background:#26292f;--color-result-background:#26292f;--color-result-border:#333;--color-result-url-font:#fff;--color-result-vim-selected:#1f1f23cc;--color-result-vim-arrow:#8af;--color-result-description-highlight-font:#fff;--color-result-link-font:#8af;--color-result-link-font-highlight:#8af;--color-result-link-visited-font:#c09cd9;--color-result-publishdate-font:#888;--color-result-engines-font:#a4a4a4;--color-result-search-url-border:#555;--color-result-search-url-font:#fff;--color-result-detail-font:#fff;--color-result-detail-label-font:lightgray;--color-result-detail-background:#1a1a1c;--color-result-detail-hr:#555;--color-result-detail-link:#8af;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:rgba(0, 0, 0, 0);--color-result-image-span-font:#bbb;--color-result-image-span-font-selected:#222;--color-result-image-background:#222;--color-settings-tr-hover:#2c2c32;--color-settings-engine-description-font:#909090;--color-settings-table-group-background:#1b1b21;--color-toolkit-badge-font:#fff;--color-toolkit-badge-background:#555;--color-toolkit-kbd-font:#000;--color-toolkit-kbd-background:#fff;--color-toolkit-dialog-border:#555;--color-toolkit-dialog-background:#1e1e22;--color-toolkit-tabs-label-border:#222;--color-toolkit-tabs-section-border:#555;--color-toolkit-select-background:#313338;--color-toolkit-select-border:#555;--color-toolkit-select-background-hover:#373b49;--color-toolkit-input-text-font:#fff;--color-toolkit-checkbox-onoff-off-background:#313338;--color-toolkit-checkbox-onoff-on-background:#313338;--color-toolkit-checkbox-onoff-on-mark-background:#58f;--color-toolkit-checkbox-onoff-on-mark-color:#222;--color-toolkit-checkbox-onoff-off-mark-background:#ddd;--color-toolkit-checkbox-onoff-off-mark-color:#222;--color-toolkit-checkbox-label-background:#222;--color-toolkit-checkbox-label-border:#333;--color-toolkit-checkbox-input-border:#58f;--color-toolkit-engine-tooltip-border:#333;--color-toolkit-engine-tooltip-background:#222;--color-toolkit-loader-border:rgba(255, 255, 255, 0.2);--color-toolkit-loader-borderleft:rgba(0, 0, 0, 0);--color-doc-code:#ddd;--color-doc-code-background:#4d5a6f;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root.theme-black{--color-base-font:#bbb;--color-base-font-rgb:187,187,187;--color-base-background:#222428;--color-base-background-mobile:#222428;--color-url-font:#8af;--color-url-visited-font:#c09cd9;--color-header-background:#1e1e22;--color-header-border:#333;--color-footer-background:#1e1e22;--color-footer-border:#333;--color-sidebar-border:#555;--color-sidebar-font:#fff;--color-sidebar-background:#292c34;--color-backtotop-font:#bbb;--color-backtotop-border:#333;--color-backtotop-background:#2b2e36;--color-btn-background:#58f;--color-btn-font:#222;--color-show-btn-background:#555;--color-show-btn-font:#fff;--color-search-border:#555;--color-search-shadow:0 2px 8px rgba(34, 38, 46, 0.25);--color-search-background:#2b2e36;--color-search-font:#fff;--color-search-background-hover:#58f;--color-error:#f55b5b;--color-error-background:#390a0a;--color-warning:#f1d561;--color-warning-background:#39300a;--color-success:#79f56e;--color-success-background:#0e390a;--color-categories-item-selected-font:#58f;--color-categories-item-border-selected:#58f;--color-autocomplete-font:#fff;--color-autocomplete-border:#555;--color-autocomplete-shadow:0 2px 8px rgba(34, 38, 46, 0.25);--color-autocomplete-background:#2b2e36;--color-autocomplete-background-hover:#1e1e22;--color-answer-font:#bbb;--color-answer-background:#26292f;--color-result-background:#26292f;--color-result-border:#333;--color-result-url-font:#fff;--color-result-vim-selected:#1f1f23cc;--color-result-vim-arrow:#8af;--color-result-description-highlight-font:#fff;--color-result-link-font:#8af;--color-result-link-font-highlight:#8af;--color-result-link-visited-font:#c09cd9;--color-result-publishdate-font:#888;--color-result-engines-font:#a4a4a4;--color-result-search-url-border:#555;--color-result-search-url-font:#fff;--color-result-detail-font:#fff;--color-result-detail-label-font:lightgray;--color-result-detail-background:#1a1a1c;--color-result-detail-hr:#555;--color-result-detail-link:#8af;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:rgba(0, 0, 0, 0);--color-result-image-span-font:#bbb;--color-result-image-span-font-selected:#222;--color-result-image-background:#222;--color-settings-tr-hover:#2c2c32;--color-settings-engine-description-font:#909090;--color-settings-table-group-background:#1b1b21;--color-toolkit-badge-font:#fff;--color-toolkit-badge-background:#555;--color-toolkit-kbd-font:#000;--color-toolkit-kbd-background:#fff;--color-toolkit-dialog-border:#555;--color-toolkit-dialog-background:#1e1e22;--color-toolkit-tabs-label-border:#222;--color-toolkit-tabs-section-border:#555;--color-toolkit-select-background:#313338;--color-toolkit-select-border:#555;--color-toolkit-select-background-hover:#373b49;--color-toolkit-input-text-font:#fff;--color-toolkit-checkbox-onoff-off-background:#313338;--color-toolkit-checkbox-onoff-on-background:#313338;--color-toolkit-checkbox-onoff-on-mark-background:#58f;--color-toolkit-checkbox-onoff-on-mark-color:#222;--color-toolkit-checkbox-onoff-off-mark-background:#ddd;--color-toolkit-checkbox-onoff-off-mark-color:#222;--color-toolkit-checkbox-label-background:#222;--color-toolkit-checkbox-label-border:#333;--color-toolkit-checkbox-input-border:#58f;--color-toolkit-engine-tooltip-border:#333;--color-toolkit-engine-tooltip-background:#222;--color-toolkit-loader-border:rgba(255, 255, 255, 0.2);--color-toolkit-loader-borderleft:rgba(0, 0, 0, 0);--color-doc-code:#ddd;--color-doc-code-background:#4d5a6f;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc;--color-base-background:#000;--color-base-background-mobile:#000;--color-header-background:#000;--color-footer-background:#000;--color-sidebar-background:#000}:root.theme-paulgo{--color-base-font:#bdc1c6;--color-base-font-rgb:189,193,198;--color-base-background:#202124;--color-base-background-mobile:#171717;--color-url-font:#8ab4f8;--color-url-visited-font:#c58af9;--color-header-background:#202124;--color-header-border:#3c4043;--color-footer-background:#171717;--color-footer-border:#212327;--color-sidebar-border:#3c4043;--color-sidebar-font:#fff;--color-sidebar-background:#171717;--color-backtotop-font:#bdc1c6;--color-backtotop-border:#212327;--color-backtotop-background:#171717;--color-btn-background:#8ab4f8;--color-btn-font:#202124;--color-show-btn-background:#171717;--color-show-btn-font:#bdc1c6;--color-search-border:transparent;--color-search-shadow:0 1px 3px rgba(23, 23, 23, 0.24);--color-search-background:#303134;--color-search-font:#fff;--color-search-background-hover:#8ab4f8;--color-error:#f55b5b;--color-error-background:#390a0a;--color-warning:#f1d561;--color-warning-background:#39300a;--color-success:#79f56e;--color-success-background:#0e390a;--color-categories-item-selected-font:#8ab4f8;--color-categories-item-border-selected:#8ab4f8;--color-autocomplete-font:#fff;--color-autocomplete-border:transparent;--color-autocomplete-shadow:0 4px 12px rgba(23, 23, 23, 0.9);--color-autocomplete-background:#303134;--color-autocomplete-background-hover:#171717;--color-answer-font:#fff;--color-answer-background:#171717;--color-result-background:#202124;--color-result-border:#3c4043;--color-result-url-font:#bdc1c6;--color-result-vim-selected:#171717;--color-result-vim-arrow:#8ab4f8;--color-result-description-highlight-font:#bdc1c6;--color-result-link-font:#8ab4f8;--color-result-link-font-highlight:#8ab4f8;--color-result-link-visited-font:#c58af9;--color-result-publishdate-font:#bdc1c6;--color-result-engines-font:#bdc1c6;--color-result-search-url-border:#3c4043;--color-result-search-url-font:#fff;--color-result-detail-font:#fff;--color-result-detail-label-font:lightgray;--color-result-detail-background:#000;--color-result-detail-hr:#3c4043;--color-result-detail-link:#8ab4f8;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:rgba(0, 0, 0, 0);--color-result-image-span-font:#bdc1c6;--color-result-image-span-font-selected:#222;--color-result-image-background:#222;--color-settings-tr-hover:#3c4043;--color-settings-engine-description-font:#bdc1c6;--color-settings-table-group-background:#171717;--color-toolkit-badge-font:#202124;--color-toolkit-badge-background:#bdc1c6;--color-toolkit-kbd-font:#000;--color-toolkit-kbd-background:#fff;--color-toolkit-dialog-border:#3c4043;--color-toolkit-dialog-background:#202124;--color-toolkit-tabs-label-border:#202124;--color-toolkit-tabs-section-border:#3c4043;--color-toolkit-select-background:#303134;--color-toolkit-select-border:#555;--color-toolkit-select-background-hover:#3c4043;--color-toolkit-input-text-font:#fff;--color-toolkit-checkbox-onoff-off-background:#303134;--color-toolkit-checkbox-onoff-on-background:#303134;--color-toolkit-checkbox-onoff-on-mark-background:#8ab4f8;--color-toolkit-checkbox-onoff-on-mark-color:#202124;--color-toolkit-checkbox-onoff-off-mark-background:#bdc1c6;--color-toolkit-checkbox-onoff-off-mark-color:#202124;--color-toolkit-checkbox-label-background:#202124;--color-toolkit-checkbox-label-border:#3c4043;--color-toolkit-checkbox-input-border:#8ab4f8;--color-toolkit-engine-tooltip-border:#3c4043;--color-toolkit-engine-tooltip-background:#202124;--color-toolkit-loader-border:rgba(0, 0, 0, 0.2);--color-toolkit-loader-borderleft:rgba(255, 255, 255, 0);--color-doc-code:#202124;--color-doc-code-background:#8ab4f8;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root.theme-latte{--color-base-font:#4c4f69;--color-base-background:#eff1f5;--color-base-background-mobile:#eff1f5;--color-url-font:#334999;--color-url-visited-font:##9822c3;--color-header-background:#e6e9ef;--color-header-border:#e6e9ef;--color-footer-background:#e6e9ef;--color-footer-border:#e6e9ef;--color-sidebar-border:#eff1f5;--color-sidebar-font:#4c4f69;--color-sidebar-background:#eff1f5;--color-backtotop-font:#5c5f77;--color-backtotop-border:#ccd0da;--color-backtotop-background:#ccd0da;--color-btn-background:#3050ff;--color-btn-font:#eff1f5;--color-show-btn-background:#bbb;--color-show-btn-font:#eff1f5;--color-search-border:#ccd0da;--color-search-shadow:0 2px 8px #dce0e8;--color-search-background:#ccd0da;--color-search-font:#4c4f69;--color-search-background-hover:#3050ff;--color-error:#d20f39;--color-error-background:#ccd0da;--color-warning:#df8e1d;--color-warning-background:#ccd0da;--color-success:#40a02b;--color-success-background:#ccd0da;--color-categories-item-selected-font:#3050ff;--color-categories-item-border-selected:#3050ff;--color-autocomplete-font:#5c5f77;--color-autocomplete-border:#ccd0da;--color-autocomplete-shadow:0 2px 8px #dce0e8;--color-autocomplete-background:#ccd0da;--color-autocomplete-background-hover:#bcc0cc;--color-answer-font:#4c4f69;--color-answer-background:#e6e9ef;--color-result-background:#e6e9ef;--color-result-border:#eff1f5;--color-result-url-font:#5c5f77;--color-result-vim-selected:#ccd0da;--color-result-vim-arrow:#000bbb;--color-result-description-highlight-font:#4c4f69;--color-result-link-font:#000bbb;--color-result-link-font-highlight:#000bbb;--color-result-link-visited-font:#9822c3;--color-result-publishdate-font:#acb0be;--color-result-engines-font:#acb0be;--color-result-search-url-border:#acb0be;--color-result-search-url-font:#4c4f69;--color-result-detail-font:#4c4f69;--color-result-detail-label-font:#6c6f85;--color-result-detail-background:#eff1f5;--color-result-detail-hr:#eff1f5;--color-result-detail-link:#8af;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:#dce0e8;--color-result-image-span-font:#4c4f69;--color-result-image-span-font-selected:#eff1f5;--color-result-image-background:#e6e9ef;--color-settings-tr-hover:#ccd0da;--color-settings-engine-description-font:#4c4f69;--color-settings-engine-group-background:#ccd0da;--color-toolkit-badge-font:#4c4f69;--color-toolkit-badge-background:#ccd0da;--color-toolkit-kbd-font:#4c4f69;--color-toolkit-kbd-background:#e6e9ef;--color-toolkit-dialog-border:#e6e9ef;--color-toolkit-dialog-background:#e6e9ef;--color-toolkit-tabs-label-border:#eff1f5;--color-toolkit-tabs-section-border:#eff1f5;--color-toolkit-select-background:#ccd0da;--color-toolkit-select-border:#ccd0da;--color-toolkit-select-background-hover:#bcc0cc;--color-toolkit-input-text-font:#4c4f69;--color-toolkit-checkbox-onoff-off-background:#ccd0da;--color-toolkit-checkbox-onoff-on-background:#ccd0da;--color-toolkit-checkbox-onoff-on-mark-background:#3050ff;--color-toolkit-checkbox-onoff-on-mark-color:#fff;--color-toolkit-checkbox-onoff-off-mark-background:#aaa;--color-toolkit-checkbox-onoff-off-mark-color:#fff;--color-toolkit-checkbox-label-background:#eff1f5;--color-toolkit-checkbox-label-border:#e6e9ef;--color-toolkit-checkbox-input-border:#3050ff;--color-toolkit-engine-tooltip-border:#ccd0da;--color-toolkit-engine-tooltip-background:#ccd0da;--color-toolkit-loader-border:rgba(255, 255, 255, 0.2);--color-toolkit-loader-borderleft:#dce0e8;--color-doc-code:#dc8a78;--color-doc-code-background:#e6e9ef;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root.theme-frappe{--color-base-font:#c6d0f5;--color-base-background:#303446;--color-base-background-mobile:#303446;--color-url-font:#8af;--color-url-visited-font:#c09cd9;--color-header-background:#292c3c;--color-header-border:#292c3c;--color-footer-background:#292c3c;--color-footer-border:#292c3c;--color-sidebar-border:#303446;--color-sidebar-font:#c6d0f5;--color-sidebar-background:#303446;--color-backtotop-font:#b5bfe2;--color-backtotop-border:#414559;--color-backtotop-background:#414559;--color-btn-background:#58f;--color-btn-font:#303446;--color-show-btn-background:#555;--color-show-btn-font:#303446;--color-search-border:#414559;--color-search-shadow:0 2px 8px #232634;--color-search-background:#414559;--color-search-font:#c6d0f5;--color-search-background-hover:#58f;--color-error:#e78284;--color-error-background:#414559;--color-warning:#e5c890;--color-warning-background:#414559;--color-success:#a6d189;--color-success-background:#414559;--color-categories-item-selected-font:#58f;--color-categories-item-border-selected:#58f;--color-autocomplete-font:#b5bfe2;--color-autocomplete-border:#414559;--color-autocomplete-shadow:0 2px 8px #232634;--color-autocomplete-background:#414559;--color-autocomplete-background-hover:#51576d;--color-answer-font:#c6d0f5;--color-answer-background:#292c3c;--color-result-background:#292c3c;--color-result-border:#303446;--color-result-url-font:#b5bfe2;--color-result-vim-selected:#414559;--color-result-vim-arrow:#8af;--color-result-description-highlight-font:#c6d0f5;--color-result-link-font:#8af;--color-result-link-font-highlight:#8af;--color-result-link-visited-font:#c09cd9;--color-result-publishdate-font:#626880;--color-result-engines-font:#626880;--color-result-search-url-border:#626880;--color-result-search-url-font:#c6d0f5;--color-result-detail-font:#c6d0f5;--color-result-detail-label-font:#a5adce;--color-result-detail-background:#303446;--color-result-detail-hr:#303446;--color-result-detail-link:#8af;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:#232634;--color-result-image-span-font:#c6d0f5;--color-result-image-span-font-selected:#303446;--color-result-image-background:#292c3c;--color-settings-tr-hover:#414559;--color-settings-engine-description-font:#c6d0f5;--color-settings-engine-group-background:#414559;--color-toolkit-badge-font:#c6d0f5;--color-toolkit-badge-background:#414559;--color-toolkit-kbd-font:#c6d0f5;--color-toolkit-kbd-background:#292c3c;--color-toolkit-dialog-border:#292c3c;--color-toolkit-dialog-background:#292c3c;--color-toolkit-tabs-label-border:#303446;--color-toolkit-tabs-section-border:#303446;--color-toolkit-select-background:#414559;--color-toolkit-select-border:#414559;--color-toolkit-select-background-hover:#51576d;--color-toolkit-input-text-font:#c6d0f5;--color-toolkit-checkbox-onoff-off-background:#414559;--color-toolkit-checkbox-onoff-on-background:#414559;--color-toolkit-checkbox-onoff-on-mark-background:#58f;--color-toolkit-checkbox-onoff-on-mark-color:#222;--color-toolkit-checkbox-onoff-off-mark-background:#ddd;--color-toolkit-checkbox-onoff-off-mark-color:#222;--color-toolkit-checkbox-label-background:#303446;--color-toolkit-checkbox-label-border:#292c3c;--color-toolkit-checkbox-input-border:#58f;--color-toolkit-engine-tooltip-border:#414559;--color-toolkit-engine-tooltip-background:#414559;--color-toolkit-loader-border:rgba(255, 255, 255, 0.2);--color-toolkit-loader-borderleft:#232634;--color-doc-code:#f2d5cf;--color-doc-code-background:#292c3c;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root.theme-macchiato{--color-base-font:#cad3f5;--color-base-background:#24273a;--color-base-background-mobile:#24273a;--color-url-font:#8af;--color-url-visited-font:#c09cd9;--color-header-background:#1e2030;--color-header-border:#1e2030;--color-footer-background:#1e2030;--color-footer-border:#1e2030;--color-sidebar-border:#24273a;--color-sidebar-font:#cad3f5;--color-sidebar-background:#24273a;--color-backtotop-font:#b8c0e0;--color-backtotop-border:#363a4f;--color-backtotop-background:#363a4f;--color-btn-background:#58f;--color-btn-font:#24273a;--color-show-btn-background:#555;--color-show-btn-font:#24273a;--color-search-border:#363a4f;--color-search-shadow:0 2px 8px #181926;--color-search-background:#363a4f;--color-search-font:#cad3f5;--color-search-background-hover:#58f;--color-error:#ed8796;--color-error-background:#363a4f;--color-warning:#eed49f;--color-warning-background:#363a4f;--color-success:#a6da95;--color-success-background:#363a4f;--color-categories-item-selected-font:#58f;--color-categories-item-border-selected:#58f;--color-autocomplete-font:#b8c0e0;--color-autocomplete-border:#363a4f;--color-autocomplete-shadow:0 2px 8px #181926;--color-autocomplete-background:#363a4f;--color-autocomplete-background-hover:#494d64;--color-answer-font:#cad3f5;--color-answer-background:#1e2030;--color-result-background:#1e2030;--color-result-border:#24273a;--color-result-url-font:#b8c0e0;--color-result-vim-selected:#363a4f;--color-result-vim-arrow:#8af;--color-result-description-highlight-font:#cad3f5;--color-result-link-font:#8af;--color-result-link-font-highlight:#8af;--color-result-link-visited-font:#c09cd9;--color-result-publishdate-font:#5b6078;--color-result-engines-font:#5b6078;--color-result-search-url-border:#5b6078;--color-result-search-url-font:#cad3f5;--color-result-detail-font:#cad3f5;--color-result-detail-label-font:#a5adcb;--color-result-detail-background:#24273a;--color-result-detail-hr:#24273a;--color-result-detail-link:#8af;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:#181926;--color-result-image-span-font:#cad3f5;--color-result-image-span-font-selected:#24273a;--color-result-image-background:#1e2030;--color-settings-tr-hover:#363a4f;--color-settings-engine-description-font:#cad3f5;--color-settings-engine-group-background:#363a4f;--color-toolkit-badge-font:#cad3f5;--color-toolkit-badge-background:#363a4f;--color-toolkit-kbd-font:#cad3f5;--color-toolkit-kbd-background:#1e2030;--color-toolkit-dialog-border:#1e2030;--color-toolkit-dialog-background:#1e2030;--color-toolkit-tabs-label-border:#24273a;--color-toolkit-tabs-section-border:#24273a;--color-toolkit-select-background:#363a4f;--color-toolkit-select-border:#363a4f;--color-toolkit-select-background-hover:#494d64;--color-toolkit-input-text-font:#cad3f5;--color-toolkit-checkbox-onoff-off-background:#363a4f;--color-toolkit-checkbox-onoff-on-background:#363a4f;--color-toolkit-checkbox-onoff-on-mark-background:#58f;--color-toolkit-checkbox-onoff-on-mark-color:#222;--color-toolkit-checkbox-onoff-off-mark-background:#ddd;--color-toolkit-checkbox-onoff-off-mark-color:#222;--color-toolkit-checkbox-label-background:#24273a;--color-toolkit-checkbox-label-border:#1e2030;--color-toolkit-checkbox-input-border:#58f;--color-toolkit-engine-tooltip-border:#363a4f;--color-toolkit-engine-tooltip-background:#363a4f;--color-toolkit-loader-border:rgba(255, 255, 255, 0.2);--color-toolkit-loader-borderleft:#181926;--color-doc-code:#f4dbd6;--color-doc-code-background:#1e2030;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root.theme-mocha{--color-base-font:#cdd6f4;--color-base-background:#1e1e2e;--color-base-background-mobile:#1e1e2e;--color-url-font:#8af;--color-url-visited-font:#c09cd9;--color-header-background:#181825;--color-header-border:#181825;--color-footer-background:#181825;--color-footer-border:#181825;--color-sidebar-border:#1e1e2e;--color-sidebar-font:#cdd6f4;--color-sidebar-background:#1e1e2e;--color-backtotop-font:#bac2de;--color-backtotop-border:#313244;--color-backtotop-background:#313244;--color-btn-background:#58f;--color-btn-font:#1e1e2e;--color-show-btn-background:#555;--color-show-btn-font:#1e1e2e;--color-search-border:#313244;--color-search-shadow:0 2px 8px #11111b;--color-search-background:#313244;--color-search-font:#cdd6f4;--color-search-background-hover:#58f;--color-error:#f38ba8;--color-error-background:#313244;--color-warning:#f9e2af;--color-warning-background:#313244;--color-success:#a6e3a1;--color-success-background:#313244;--color-categories-item-selected-font:#58f;--color-categories-item-border-selected:#58f;--color-autocomplete-font:#bac2de;--color-autocomplete-border:#313244;--color-autocomplete-shadow:0 2px 8px #11111b;--color-autocomplete-background:#313244;--color-autocomplete-background-hover:#45475a;--color-answer-font:#cdd6f4;--color-answer-background:#181825;--color-result-background:#181825;--color-result-border:#1e1e2e;--color-result-url-font:#bac2de;--color-result-vim-selected:#313244;--color-result-vim-arrow:#8af;--color-result-description-highlight-font:#cdd6f4;--color-result-link-font:#8af;--color-result-link-font-highlight:#8af;--color-result-link-visited-font:#c09cd9;--color-result-publishdate-font:#585b70;--color-result-engines-font:#585b70;--color-result-search-url-border:#585b70;--color-result-search-url-font:#cdd6f4;--color-result-detail-font:#cdd6f4;--color-result-detail-label-font:#a6adc8;--color-result-detail-background:#1e1e2e;--color-result-detail-hr:#1e1e2e;--color-result-detail-link:#8af;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:#11111b;--color-result-image-span-font:#cdd6f4;--color-result-image-span-font-selected:#1e1e2e;--color-result-image-background:#181825;--color-settings-tr-hover:#313244;--color-settings-engine-description-font:#cdd6f4;--color-settings-engine-group-background:#313244;--color-toolkit-badge-font:#cdd6f4;--color-toolkit-badge-background:#313244;--color-toolkit-kbd-font:#cdd6f4;--color-toolkit-kbd-background:#181825;--color-toolkit-dialog-border:#181825;--color-toolkit-dialog-background:#181825;--color-toolkit-tabs-label-border:#1e1e2e;--color-toolkit-tabs-section-border:#1e1e2e;--color-toolkit-select-background:#313244;--color-toolkit-select-border:#313244;--color-toolkit-select-background-hover:#45475a;--color-toolkit-input-text-font:#cdd6f4;--color-toolkit-checkbox-onoff-off-background:#313244;--color-toolkit-checkbox-onoff-on-background:#313244;--color-toolkit-checkbox-onoff-on-mark-background:#58f;--color-toolkit-checkbox-onoff-on-mark-color:#222;--color-toolkit-checkbox-onoff-off-mark-background:#ddd;--color-toolkit-checkbox-onoff-off-mark-color:#222;--color-toolkit-checkbox-label-background:#1e1e2e;--color-toolkit-checkbox-label-border:#181825;--color-toolkit-checkbox-input-border:#58f;--color-toolkit-engine-tooltip-border:#313244;--color-toolkit-engine-tooltip-background:#313244;--color-toolkit-loader-border:rgba(255, 255, 255, 0.2);--color-toolkit-loader-borderleft:#11111b;--color-doc-code:#f5e0dc;--color-doc-code-background:#181825;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root.theme-kagi{--color-base-font:#acacaf;--color-base-font-rgb:189,193,198;--color-base-background:#232325;--color-base-background-mobile:#232325;--color-url-font:#9185e0;--color-url-visited-font:#9185e0;--color-header-background:#232325;--color-header-border:#3c4043;--color-footer-background:#232325;--color-footer-border:#212327;--color-sidebar-border:#3c4043;--color-sidebar-font:#fff;--color-sidebar-background:#232325;--color-backtotop-font:#acacaf;--color-backtotop-border:#212327;--color-backtotop-background:#232325;--color-btn-background:#fff;--color-btn-font:#232325;--color-show-btn-background:#232325;--color-show-btn-font:#acacaf;--color-search-border:transparent;--color-search-shadow:0 1px 3px rgba(23, 23, 23, 0.24);--color-search-background:#454549;--color-search-font:#fff;--color-search-background-hover:#e6e6e8;--color-error:#f55b5b;--color-error-background:#390a0a;--color-warning:#f1d561;--color-warning-background:#39300a;--color-success:#79f56e;--color-success-background:#0e390a;--color-categories-item-selected-font:#eee;--color-categories-item-border-selected:#fff;--color-autocomplete-font:#fff;--color-autocomplete-border:transparent;--color-autocomplete-shadow:0 4px 12px rgba(23, 23, 23, 0.9);--color-autocomplete-background:#454549;--color-autocomplete-background-hover:#2f2f31;--color-answer-font:#fff;--color-answer-background:#232325;--color-result-background:#232325;--color-result-border:#3c4043;--color-result-url-font:#cfcfd1;--color-result-vim-selected:#232325;--color-result-vim-arrow:#fff;--color-result-description-highlight-font:#cfcfd1;--color-result-link-font:#fff;--color-result-link-font-highlight:#fff;--color-result-link-visited-font:#9185e0;--color-result-publishdate-font:#454549;--color-result-engines-font:#acacaf;--color-result-search-url-border:#3c4043;--color-result-search-url-font:#fff;--color-result-detail-font:#fff;--color-result-detail-label-font:lightgray;--color-result-detail-background:#000;--color-result-detail-hr:#3c4043;--color-result-detail-link:#fff;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:rgba(0, 0, 0, 0);--color-result-image-span-font:#cfcfd1;--color-result-image-span-font-selected:#222;--color-result-image-background:#222;--color-settings-tr-hover:#3c4043;--color-settings-engine-description-font:#cfcfd1;--color-settings-table-group-background:#232325;--color-toolkit-badge-font:#232325;--color-toolkit-badge-background:#cfcfd1;--color-toolkit-kbd-font:#000;--color-toolkit-kbd-background:#fff;--color-toolkit-dialog-border:#3c4043;--color-toolkit-dialog-background:#232325;--color-toolkit-tabs-label-border:#232325;--color-toolkit-tabs-section-border:#3c4043;--color-toolkit-select-background:#303134;--color-toolkit-select-border:#555;--color-toolkit-select-background-hover:#3c4043;--color-toolkit-input-text-font:#fff;--color-toolkit-checkbox-onoff-off-background:#303134;--color-toolkit-checkbox-onoff-on-background:#303134;--color-toolkit-checkbox-onoff-on-mark-background:#fff;--color-toolkit-checkbox-onoff-on-mark-color:#232325;--color-toolkit-checkbox-onoff-off-mark-background:#cfcfd1;--color-toolkit-checkbox-onoff-off-mark-color:#232325;--color-toolkit-checkbox-label-background:#232325;--color-toolkit-checkbox-label-border:#3c4043;--color-toolkit-checkbox-input-border:#fff;--color-toolkit-engine-tooltip-border:#3c4043;--color-toolkit-engine-tooltip-background:#232325;--color-toolkit-loader-border:rgba(0, 0, 0, 0.2);--color-toolkit-loader-borderleft:rgba(255, 255, 255, 0);--color-doc-code:#232325;--color-doc-code-background:#fff;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root.theme-brave{--color-base-font:#a1b2ba;--color-base-font-rgb:161,178,186;--color-base-background:#17191e;--color-base-background-mobile:#171717;--color-url-font:#7c91ff;--color-url-visited-font:#7166a9;--color-header-background:#17191e;--color-header-border:#62757e;--color-footer-background:#171717;--color-footer-border:#21272a;--color-sidebar-border:#62757e;--color-sidebar-font:#fff;--color-sidebar-background:#171717;--color-backtotop-font:#a1b2ba;--color-backtotop-border:#21272a;--color-backtotop-background:#171717;--color-btn-background:#7c91ff;--color-btn-font:#17191e;--color-show-btn-background:#171717;--color-show-btn-font:#a1b2ba;--color-search-border:transparent;--color-search-shadow:0 1px 3px rgba(23, 23, 23, 0.24);--color-search-background:#242731;--color-search-font:#fff;--color-search-background-hover:#ff6022;--color-error:#e11f3d;--color-error-background:#620f18;--color-warning:#f1d561;--color-warning-background:#b18c00;--color-success:#94df91;--color-success-background:#02a820;--color-categories-item-selected-font:#ff6022;--color-categories-item-border-selected:#ff6022;--color-autocomplete-font:#fff;--color-autocomplete-border:transparent;--color-autocomplete-shadow:0 4px 12px rgba(23, 23, 23, 0.9);--color-autocomplete-background:#242731;--color-autocomplete-background-hover:#171717;--color-answer-font:#fff;--color-answer-background:#171717;--color-result-background:#17191e;--color-result-border:#62757e;--color-result-url-font:#a1b2ba;--color-result-vim-selected:#171717;--color-result-vim-arrow:#7c91ff;--color-result-description-highlight-font:#a1b2ba;--color-result-link-font:#7c91ff;--color-result-link-font-highlight:#7c91ff;--color-result-link-visited-font:#7166a9;--color-result-publishdate-font:#a1b2ba;--color-result-engines-font:#a1b2ba;--color-result-search-url-border:#62757e;--color-result-search-url-font:#fff;--color-result-detail-font:#fff;--color-result-detail-label-font:#becad0;--color-result-detail-background:#000;--color-result-detail-hr:#62757e;--color-result-detail-link:#7c91ff;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:rgba(0, 0, 0, 0);--color-result-image-span-font:#a1b2ba;--color-result-image-span-font-selected:#222;--color-result-image-background:#222;--color-settings-tr-hover:#62757e;--color-settings-engine-description-font:#a1b2ba;--color-settings-table-group-background:#171717;--color-toolkit-badge-font:#17191e;--color-toolkit-badge-background:#a1b2ba;--color-toolkit-kbd-font:#000;--color-toolkit-kbd-background:#fff;--color-toolkit-dialog-border:#62757e;--color-toolkit-dialog-background:#17191e;--color-toolkit-tabs-label-border:#17191e;--color-toolkit-tabs-section-border:#62757e;--color-toolkit-select-background:#242731;--color-toolkit-select-border:#555;--color-toolkit-select-background-hover:#62757e;--color-toolkit-input-text-font:#fff;--color-toolkit-checkbox-onoff-off-background:#242731;--color-toolkit-checkbox-onoff-on-background:#242731;--color-toolkit-checkbox-onoff-on-mark-background:#ff6022;--color-toolkit-checkbox-onoff-on-mark-color:#17191e;--color-toolkit-checkbox-onoff-off-mark-background:#a1b2ba;--color-toolkit-checkbox-onoff-off-mark-color:#17191e;--color-toolkit-checkbox-label-background:#17191e;--color-toolkit-checkbox-label-border:#62757e;--color-toolkit-checkbox-input-border:#7c91ff;--color-toolkit-engine-tooltip-border:#62757e;--color-toolkit-engine-tooltip-background:#17191e;--color-toolkit-loader-border:rgba(0, 0, 0, 0.2);--color-toolkit-loader-borderleft:rgba(255, 255, 255, 0);--color-doc-code:#17191e;--color-doc-code-background:#7c91ff;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root.theme-moa{--color-base-font:#bbb;--color-base-font-rgb:187,187,187;--color-base-background:#222428;--color-base-background-mobile:#222428;--color-url-font:#865dff;--color-url-visited-font:#c09cd9;--color-header-background:#212127;--color-header-border:#333;--color-footer-background:#262930;--color-footer-border:#333;--color-sidebar-border:#222428;--color-sidebar-font:#fff;--color-sidebar-background:#262930;--color-backtotop-font:#865dff;--color-backtotop-border:#333;--color-backtotop-background:#262930;--color-btn-background:#b984ff;--color-btn-font:#222;--color-show-btn-background:#555;--color-show-btn-font:#fff;--color-search-border:#555;--color-search-shadow:0 2px 8px rgba(34, 38, 46, 0.25);--color-search-background:#2b2e36;--color-search-font:#fff;--color-search-background-hover:#865dff;--color-error:#f55b5b;--color-error-background:#a12e2e;--color-warning:#f1d561;--color-warning-background:#b98a1d;--color-success:#79f56e;--color-success-background:#2d8a1d;--color-categories-item-selected-font:#865dff;--color-categories-item-border-selected:#865dff;--color-autocomplete-font:#fff;--color-autocomplete-border:#555;--color-autocomplete-shadow:0 2px 8px rgba(34, 38, 46, 0.25);--color-autocomplete-background:#2b2e36;--color-autocomplete-background-hover:#1e1e22;--color-answer-font:#bbb;--color-answer-background:#26292f;--color-result-background:#26292f;--color-result-border:#333;--color-result-url-font:#fff;--color-result-vim-selected:#1f1f23cc;--color-result-vim-arrow:#865dff;--color-result-description-highlight-font:#fff;--color-result-link-font:#8af;--color-result-link-font-highlight:#8af;--color-result-link-visited-font:#c09cd9;--color-result-publishdate-font:#888;--color-result-engines-font:#a4a4a4;--color-result-search-url-border:#555;--color-result-search-url-font:#fff;--color-result-detail-font:#fff;--color-result-detail-label-font:lightgray;--color-result-detail-background:#262930;--color-result-detail-hr:#555;--color-result-detail-link:#8af;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:rgba(0, 0, 0, 0);--color-result-image-span-font:#bbb;--color-result-image-span-font-selected:#222;--color-result-image-background:#222;--color-settings-tr-hover:#2c2c32;--color-settings-engine-description-font:#9e9e9e;--color-settings-table-group-background:#1b1b21;--color-toolkit-badge-font:#fff;--color-toolkit-badge-background:#555;--color-toolkit-kbd-font:#000;--color-toolkit-kbd-background:#fff;--color-toolkit-dialog-border:#555;--color-toolkit-dialog-background:#1e1e22;--color-toolkit-tabs-label-border:#222;--color-toolkit-tabs-section-border:#555;--color-toolkit-select-background:#313338;--color-toolkit-select-border:#555;--color-toolkit-select-background-hover:#373b49;--color-toolkit-input-text-font:#fff;--color-toolkit-checkbox-onoff-off-background:#313338;--color-toolkit-checkbox-onoff-on-background:#313338;--color-toolkit-checkbox-onoff-on-mark-background:#865dff;--color-toolkit-checkbox-onoff-on-mark-color:#222;--color-toolkit-checkbox-onoff-off-mark-background:#ddd;--color-toolkit-checkbox-onoff-off-mark-color:#222;--color-toolkit-checkbox-label-background:#222;--color-toolkit-checkbox-label-border:#333;--color-toolkit-checkbox-input-border:#865dff;--color-toolkit-engine-tooltip-border:#333;--color-toolkit-engine-tooltip-background:#222;--color-toolkit-loader-border:rgba(255, 255, 255, 0.2);--color-toolkit-loader-borderleft:rgba(0, 0, 0, 0);--color-doc-code:#ddd;--color-doc-code-background:#4d5a6f;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}:root.theme-night{--color-base-font:#eaecf0;--color-base-font-rgb:#eaecf0;--color-base-background:#101418;--color-base-background-mobile:#101418;--color-url-font:#6d8af2;--color-url-visited-font:#977dbd;--color-header-background:#101418;--color-header-border:#3c4043;--color-footer-background:#101418;--color-footer-border:#212327;--color-sidebar-border:#3c4043;--color-sidebar-font:#fff;--color-sidebar-background:#101418;--color-backtotop-font:#eaecf0;--color-backtotop-border:#212327;--color-backtotop-background:#111213;--color-btn-background:#447ff5;--color-btn-font:#101418;--color-show-btn-background:#202122;--color-show-btn-font:#eaecf0;--color-search-border:#3c4043;--color-search-shadow:0 2px 8px #20212241;--color-search-background:#111213;--color-search-font:#fff;--color-search-background-hover:#447ff5;--color-error:#f55b5b;--color-error-background:#390a0a;--color-warning:#f1d561;--color-warning-background:#39300a;--color-success:#79f56e;--color-success-background:#0e390a;--color-categories-item-selected-font:#6d8af2;--color-categories-item-border-selected:#447ff5;--color-autocomplete-font:#fff;--color-autocomplete-border:#3c4043;--color-autocomplete-shadow:0 4px 12px #20212241;--color-autocomplete-background:#111213;--color-autocomplete-background-hover:#202122;--color-answer-font:#fff;--color-answer-background:#202122;--color-result-background:#111213;--color-result-border:#3c4043;--color-result-url-font:#eaecf0;--color-result-vim-selected:#202122;--color-result-vim-arrow:#6d8af2;--color-result-description-highlight-font:#eaecf0;--color-result-link-font:#6d8af2;--color-result-link-font-highlight:#447ff5;--color-result-link-visited-font:#977dbd;--color-result-publishdate-font:#eaecf0;--color-result-engines-font:#eaecf0;--color-result-search-url-border:#3c4043;--color-result-search-url-font:#fff;--color-result-detail-font:#fff;--color-result-detail-label-font:lightgray;--color-result-detail-background:#101418;--color-result-detail-hr:#3c4043;--color-result-detail-link:#6d8af2;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:#202122;--color-result-image-span-font:#eaecf0;--color-result-image-span-font-selected:#222;--color-result-image-background:#222;--color-settings-tr-hover:#3c4043;--color-settings-engine-description-font:#eaecf0;--color-settings-table-group-background:#202122;--color-toolkit-badge-font:#101418;--color-toolkit-badge-background:#eaecf0;--color-toolkit-kbd-font:#000;--color-toolkit-kbd-background:#fff;--color-toolkit-dialog-border:#3c4043;--color-toolkit-dialog-background:#101418;--color-toolkit-tabs-label-border:#101418;--color-toolkit-tabs-section-border:#3c4043;--color-toolkit-select-background:#303134;--color-toolkit-select-border:#555;--color-toolkit-select-background-hover:#3c4043;--color-toolkit-input-text-font:#fff;--color-toolkit-checkbox-onoff-off-background:#303134;--color-toolkit-checkbox-onoff-on-background:#303134;--color-toolkit-checkbox-onoff-on-mark-background:#6d8af2;--color-toolkit-checkbox-onoff-on-mark-color:#101418;--color-toolkit-checkbox-onoff-off-mark-background:#eaecf0;--color-toolkit-checkbox-onoff-off-mark-color:#101418;--color-toolkit-checkbox-label-background:#101418;--color-toolkit-checkbox-label-border:#3c4043;--color-toolkit-checkbox-input-border:#6d8af2;--color-toolkit-engine-tooltip-border:#3c4043;--color-toolkit-engine-tooltip-background:#101418;--color-toolkit-loader-border:#202122;--color-toolkit-loader-borderleft:rgba(255, 255, 255, 0);--color-doc-code:#101418;--color-doc-code-background:#6d8af2;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}@media (prefers-color-scheme:dark){:root.theme-auto{--color-base-font:#cad3f5;--color-base-background:#24273a;--color-base-background-mobile:#24273a;--color-url-font:#8af;--color-url-visited-font:#c09cd9;--color-header-background:#1e2030;--color-header-border:#1e2030;--color-footer-background:#1e2030;--color-footer-border:#1e2030;--color-sidebar-border:#24273a;--color-sidebar-font:#cad3f5;--color-sidebar-background:#24273a;--color-backtotop-font:#b8c0e0;--color-backtotop-border:#363a4f;--color-backtotop-background:#363a4f;--color-btn-background:#58f;--color-btn-font:#24273a;--color-show-btn-background:#555;--color-show-btn-font:#24273a;--color-search-border:#363a4f;--color-search-shadow:0 2px 8px #181926;--color-search-background:#363a4f;--color-search-font:#cad3f5;--color-search-background-hover:#58f;--color-error:#ed8796;--color-error-background:#363a4f;--color-warning:#eed49f;--color-warning-background:#363a4f;--color-success:#a6da95;--color-success-background:#363a4f;--color-categories-item-selected-font:#58f;--color-categories-item-border-selected:#58f;--color-autocomplete-font:#b8c0e0;--color-autocomplete-border:#363a4f;--color-autocomplete-shadow:0 2px 8px #181926;--color-autocomplete-background:#363a4f;--color-autocomplete-background-hover:#494d64;--color-answer-font:#cad3f5;--color-answer-background:#1e2030;--color-result-background:#1e2030;--color-result-border:#24273a;--color-result-url-font:#b8c0e0;--color-result-vim-selected:#363a4f;--color-result-vim-arrow:#8af;--color-result-description-highlight-font:#cad3f5;--color-result-link-font:#8af;--color-result-link-font-highlight:#8af;--color-result-link-visited-font:#c09cd9;--color-result-publishdate-font:#5b6078;--color-result-engines-font:#5b6078;--color-result-search-url-border:#5b6078;--color-result-search-url-font:#cad3f5;--color-result-detail-font:#cad3f5;--color-result-detail-label-font:#a5adcb;--color-result-detail-background:#24273a;--color-result-detail-hr:#24273a;--color-result-detail-link:#8af;--color-result-detail-loader-border:rgba(255, 255, 255, 0.2);--color-result-detail-loader-borderleft:#181926;--color-result-image-span-font:#cad3f5;--color-result-image-span-font-selected:#24273a;--color-result-image-background:#1e2030;--color-settings-tr-hover:#363a4f;--color-settings-engine-description-font:#cad3f5;--color-settings-engine-group-background:#363a4f;--color-toolkit-badge-font:#cad3f5;--color-toolkit-badge-background:#363a4f;--color-toolkit-kbd-font:#cad3f5;--color-toolkit-kbd-background:#1e2030;--color-toolkit-dialog-border:#1e2030;--color-toolkit-dialog-background:#1e2030;--color-toolkit-tabs-label-border:#24273a;--color-toolkit-tabs-section-border:#24273a;--color-toolkit-select-background:#363a4f;--color-toolkit-select-border:#363a4f;--color-toolkit-select-background-hover:#494d64;--color-toolkit-input-text-font:#cad3f5;--color-toolkit-checkbox-onoff-off-background:#363a4f;--color-toolkit-checkbox-onoff-on-background:#363a4f;--color-toolkit-checkbox-onoff-on-mark-background:#58f;--color-toolkit-checkbox-onoff-on-mark-color:#222;--color-toolkit-checkbox-onoff-off-mark-background:#ddd;--color-toolkit-checkbox-onoff-off-mark-color:#222;--color-toolkit-checkbox-label-background:#24273a;--color-toolkit-checkbox-label-border:#1e2030;--color-toolkit-checkbox-input-border:#58f;--color-toolkit-engine-tooltip-border:#363a4f;--color-toolkit-engine-tooltip-background:#363a4f;--color-toolkit-loader-border:rgba(255, 255, 255, 0.2);--color-toolkit-loader-borderleft:#181926;--color-doc-code:#f4dbd6;--color-doc-code-background:#1e2030;--color-favicon-background-color:#ddd;--color-favicon-border-color:#ccc}}body,html,main{padding:0;margin:0}html{font-family:sans-serif;font-size:.9em;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;color:var(--color-base-font);background-color:var(--color-base-background);scroll-behavior:smooth}body{margin-inline:1rem}a{text-decoration:none;color:var(--color-url-font)}a:visited{color:var(--color-url-visited-font)}a:visited .highlight{color:var(--color-url-visited-font)}/*# sourceMappingURL=rss.min.css.map */
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+/*
+ * SearXNG, A privacy-respecting, hackable metasearch engine
+ *
+ * To change the colors of the site, simple edit this variables
+*/
+.night-themes {
+  --color-base-font: #eaecf0;
+  --color-base-font-rgb: #eaecf0;
+  --color-base-background: #101418;
+  --color-base-background-mobile: #101418;
+  --color-url-font: #6d8af2;
+  --color-url-visited-font: #977dbd;
+  --color-header-background: #101418;
+  --color-header-border: #3c4043;
+  --color-footer-background: #101418;
+  --color-footer-border: #212327;
+  --color-sidebar-border: #3c4043;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #101418;
+  --color-backtotop-font: #eaecf0;
+  --color-backtotop-border: #212327;
+  --color-backtotop-background: #111213;
+  --color-btn-background: #447ff5;
+  --color-btn-font: #101418;
+  --color-show-btn-background: #202122;
+  --color-show-btn-font: #eaecf0;
+  --color-search-border: #3c4043;
+  --color-search-shadow: 0 2px 8px #20212241;
+  --color-search-background: #111213;
+  --color-search-font: #fff;
+  --color-search-background-hover: #447ff5;
+  --color-error: #f55b5b;
+  --color-error-background: #390a0a;
+  --color-warning: #f1d561;
+  --color-warning-background: #39300a;
+  --color-success: #79f56e;
+  --color-success-background: #0e390a;
+  --color-categories-item-selected-font: #6d8af2;
+  --color-categories-item-border-selected: #447ff5;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: #3c4043;
+  --color-autocomplete-shadow: 0 4px 12px #20212241;
+  --color-autocomplete-background: #111213;
+  --color-autocomplete-background-hover: #202122;
+  --color-answer-font: #fff;
+  --color-answer-background: #202122;
+  --color-result-background: #111213;
+  --color-result-border: #3c4043;
+  --color-result-url-font: #eaecf0;
+  --color-result-vim-selected: #202122;
+  --color-result-vim-arrow: #6d8af2;
+  --color-result-description-highlight-font: #eaecf0;
+  --color-result-link-font: #6d8af2;
+  --color-result-link-font-highlight: #447ff5;
+  --color-result-link-visited-font: #977dbd;
+  --color-result-publishdate-font: #eaecf0;
+  --color-result-engines-font: #eaecf0;
+  --color-result-search-url-border: #3c4043;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #101418;
+  --color-result-detail-hr: #3c4043;
+  --color-result-detail-link: #6d8af2;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: #202122;
+  --color-result-image-span-font: #eaecf0;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #3c4043;
+  --color-settings-engine-description-font: #eaecf0;
+  --color-settings-table-group-background: #202122;
+  --color-toolkit-badge-font: #101418;
+  --color-toolkit-badge-background: #eaecf0;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #3c4043;
+  --color-toolkit-dialog-background: #101418;
+  --color-toolkit-tabs-label-border: #101418;
+  --color-toolkit-tabs-section-border: #3c4043;
+  --color-toolkit-select-background: #303134;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #3c4043;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #303134;
+  --color-toolkit-checkbox-onoff-on-background: #303134;
+  --color-toolkit-checkbox-onoff-on-mark-background: #6d8af2;
+  --color-toolkit-checkbox-onoff-on-mark-color: #101418;
+  --color-toolkit-checkbox-onoff-off-mark-background: #eaecf0;
+  --color-toolkit-checkbox-onoff-off-mark-color: #101418;
+  --color-toolkit-checkbox-label-background: #101418;
+  --color-toolkit-checkbox-label-border: #3c4043;
+  --color-toolkit-checkbox-input-border: #6d8af2;
+  --color-toolkit-engine-tooltip-border: #3c4043;
+  --color-toolkit-engine-tooltip-background: #101418;
+  --color-toolkit-loader-border: #202122;
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #101418;
+  --color-doc-code-background: #6d8af2;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root {
+  --color-base-font: #444;
+  --color-base-font-rgb: 68, 68, 68;
+  --color-base-background: #fff;
+  --color-base-background-mobile: #f2f5f8;
+  --color-url-font: #334999;
+  --color-url-visited-font: #9822c3;
+  --color-header-background: #fdfbff;
+  --color-header-border: #ddd;
+  --color-footer-background: #fdfbff;
+  --color-footer-border: #ddd;
+  --color-sidebar-border: #ddd;
+  --color-sidebar-font: #000;
+  --color-sidebar-background: #fff;
+  --color-backtotop-font: #444;
+  --color-backtotop-border: #ddd;
+  --color-backtotop-background: #fff;
+  --color-btn-background: #3050ff;
+  --color-btn-font: #fff;
+  --color-show-btn-background: #bbb;
+  --color-show-btn-font: #000;
+  --color-search-border: #bbb;
+  --color-search-shadow: 0 2px 8px rgba(34, 38, 46, 0.25);
+  --color-search-background: #fff;
+  --color-search-font: #222;
+  --color-search-background-hover: #3050ff;
+  --color-error: #db3434;
+  --color-error-background: #fae1e1;
+  --color-warning: #dbba34;
+  --color-warning-background: #faf5e1;
+  --color-success: #42db34;
+  --color-success-background: #e3fae1;
+  --color-categories-item-selected-font: #3050ff;
+  --color-categories-item-border-selected: #3050ff;
+  --color-autocomplete-font: #000;
+  --color-autocomplete-border: #bbb;
+  --color-autocomplete-shadow: 0 2px 8px rgba(34, 38, 46, 0.25);
+  --color-autocomplete-background: #fff;
+  --color-autocomplete-background-hover: #e3e3e3;
+  --color-answer-font: #444;
+  --color-answer-background: #fff;
+  --color-result-background: #fff;
+  --color-result-border: #ddd;
+  --color-result-url-font: #000;
+  --color-result-vim-selected: #f7f7f7;
+  --color-result-vim-arrow: #000bbb;
+  --color-result-description-highlight-font: #000;
+  --color-result-link-font: #000bbb;
+  --color-result-link-font-highlight: #000bbb;
+  --color-result-link-visited-font: #9822c3;
+  --color-result-publishdate-font: #777;
+  --color-result-engines-font: #545454;
+  --color-result-search-url-border: #ddd;
+  --color-result-search-url-font: #000;
+  --color-result-image-span-font: #444;
+  --color-result-image-span-font-selected: #fff;
+  --color-result-image-background: #fff;
+  --color-settings-tr-hover: #ebebeb;
+  --color-settings-engine-description-font: #545454;
+  --color-settings-table-group-background: #0001;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #242424;
+  --color-result-detail-hr: #555;
+  --color-result-detail-link: #8af;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-toolkit-badge-font: #fff;
+  --color-toolkit-badge-background: #545454;
+  --color-toolkit-kbd-font: #fff;
+  --color-toolkit-kbd-background: #000;
+  --color-toolkit-dialog-border: #ddd;
+  --color-toolkit-dialog-background: #fff;
+  --color-toolkit-tabs-label-border: #fff;
+  --color-toolkit-tabs-section-border: #ddd;
+  --color-toolkit-select-background: #e1e1e1;
+  --color-toolkit-select-border: #ddd;
+  --color-toolkit-select-background-hover: #bbb;
+  --color-toolkit-input-text-font: #222;
+  --color-toolkit-checkbox-onoff-off-background: #ddd;
+  --color-toolkit-checkbox-onoff-on-background: #ddd;
+  --color-toolkit-checkbox-onoff-on-mark-background: #3050ff;
+  --color-toolkit-checkbox-onoff-on-mark-color: #fff;
+  --color-toolkit-checkbox-onoff-off-mark-background: #aaa;
+  --color-toolkit-checkbox-onoff-off-mark-color: #fff;
+  --color-toolkit-checkbox-label-background: #ddd;
+  --color-toolkit-checkbox-label-border: #ddd;
+  --color-toolkit-checkbox-input-border: #3050ff;
+  --color-toolkit-engine-tooltip-border: #ddd;
+  --color-toolkit-engine-tooltip-background: #fff;
+  --color-toolkit-loader-border: rgba(0, 0, 0, 0.2);
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #003;
+  --color-doc-code-background: #ddeaff;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+  --color-bar-chart-primary: #5bc0de;
+  --color-bar-chart-secondary: #deb15b;
+  --color-image-resolution-background: rgba(0, 0, 0, 0.5);
+  --color-image-resolution-font: #fff;
+  --color-loading-indicator: rgba(255, 255, 255, 0.2);
+  --color-loading-indicator-gap: #fff;
+  --color-line-number: #64708d;
+}
+:root.theme-dark {
+  --color-base-font: #bbb;
+  --color-base-font-rgb: 187, 187, 187;
+  --color-base-background: #222428;
+  --color-base-background-mobile: #222428;
+  --color-url-font: #8af;
+  --color-url-visited-font: #c09cd9;
+  --color-header-background: #1e1e22;
+  --color-header-border: #333;
+  --color-footer-background: #1e1e22;
+  --color-footer-border: #333;
+  --color-sidebar-border: #555;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #292c34;
+  --color-backtotop-font: #bbb;
+  --color-backtotop-border: #333;
+  --color-backtotop-background: #2b2e36;
+  --color-btn-background: #58f;
+  --color-btn-font: #222;
+  --color-show-btn-background: #555;
+  --color-show-btn-font: #fff;
+  --color-search-border: #555;
+  --color-search-shadow: 0 2px 8px rgba(34, 38, 46, 0.25);
+  --color-search-background: #2b2e36;
+  --color-search-font: #fff;
+  --color-search-background-hover: #58f;
+  --color-error: #f55b5b;
+  --color-error-background: #390a0a;
+  --color-warning: #f1d561;
+  --color-warning-background: #39300a;
+  --color-success: #79f56e;
+  --color-success-background: #0e390a;
+  --color-categories-item-selected-font: #58f;
+  --color-categories-item-border-selected: #58f;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: #555;
+  --color-autocomplete-shadow: 0 2px 8px rgba(34, 38, 46, 0.25);
+  --color-autocomplete-background: #2b2e36;
+  --color-autocomplete-background-hover: #1e1e22;
+  --color-answer-font: #bbb;
+  --color-answer-background: #26292f;
+  --color-result-background: #26292f;
+  --color-result-border: #333;
+  --color-result-url-font: #fff;
+  --color-result-vim-selected: #1f1f23cc;
+  --color-result-vim-arrow: #8af;
+  --color-result-description-highlight-font: #fff;
+  --color-result-link-font: #8af;
+  --color-result-link-font-highlight: #8af;
+  --color-result-link-visited-font: #c09cd9;
+  --color-result-publishdate-font: #888;
+  --color-result-engines-font: #a4a4a4;
+  --color-result-search-url-border: #555;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #1a1a1c;
+  --color-result-detail-hr: #555;
+  --color-result-detail-link: #8af;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-result-image-span-font: #bbb;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #2c2c32;
+  --color-settings-engine-description-font: #909090;
+  --color-settings-table-group-background: #1b1b21;
+  --color-toolkit-badge-font: #fff;
+  --color-toolkit-badge-background: #555;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #555;
+  --color-toolkit-dialog-background: #1e1e22;
+  --color-toolkit-tabs-label-border: #222;
+  --color-toolkit-tabs-section-border: #555;
+  --color-toolkit-select-background: #313338;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #373b49;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #313338;
+  --color-toolkit-checkbox-onoff-on-background: #313338;
+  --color-toolkit-checkbox-onoff-on-mark-background: #58f;
+  --color-toolkit-checkbox-onoff-on-mark-color: #222;
+  --color-toolkit-checkbox-onoff-off-mark-background: #ddd;
+  --color-toolkit-checkbox-onoff-off-mark-color: #222;
+  --color-toolkit-checkbox-label-background: #222;
+  --color-toolkit-checkbox-label-border: #333;
+  --color-toolkit-checkbox-input-border: #58f;
+  --color-toolkit-engine-tooltip-border: #333;
+  --color-toolkit-engine-tooltip-background: #222;
+  --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
+  --color-toolkit-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-doc-code: #ddd;
+  --color-doc-code-background: #4d5a6f;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-black {
+  --color-base-font: #bbb;
+  --color-base-font-rgb: 187, 187, 187;
+  --color-base-background: #222428;
+  --color-base-background-mobile: #222428;
+  --color-url-font: #8af;
+  --color-url-visited-font: #c09cd9;
+  --color-header-background: #1e1e22;
+  --color-header-border: #333;
+  --color-footer-background: #1e1e22;
+  --color-footer-border: #333;
+  --color-sidebar-border: #555;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #292c34;
+  --color-backtotop-font: #bbb;
+  --color-backtotop-border: #333;
+  --color-backtotop-background: #2b2e36;
+  --color-btn-background: #58f;
+  --color-btn-font: #222;
+  --color-show-btn-background: #555;
+  --color-show-btn-font: #fff;
+  --color-search-border: #555;
+  --color-search-shadow: 0 2px 8px rgba(34, 38, 46, 0.25);
+  --color-search-background: #2b2e36;
+  --color-search-font: #fff;
+  --color-search-background-hover: #58f;
+  --color-error: #f55b5b;
+  --color-error-background: #390a0a;
+  --color-warning: #f1d561;
+  --color-warning-background: #39300a;
+  --color-success: #79f56e;
+  --color-success-background: #0e390a;
+  --color-categories-item-selected-font: #58f;
+  --color-categories-item-border-selected: #58f;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: #555;
+  --color-autocomplete-shadow: 0 2px 8px rgba(34, 38, 46, 0.25);
+  --color-autocomplete-background: #2b2e36;
+  --color-autocomplete-background-hover: #1e1e22;
+  --color-answer-font: #bbb;
+  --color-answer-background: #26292f;
+  --color-result-background: #26292f;
+  --color-result-border: #333;
+  --color-result-url-font: #fff;
+  --color-result-vim-selected: #1f1f23cc;
+  --color-result-vim-arrow: #8af;
+  --color-result-description-highlight-font: #fff;
+  --color-result-link-font: #8af;
+  --color-result-link-font-highlight: #8af;
+  --color-result-link-visited-font: #c09cd9;
+  --color-result-publishdate-font: #888;
+  --color-result-engines-font: #a4a4a4;
+  --color-result-search-url-border: #555;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #1a1a1c;
+  --color-result-detail-hr: #555;
+  --color-result-detail-link: #8af;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-result-image-span-font: #bbb;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #2c2c32;
+  --color-settings-engine-description-font: #909090;
+  --color-settings-table-group-background: #1b1b21;
+  --color-toolkit-badge-font: #fff;
+  --color-toolkit-badge-background: #555;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #555;
+  --color-toolkit-dialog-background: #1e1e22;
+  --color-toolkit-tabs-label-border: #222;
+  --color-toolkit-tabs-section-border: #555;
+  --color-toolkit-select-background: #313338;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #373b49;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #313338;
+  --color-toolkit-checkbox-onoff-on-background: #313338;
+  --color-toolkit-checkbox-onoff-on-mark-background: #58f;
+  --color-toolkit-checkbox-onoff-on-mark-color: #222;
+  --color-toolkit-checkbox-onoff-off-mark-background: #ddd;
+  --color-toolkit-checkbox-onoff-off-mark-color: #222;
+  --color-toolkit-checkbox-label-background: #222;
+  --color-toolkit-checkbox-label-border: #333;
+  --color-toolkit-checkbox-input-border: #58f;
+  --color-toolkit-engine-tooltip-border: #333;
+  --color-toolkit-engine-tooltip-background: #222;
+  --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
+  --color-toolkit-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-doc-code: #ddd;
+  --color-doc-code-background: #4d5a6f;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+  --color-base-background: #000;
+  --color-base-background-mobile: #000;
+  --color-header-background: #000;
+  --color-footer-background: #000;
+  --color-sidebar-background: #000;
+}
+:root.theme-paulgo {
+  --color-base-font: #bdc1c6;
+  --color-base-font-rgb: 189, 193, 198;
+  --color-base-background: #202124;
+  --color-base-background-mobile: #171717;
+  --color-url-font: #8ab4f8;
+  --color-url-visited-font: #c58af9;
+  --color-header-background: #202124;
+  --color-header-border: #3c4043;
+  --color-footer-background: #171717;
+  --color-footer-border: #212327;
+  --color-sidebar-border: #3c4043;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #171717;
+  --color-backtotop-font: #bdc1c6;
+  --color-backtotop-border: #212327;
+  --color-backtotop-background: #171717;
+  --color-btn-background: #8ab4f8;
+  --color-btn-font: #202124;
+  --color-show-btn-background: #171717;
+  --color-show-btn-font: #bdc1c6;
+  --color-search-border: transparent;
+  --color-search-shadow: 0 1px 3px rgba(23, 23, 23, 0.24);
+  --color-search-background: #303134;
+  --color-search-font: #fff;
+  --color-search-background-hover: #8ab4f8;
+  --color-error: #f55b5b;
+  --color-error-background: #390a0a;
+  --color-warning: #f1d561;
+  --color-warning-background: #39300a;
+  --color-success: #79f56e;
+  --color-success-background: #0e390a;
+  --color-categories-item-selected-font: #8ab4f8;
+  --color-categories-item-border-selected: #8ab4f8;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: transparent;
+  --color-autocomplete-shadow: 0 4px 12px rgba(23, 23, 23, 0.9);
+  --color-autocomplete-background: #303134;
+  --color-autocomplete-background-hover: #171717;
+  --color-answer-font: #fff;
+  --color-answer-background: #171717;
+  --color-result-background: #202124;
+  --color-result-border: #3c4043;
+  --color-result-url-font: #bdc1c6;
+  --color-result-vim-selected: #171717;
+  --color-result-vim-arrow: #8ab4f8;
+  --color-result-description-highlight-font: #bdc1c6;
+  --color-result-link-font: #8ab4f8;
+  --color-result-link-font-highlight: #8ab4f8;
+  --color-result-link-visited-font: #c58af9;
+  --color-result-publishdate-font: #bdc1c6;
+  --color-result-engines-font: #bdc1c6;
+  --color-result-search-url-border: #3c4043;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #000;
+  --color-result-detail-hr: #3c4043;
+  --color-result-detail-link: #8ab4f8;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-result-image-span-font: #bdc1c6;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #3c4043;
+  --color-settings-engine-description-font: #bdc1c6;
+  --color-settings-table-group-background: #171717;
+  --color-toolkit-badge-font: #202124;
+  --color-toolkit-badge-background: #bdc1c6;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #3c4043;
+  --color-toolkit-dialog-background: #202124;
+  --color-toolkit-tabs-label-border: #202124;
+  --color-toolkit-tabs-section-border: #3c4043;
+  --color-toolkit-select-background: #303134;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #3c4043;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #303134;
+  --color-toolkit-checkbox-onoff-on-background: #303134;
+  --color-toolkit-checkbox-onoff-on-mark-background: #8ab4f8;
+  --color-toolkit-checkbox-onoff-on-mark-color: #202124;
+  --color-toolkit-checkbox-onoff-off-mark-background: #bdc1c6;
+  --color-toolkit-checkbox-onoff-off-mark-color: #202124;
+  --color-toolkit-checkbox-label-background: #202124;
+  --color-toolkit-checkbox-label-border: #3c4043;
+  --color-toolkit-checkbox-input-border: #8ab4f8;
+  --color-toolkit-engine-tooltip-border: #3c4043;
+  --color-toolkit-engine-tooltip-background: #202124;
+  --color-toolkit-loader-border: rgba(0, 0, 0, 0.2);
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #202124;
+  --color-doc-code-background: #8ab4f8;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-latte {
+  --color-base-font: #4c4f69;
+  --color-base-background: #eff1f5;
+  --color-base-background-mobile: #eff1f5;
+  --color-url-font: #334999;
+  --color-url-visited-font: ##9822c3;
+  --color-header-background: #e6e9ef;
+  --color-header-border: #e6e9ef;
+  --color-footer-background: #e6e9ef;
+  --color-footer-border: #e6e9ef;
+  --color-sidebar-border: #eff1f5;
+  --color-sidebar-font: #4c4f69;
+  --color-sidebar-background: #eff1f5;
+  --color-backtotop-font: #5c5f77;
+  --color-backtotop-border: #ccd0da;
+  --color-backtotop-background: #ccd0da;
+  --color-btn-background: #3050ff;
+  --color-btn-font: #eff1f5;
+  --color-show-btn-background: #bbb;
+  --color-show-btn-font: #eff1f5;
+  --color-search-border: #ccd0da;
+  --color-search-shadow: 0 2px 8px #dce0e8;
+  --color-search-background: #ccd0da;
+  --color-search-font: #4c4f69;
+  --color-search-background-hover: #3050ff;
+  --color-error: #d20f39;
+  --color-error-background: #ccd0da;
+  --color-warning: #df8e1d;
+  --color-warning-background: #ccd0da;
+  --color-success: #40a02b;
+  --color-success-background: #ccd0da;
+  --color-categories-item-selected-font: #3050ff;
+  --color-categories-item-border-selected: #3050ff;
+  --color-autocomplete-font: #5c5f77;
+  --color-autocomplete-border: #ccd0da;
+  --color-autocomplete-shadow: 0 2px 8px #dce0e8;
+  --color-autocomplete-background: #ccd0da;
+  --color-autocomplete-background-hover: #bcc0cc;
+  --color-answer-font: #4c4f69;
+  --color-answer-background: #e6e9ef;
+  --color-result-background: #e6e9ef;
+  --color-result-border: #eff1f5;
+  --color-result-url-font: #5c5f77;
+  --color-result-vim-selected: #ccd0da;
+  --color-result-vim-arrow: #000bbb;
+  --color-result-description-highlight-font: #4c4f69;
+  --color-result-link-font: #000bbb;
+  --color-result-link-font-highlight: #000bbb;
+  --color-result-link-visited-font: #9822c3;
+  --color-result-publishdate-font: #acb0be;
+  --color-result-engines-font: #acb0be;
+  --color-result-search-url-border: #acb0be;
+  --color-result-search-url-font: #4c4f69;
+  --color-result-detail-font: #4c4f69;
+  --color-result-detail-label-font: #6c6f85;
+  --color-result-detail-background: #eff1f5;
+  --color-result-detail-hr: #eff1f5;
+  --color-result-detail-link: #8af;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: #dce0e8;
+  --color-result-image-span-font: #4c4f69;
+  --color-result-image-span-font-selected: #eff1f5;
+  --color-result-image-background: #e6e9ef;
+  --color-settings-tr-hover: #ccd0da;
+  --color-settings-engine-description-font: #4c4f69;
+  --color-settings-engine-group-background: #ccd0da;
+  --color-toolkit-badge-font: #4c4f69;
+  --color-toolkit-badge-background: #ccd0da;
+  --color-toolkit-kbd-font: #4c4f69;
+  --color-toolkit-kbd-background: #e6e9ef;
+  --color-toolkit-dialog-border: #e6e9ef;
+  --color-toolkit-dialog-background: #e6e9ef;
+  --color-toolkit-tabs-label-border: #eff1f5;
+  --color-toolkit-tabs-section-border: #eff1f5;
+  --color-toolkit-select-background: #ccd0da;
+  --color-toolkit-select-border: #ccd0da;
+  --color-toolkit-select-background-hover: #bcc0cc;
+  --color-toolkit-input-text-font: #4c4f69;
+  --color-toolkit-checkbox-onoff-off-background: #ccd0da;
+  --color-toolkit-checkbox-onoff-on-background: #ccd0da;
+  --color-toolkit-checkbox-onoff-on-mark-background: #3050ff;
+  --color-toolkit-checkbox-onoff-on-mark-color: #fff;
+  --color-toolkit-checkbox-onoff-off-mark-background: #aaa;
+  --color-toolkit-checkbox-onoff-off-mark-color: #fff;
+  --color-toolkit-checkbox-label-background: #eff1f5;
+  --color-toolkit-checkbox-label-border: #e6e9ef;
+  --color-toolkit-checkbox-input-border: #3050ff;
+  --color-toolkit-engine-tooltip-border: #ccd0da;
+  --color-toolkit-engine-tooltip-background: #ccd0da;
+  --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
+  --color-toolkit-loader-borderleft: #dce0e8;
+  --color-doc-code: #dc8a78;
+  --color-doc-code-background: #e6e9ef;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-frappe {
+  --color-base-font: #c6d0f5;
+  --color-base-background: #303446;
+  --color-base-background-mobile: #303446;
+  --color-url-font: #8af;
+  --color-url-visited-font: #c09cd9;
+  --color-header-background: #292c3c;
+  --color-header-border: #292c3c;
+  --color-footer-background: #292c3c;
+  --color-footer-border: #292c3c;
+  --color-sidebar-border: #303446;
+  --color-sidebar-font: #c6d0f5;
+  --color-sidebar-background: #303446;
+  --color-backtotop-font: #b5bfe2;
+  --color-backtotop-border: #414559;
+  --color-backtotop-background: #414559;
+  --color-btn-background: #58f;
+  --color-btn-font: #303446;
+  --color-show-btn-background: #555;
+  --color-show-btn-font: #303446;
+  --color-search-border: #414559;
+  --color-search-shadow: 0 2px 8px #232634;
+  --color-search-background: #414559;
+  --color-search-font: #c6d0f5;
+  --color-search-background-hover: #58f;
+  --color-error: #e78284;
+  --color-error-background: #414559;
+  --color-warning: #e5c890;
+  --color-warning-background: #414559;
+  --color-success: #a6d189;
+  --color-success-background: #414559;
+  --color-categories-item-selected-font: #58f;
+  --color-categories-item-border-selected: #58f;
+  --color-autocomplete-font: #b5bfe2;
+  --color-autocomplete-border: #414559;
+  --color-autocomplete-shadow: 0 2px 8px #232634;
+  --color-autocomplete-background: #414559;
+  --color-autocomplete-background-hover: #51576d;
+  --color-answer-font: #c6d0f5;
+  --color-answer-background: #292c3c;
+  --color-result-background: #292c3c;
+  --color-result-border: #303446;
+  --color-result-url-font: #b5bfe2;
+  --color-result-vim-selected: #414559;
+  --color-result-vim-arrow: #8af;
+  --color-result-description-highlight-font: #c6d0f5;
+  --color-result-link-font: #8af;
+  --color-result-link-font-highlight: #8af;
+  --color-result-link-visited-font: #c09cd9;
+  --color-result-publishdate-font: #626880;
+  --color-result-engines-font: #626880;
+  --color-result-search-url-border: #626880;
+  --color-result-search-url-font: #c6d0f5;
+  --color-result-detail-font: #c6d0f5;
+  --color-result-detail-label-font: #a5adce;
+  --color-result-detail-background: #303446;
+  --color-result-detail-hr: #303446;
+  --color-result-detail-link: #8af;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: #232634;
+  --color-result-image-span-font: #c6d0f5;
+  --color-result-image-span-font-selected: #303446;
+  --color-result-image-background: #292c3c;
+  --color-settings-tr-hover: #414559;
+  --color-settings-engine-description-font: #c6d0f5;
+  --color-settings-engine-group-background: #414559;
+  --color-toolkit-badge-font: #c6d0f5;
+  --color-toolkit-badge-background: #414559;
+  --color-toolkit-kbd-font: #c6d0f5;
+  --color-toolkit-kbd-background: #292c3c;
+  --color-toolkit-dialog-border: #292c3c;
+  --color-toolkit-dialog-background: #292c3c;
+  --color-toolkit-tabs-label-border: #303446;
+  --color-toolkit-tabs-section-border: #303446;
+  --color-toolkit-select-background: #414559;
+  --color-toolkit-select-border: #414559;
+  --color-toolkit-select-background-hover: #51576d;
+  --color-toolkit-input-text-font: #c6d0f5;
+  --color-toolkit-checkbox-onoff-off-background: #414559;
+  --color-toolkit-checkbox-onoff-on-background: #414559;
+  --color-toolkit-checkbox-onoff-on-mark-background: #58f;
+  --color-toolkit-checkbox-onoff-on-mark-color: #222;
+  --color-toolkit-checkbox-onoff-off-mark-background: #ddd;
+  --color-toolkit-checkbox-onoff-off-mark-color: #222;
+  --color-toolkit-checkbox-label-background: #303446;
+  --color-toolkit-checkbox-label-border: #292c3c;
+  --color-toolkit-checkbox-input-border: #58f;
+  --color-toolkit-engine-tooltip-border: #414559;
+  --color-toolkit-engine-tooltip-background: #414559;
+  --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
+  --color-toolkit-loader-borderleft: #232634;
+  --color-doc-code: #f2d5cf;
+  --color-doc-code-background: #292c3c;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-macchiato {
+  --color-base-font: #cad3f5;
+  --color-base-background: #24273a;
+  --color-base-background-mobile: #24273a;
+  --color-url-font: #8af;
+  --color-url-visited-font: #c09cd9;
+  --color-header-background: #1e2030;
+  --color-header-border: #1e2030;
+  --color-footer-background: #1e2030;
+  --color-footer-border: #1e2030;
+  --color-sidebar-border: #24273a;
+  --color-sidebar-font: #cad3f5;
+  --color-sidebar-background: #24273a;
+  --color-backtotop-font: #b8c0e0;
+  --color-backtotop-border: #363a4f;
+  --color-backtotop-background: #363a4f;
+  --color-btn-background: #58f;
+  --color-btn-font: #24273a;
+  --color-show-btn-background: #555;
+  --color-show-btn-font: #24273a;
+  --color-search-border: #363a4f;
+  --color-search-shadow: 0 2px 8px #181926;
+  --color-search-background: #363a4f;
+  --color-search-font: #cad3f5;
+  --color-search-background-hover: #58f;
+  --color-error: #ed8796;
+  --color-error-background: #363a4f;
+  --color-warning: #eed49f;
+  --color-warning-background: #363a4f;
+  --color-success: #a6da95;
+  --color-success-background: #363a4f;
+  --color-categories-item-selected-font: #58f;
+  --color-categories-item-border-selected: #58f;
+  --color-autocomplete-font: #b8c0e0;
+  --color-autocomplete-border: #363a4f;
+  --color-autocomplete-shadow: 0 2px 8px #181926;
+  --color-autocomplete-background: #363a4f;
+  --color-autocomplete-background-hover: #494d64;
+  --color-answer-font: #cad3f5;
+  --color-answer-background: #1e2030;
+  --color-result-background: #1e2030;
+  --color-result-border: #24273a;
+  --color-result-url-font: #b8c0e0;
+  --color-result-vim-selected: #363a4f;
+  --color-result-vim-arrow: #8af;
+  --color-result-description-highlight-font: #cad3f5;
+  --color-result-link-font: #8af;
+  --color-result-link-font-highlight: #8af;
+  --color-result-link-visited-font: #c09cd9;
+  --color-result-publishdate-font: #5b6078;
+  --color-result-engines-font: #5b6078;
+  --color-result-search-url-border: #5b6078;
+  --color-result-search-url-font: #cad3f5;
+  --color-result-detail-font: #cad3f5;
+  --color-result-detail-label-font: #a5adcb;
+  --color-result-detail-background: #24273a;
+  --color-result-detail-hr: #24273a;
+  --color-result-detail-link: #8af;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: #181926;
+  --color-result-image-span-font: #cad3f5;
+  --color-result-image-span-font-selected: #24273a;
+  --color-result-image-background: #1e2030;
+  --color-settings-tr-hover: #363a4f;
+  --color-settings-engine-description-font: #cad3f5;
+  --color-settings-engine-group-background: #363a4f;
+  --color-toolkit-badge-font: #cad3f5;
+  --color-toolkit-badge-background: #363a4f;
+  --color-toolkit-kbd-font: #cad3f5;
+  --color-toolkit-kbd-background: #1e2030;
+  --color-toolkit-dialog-border: #1e2030;
+  --color-toolkit-dialog-background: #1e2030;
+  --color-toolkit-tabs-label-border: #24273a;
+  --color-toolkit-tabs-section-border: #24273a;
+  --color-toolkit-select-background: #363a4f;
+  --color-toolkit-select-border: #363a4f;
+  --color-toolkit-select-background-hover: #494d64;
+  --color-toolkit-input-text-font: #cad3f5;
+  --color-toolkit-checkbox-onoff-off-background: #363a4f;
+  --color-toolkit-checkbox-onoff-on-background: #363a4f;
+  --color-toolkit-checkbox-onoff-on-mark-background: #58f;
+  --color-toolkit-checkbox-onoff-on-mark-color: #222;
+  --color-toolkit-checkbox-onoff-off-mark-background: #ddd;
+  --color-toolkit-checkbox-onoff-off-mark-color: #222;
+  --color-toolkit-checkbox-label-background: #24273a;
+  --color-toolkit-checkbox-label-border: #1e2030;
+  --color-toolkit-checkbox-input-border: #58f;
+  --color-toolkit-engine-tooltip-border: #363a4f;
+  --color-toolkit-engine-tooltip-background: #363a4f;
+  --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
+  --color-toolkit-loader-borderleft: #181926;
+  --color-doc-code: #f4dbd6;
+  --color-doc-code-background: #1e2030;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-mocha {
+  --color-base-font: #cdd6f4;
+  --color-base-background: #1e1e2e;
+  --color-base-background-mobile: #1e1e2e;
+  --color-url-font: #8af;
+  --color-url-visited-font: #c09cd9;
+  --color-header-background: #181825;
+  --color-header-border: #181825;
+  --color-footer-background: #181825;
+  --color-footer-border: #181825;
+  --color-sidebar-border: #1e1e2e;
+  --color-sidebar-font: #cdd6f4;
+  --color-sidebar-background: #1e1e2e;
+  --color-backtotop-font: #bac2de;
+  --color-backtotop-border: #313244;
+  --color-backtotop-background: #313244;
+  --color-btn-background: #58f;
+  --color-btn-font: #1e1e2e;
+  --color-show-btn-background: #555;
+  --color-show-btn-font: #1e1e2e;
+  --color-search-border: #313244;
+  --color-search-shadow: 0 2px 8px #11111b;
+  --color-search-background: #313244;
+  --color-search-font: #cdd6f4;
+  --color-search-background-hover: #58f;
+  --color-error: #f38ba8;
+  --color-error-background: #313244;
+  --color-warning: #f9e2af;
+  --color-warning-background: #313244;
+  --color-success: #a6e3a1;
+  --color-success-background: #313244;
+  --color-categories-item-selected-font: #58f;
+  --color-categories-item-border-selected: #58f;
+  --color-autocomplete-font: #bac2de;
+  --color-autocomplete-border: #313244;
+  --color-autocomplete-shadow: 0 2px 8px #11111b;
+  --color-autocomplete-background: #313244;
+  --color-autocomplete-background-hover: #45475a;
+  --color-answer-font: #cdd6f4;
+  --color-answer-background: #181825;
+  --color-result-background: #181825;
+  --color-result-border: #1e1e2e;
+  --color-result-url-font: #bac2de;
+  --color-result-vim-selected: #313244;
+  --color-result-vim-arrow: #8af;
+  --color-result-description-highlight-font: #cdd6f4;
+  --color-result-link-font: #8af;
+  --color-result-link-font-highlight: #8af;
+  --color-result-link-visited-font: #c09cd9;
+  --color-result-publishdate-font: #585b70;
+  --color-result-engines-font: #585b70;
+  --color-result-search-url-border: #585b70;
+  --color-result-search-url-font: #cdd6f4;
+  --color-result-detail-font: #cdd6f4;
+  --color-result-detail-label-font: #a6adc8;
+  --color-result-detail-background: #1e1e2e;
+  --color-result-detail-hr: #1e1e2e;
+  --color-result-detail-link: #8af;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: #11111b;
+  --color-result-image-span-font: #cdd6f4;
+  --color-result-image-span-font-selected: #1e1e2e;
+  --color-result-image-background: #181825;
+  --color-settings-tr-hover: #313244;
+  --color-settings-engine-description-font: #cdd6f4;
+  --color-settings-engine-group-background: #313244;
+  --color-toolkit-badge-font: #cdd6f4;
+  --color-toolkit-badge-background: #313244;
+  --color-toolkit-kbd-font: #cdd6f4;
+  --color-toolkit-kbd-background: #181825;
+  --color-toolkit-dialog-border: #181825;
+  --color-toolkit-dialog-background: #181825;
+  --color-toolkit-tabs-label-border: #1e1e2e;
+  --color-toolkit-tabs-section-border: #1e1e2e;
+  --color-toolkit-select-background: #313244;
+  --color-toolkit-select-border: #313244;
+  --color-toolkit-select-background-hover: #45475a;
+  --color-toolkit-input-text-font: #cdd6f4;
+  --color-toolkit-checkbox-onoff-off-background: #313244;
+  --color-toolkit-checkbox-onoff-on-background: #313244;
+  --color-toolkit-checkbox-onoff-on-mark-background: #58f;
+  --color-toolkit-checkbox-onoff-on-mark-color: #222;
+  --color-toolkit-checkbox-onoff-off-mark-background: #ddd;
+  --color-toolkit-checkbox-onoff-off-mark-color: #222;
+  --color-toolkit-checkbox-label-background: #1e1e2e;
+  --color-toolkit-checkbox-label-border: #181825;
+  --color-toolkit-checkbox-input-border: #58f;
+  --color-toolkit-engine-tooltip-border: #313244;
+  --color-toolkit-engine-tooltip-background: #313244;
+  --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
+  --color-toolkit-loader-borderleft: #11111b;
+  --color-doc-code: #f5e0dc;
+  --color-doc-code-background: #181825;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-kagi {
+  --color-base-font: #acacaf;
+  --color-base-font-rgb: 189, 193, 198;
+  --color-base-background: #232325;
+  --color-base-background-mobile: #232325;
+  --color-url-font: #9185e0;
+  --color-url-visited-font: #9185e0;
+  --color-header-background: #232325;
+  --color-header-border: #3c4043;
+  --color-footer-background: #232325;
+  --color-footer-border: #212327;
+  --color-sidebar-border: #3c4043;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #232325;
+  --color-backtotop-font: #acacaf;
+  --color-backtotop-border: #212327;
+  --color-backtotop-background: #232325;
+  --color-btn-background: #fff;
+  --color-btn-font: #232325;
+  --color-show-btn-background: #232325;
+  --color-show-btn-font: #acacaf;
+  --color-search-border: transparent;
+  --color-search-shadow: 0 1px 3px rgba(23, 23, 23, 0.24);
+  --color-search-background: #454549;
+  --color-search-font: #fff;
+  --color-search-background-hover: #e6e6e8;
+  --color-error: #f55b5b;
+  --color-error-background: #390a0a;
+  --color-warning: #f1d561;
+  --color-warning-background: #39300a;
+  --color-success: #79f56e;
+  --color-success-background: #0e390a;
+  --color-categories-item-selected-font: #eee;
+  --color-categories-item-border-selected: #fff;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: transparent;
+  --color-autocomplete-shadow: 0 4px 12px rgba(23, 23, 23, 0.9);
+  --color-autocomplete-background: #454549;
+  --color-autocomplete-background-hover: #2f2f31;
+  --color-answer-font: #fff;
+  --color-answer-background: #232325;
+  --color-result-background: #232325;
+  --color-result-border: #3c4043;
+  --color-result-url-font: #cfcfd1;
+  --color-result-vim-selected: #232325;
+  --color-result-vim-arrow: #fff;
+  --color-result-description-highlight-font: #cfcfd1;
+  --color-result-link-font: #fff;
+  --color-result-link-font-highlight: #fff;
+  --color-result-link-visited-font: #9185e0;
+  --color-result-publishdate-font: #454549;
+  --color-result-engines-font: #acacaf;
+  --color-result-search-url-border: #3c4043;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #000;
+  --color-result-detail-hr: #3c4043;
+  --color-result-detail-link: #fff;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-result-image-span-font: #cfcfd1;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #3c4043;
+  --color-settings-engine-description-font: #cfcfd1;
+  --color-settings-table-group-background: #232325;
+  --color-toolkit-badge-font: #232325;
+  --color-toolkit-badge-background: #cfcfd1;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #3c4043;
+  --color-toolkit-dialog-background: #232325;
+  --color-toolkit-tabs-label-border: #232325;
+  --color-toolkit-tabs-section-border: #3c4043;
+  --color-toolkit-select-background: #303134;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #3c4043;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #303134;
+  --color-toolkit-checkbox-onoff-on-background: #303134;
+  --color-toolkit-checkbox-onoff-on-mark-background: #fff;
+  --color-toolkit-checkbox-onoff-on-mark-color: #232325;
+  --color-toolkit-checkbox-onoff-off-mark-background: #cfcfd1;
+  --color-toolkit-checkbox-onoff-off-mark-color: #232325;
+  --color-toolkit-checkbox-label-background: #232325;
+  --color-toolkit-checkbox-label-border: #3c4043;
+  --color-toolkit-checkbox-input-border: #fff;
+  --color-toolkit-engine-tooltip-border: #3c4043;
+  --color-toolkit-engine-tooltip-background: #232325;
+  --color-toolkit-loader-border: rgba(0, 0, 0, 0.2);
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #232325;
+  --color-doc-code-background: #fff;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-brave {
+  --color-base-font: #a1b2ba;
+  --color-base-font-rgb: 161, 178, 186;
+  --color-base-background: #17191e;
+  --color-base-background-mobile: #171717;
+  --color-url-font: #7c91ff;
+  --color-url-visited-font: #7166a9;
+  --color-header-background: #17191e;
+  --color-header-border: #62757e;
+  --color-footer-background: #171717;
+  --color-footer-border: #21272a;
+  --color-sidebar-border: #62757e;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #171717;
+  --color-backtotop-font: #a1b2ba;
+  --color-backtotop-border: #21272a;
+  --color-backtotop-background: #171717;
+  --color-btn-background: #7c91ff;
+  --color-btn-font: #17191e;
+  --color-show-btn-background: #171717;
+  --color-show-btn-font: #a1b2ba;
+  --color-search-border: transparent;
+  --color-search-shadow: 0 1px 3px rgba(23, 23, 23, 0.24);
+  --color-search-background: #242731;
+  --color-search-font: #fff;
+  --color-search-background-hover: #ff6022;
+  --color-error: #e11f3d;
+  --color-error-background: #620f18;
+  --color-warning: #f1d561;
+  --color-warning-background: #b18c00;
+  --color-success: #94df91;
+  --color-success-background: #02a820;
+  --color-categories-item-selected-font: #ff6022;
+  --color-categories-item-border-selected: #ff6022;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: transparent;
+  --color-autocomplete-shadow: 0 4px 12px rgba(23, 23, 23, 0.9);
+  --color-autocomplete-background: #242731;
+  --color-autocomplete-background-hover: #171717;
+  --color-answer-font: #fff;
+  --color-answer-background: #171717;
+  --color-result-background: #17191e;
+  --color-result-border: #62757e;
+  --color-result-url-font: #a1b2ba;
+  --color-result-vim-selected: #171717;
+  --color-result-vim-arrow: #7c91ff;
+  --color-result-description-highlight-font: #a1b2ba;
+  --color-result-link-font: #7c91ff;
+  --color-result-link-font-highlight: #7c91ff;
+  --color-result-link-visited-font: #7166a9;
+  --color-result-publishdate-font: #a1b2ba;
+  --color-result-engines-font: #a1b2ba;
+  --color-result-search-url-border: #62757e;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: #becad0;
+  --color-result-detail-background: #000;
+  --color-result-detail-hr: #62757e;
+  --color-result-detail-link: #7c91ff;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-result-image-span-font: #a1b2ba;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #62757e;
+  --color-settings-engine-description-font: #a1b2ba;
+  --color-settings-table-group-background: #171717;
+  --color-toolkit-badge-font: #17191e;
+  --color-toolkit-badge-background: #a1b2ba;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #62757e;
+  --color-toolkit-dialog-background: #17191e;
+  --color-toolkit-tabs-label-border: #17191e;
+  --color-toolkit-tabs-section-border: #62757e;
+  --color-toolkit-select-background: #242731;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #62757e;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #242731;
+  --color-toolkit-checkbox-onoff-on-background: #242731;
+  --color-toolkit-checkbox-onoff-on-mark-background: #ff6022;
+  --color-toolkit-checkbox-onoff-on-mark-color: #17191e;
+  --color-toolkit-checkbox-onoff-off-mark-background: #a1b2ba;
+  --color-toolkit-checkbox-onoff-off-mark-color: #17191e;
+  --color-toolkit-checkbox-label-background: #17191e;
+  --color-toolkit-checkbox-label-border: #62757e;
+  --color-toolkit-checkbox-input-border: #7c91ff;
+  --color-toolkit-engine-tooltip-border: #62757e;
+  --color-toolkit-engine-tooltip-background: #17191e;
+  --color-toolkit-loader-border: rgba(0, 0, 0, 0.2);
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #17191e;
+  --color-doc-code-background: #7c91ff;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-moa {
+  --color-base-font: #bbb;
+  --color-base-font-rgb: 187, 187, 187;
+  --color-base-background: #222428;
+  --color-base-background-mobile: #222428;
+  --color-url-font: #865dff;
+  --color-url-visited-font: #c09cd9;
+  --color-header-background: #212127;
+  --color-header-border: #333;
+  --color-footer-background: #262930;
+  --color-footer-border: #333;
+  --color-sidebar-border: #222428;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #262930;
+  --color-backtotop-font: #865dff;
+  --color-backtotop-border: #333;
+  --color-backtotop-background: #262930;
+  --color-btn-background: #b984ff;
+  --color-btn-font: #222;
+  --color-show-btn-background: #555;
+  --color-show-btn-font: #fff;
+  --color-search-border: #555;
+  --color-search-shadow: 0 2px 8px rgba(34, 38, 46, 0.25);
+  --color-search-background: #2b2e36;
+  --color-search-font: #fff;
+  --color-search-background-hover: #865dff;
+  --color-error: #f55b5b;
+  --color-error-background: #a12e2e;
+  --color-warning: #f1d561;
+  --color-warning-background: #b98a1d;
+  --color-success: #79f56e;
+  --color-success-background: #2d8a1d;
+  --color-categories-item-selected-font: #865dff;
+  --color-categories-item-border-selected: #865dff;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: #555;
+  --color-autocomplete-shadow: 0 2px 8px rgba(34, 38, 46, 0.25);
+  --color-autocomplete-background: #2b2e36;
+  --color-autocomplete-background-hover: #1e1e22;
+  --color-answer-font: #bbb;
+  --color-answer-background: #26292f;
+  --color-result-background: #26292f;
+  --color-result-border: #333;
+  --color-result-url-font: #fff;
+  --color-result-vim-selected: #1f1f23cc;
+  --color-result-vim-arrow: #865dff;
+  --color-result-description-highlight-font: #fff;
+  --color-result-link-font: #8af;
+  --color-result-link-font-highlight: #8af;
+  --color-result-link-visited-font: #c09cd9;
+  --color-result-publishdate-font: #888;
+  --color-result-engines-font: #a4a4a4;
+  --color-result-search-url-border: #555;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #262930;
+  --color-result-detail-hr: #555;
+  --color-result-detail-link: #8af;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-result-image-span-font: #bbb;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #2c2c32;
+  --color-settings-engine-description-font: #9e9e9e;
+  --color-settings-table-group-background: #1b1b21;
+  --color-toolkit-badge-font: #fff;
+  --color-toolkit-badge-background: #555;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #555;
+  --color-toolkit-dialog-background: #1e1e22;
+  --color-toolkit-tabs-label-border: #222;
+  --color-toolkit-tabs-section-border: #555;
+  --color-toolkit-select-background: #313338;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #373b49;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #313338;
+  --color-toolkit-checkbox-onoff-on-background: #313338;
+  --color-toolkit-checkbox-onoff-on-mark-background: #865dff;
+  --color-toolkit-checkbox-onoff-on-mark-color: #222;
+  --color-toolkit-checkbox-onoff-off-mark-background: #ddd;
+  --color-toolkit-checkbox-onoff-off-mark-color: #222;
+  --color-toolkit-checkbox-label-background: #222;
+  --color-toolkit-checkbox-label-border: #333;
+  --color-toolkit-checkbox-input-border: #865dff;
+  --color-toolkit-engine-tooltip-border: #333;
+  --color-toolkit-engine-tooltip-background: #222;
+  --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
+  --color-toolkit-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-doc-code: #ddd;
+  --color-doc-code-background: #4d5a6f;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-night {
+  --color-base-font: #eaecf0;
+  --color-base-font-rgb: #eaecf0;
+  --color-base-background: #101418;
+  --color-base-background-mobile: #101418;
+  --color-url-font: #6d8af2;
+  --color-url-visited-font: #977dbd;
+  --color-header-background: #101418;
+  --color-header-border: #3c4043;
+  --color-footer-background: #101418;
+  --color-footer-border: #212327;
+  --color-sidebar-border: #3c4043;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #101418;
+  --color-backtotop-font: #eaecf0;
+  --color-backtotop-border: #212327;
+  --color-backtotop-background: #111213;
+  --color-btn-background: #447ff5;
+  --color-btn-font: #101418;
+  --color-show-btn-background: #202122;
+  --color-show-btn-font: #eaecf0;
+  --color-search-border: #3c4043;
+  --color-search-shadow: 0 2px 8px #20212241;
+  --color-search-background: #111213;
+  --color-search-font: #fff;
+  --color-search-background-hover: #447ff5;
+  --color-error: #f55b5b;
+  --color-error-background: #390a0a;
+  --color-warning: #f1d561;
+  --color-warning-background: #39300a;
+  --color-success: #79f56e;
+  --color-success-background: #0e390a;
+  --color-categories-item-selected-font: #6d8af2;
+  --color-categories-item-border-selected: #447ff5;
+  --color-autocomplete-font: #fff;
+  --color-autocomplete-border: #3c4043;
+  --color-autocomplete-shadow: 0 4px 12px #20212241;
+  --color-autocomplete-background: #111213;
+  --color-autocomplete-background-hover: #202122;
+  --color-answer-font: #fff;
+  --color-answer-background: #202122;
+  --color-result-background: #111213;
+  --color-result-border: #3c4043;
+  --color-result-url-font: #eaecf0;
+  --color-result-vim-selected: #202122;
+  --color-result-vim-arrow: #6d8af2;
+  --color-result-description-highlight-font: #eaecf0;
+  --color-result-link-font: #6d8af2;
+  --color-result-link-font-highlight: #447ff5;
+  --color-result-link-visited-font: #977dbd;
+  --color-result-publishdate-font: #eaecf0;
+  --color-result-engines-font: #eaecf0;
+  --color-result-search-url-border: #3c4043;
+  --color-result-search-url-font: #fff;
+  --color-result-detail-font: #fff;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #101418;
+  --color-result-detail-hr: #3c4043;
+  --color-result-detail-link: #6d8af2;
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: #202122;
+  --color-result-image-span-font: #eaecf0;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-tr-hover: #3c4043;
+  --color-settings-engine-description-font: #eaecf0;
+  --color-settings-table-group-background: #202122;
+  --color-toolkit-badge-font: #101418;
+  --color-toolkit-badge-background: #eaecf0;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #3c4043;
+  --color-toolkit-dialog-background: #101418;
+  --color-toolkit-tabs-label-border: #101418;
+  --color-toolkit-tabs-section-border: #3c4043;
+  --color-toolkit-select-background: #303134;
+  --color-toolkit-select-border: #555;
+  --color-toolkit-select-background-hover: #3c4043;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #303134;
+  --color-toolkit-checkbox-onoff-on-background: #303134;
+  --color-toolkit-checkbox-onoff-on-mark-background: #6d8af2;
+  --color-toolkit-checkbox-onoff-on-mark-color: #101418;
+  --color-toolkit-checkbox-onoff-off-mark-background: #eaecf0;
+  --color-toolkit-checkbox-onoff-off-mark-color: #101418;
+  --color-toolkit-checkbox-label-background: #101418;
+  --color-toolkit-checkbox-label-border: #3c4043;
+  --color-toolkit-checkbox-input-border: #6d8af2;
+  --color-toolkit-engine-tooltip-border: #3c4043;
+  --color-toolkit-engine-tooltip-background: #101418;
+  --color-toolkit-loader-border: #202122;
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #101418;
+  --color-doc-code-background: #6d8af2;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+@media (prefers-color-scheme: dark) {
+  :root.theme-auto {
+    --color-base-font: #cad3f5;
+    --color-base-background: #24273a;
+    --color-base-background-mobile: #24273a;
+    --color-url-font: #8af;
+    --color-url-visited-font: #c09cd9;
+    --color-header-background: #1e2030;
+    --color-header-border: #1e2030;
+    --color-footer-background: #1e2030;
+    --color-footer-border: #1e2030;
+    --color-sidebar-border: #24273a;
+    --color-sidebar-font: #cad3f5;
+    --color-sidebar-background: #24273a;
+    --color-backtotop-font: #b8c0e0;
+    --color-backtotop-border: #363a4f;
+    --color-backtotop-background: #363a4f;
+    --color-btn-background: #58f;
+    --color-btn-font: #24273a;
+    --color-show-btn-background: #555;
+    --color-show-btn-font: #24273a;
+    --color-search-border: #363a4f;
+    --color-search-shadow: 0 2px 8px #181926;
+    --color-search-background: #363a4f;
+    --color-search-font: #cad3f5;
+    --color-search-background-hover: #58f;
+    --color-error: #ed8796;
+    --color-error-background: #363a4f;
+    --color-warning: #eed49f;
+    --color-warning-background: #363a4f;
+    --color-success: #a6da95;
+    --color-success-background: #363a4f;
+    --color-categories-item-selected-font: #58f;
+    --color-categories-item-border-selected: #58f;
+    --color-autocomplete-font: #b8c0e0;
+    --color-autocomplete-border: #363a4f;
+    --color-autocomplete-shadow: 0 2px 8px #181926;
+    --color-autocomplete-background: #363a4f;
+    --color-autocomplete-background-hover: #494d64;
+    --color-answer-font: #cad3f5;
+    --color-answer-background: #1e2030;
+    --color-result-background: #1e2030;
+    --color-result-border: #24273a;
+    --color-result-url-font: #b8c0e0;
+    --color-result-vim-selected: #363a4f;
+    --color-result-vim-arrow: #8af;
+    --color-result-description-highlight-font: #cad3f5;
+    --color-result-link-font: #8af;
+    --color-result-link-font-highlight: #8af;
+    --color-result-link-visited-font: #c09cd9;
+    --color-result-publishdate-font: #5b6078;
+    --color-result-engines-font: #5b6078;
+    --color-result-search-url-border: #5b6078;
+    --color-result-search-url-font: #cad3f5;
+    --color-result-detail-font: #cad3f5;
+    --color-result-detail-label-font: #a5adcb;
+    --color-result-detail-background: #24273a;
+    --color-result-detail-hr: #24273a;
+    --color-result-detail-link: #8af;
+    --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+    --color-result-detail-loader-borderleft: #181926;
+    --color-result-image-span-font: #cad3f5;
+    --color-result-image-span-font-selected: #24273a;
+    --color-result-image-background: #1e2030;
+    --color-settings-tr-hover: #363a4f;
+    --color-settings-engine-description-font: #cad3f5;
+    --color-settings-engine-group-background: #363a4f;
+    --color-toolkit-badge-font: #cad3f5;
+    --color-toolkit-badge-background: #363a4f;
+    --color-toolkit-kbd-font: #cad3f5;
+    --color-toolkit-kbd-background: #1e2030;
+    --color-toolkit-dialog-border: #1e2030;
+    --color-toolkit-dialog-background: #1e2030;
+    --color-toolkit-tabs-label-border: #24273a;
+    --color-toolkit-tabs-section-border: #24273a;
+    --color-toolkit-select-background: #363a4f;
+    --color-toolkit-select-border: #363a4f;
+    --color-toolkit-select-background-hover: #494d64;
+    --color-toolkit-input-text-font: #cad3f5;
+    --color-toolkit-checkbox-onoff-off-background: #363a4f;
+    --color-toolkit-checkbox-onoff-on-background: #363a4f;
+    --color-toolkit-checkbox-onoff-on-mark-background: #58f;
+    --color-toolkit-checkbox-onoff-on-mark-color: #222;
+    --color-toolkit-checkbox-onoff-off-mark-background: #ddd;
+    --color-toolkit-checkbox-onoff-off-mark-color: #222;
+    --color-toolkit-checkbox-label-background: #24273a;
+    --color-toolkit-checkbox-label-border: #1e2030;
+    --color-toolkit-checkbox-input-border: #58f;
+    --color-toolkit-engine-tooltip-border: #363a4f;
+    --color-toolkit-engine-tooltip-background: #363a4f;
+    --color-toolkit-loader-border: rgba(255, 255, 255, 0.2);
+    --color-toolkit-loader-borderleft: #181926;
+    --color-doc-code: #f4dbd6;
+    --color-doc-code-background: #1e2030;
+    --color-favicon-background-color: #ddd;
+    --color-favicon-border-color: #ccc;
+  }
+}
+html,
+body,
+main {
+  padding: 0;
+  margin: 0;
+}
+html {
+  font-family: sans-serif;
+  font-size: 0.9em;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  color: var(--color-base-font);
+  background-color: var(--color-base-background);
+  scroll-behavior: smooth;
+}
+body {
+  margin-inline: 1rem;
+}
+a {
+  text-decoration: none;
+  color: var(--color-url-font);
+}
+a:visited {
+  color: var(--color-url-visited-font);
+}
+a:visited .highlight {
+  color: var(--color-url-visited-font);
+}
+/*# sourceMappingURL=rss.min.css.map */
