@@ -366,10 +366,10 @@ template {
   --color-url-font: #6d8af2;
   --color-url-visited-font: #977dbd;
   --color-header-background: #101418;
-  --color-header-border: #3c4043;
+  --color-header-border: #44475a;
   --color-footer-background: #101418;
   --color-footer-border: #212327;
-  --color-sidebar-border: #3c4043;
+  --color-sidebar-border: #44475a;
   --color-sidebar-font: #fff;
   --color-sidebar-background: #101418;
   --color-backtotop-font: #eaecf0;
@@ -379,7 +379,7 @@ template {
   --color-btn-font: #101418;
   --color-show-btn-background: #202122;
   --color-show-btn-font: #eaecf0;
-  --color-search-border: #3c4043;
+  --color-search-border: #44475a;
   --color-search-shadow: 0 2px 8px #20212241;
   --color-search-background: #111213;
   --color-search-font: #fff;
@@ -393,14 +393,14 @@ template {
   --color-categories-item-selected-font: #6d8af2;
   --color-categories-item-border-selected: #447ff5;
   --color-autocomplete-font: #fff;
-  --color-autocomplete-border: #3c4043;
+  --color-autocomplete-border: #44475a;
   --color-autocomplete-shadow: 0 4px 12px #20212241;
   --color-autocomplete-background: #111213;
   --color-autocomplete-background-hover: #202122;
   --color-answer-font: #fff;
   --color-answer-background: #202122;
   --color-result-background: #111213;
-  --color-result-border: #3c4043;
+  --color-result-border: #44475a;
   --color-result-url-font: #eaecf0;
   --color-result-vim-selected: #202122;
   --color-result-vim-arrow: #6d8af2;
@@ -410,32 +410,32 @@ template {
   --color-result-link-visited-font: #977dbd;
   --color-result-publishdate-font: #eaecf0;
   --color-result-engines-font: #eaecf0;
-  --color-result-search-url-border: #3c4043;
+  --color-result-search-url-border: #44475a;
   --color-result-search-url-font: #fff;
   --color-result-detail-font: #fff;
   --color-result-detail-label-font: lightgray;
   --color-result-detail-background: #101418;
-  --color-result-detail-hr: #3c4043;
+  --color-result-detail-hr: #44475a;
   --color-result-detail-link: #6d8af2;
   --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
   --color-result-detail-loader-borderleft: #202122;
   --color-result-image-span-font: #eaecf0;
   --color-result-image-span-font-selected: #222;
   --color-result-image-background: #222;
-  --color-settings-tr-hover: #3c4043;
+  --color-settings-tr-hover: #44475a;
   --color-settings-engine-description-font: #eaecf0;
   --color-settings-table-group-background: #202122;
   --color-toolkit-badge-font: #101418;
   --color-toolkit-badge-background: #eaecf0;
   --color-toolkit-kbd-font: #000;
   --color-toolkit-kbd-background: #fff;
-  --color-toolkit-dialog-border: #3c4043;
+  --color-toolkit-dialog-border: #44475a;
   --color-toolkit-dialog-background: #101418;
   --color-toolkit-tabs-label-border: #101418;
-  --color-toolkit-tabs-section-border: #3c4043;
+  --color-toolkit-tabs-section-border: #44475a;
   --color-toolkit-select-background: #303134;
   --color-toolkit-select-border: #555;
-  --color-toolkit-select-background-hover: #3c4043;
+  --color-toolkit-select-background-hover: #44475a;
   --color-toolkit-input-text-font: #fff;
   --color-toolkit-checkbox-onoff-off-background: #303134;
   --color-toolkit-checkbox-onoff-on-background: #303134;
@@ -444,14 +444,112 @@ template {
   --color-toolkit-checkbox-onoff-off-mark-background: #eaecf0;
   --color-toolkit-checkbox-onoff-off-mark-color: #101418;
   --color-toolkit-checkbox-label-background: #101418;
-  --color-toolkit-checkbox-label-border: #3c4043;
+  --color-toolkit-checkbox-label-border: #44475a;
   --color-toolkit-checkbox-input-border: #6d8af2;
-  --color-toolkit-engine-tooltip-border: #3c4043;
+  --color-toolkit-engine-tooltip-border: #44475a;
   --color-toolkit-engine-tooltip-background: #101418;
   --color-toolkit-loader-border: #202122;
   --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
   --color-doc-code: #101418;
   --color-doc-code-background: #6d8af2;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+.dracula-themes {
+  --color-base-font: #f8f8f2;
+  --color-base-font-rgb: rgb(248 248, 242);
+  --color-base-background: #282a36;
+  --color-base-background-mobile: #282a36;
+  --color-url-font: #bd93f9;
+  --color-url-visited-font: #bd93f9;
+  --color-header-background: #282a36;
+  --color-header-border: #44475a;
+  --color-footer-background: #282a36;
+  --color-footer-border: #44475a;
+  --color-sidebar-border: #44475a;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #282a36;
+  --color-backtotop-font: #eaecf0;
+  --color-backtotop-border: #44475a;
+  --color-backtotop-background: #44475a;
+  --color-btn-background: hsl(250, 92%, 66%);
+  --color-btn-font: #282a36;
+  --color-show-btn-background: #202122;
+  --color-show-btn-font: #eaecf0;
+  --color-search-border: #44475a;
+  --color-search-shadow: 0 2px 8px #20212241;
+  --color-search-background: #44475a;
+  --color-search-font: #fff;
+  --color-search-background-hover: hsl(250, 92%, 66%);
+  --color-error: #f55b5b;
+  --color-error-background: #390a0a;
+  --color-warning: #f1d561;
+  --color-warning-background: #39300a;
+  --color-success: #79f56e;
+  --color-success-background: #0e390a;
+  --color-categories-item-selected-font: #bd93f9;
+  --color-categories-item-border-selected: #282a36;
+  --color-autocomplete-font: #f8f8f2;
+  --color-autocomplete-border: #44475a;
+  --color-autocomplete-shadow: 0 4px 12px #20212241;
+  --color-autocomplete-background: #44475a;
+  --color-autocomplete-background-hover: #202122;
+  --color-answer-font: #f8f8f2;
+  --color-answer-background: #282a36;
+  --color-result-background: #282a36;
+  --color-result-border: #44475a;
+  --color-result-url-font: #f8f8f2;
+  --color-result-vim-selected: #202122;
+  --color-result-vim-arrow: hsl(250, 92%, 66%);
+  --color-result-description-highlight-font: #f8f8f2;
+  --color-result-link-font: #f8f8f2;
+  --color-result-link-font-highlight: #f8f8f2;
+  --color-result-link-visited-font: #bd93f9;
+  --color-result-publishdate-font: #f8f8f2;
+  --color-result-engines-font: #f8f8f2;
+  --color-result-search-url-border: #44475a;
+  --color-result-search-url-font: #f8f8f2;
+  --color-result-detail-font: #f8f8f2;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #101418;
+  --color-result-detail-hr: #44475a;
+  --color-result-detail-link: hsl(250, 92%, 66%);
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: #202122;
+  --color-result-image-span-font: #eaecf0;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-return-font: #282a36;
+  --color-settings-tr-hover: #44475a;
+  --color-settings-engine-description-font: #eaecf0;
+  --color-settings-table-group-background: #282a36;
+  --color-toolkit-badge-font: #101418;
+  --color-toolkit-badge-background: #eaecf0;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #44475a;
+  --color-toolkit-dialog-background: #101418;
+  --color-toolkit-tabs-label-border: #282a36;
+  --color-toolkit-tabs-section-border: #282a36;
+  --color-toolkit-select-background: #303134;
+  --color-toolkit-select-border: #44475a;
+  --color-toolkit-select-background-hover: #44475a;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #303134;
+  --color-toolkit-checkbox-onoff-on-background: #303134;
+  --color-toolkit-checkbox-onoff-on-mark-background: hsl(250, 92%, 66%);
+  --color-toolkit-checkbox-onoff-on-mark-color: #101418;
+  --color-toolkit-checkbox-onoff-off-mark-background: #eaecf0;
+  --color-toolkit-checkbox-onoff-off-mark-color: #101418;
+  --color-toolkit-checkbox-label-background: #101418;
+  --color-toolkit-checkbox-label-border: #44475a;
+  --color-toolkit-checkbox-input-border: hsl(250, 92%, 66%);
+  --color-toolkit-engine-tooltip-border: #44475a;
+  --color-toolkit-engine-tooltip-background: #101418;
+  --color-toolkit-loader-border: #44475a;
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #101418;
+  --color-doc-code-background: hsl(250, 92%, 66%);
   --color-favicon-background-color: #ddd;
   --color-favicon-border-color: #ccc;
 }
@@ -766,10 +864,10 @@ template {
   --color-url-font: #8ab4f8;
   --color-url-visited-font: #c58af9;
   --color-header-background: #202124;
-  --color-header-border: #3c4043;
+  --color-header-border: #44475a;
   --color-footer-background: #171717;
   --color-footer-border: #212327;
-  --color-sidebar-border: #3c4043;
+  --color-sidebar-border: #44475a;
   --color-sidebar-font: #fff;
   --color-sidebar-background: #171717;
   --color-backtotop-font: #bdc1c6;
@@ -800,7 +898,7 @@ template {
   --color-answer-font: #fff;
   --color-answer-background: #171717;
   --color-result-background: #202124;
-  --color-result-border: #3c4043;
+  --color-result-border: #44475a;
   --color-result-url-font: #bdc1c6;
   --color-result-vim-selected: #171717;
   --color-result-vim-arrow: #8ab4f8;
@@ -810,32 +908,32 @@ template {
   --color-result-link-visited-font: #c58af9;
   --color-result-publishdate-font: #bdc1c6;
   --color-result-engines-font: #bdc1c6;
-  --color-result-search-url-border: #3c4043;
+  --color-result-search-url-border: #44475a;
   --color-result-search-url-font: #fff;
   --color-result-detail-font: #fff;
   --color-result-detail-label-font: lightgray;
   --color-result-detail-background: #000;
-  --color-result-detail-hr: #3c4043;
+  --color-result-detail-hr: #44475a;
   --color-result-detail-link: #8ab4f8;
   --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
   --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
   --color-result-image-span-font: #bdc1c6;
   --color-result-image-span-font-selected: #222;
   --color-result-image-background: #222;
-  --color-settings-tr-hover: #3c4043;
+  --color-settings-tr-hover: #44475a;
   --color-settings-engine-description-font: #bdc1c6;
   --color-settings-table-group-background: #171717;
   --color-toolkit-badge-font: #202124;
   --color-toolkit-badge-background: #bdc1c6;
   --color-toolkit-kbd-font: #000;
   --color-toolkit-kbd-background: #fff;
-  --color-toolkit-dialog-border: #3c4043;
+  --color-toolkit-dialog-border: #44475a;
   --color-toolkit-dialog-background: #202124;
   --color-toolkit-tabs-label-border: #202124;
-  --color-toolkit-tabs-section-border: #3c4043;
+  --color-toolkit-tabs-section-border: #44475a;
   --color-toolkit-select-background: #303134;
   --color-toolkit-select-border: #555;
-  --color-toolkit-select-background-hover: #3c4043;
+  --color-toolkit-select-background-hover: #44475a;
   --color-toolkit-input-text-font: #fff;
   --color-toolkit-checkbox-onoff-off-background: #303134;
   --color-toolkit-checkbox-onoff-on-background: #303134;
@@ -844,9 +942,9 @@ template {
   --color-toolkit-checkbox-onoff-off-mark-background: #bdc1c6;
   --color-toolkit-checkbox-onoff-off-mark-color: #202124;
   --color-toolkit-checkbox-label-background: #202124;
-  --color-toolkit-checkbox-label-border: #3c4043;
+  --color-toolkit-checkbox-label-border: #44475a;
   --color-toolkit-checkbox-input-border: #8ab4f8;
-  --color-toolkit-engine-tooltip-border: #3c4043;
+  --color-toolkit-engine-tooltip-border: #44475a;
   --color-toolkit-engine-tooltip-background: #202124;
   --color-toolkit-loader-border: rgba(0, 0, 0, 0.2);
   --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
@@ -1247,10 +1345,10 @@ template {
   --color-url-font: #9185e0;
   --color-url-visited-font: #9185e0;
   --color-header-background: #232325;
-  --color-header-border: #3c4043;
+  --color-header-border: #44475a;
   --color-footer-background: #232325;
   --color-footer-border: #212327;
-  --color-sidebar-border: #3c4043;
+  --color-sidebar-border: #44475a;
   --color-sidebar-font: #fff;
   --color-sidebar-background: #232325;
   --color-backtotop-font: #acacaf;
@@ -1281,7 +1379,7 @@ template {
   --color-answer-font: #fff;
   --color-answer-background: #232325;
   --color-result-background: #232325;
-  --color-result-border: #3c4043;
+  --color-result-border: #44475a;
   --color-result-url-font: #cfcfd1;
   --color-result-vim-selected: #232325;
   --color-result-vim-arrow: #fff;
@@ -1291,32 +1389,32 @@ template {
   --color-result-link-visited-font: #9185e0;
   --color-result-publishdate-font: #454549;
   --color-result-engines-font: #acacaf;
-  --color-result-search-url-border: #3c4043;
+  --color-result-search-url-border: #44475a;
   --color-result-search-url-font: #fff;
   --color-result-detail-font: #fff;
   --color-result-detail-label-font: lightgray;
   --color-result-detail-background: #000;
-  --color-result-detail-hr: #3c4043;
+  --color-result-detail-hr: #44475a;
   --color-result-detail-link: #fff;
   --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
   --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
   --color-result-image-span-font: #cfcfd1;
   --color-result-image-span-font-selected: #222;
   --color-result-image-background: #222;
-  --color-settings-tr-hover: #3c4043;
+  --color-settings-tr-hover: #44475a;
   --color-settings-engine-description-font: #cfcfd1;
   --color-settings-table-group-background: #232325;
   --color-toolkit-badge-font: #232325;
   --color-toolkit-badge-background: #cfcfd1;
   --color-toolkit-kbd-font: #000;
   --color-toolkit-kbd-background: #fff;
-  --color-toolkit-dialog-border: #3c4043;
+  --color-toolkit-dialog-border: #44475a;
   --color-toolkit-dialog-background: #232325;
   --color-toolkit-tabs-label-border: #232325;
-  --color-toolkit-tabs-section-border: #3c4043;
+  --color-toolkit-tabs-section-border: #44475a;
   --color-toolkit-select-background: #303134;
   --color-toolkit-select-border: #555;
-  --color-toolkit-select-background-hover: #3c4043;
+  --color-toolkit-select-background-hover: #44475a;
   --color-toolkit-input-text-font: #fff;
   --color-toolkit-checkbox-onoff-off-background: #303134;
   --color-toolkit-checkbox-onoff-on-background: #303134;
@@ -1325,9 +1423,9 @@ template {
   --color-toolkit-checkbox-onoff-off-mark-background: #cfcfd1;
   --color-toolkit-checkbox-onoff-off-mark-color: #232325;
   --color-toolkit-checkbox-label-background: #232325;
-  --color-toolkit-checkbox-label-border: #3c4043;
+  --color-toolkit-checkbox-label-border: #44475a;
   --color-toolkit-checkbox-input-border: #fff;
-  --color-toolkit-engine-tooltip-border: #3c4043;
+  --color-toolkit-engine-tooltip-border: #44475a;
   --color-toolkit-engine-tooltip-background: #232325;
   --color-toolkit-loader-border: rgba(0, 0, 0, 0.2);
   --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
@@ -1538,10 +1636,10 @@ template {
   --color-url-font: #6d8af2;
   --color-url-visited-font: #977dbd;
   --color-header-background: #101418;
-  --color-header-border: #3c4043;
+  --color-header-border: #44475a;
   --color-footer-background: #101418;
   --color-footer-border: #212327;
-  --color-sidebar-border: #3c4043;
+  --color-sidebar-border: #44475a;
   --color-sidebar-font: #fff;
   --color-sidebar-background: #101418;
   --color-backtotop-font: #eaecf0;
@@ -1551,7 +1649,7 @@ template {
   --color-btn-font: #101418;
   --color-show-btn-background: #202122;
   --color-show-btn-font: #eaecf0;
-  --color-search-border: #3c4043;
+  --color-search-border: #44475a;
   --color-search-shadow: 0 2px 8px #20212241;
   --color-search-background: #111213;
   --color-search-font: #fff;
@@ -1565,14 +1663,14 @@ template {
   --color-categories-item-selected-font: #6d8af2;
   --color-categories-item-border-selected: #447ff5;
   --color-autocomplete-font: #fff;
-  --color-autocomplete-border: #3c4043;
+  --color-autocomplete-border: #44475a;
   --color-autocomplete-shadow: 0 4px 12px #20212241;
   --color-autocomplete-background: #111213;
   --color-autocomplete-background-hover: #202122;
   --color-answer-font: #fff;
   --color-answer-background: #202122;
   --color-result-background: #111213;
-  --color-result-border: #3c4043;
+  --color-result-border: #44475a;
   --color-result-url-font: #eaecf0;
   --color-result-vim-selected: #202122;
   --color-result-vim-arrow: #6d8af2;
@@ -1582,32 +1680,32 @@ template {
   --color-result-link-visited-font: #977dbd;
   --color-result-publishdate-font: #eaecf0;
   --color-result-engines-font: #eaecf0;
-  --color-result-search-url-border: #3c4043;
+  --color-result-search-url-border: #44475a;
   --color-result-search-url-font: #fff;
   --color-result-detail-font: #fff;
   --color-result-detail-label-font: lightgray;
   --color-result-detail-background: #101418;
-  --color-result-detail-hr: #3c4043;
+  --color-result-detail-hr: #44475a;
   --color-result-detail-link: #6d8af2;
   --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
   --color-result-detail-loader-borderleft: #202122;
   --color-result-image-span-font: #eaecf0;
   --color-result-image-span-font-selected: #222;
   --color-result-image-background: #222;
-  --color-settings-tr-hover: #3c4043;
+  --color-settings-tr-hover: #44475a;
   --color-settings-engine-description-font: #eaecf0;
   --color-settings-table-group-background: #202122;
   --color-toolkit-badge-font: #101418;
   --color-toolkit-badge-background: #eaecf0;
   --color-toolkit-kbd-font: #000;
   --color-toolkit-kbd-background: #fff;
-  --color-toolkit-dialog-border: #3c4043;
+  --color-toolkit-dialog-border: #44475a;
   --color-toolkit-dialog-background: #101418;
   --color-toolkit-tabs-label-border: #101418;
-  --color-toolkit-tabs-section-border: #3c4043;
+  --color-toolkit-tabs-section-border: #44475a;
   --color-toolkit-select-background: #303134;
   --color-toolkit-select-border: #555;
-  --color-toolkit-select-background-hover: #3c4043;
+  --color-toolkit-select-background-hover: #44475a;
   --color-toolkit-input-text-font: #fff;
   --color-toolkit-checkbox-onoff-off-background: #303134;
   --color-toolkit-checkbox-onoff-on-background: #303134;
@@ -1616,14 +1714,112 @@ template {
   --color-toolkit-checkbox-onoff-off-mark-background: #eaecf0;
   --color-toolkit-checkbox-onoff-off-mark-color: #101418;
   --color-toolkit-checkbox-label-background: #101418;
-  --color-toolkit-checkbox-label-border: #3c4043;
+  --color-toolkit-checkbox-label-border: #44475a;
   --color-toolkit-checkbox-input-border: #6d8af2;
-  --color-toolkit-engine-tooltip-border: #3c4043;
+  --color-toolkit-engine-tooltip-border: #44475a;
   --color-toolkit-engine-tooltip-background: #101418;
   --color-toolkit-loader-border: #202122;
   --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
   --color-doc-code: #101418;
   --color-doc-code-background: #6d8af2;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+}
+:root.theme-dracula {
+  --color-base-font: #f8f8f2;
+  --color-base-font-rgb: rgb(248 248, 242);
+  --color-base-background: #282a36;
+  --color-base-background-mobile: #282a36;
+  --color-url-font: #bd93f9;
+  --color-url-visited-font: #bd93f9;
+  --color-header-background: #282a36;
+  --color-header-border: #44475a;
+  --color-footer-background: #282a36;
+  --color-footer-border: #44475a;
+  --color-sidebar-border: #44475a;
+  --color-sidebar-font: #fff;
+  --color-sidebar-background: #282a36;
+  --color-backtotop-font: #eaecf0;
+  --color-backtotop-border: #44475a;
+  --color-backtotop-background: #44475a;
+  --color-btn-background: hsl(250, 92%, 66%);
+  --color-btn-font: #282a36;
+  --color-show-btn-background: #202122;
+  --color-show-btn-font: #eaecf0;
+  --color-search-border: #44475a;
+  --color-search-shadow: 0 2px 8px #20212241;
+  --color-search-background: #44475a;
+  --color-search-font: #fff;
+  --color-search-background-hover: hsl(250, 92%, 66%);
+  --color-error: #f55b5b;
+  --color-error-background: #390a0a;
+  --color-warning: #f1d561;
+  --color-warning-background: #39300a;
+  --color-success: #79f56e;
+  --color-success-background: #0e390a;
+  --color-categories-item-selected-font: #bd93f9;
+  --color-categories-item-border-selected: #282a36;
+  --color-autocomplete-font: #f8f8f2;
+  --color-autocomplete-border: #44475a;
+  --color-autocomplete-shadow: 0 4px 12px #20212241;
+  --color-autocomplete-background: #44475a;
+  --color-autocomplete-background-hover: #202122;
+  --color-answer-font: #f8f8f2;
+  --color-answer-background: #282a36;
+  --color-result-background: #282a36;
+  --color-result-border: #44475a;
+  --color-result-url-font: #f8f8f2;
+  --color-result-vim-selected: #202122;
+  --color-result-vim-arrow: hsl(250, 92%, 66%);
+  --color-result-description-highlight-font: #f8f8f2;
+  --color-result-link-font: #f8f8f2;
+  --color-result-link-font-highlight: #f8f8f2;
+  --color-result-link-visited-font: #bd93f9;
+  --color-result-publishdate-font: #f8f8f2;
+  --color-result-engines-font: #f8f8f2;
+  --color-result-search-url-border: #44475a;
+  --color-result-search-url-font: #f8f8f2;
+  --color-result-detail-font: #f8f8f2;
+  --color-result-detail-label-font: lightgray;
+  --color-result-detail-background: #101418;
+  --color-result-detail-hr: #44475a;
+  --color-result-detail-link: hsl(250, 92%, 66%);
+  --color-result-detail-loader-border: rgba(255, 255, 255, 0.2);
+  --color-result-detail-loader-borderleft: #202122;
+  --color-result-image-span-font: #eaecf0;
+  --color-result-image-span-font-selected: #222;
+  --color-result-image-background: #222;
+  --color-settings-return-font: #282a36;
+  --color-settings-tr-hover: #44475a;
+  --color-settings-engine-description-font: #eaecf0;
+  --color-settings-table-group-background: #282a36;
+  --color-toolkit-badge-font: #101418;
+  --color-toolkit-badge-background: #eaecf0;
+  --color-toolkit-kbd-font: #000;
+  --color-toolkit-kbd-background: #fff;
+  --color-toolkit-dialog-border: #44475a;
+  --color-toolkit-dialog-background: #101418;
+  --color-toolkit-tabs-label-border: #282a36;
+  --color-toolkit-tabs-section-border: #282a36;
+  --color-toolkit-select-background: #303134;
+  --color-toolkit-select-border: #44475a;
+  --color-toolkit-select-background-hover: #44475a;
+  --color-toolkit-input-text-font: #fff;
+  --color-toolkit-checkbox-onoff-off-background: #303134;
+  --color-toolkit-checkbox-onoff-on-background: #303134;
+  --color-toolkit-checkbox-onoff-on-mark-background: hsl(250, 92%, 66%);
+  --color-toolkit-checkbox-onoff-on-mark-color: #101418;
+  --color-toolkit-checkbox-onoff-off-mark-background: #eaecf0;
+  --color-toolkit-checkbox-onoff-off-mark-color: #101418;
+  --color-toolkit-checkbox-label-background: #101418;
+  --color-toolkit-checkbox-label-border: #44475a;
+  --color-toolkit-checkbox-input-border: hsl(250, 92%, 66%);
+  --color-toolkit-engine-tooltip-border: #44475a;
+  --color-toolkit-engine-tooltip-background: #101418;
+  --color-toolkit-loader-border: #44475a;
+  --color-toolkit-loader-borderleft: rgba(255, 255, 255, 0);
+  --color-doc-code: #101418;
+  --color-doc-code-background: hsl(250, 92%, 66%);
   --color-favicon-background-color: #ddd;
   --color-favicon-border-color: #ccc;
 }
@@ -5835,6 +6031,381 @@ template {
 :root.theme-night .code-highlight span.linenos {
   color: #64708d;
 }
+:root.theme-dracula .code-highlight {
+  /* Comment */
+  /* Error */
+  /* Escape */
+  /* Generic */
+  /* Keyword */
+  /* Literal */
+  /* Name */
+  /* Operator */
+  /* Other */
+  /* Punctuation */
+  /* Comment.Hashbang */
+  /* Comment.Multiline */
+  /* Comment.Preproc */
+  /* Comment.PreprocFile */
+  /* Comment.Single */
+  /* Comment.Special */
+  /* Generic.Deleted */
+  /* Generic.Emph */
+  /* Generic.EmphStrong */
+  /* Generic.Error */
+  /* Generic.Heading */
+  /* Generic.Inserted */
+  /* Generic.Output */
+  /* Generic.Prompt */
+  /* Generic.Strong */
+  /* Generic.Subheading */
+  /* Generic.Traceback */
+  /* Keyword.Constant */
+  /* Keyword.Declaration */
+  /* Keyword.Namespace */
+  /* Keyword.Pseudo */
+  /* Keyword.Reserved */
+  /* Keyword.Type */
+  /* Literal.Date */
+  /* Literal.Number */
+  /* Literal.String */
+  /* Name.Attribute */
+  /* Name.Builtin */
+  /* Name.Class */
+  /* Name.Constant */
+  /* Name.Decorator */
+  /* Name.Entity */
+  /* Name.Exception */
+  /* Name.Function */
+  /* Name.Label */
+  /* Name.Namespace */
+  /* Name.Other */
+  /* Name.Property */
+  /* Name.Tag */
+  /* Name.Variable */
+  /* Operator.Word */
+  /* Punctuation.Marker */
+  /* Text.Whitespace */
+  /* Literal.Number.Bin */
+  /* Literal.Number.Float */
+  /* Literal.Number.Hex */
+  /* Literal.Number.Integer */
+  /* Literal.Number.Oct */
+  /* Literal.String.Affix */
+  /* Literal.String.Backtick */
+  /* Literal.String.Char */
+  /* Literal.String.Delimiter */
+  /* Literal.String.Doc */
+  /* Literal.String.Double */
+  /* Literal.String.Escape */
+  /* Literal.String.Heredoc */
+  /* Literal.String.Interpol */
+  /* Literal.String.Other */
+  /* Literal.String.Regex */
+  /* Literal.String.Single */
+  /* Literal.String.Symbol */
+  /* Name.Builtin.Pseudo */
+  /* Name.Function.Magic */
+  /* Name.Variable.Class */
+  /* Name.Variable.Global */
+  /* Name.Variable.Instance */
+  /* Name.Variable.Magic */
+  /* Literal.Number.Integer.Long */
+}
+:root.theme-dracula .code-highlight pre {
+  line-height: 100%;
+}
+:root.theme-dracula .code-highlight td.linenos .normal {
+  color: #3c4354;
+  background-color: transparent;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+:root.theme-dracula .code-highlight span.linenos {
+  color: #3c4354;
+  background-color: transparent;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+:root.theme-dracula .code-highlight td.linenos .special {
+  color: #3c4354;
+  background-color: #ffffc0;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+:root.theme-dracula .code-highlight span.linenos.special {
+  color: #3c4354;
+  background-color: #ffffc0;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+:root.theme-dracula .code-highlight .hll {
+  background-color: #6e7681;
+}
+:root.theme-dracula .code-highlight .c {
+  color: #7E8AA1;
+}
+:root.theme-dracula .code-highlight .err {
+  color: #F88F7F;
+}
+:root.theme-dracula .code-highlight .esc {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .g {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .k {
+  color: #FFAD66;
+}
+:root.theme-dracula .code-highlight .l {
+  color: #D5FF80;
+}
+:root.theme-dracula .code-highlight .n {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .o {
+  color: #FFAD66;
+}
+:root.theme-dracula .code-highlight .x {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .p {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .ch {
+  color: #F88F7F;
+  font-style: italic;
+}
+:root.theme-dracula .code-highlight .cm {
+  color: #7E8AA1;
+}
+:root.theme-dracula .code-highlight .cp {
+  color: #FFAD66;
+  font-weight: bold;
+}
+:root.theme-dracula .code-highlight .cpf {
+  color: #7E8AA1;
+}
+:root.theme-dracula .code-highlight .c1 {
+  color: #7E8AA1;
+}
+:root.theme-dracula .code-highlight .cs {
+  color: #7E8AA1;
+  font-style: italic;
+}
+:root.theme-dracula .code-highlight .gd {
+  color: #F88F7F;
+  background-color: #3D1E20;
+}
+:root.theme-dracula .code-highlight .ge {
+  color: #D4D2C8;
+  font-style: italic;
+}
+:root.theme-dracula .code-highlight .ges {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .gr {
+  color: #F88F7F;
+}
+:root.theme-dracula .code-highlight .gh {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .gi {
+  color: #6AD4AF;
+  background-color: #19362C;
+}
+:root.theme-dracula .code-highlight .go {
+  color: #7E8AA1;
+}
+:root.theme-dracula .code-highlight .gp {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .gs {
+  color: #D4D2C8;
+  font-weight: bold;
+}
+:root.theme-dracula .code-highlight .gu {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .gt {
+  color: #F88F7F;
+}
+:root.theme-dracula .code-highlight .kc {
+  color: #FFAD66;
+}
+:root.theme-dracula .code-highlight .kd {
+  color: #FFAD66;
+}
+:root.theme-dracula .code-highlight .kn {
+  color: #FFAD66;
+}
+:root.theme-dracula .code-highlight .kp {
+  color: #FFAD66;
+}
+:root.theme-dracula .code-highlight .kr {
+  color: #FFAD66;
+}
+:root.theme-dracula .code-highlight .kt {
+  color: #73D0FF;
+}
+:root.theme-dracula .code-highlight .ld {
+  color: #D5FF80;
+}
+:root.theme-dracula .code-highlight .m {
+  color: #DFBFFF;
+}
+:root.theme-dracula .code-highlight .s {
+  color: #D5FF80;
+}
+:root.theme-dracula .code-highlight .na {
+  color: #FFD173;
+}
+:root.theme-dracula .code-highlight .nb {
+  color: #FFD173;
+}
+:root.theme-dracula .code-highlight .nc {
+  color: #73D0FF;
+}
+:root.theme-dracula .code-highlight .no {
+  color: #FFD173;
+}
+:root.theme-dracula .code-highlight .nd {
+  color: #7E8AA1;
+  font-weight: bold;
+  font-style: italic;
+}
+:root.theme-dracula .code-highlight .ni {
+  color: #95E6CB;
+}
+:root.theme-dracula .code-highlight .ne {
+  color: #73D0FF;
+}
+:root.theme-dracula .code-highlight .nf {
+  color: #FFD173;
+}
+:root.theme-dracula .code-highlight .nl {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .nn {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .nx {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .py {
+  color: #FFD173;
+}
+:root.theme-dracula .code-highlight .nt {
+  color: #5CCFE6;
+}
+:root.theme-dracula .code-highlight .nv {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .ow {
+  color: #FFAD66;
+}
+:root.theme-dracula .code-highlight .pm {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .w {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .mb {
+  color: #DFBFFF;
+}
+:root.theme-dracula .code-highlight .mf {
+  color: #DFBFFF;
+}
+:root.theme-dracula .code-highlight .mh {
+  color: #DFBFFF;
+}
+:root.theme-dracula .code-highlight .mi {
+  color: #DFBFFF;
+}
+:root.theme-dracula .code-highlight .mo {
+  color: #DFBFFF;
+}
+:root.theme-dracula .code-highlight .sa {
+  color: #F29E74;
+}
+:root.theme-dracula .code-highlight .sb {
+  color: #D5FF80;
+}
+:root.theme-dracula .code-highlight .sc {
+  color: #D5FF80;
+}
+:root.theme-dracula .code-highlight .dl {
+  color: #D5FF80;
+}
+:root.theme-dracula .code-highlight .sd {
+  color: #7E8AA1;
+}
+:root.theme-dracula .code-highlight .s2 {
+  color: #D5FF80;
+}
+:root.theme-dracula .code-highlight .se {
+  color: #95E6CB;
+}
+:root.theme-dracula .code-highlight .sh {
+  color: #D5FF80;
+}
+:root.theme-dracula .code-highlight .si {
+  color: #95E6CB;
+}
+:root.theme-dracula .code-highlight .sx {
+  color: #95E6CB;
+}
+:root.theme-dracula .code-highlight .sr {
+  color: #95E6CB;
+}
+:root.theme-dracula .code-highlight .s1 {
+  color: #D5FF80;
+}
+:root.theme-dracula .code-highlight .ss {
+  color: #DFBFFF;
+}
+:root.theme-dracula .code-highlight .bp {
+  color: #5CCFE6;
+}
+:root.theme-dracula .code-highlight .fm {
+  color: #FFD173;
+}
+:root.theme-dracula .code-highlight .vc {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .vg {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .vi {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .vm {
+  color: #D4D2C8;
+}
+:root.theme-dracula .code-highlight .il {
+  color: #DFBFFF;
+}
+:root.theme-dracula .code-highlight pre {
+  overflow: auto;
+  margin: 0;
+  padding: 0 0 0.75rem 0;
+}
+:root.theme-dracula .code-highlight .linenos {
+  user-select: none;
+  cursor: default;
+  margin-right: 8px;
+  text-align: right;
+}
+:root.theme-dracula .code-highlight .linenos::selection {
+  background: transparent;
+  /* WebKit/Blink Browsers */
+}
+:root.theme-dracula .code-highlight .linenos::-moz-selection {
+  background: transparent;
+  /* Gecko Browsers */
+}
+:root.theme-dracula .code-highlight span.linenos {
+  color: #64708d;
+}
 html.no-js .hide_if_nojs {
   display: none;
 }
@@ -7805,6 +8376,9 @@ article.category-images {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%0A%3Cg%3E%3Cpolygon%20fill%3D%22%23ddd%22%20points%3D%22128%2C192%20256%2C320%20384%2C192%22%2F%3E%3C%2Fg%3E%0A%3C%2Fsvg%3E");
   }
   html.theme-night select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%0A%3Cg%3E%3Cpolygon%20fill%3D%22%23ddd%22%20points%3D%22128%2C192%20256%2C320%20384%2C192%22%2F%3E%3C%2Fg%3E%0A%3C%2Fsvg%3E");
+  }
+  html.theme-dracula select {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%0A%3Cg%3E%3Cpolygon%20fill%3D%22%23ddd%22%20points%3D%22128%2C192%20256%2C320%20384%2C192%22%2F%3E%3C%2Fg%3E%0A%3C%2Fsvg%3E");
   }
 }
