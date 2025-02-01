@@ -12,11 +12,7 @@ America, iFog - 🇺🇸 Fremont, United States : https://na.priv.au
 
 Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au
 
-Europe, iFog - 🇨🇭 Zurich, Switzerland : https://eu.priv.au
-
-Europe, Lagrange - 🇬🇧 London, United Kingdom : https://eu2.priv.au
-
-Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu3.priv.au
+Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu.priv.au
 
 Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au
 
