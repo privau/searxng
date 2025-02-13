@@ -99,6 +99,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "s+donation_url: https://docs.searxng.org/donate.html+donation_url: false+g" \
 -e "/bind_address:/s/127.0.0.1/0.0.0.0/g" \
 -e '/default_lang:/s/ ""/ en/g' \
+-e "/method:/s/\"POST\"/\"GET\"/g" \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
 -e "/X-Content-Type-Options: nosniff/d" \
 -e "/X-XSS-Protection: 1; mode=block/d" \
