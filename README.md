@@ -1,40 +1,13 @@
 # SearXNG
 
-Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-respecting metasearch engine. Includes a suite of custom themes from catppuccin, paulgoio, kagi, brave, moa, and the default SearXNG themes.
+A privacy-respecting metasearch engine instance hosted in Switzerland, a country renowned for having the world's strictest data protection and privacy laws. This instance also includes a suite of custom themes from catppuccin, paulgoio, kagi, brave, moa, and the default SearXNG themes.
 
-Don't see your favorite theme? [Submit a theme request!](https://github.com/privau/searxng/issues/new?assignees=&labels=bug&projects=&template=theme-request.md)
-
-Global Instance - 🌐 Worldwide : https://priv.au
-
----
-
-America, iFog - 🇺🇸 Fremont, United States : https://na.priv.au
-
-Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au
-
-Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu.priv.au
-
-Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au
-
-## FAQ
-
-### Where geographically is priv.au hosted?
-
-When you connect to priv.au over IPv4, the location of your DNS resolver will determine which of our instances across the globe you will connect to, generally the closest will be chosen. Connecting over IPv6 will route you to the closest instance via BGP Anycast. You are able to bypass this selection process by connecting directly to a geographic instance, using the links above.
-
-### Why does the Qwant engine not work?
-
-If Qwant is returning an 'Access Denied' error, you're most likely connecting to our Singaporean instance. In December 2020, Qwant closed access for multiple countries, one being Singapore. You can read their statement on the matter [here](https://twitter.com/QwantCom/status/1339149434572206080). To bypass this block, you connect to a different instance in a different country.
-
-## Basic Usage
-
-* ```docker run -d --restart always -p 127.0.0.1:8080:8080 --name searxng ghcr.io/privau/searxng```
-
-* Visit `http://127.0.0.1:8080` in your browser, stop the server with `Ctrl` + `C`.
+- Instance URL: https://searxng.admingod.ch
+- Instance Maintainer: https://admingod.ch
 
 ## Theme Development
 
-* Clone this repo: ```git clone https://github.com/privau/searxng.git```
+* Clone this repo: ```git clone https://github.com/AdminGodZ/searxng.git```
 
 * Make your changes to the theme within `src/less`
 

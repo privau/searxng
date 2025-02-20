@@ -1,0 +1,34 @@
+# Assuming you are using Cloudflare tunnels to host your SearXNG instance
+services:
+  searxng:
+    image: searxng/searxng:latest
+    networks:
+      proxy:
+    restart: always
+    environment:
+      BASE_URL: https://searxng.admingod.ch/
+      MORTY_URL: https://searxng.admingod.ch/
+      INSTANCE_NAME: SearXNG
+      AUTOCOMPLETE: google
+      # Public instance settings
+      PUBLIC_INSTANCE: true
+      CONTACT: https://admingod.ch
+      GIT_URL: https://github.com/AdminGodZ/searxng
+      # Enable Redis for rate limiting (required for public instances)
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+    networks:
+      proxy:
+    restart: always
+    volumes:
+      - redis_data:/data
+    command: redis-server --save 60 1 --loglevel warning
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  redis_data:
