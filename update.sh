@@ -1,21 +1,20 @@
 #!/bin/sh
 
-echo "Building theme from master branch searxng/searxng."
-
-echo "Cloning latest searxng/searxng"
 if [ ! -d build ]
 then
-    git clone https://github.com/searxng/searxng.git build
+    git clone https://github.com/return42/searxng.git build
+    git reset --hard 032aac7d87e64cd4cbdf641ee169badefb3ea4c4
 else
     cd build
     git restore .
-    git pull https://github.com/searxng/searxng.git
+    git pull https://github.com/return42/searxng.git
+    git reset --hard 032aac7d87e64cd4cbdf641ee169badefb3ea4c4
     cd ..
 fi
 
 echo "Replace fork simple theme definitions."
-cp -v src/less/* build/searx/static/themes/simple/src/less/
-cp -v src/js/* build/searx/static/themes/simple/src/js/main/
+cp -v src/less/* build/client/simple/src/less/
+cp -v src/js/* build/client/simple/src/js/main/
 
 echo "Build static files."
 cd build
