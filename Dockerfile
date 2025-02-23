@@ -85,6 +85,11 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
 
+# patch for instant autocompletion
+RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/simple_search.html
+RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/search.html
+
+
 # make run.sh executable, copy uwsgi server ini, set default settings, precompile static theme files
 RUN cp -r -v dockerfiles/uwsgi.ini /etc/uwsgi/; \
 chmod +x /usr/local/bin/run.sh; \
