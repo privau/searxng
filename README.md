@@ -4,17 +4,17 @@ Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-resp
 
 Don't see your favorite theme? [Submit a theme request!](https://github.com/privau/searxng/issues/new?assignees=&labels=bug&projects=&template=theme-request.md)
 
-Global Instance - 🌐 Worldwide : https://priv.au
+Global Instance - 🌐 Worldwide : https://priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1lrch.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
 
 ---
 
-America, iFog - 🇺🇸 Fremont, United States : https://na.priv.au
+America, iFog - 🇺🇸 Fremont, United States : https://na.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3j.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
 
-Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au
+Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3i.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
 
-Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu.priv.au
+Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3o.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
 
-Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au
+Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3e.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
 
 ## FAQ
 
