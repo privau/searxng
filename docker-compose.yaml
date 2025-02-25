@@ -1,26 +1,29 @@
-# Assuming you are using Cloudflare tunnels to host your SearXNG instance
+# Using Cloudflare tunnels to host SearXNG instance
 services:
   searxng:
-    image: searxng/searxng:latest
+    build: .
     networks:
-      proxy:
+      - proxy
     restart: always
     environment:
       BASE_URL: https://searxng.admingod.ch/
       MORTY_URL: https://searxng.admingod.ch/
       INSTANCE_NAME: SearXNG
-      AUTOCOMPLETE: google
+      AUTOCOMPLETE: ""  # Temporarily disable autocomplete until properly configured
       # Public instance settings
       PUBLIC_INSTANCE: true
       CONTACT: https://admingod.ch
       GIT_URL: https://github.com/AdminGodZ/searxng
-      # Enable Redis for rate limiting (required for public instances)
+      # Redis configuration for rate limiting
+      REDIS_URL: redis://redis:6379/0
+      LIMITER: true
     depends_on:
       - redis
+
   redis:
     image: redis:alpine
     networks:
-      proxy:
+      - proxy
     restart: always
     volumes:
       - redis_data:/data

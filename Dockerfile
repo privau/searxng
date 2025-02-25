@@ -6,9 +6,9 @@ GOOGLE_DEFAULT=true BING_DEFAULT= \
 OPENMETRICS_PASSWORD= \
 PRIVACYPOLICY= \
 DONATION_URL= \
-CONTACT=https://vojk.au \
+CONTACT=https://admingod.ch\
 FOOTER_MESSAGE= \
-ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
+ISSUE_URL=https://github.com/AdminGodZ/searxng/issues GIT_URL=https://github.com/AdminGodZ/searxng GIT_BRANCH=main \
 UPSTREAM_COMMIT=28d1240fce945a48a2c61c29fff83336410c4c77
 
 COPY ./requirements.txt .
@@ -93,12 +93,12 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete_min:/s/4/0/g" \
 -e "/favicon_resolver:/s/\"\"/\"google\"/g" \
 -e "/port:/s/8888/8080/g" \
--e "/simple_style:/s/auto/macchiato/g" \
+-e "/simple_style:/s/auto/mocha/g" \
 -e "/infinite_scroll:/s/false/true/g" \
 -e "/query_in_title:/s/false/true/g" \
 -e "s+donation_url: https://docs.searxng.org/donate.html+donation_url: false+g" \
 -e "/bind_address:/s/127.0.0.1/0.0.0.0/g" \
--e '/default_lang:/s/ ""/ en/g' \
+-e '/default_lang:/s/ ""/ auto/g' \
 -e "/method:/s/\"POST\"/\"GET\"/g" \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
 -e "/X-Content-Type-Options: nosniff/d" \
@@ -148,10 +148,11 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: unsplash/s/$/\n    disabled: true/g" \
 -e "/name: gentoo/s/$/\n    disabled: true/g" \
 -e "/name: openverse/s/$/\n    disabled: true/g" \
--e "/name: google videos/s/$/\n    disabled: true/g" \
+-e "/name: google videos/s/$/\n    disabled: false/g" \
 -e "/name: yahoo news/s/$/\n    disabled: true/g" \
 -e "/name: bing news/s/$/\n    disabled: true/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
+-e "/name: startpage/s/$/\n    disabled: true/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
 searx/settings.yml; \
 su searxng -c "/usr/bin/python3 -m compileall -q searx"; \
