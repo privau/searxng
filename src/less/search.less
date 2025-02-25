@@ -79,6 +79,12 @@ button.category_button {
     padding-right: 0.13rem;
   }
 
+  @media screen and (min-width: @phone) {
+    &:first-child {
+      margin-left: 0 !important;
+    }
+  }
+  
   &.selected,
   &:active,
   &:focus-within {
@@ -135,7 +141,7 @@ button.category_button {
 }
 
 .search_box {
-  border-radius: 0.8rem;
+  border-radius: 0.9rem;
   width: @search-width;
   display: inline-flex;
   flex-direction: row;
