@@ -3,12 +3,12 @@
 if [ ! -d build ]
 then
     git clone https://github.com/return42/searxng.git build
-    git reset --hard 032aac7d87e64cd4cbdf641ee169badefb3ea4c4
+    git reset --hard 7d08c6968ebf0ab6c73f637bf63033ce3c9f60c0
 else
     cd build
     git restore .
     git pull https://github.com/return42/searxng.git
-    git reset --hard 032aac7d87e64cd4cbdf641ee169badefb3ea4c4
+    git reset --hard 7d08c6968ebf0ab6c73f637bf63033ce3c9f60c0
     cd ..
 fi
 
