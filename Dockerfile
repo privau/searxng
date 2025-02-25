@@ -157,6 +157,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: yahoo news/s/$/\n    disabled: true/g" \
 -e "/name: bing news/s/$/\n    disabled: true/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
+-e "/engine: startpage/s/$/\n    disabled: true/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
 searx/settings.yml; \
 su searxng -c "/usr/bin/python3 -m compileall -q searx"; \
