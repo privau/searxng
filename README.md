@@ -22,10 +22,6 @@ Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au [![Better 
 
 When you connect to priv.au over IPv4, the location of your DNS resolver will determine which of our instances across the globe you will connect to, generally the closest will be chosen. Connecting over IPv6 will route you to the closest instance via BGP Anycast. You are able to bypass this selection process by connecting directly to a geographic instance, using the links above.
 
-### Why does the Qwant engine not work?
-
-If Qwant is returning an 'Access Denied' error, you're most likely connecting to our Singaporean instance. In December 2020, Qwant closed access for multiple countries, one being Singapore. You can read their statement on the matter [here](https://twitter.com/QwantCom/status/1339149434572206080). To bypass this block, you connect to a different instance in a different country.
-
 ## Basic Usage
 
 * ```docker run -d --restart always -p 127.0.0.1:8080:8080 --name searxng ghcr.io/privau/searxng```
