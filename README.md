@@ -8,7 +8,7 @@ Global Instance - 🌐 Worldwide : https://priv.au [![Better Stack Badge](https:
 
 ---
 
-America, iFog - 🇺🇸 Fremont, United States : https://na.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3j.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
+America, Ausra - 🇺🇸 Kansas City, United States : https://na.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3j.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
 
 Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3i.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
 
