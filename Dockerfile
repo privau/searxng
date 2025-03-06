@@ -6,9 +6,9 @@ GOOGLE_DEFAULT=true BING_DEFAULT= \
 OPENMETRICS_PASSWORD= \
 PRIVACYPOLICY= \
 DONATION_URL= \
-CONTACT=https://vojk.au \
+CONTACT=https://admingod.ch/ \
 FOOTER_MESSAGE= \
-ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
+ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/AdminGodZ/searxng GIT_BRANCH=main \
 UPSTREAM_COMMIT=066aabc112f7869f03966553aa048e9508f89545
 
 COPY ./requirements.txt .
@@ -86,8 +86,9 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
 
 # patch for instant autocompletion
-RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/simple_search.html
-RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/search.html
+RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/simple_search.html \
+&& sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/search.html \
+&& sed -i 's/var searchInputs = document.querySelectorAll("#search_form input\\[type=\\\"text\\\"\\]");/var searchInputs = document.querySelectorAll("#search_form input\\[type=\\\"text\\\"\\]");\n    searchInputs.forEach(function(searchInput) {\n        searchInput.addEventListener("focus", function() {\n            if (searchInput.value.length === 0) {\n                searchInput.dispatchEvent(new Event("keyup"));\n            }\n        });\n    });/' searx/static/themes/simple/js/main.js
 
 
 # make run.sh executable, copy uwsgi server ini, set default settings, precompile static theme files
@@ -159,6 +160,15 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
 -e "/engine: startpage/s/$/\n    disabled: true/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
+-e "/name: google/s/$/\n    disabled: false/g" \
+-e "/name: bing/s/$/\n    disabled: true/g" \
+-e "/name: yahoo/s/$/\n    disabled: true/g" \
+-e "/name: google images/s/$/\n    disabled: false/g" \
+-e "/name: duckduckgo images/s/$/\n    disabled: false/g" \
+-e "/name: bing images/s/$/\n    disabled: true/g" \
+-e "/name: yahoo images/s/$/\n    disabled: true/g" \
+-e "/name: youtube/s/$/\n    disabled: false/g" \
+-e "/categories:/a\  general:\n    engines:\n      - google\n      - wikipedia\n  images:\n    engines:\n      - google images\n      - duckduckgo images\n  videos:\n    engines:\n      - youtube" \
 searx/settings.yml; \
 su searxng -c "/usr/bin/python3 -m compileall -q searx"; \
 find /usr/local/searxng/searx/static -a \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.ttf' -o -name '*.eot' \) \
