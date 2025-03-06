@@ -159,15 +159,6 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
 -e "/engine: startpage/s/$/\n    disabled: true/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
--e "/name: google/s/$/\n    disabled: false/g" \
--e "/name: bing/s/$/\n    disabled: true/g" \
--e "/name: yahoo/s/$/\n    disabled: true/g" \
--e "/name: google images/s/$/\n    disabled: false/g" \
--e "/name: duckduckgo images/s/$/\n    disabled: false/g" \
--e "/name: bing images/s/$/\n    disabled: true/g" \
--e "/name: yahoo images/s/$/\n    disabled: true/g" \
--e "/name: youtube/s/$/\n    disabled: false/g" \
--e "/categories:/a\  general:\n    engines:\n      - google\n      - wikipedia\n  images:\n    engines:\n      - google images\n      - duckduckgo images\n  videos:\n    engines:\n      - youtube" \
 searx/settings.yml; \
 su searxng -c "/usr/bin/python3 -m compileall -q searx"; \
 find /usr/local/searxng/searx/static -a \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.ttf' -o -name '*.eot' \) \
