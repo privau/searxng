@@ -85,6 +85,9 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
 
+# google patch (temporary solution)
+RUN sed -i "s/UI_ASYNC = 'use_ac:true,_fmt:prog'/UI_ASYNC = 'arc_id:srp_zF_JZ_ehGr-L7M8Po-jhgQE_120,use_ac:true,_fmt:prog'/" searx/engines/google.py
+
 # patch for instant autocompletion
 RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/simple_search.html
 RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/search.html
@@ -126,7 +129,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: wikiquote/s/$/\n    disabled: true/g" \
 -e "/name: wikisource/s/$/\n    disabled: true/g" \
 -e "/name: wikicommons.images/s/$/\n    disabled: true/g" \
--e "/name: duckduckgo/s/$/\n    disabled: false/g" \
+-e "/name: duckduckgo/s/$/\n    disabled: true/g" \
 -e "/name: pinterest/s/$/\n    disabled: true/g" \
 -e "/name: piped/s/$/\n    disabled: true/g" \
 -e "/name: piped.music/s/$/\n    disabled: true/g" \
@@ -157,7 +160,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: yahoo news/s/$/\n    disabled: true/g" \
 -e "/name: bing news/s/$/\n    disabled: true/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
--e "/engine: startpage/s/$/\n    disabled: false/g" \
+-e "/engine: startpage/s/$/\n    disabled: true/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
 searx/settings.yml; \
 su searxng -c "/usr/bin/python3 -m compileall -q searx"; \
