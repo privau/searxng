@@ -86,7 +86,7 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
 
 # google patch (temporary solution)
-RUN sed -i "s/UI_ASYNC = 'use_ac:true,_fmt:prog'/UI_ASYNC = 'arc_id:srp_zF_JZ_ehGr-L7M8Po-jhgQE_120,use_ac:true,_fmt:prog'/" searx/engines/google.py
+RUN sed -i "s/UI_ASYNC = 'use_ac:true,_fmt:prog'/UI_ASYNC = 'arc_id:srp_aX_KY_qnHt-W9N6Rp-mdfVZ_120,use_ac:true,_fmt:prog'/" searx/engines/google.py
 
 # patch for instant autocompletion
 RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/simple_search.html
