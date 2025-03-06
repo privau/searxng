@@ -86,9 +86,8 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
 
 # patch for instant autocompletion
-RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/simple_search.html \
-&& sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/search.html \
-&& sed -i 's/var searchInputs = document.querySelectorAll("#search_form input\\[type=\\\"text\\\"\\]");/var searchInputs = document.querySelectorAll("#search_form input\\[type=\\\"text\\\"\\]");\n    searchInputs.forEach(function(searchInput) {\n        searchInput.addEventListener("focus", function() {\n            if (searchInput.value.length === 0) {\n                searchInput.dispatchEvent(new Event("keyup"));\n            }\n        });\n    });/' searx/static/themes/simple/js/main.js
+RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/simple_search.html
+RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/search.html
 
 
 # make run.sh executable, copy uwsgi server ini, set default settings, precompile static theme files
