@@ -1,94 +1,139 @@
 {% extends "simple/base.html" %}
 {% block content %}
 <style>
-  .box {
+  .privacy-container {
     background: var(--color-search-background);
-    border: 1px solid var(--color-search-border);
-    border-radius: 1rem;
-    margin: 2.5em auto 10em auto;
-    padding: 0 3rem 5em;
-    width: 600px;
-    max-width: 100%;
-    text-align: justify;
-    line-height: 1.6em;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin: 3em auto 8em auto;
+    padding: 2.5rem;
+    width: 800px;
+    max-width: 90%;
     color: var(--color-base-font);
     box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.7;
   }
 
-  .box h1, .box h6 {
+  .privacy-container h1 {
     text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
   }
 
-  .box h2 {
-    margin-top: 3rem;
-    line-height: 1em;
+  .privacy-container .subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    color: var(--color-base-font);
+    opacity: 0.8;
+    font-weight: 400;
   }
 
-  .box b {
-    color: var(--color-warning);
+  .privacy-container h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(125, 125, 125, 0.2);
+    padding-bottom: 0.5rem;
   }
 
-  .box br {
-    content: " ";
+  .privacy-container p {
+    margin-bottom: 1.5rem;
+  }
+
+  .privacy-container b {
+    color: #8A2BE2;
+    font-weight: 600;
+  }
+
+  .privacy-container .link {
+    color: #8A2BE2;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .privacy-container .link:hover {
+    border-color: #8A2BE2;
+  }
+
+  .privacy-container .logo {
+    max-width: 80px;
+    max-height: 80px;
+    margin: 2rem auto;
     display: block;
-    margin: 10px 0;
+    opacity: 0.9;
   }
 
-  .box .link {
-    color: var(--color-warning);
-    text-decoration: underline;
-    font-weight: bolder;
+  .privacy-container .section {
+    margin-bottom: 2rem;
   }
 
-  .box .mainpicture {
-    max-width: 15em;
-    max-height: 15em;
-    margin-top: 5em;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @media (max-width: 600px) {
-    .box {
-      padding: 0 0.5rem;
-      background: none;
-      border-radius: 0;
-      margin: 0;
+  @media (max-width: 768px) {
+    .privacy-container {
+      padding: 1.5rem;
+      margin: 1rem auto;
+      border-radius: 1rem;
+    }
+    
+    .privacy-container h1 {
+      font-size: 2rem;
     }
   }
 </style>
-<div class="box">
-  <img src="../favicon.ico" class="mainpicture" draggable="false">
-  <h1>PRIVACY POLICY</h1>
-  <h6>
+<div class="privacy-container">
+  <img src="../favicon.ico" class="logo" draggable="false" alt="SearXNG Logo">
+  <h1>Privacy Policy</h1>
+  <div class="subtitle">
     Your privacy is important to us. This policy explains how we handle your information.
-  </h6>
-  <h2>1. Logging Policy</h2>
-  <p>
-    We <b>never log</b> your search queries, user agent information, or your unmasked IP address. <br>
-    We do use the <b>inbuilt SearXNG rate limiter</b>, which keeps a <b>SHA256 hash of a salted IP address</b> for a max period of <b>10 minutes</b>, solely for operational purposes. You can review the source of the rate limiter on <a class="link" href="https://github.com/searxng/searxng/blob/master/searx/botdetection/ip_limit.py">GitHub</a>.
-  </p>
-  <h2>2. Cookies and Local Storage</h2>
-  <p>
-    We use <b>cookies</b> only to improve your experience, like saving your preferences. We will <b>never</b> use these to track you and we'll <b>never</b> use third-party cookies. You can see your saved cookies in <a class="link" href="/preferences">Preferences</a>. <br>
-  </p>
-  <h2>3. TLS Termination</h2>
-  <p>
-    We <b>always</b> handle TLS termination ourselves and <b>never</b> use third-party services, such as Cloudflare, AWS CloudFront, Lambda, etc. This way, your search queries are <b>encrypted</b> from your browser to our servers. <br>
-    We utilise our <b>own network</b> of global servers to provide you with the best possible experience.
-  </p>
-  <h2>4. Changes to Privacy Policy</h2>
-  <p>
-    We may <b>update</b> this Privacy Policy at any time. Any changes will be <b>prominently posted</b> on this page, and it's up to you to <b>check for updates</b> on a regular basis. <br>
-  </p>
-  <h2>5. Contact Us</h2>
-  <p>
-    If you have any questions or concerns regarding data protection, please contact Brock Vojkovic at <a href="https://vojk.au">vojk.au</a><br>
-  </p>
-  <h2>6. Effective Date</h2>
-  <p>
-    This Privacy Policy is effective as of <b>2024-10-18</b>.<br>
-  </p>
+  </div>
+  
+  <div class="section">
+    <h2>1. Logging Policy</h2>
+    <p>
+      We <b>never log</b> your search queries, user agent information, or your unmasked IP address.
+      We do use the <b>inbuilt SearXNG rate limiter</b>, which keeps a <b>SHA256 hash of a salted IP address</b> for a max period of <b>10 minutes</b>, solely for operational purposes. You can review the source of the rate limiter on <a class="link" href="https://github.com/searxng/searxng/blob/master/searx/botdetection/ip_limit.py">GitHub</a>.
+    </p>
+  </div>
+  
+  <div class="section">
+    <h2>2. Cookies and Local Storage</h2>
+    <p>
+      We use <b>cookies</b> only to improve your experience, like saving your preferences. We will <b>never</b> use these to track you and we'll <b>never</b> use third-party cookies. You can see your saved cookies in <a class="link" href="/preferences">Preferences</a>.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>3. Server Location</h2>
+    <p>
+      This SearXNG instance is <b>hosted in Switzerland</b>, a country known for having some of the <b>strictest data protection policies and laws in the world</b>. This provides an additional layer of privacy and security for our users.
+    </p>
+  </div>
+  
+  <div class="section">
+    <h2>4. Changes to Privacy Policy</h2>
+    <p>
+      We may <b>update</b> this Privacy Policy at any time. Any changes will be <b>prominently posted</b> on this page, and it's up to you to <b>check for updates</b> on a regular basis.
+    </p>
+  </div>
+  
+  <div class="section">
+    <h2>5. Contact Us</h2>
+    <p>
+      If you have any questions or concerns regarding data protection, please contact AdminGod at <a class="link" href="https://admingod.ch">admingod.ch</a>
+    </p>
+  </div>
+  
+  <div class="section">
+    <h2>6. Effective Date</h2>
+    <p>
+      This Privacy Policy is effective as of <b>2025-03-04</b>.
+    </p>
+  </div>
 </div>
 {% endblock %}
