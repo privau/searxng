@@ -126,7 +126,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: wikiquote/s/$/\n    disabled: true/g" \
 -e "/name: wikisource/s/$/\n    disabled: true/g" \
 -e "/name: wikicommons.images/s/$/\n    disabled: true/g" \
--e "/name: duckduckgo/s/$/\n    disabled: true/g" \
+-e "/name: duckduckgo/s/$/\n    disabled: false/g" \
 -e "/name: pinterest/s/$/\n    disabled: true/g" \
 -e "/name: piped/s/$/\n    disabled: true/g" \
 -e "/name: piped.music/s/$/\n    disabled: true/g" \
@@ -157,7 +157,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: yahoo news/s/$/\n    disabled: true/g" \
 -e "/name: bing news/s/$/\n    disabled: true/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
--e "/engine: startpage/s/$/\n    disabled: true/g" \
+-e "/engine: startpage/s/$/\n    disabled: false/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
 searx/settings.yml; \
 su searxng -c "/usr/bin/python3 -m compileall -q searx"; \
