@@ -9,7 +9,7 @@ DONATION_URL= \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=e7cb18c3dd9552311628f325c57b760f2bfd420c
+UPSTREAM_COMMIT=08a90d46d6f23607ddecf2a2d9fa216df69d2fac
 
 COPY ./requirements.txt .
 
