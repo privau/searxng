@@ -144,6 +144,7 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: openairepublications/s/$/\n    disabled: true/g" \
 -e "/name: library of congress/s/$/\n    disabled: true/g" \
 -e "/name: dictzone/s/$/\n    disabled: true/g" \
+-e "/name: baidu/s/$/\n    disabled: true/g" \
 -e "/name: brave/s/$/\n    disabled: true/g" \
 -e "/name: lingva/s/$/\n    disabled: true/g" \
 -e "/name: genius/s/$/\n    disabled: true/g" \ 
