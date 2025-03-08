@@ -14,6 +14,11 @@ echo "Replace fork simple theme definitions."
 cp -v src/less/* build/client/simple/src/less/
 cp -v src/js/* build/client/simple/src/js/main/
 
+echo "Enable privacy page."
+if ! grep -q '@import "privacypage.less";' build/client/simple/src/less/style.less; then
+  sed -i 's/@import "definitions.less";/@import "definitions.less";\n@import "privacypage.less";/' build/client/simple/src/less/style.less
+fi
+
 echo "Build static files."
 cd build
 make themes.all

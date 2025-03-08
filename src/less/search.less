@@ -93,9 +93,19 @@ button.category_button {
   }
 }
 
-#categories_container:has(button.category_button:focus-within) button.category_button.selected {
-  color: var(--color-base-font);
-  border-bottom: none;
+// only used when JavaScript is disabled
+.no-js
+  #categories_container:has(button.category_button:focus-within)
+  button.category_button {
+  &.selected {
+    color: var(--color-base-font);
+    border-bottom: none;
+  }
+
+  &:focus-within {
+    color: var(--color-categories-item-selected-font);
+    border-bottom: 2px solid var(--color-categories-item-border-selected);
+  }
 }
 
 #search_logo {
@@ -162,7 +172,7 @@ button.category_button {
   outline: none;
   color: var(--color-search-font);
   font-size: 1.1rem;
-  z-index: 10000;
+  z-index: 1000;
 
   &:hover {
     color: var(--color-search-background-hover);
@@ -187,7 +197,7 @@ html.no-js #clear_search.hide_if_nojs {
   outline: none;
   color: var(--color-search-font);
   font-size: 1.1rem;
-  z-index: 2;
+  z-index: 100;
 }
 
 #q {
@@ -320,7 +330,7 @@ html.no-js #clear_search.hide_if_nojs {
     top: 0;
     height: 100%;
     width: 100%;
-    z-index: 10000;
+    z-index: 2000;
 
     .search_box {
       border-bottom: 1px solid var(--color-search-border);
