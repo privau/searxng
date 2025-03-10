@@ -1,36 +1,20 @@
 # SearXNG
 
-Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-respecting metasearch engine. Includes a suite of custom themes from catppuccin, paulgoio, kagi, brave, moa, and the default SearXNG themes.
+Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-respecting metasearch engine. Includes a suite of custom themes from catppuccin, paulgoio, kagi, brave, moa, and the default SearXNG themes. Note that this SearXNG instance is a fork of [priv.au](https://github.com/privau/searxng)
 
 Don't see your favorite theme? [Submit a theme request!](https://github.com/privau/searxng/issues/new?assignees=&labels=bug&projects=&template=theme-request.md)
 
-Global Instance - 🌐 Worldwide : https://priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1lrch.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
-
----
-
-America, Ausra - 🇺🇸 Kansas City, United States : https://na.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3j.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
-
-Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3i.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
-
-Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3o.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
-
-Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1sv3e.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
+My Instance - [SearXNG](https://searxng.admingod.ch/)
 
 ## FAQ
 
-### Where geographically is priv.au hosted?
+### Where geographically is searxng.admingod.ch hosted?
 
-When you connect to priv.au over IPv4, the location of your DNS resolver will determine which of our instances across the globe you will connect to, generally the closest will be chosen. Connecting over IPv6 will route you to the closest instance via BGP Anycast. You are able to bypass this selection process by connecting directly to a geographic instance, using the links above.
-
-## Basic Usage
-
-* ```docker run -d --restart always -p 127.0.0.1:8080:8080 --name searxng ghcr.io/privau/searxng```
-
-* Visit `http://127.0.0.1:8080` in your browser, stop the server with `Ctrl` + `C`.
+searxng.admingod.ch is hosted in Switzerland, a country renowned for having some of the strictest data protection laws in the world. To enhance privacy and security, the service utilizes a double hop VPN connection through MullvadVPN, with NextDNS as the resolver. This setup ensures robust protection for user data and queries, leveraging Switzerland's strong privacy regulations and advanced networking technologies for optimal security.
 
 ## Theme Development
 
-* Clone this repo: ```git clone https://github.com/privau/searxng.git```
+* Clone this repo: ```git clone https://github.com/AdminGodZ/searxng.git```
 
 * Make your changes to the theme within `src/less`
 

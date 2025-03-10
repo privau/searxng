@@ -6,10 +6,10 @@ GOOGLE_DEFAULT=true BING_DEFAULT= \
 OPENMETRICS_PASSWORD= \
 PRIVACYPOLICY= \
 DONATION_URL= \
-CONTACT=https://vojk.au \
+CONTACT=https://admingod.ch/ \
 FOOTER_MESSAGE= \
-ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=8b1d73c5b96e9059c397b62f084aa8cee378218b
+ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/AdminGodZ/searxng GIT_BRANCH=main \
+UPSTREAM_COMMIT=066aabc112f7869f03966553aa048e9508f89545
 
 COPY ./requirements.txt .
 
@@ -95,7 +95,7 @@ RUN cp -r -v dockerfiles/uwsgi.ini /etc/uwsgi/; \
 chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
--e "/autocomplete_min:/s/4/0/g" \
+-e "/autocomplete_min:/s/4/1/g" \
 -e "/favicon_resolver:/s/\"\"/\"google\"/g" \
 -e "/port:/s/8888/8080/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
