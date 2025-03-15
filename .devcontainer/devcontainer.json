@@ -3,7 +3,8 @@
     "dockerfile": "Dockerfile"
   },
   "features": {
-    "ghcr.io/devcontainers/features/github-cli": {}
+    "ghcr.io/devcontainers/features/github-cli": {},
+    "ghcr.io/devcontainers/features/docker-in-docker": {}
   },
   "customizations": {
     "vscode": {
@@ -25,8 +26,5 @@
   "forwardPorts": [8080],
   "portsAttributes": {
     "8080": {"label": "SearXNG"}
-  },
-  "mounts": [
-    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
-  ]
+  }
 }
