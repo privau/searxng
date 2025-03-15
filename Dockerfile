@@ -9,7 +9,7 @@ DONATION_URL= \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=615a92feb4a4eda56dd23842d2182fab5c28fc54
+UPSTREAM_COMMIT=11b5ae186baae033e9e1919be580017e82d1925f
 
 COPY ./requirements.txt .
 
@@ -48,7 +48,7 @@ WORKDIR /usr/local/searxng
 RUN addgroup -g ${GID} searxng \
 && adduser -u ${UID} -D -h /usr/local/searxng -s /bin/sh -G searxng searxng \
 && git config --global --add safe.directory /usr/local/searxng \
-&& git clone https://github.com/return42/searxng . \
+&& git clone https://github.com/searxng/searxng . \
 && git reset --hard ${UPSTREAM_COMMIT} \
 && chown -R searxng:searxng . \
 && su searxng -c "/usr/bin/python3 -m searx.version freeze"
@@ -102,7 +102,6 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/infinite_scroll:/s/false/true/g" \
 -e "/query_in_title:/s/false/true/g" \
 -e "s+donation_url: https://docs.searxng.org/donate.html+donation_url: false+g" \
--e "/bind_address:/s/127.0.0.1/0.0.0.0/g" \
 -e '/default_lang:/s/ ""/ en/g' \
 -e "/method:/s/\"POST\"/\"GET\"/g" \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
