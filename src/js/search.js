@@ -82,8 +82,8 @@
   }
 
   searxng.ready(function () {
-    // focus search input on large screens
-    if (window.matchMedia("(min-width: 50em)").matches) document.getElementById("q").focus();
+    // Focus search input on large screens, only on the root directory
+    if (window.location.pathname === '/' && window.matchMedia("(min-width: 50em)").matches) document.getElementById("q").focus();
     qinput = d.getElementById(qinput_id);
     const autocomplete = d.querySelector(".autocomplete");
     const autocompleteList = d.querySelector(".autocomplete ul");
