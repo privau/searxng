@@ -12,9 +12,7 @@ if [ ! -z "${PROXY}" ]; then
     sed -i -e "s/  #  proxies:/  proxies:/g" \
     -e "s+  #    all://:+    all://:+g" \
     searx/settings.yml;
-    proxies=($(echo ${PROXY} | tr ',' ' '))
-    for i in "${proxies[@]}"
-    do
+    echo "${PROXY}" | tr ',' '\n' | while read -r i; do
         sed -i -e "s+    all://:+    all://:\n      - ${i}+g" \
         searx/settings.yml;
     done
