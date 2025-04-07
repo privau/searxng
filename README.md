@@ -50,7 +50,11 @@ When you connect to priv.au over IPv4, the location of your DNS resolver will de
 
 * ```LIMITER``` : limit bot traffic; this option also requires redis to be set up
 
+* ```PROXY``` : list of comma-seperated servers that are applied as round robin for all engines (for example http://127.0.0.1:8080,http://proxy.example.net)
+
 * ```BASE_URL``` : Sets the base url (for example: example.org would have `https://example.org/` as base)
+
+* ```BIND_ADDRESS``` : Sets the address that uwsgi will bind to. (default: `[::]:8080`)
 
 * ```NAME``` : Sets the name of the instance, which is for example displayed in the title of the site (for example `SearXNG`)
 

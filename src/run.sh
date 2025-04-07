@@ -143,4 +143,4 @@ if [ ! -z "${FOOTER_MESSAGE}" ]; then
 fi
 
 # start uwsgi with SearXNG workload
-exec uwsgi --master --http-socket "0.0.0.0:8080" "/etc/uwsgi/uwsgi.ini"
+exec uwsgi --master --http-socket ${BIND_ADDRESS} "/etc/uwsgi/uwsgi.ini"

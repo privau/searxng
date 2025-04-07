@@ -6,6 +6,7 @@ GOOGLE_DEFAULT=true BING_DEFAULT= \
 OPENMETRICS_PASSWORD= \
 PRIVACYPOLICY= \
 DONATION_URL= \
+BIND_ADDRESS=[::]:8080 \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
