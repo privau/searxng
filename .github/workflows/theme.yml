@@ -1,4 +1,4 @@
-name: ci
+name: theme
 
 on:
   workflow_dispatch:
