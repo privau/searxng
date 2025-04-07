@@ -8,9 +8,6 @@ on:
 env:
   SOURCE_REPO: searxng/searxng
   SOURCE_REPO_BRANCH: master
-  TEST_TAG: vojkovic/searxng:test
-  LATEST_TAG: vojkovic/searxng:latest
-  GITHUB_LATEST_TAG: ghcr.io/privau/searxng:latest
 
 jobs:
   check-update-required:

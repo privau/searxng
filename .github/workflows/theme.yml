@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-theme:
+    runs-on: ubuntu-latest
+    outputs:
+      is-up-to-date: ${{ steps.check-for-changes.outputs.is-up-to-date }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+
+    - name: Build theme
+      id: build-theme
+      run: |
+        ./update.sh
+
+    - name: Push changes
+      uses: actions-js/push@master
+      with:
+        author_name: 'github-actions[bot]'
+        author_email: '41898283+github-actions[bot]@users.noreply.github.com'
+        message: 'theme: build out/'
+        github_token: ${{ secrets.PAT_TOKEN }}
