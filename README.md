@@ -87,3 +87,7 @@ When you connect to priv.au over IPv4, the location of your DNS resolver will de
 * ```GOOGLE_DEFAULT``` : Enable the Google search engine by default. (Default: `true`)
 
 * ```BING_DEFAULT``` : Enable the Bing search engine by default. (Default: `false`)
+
+* ```BRAVE_DEFAULT``` : Enable the Brave search engine by default. (Default: `false`)
+
+* ```DUCKDUCKGO_DEFAULT``` : Enable the DuckDuckGo search engine by default. (Default: `false`)

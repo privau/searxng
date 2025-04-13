@@ -136,6 +136,24 @@ else # set to disabled
     searx/settings.yml;
 fi
 
+# set BRAVE_DEFAULT if exists
+if [ ! -z "${BRAVE_DEFAULT}" ]; then
+    sed -i -e "/name: brave/s/$/\n    disabled: false/g" \
+    searx/settings.yml;
+else # set to disabled
+    sed -i -e "/name: brave/s/$/\n    disabled: true/g" \
+    searx/settings.yml;
+fi
+
+# set DUCKDUCKGO_DEFAULT if exists
+if [ ! -z "${DUCKDUCKGO_DEFAULT}" ]; then
+    sed -i -e "/name: duckduckgo/s/$/\n    disabled: false/g" \
+    searx/settings.yml;
+else # set to disabled
+    sed -i -e "/name: duckduckgo/s/$/\n    disabled: true/g" \
+    searx/settings.yml;
+fi
+
 # set footer message
 if [ ! -z "${FOOTER_MESSAGE}" ]; then
     sed -i "/<footer>/,/{{/ { /${FOOTER_MESSAGE}/! s|<p>[^{{]*|<p>${FOOTER_MESSAGE}| }" \
