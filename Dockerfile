@@ -126,7 +126,6 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: wikiquote/s/$/\n    disabled: true/g" \
 -e "/name: wikisource/s/$/\n    disabled: true/g" \
 -e "/name: wikicommons.images/s/$/\n    disabled: true/g" \
--e "/name: duckduckgo/s/$/\n    disabled: true/g" \
 -e "/name: pinterest/s/$/\n    disabled: true/g" \
 -e "/name: piped/s/$/\n    disabled: true/g" \
 -e "/name: piped.music/s/$/\n    disabled: true/g" \
@@ -145,7 +144,6 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: library of congress/s/$/\n    disabled: true/g" \
 -e "/name: dictzone/s/$/\n    disabled: true/g" \
 -e "/name: baidu/s/$/\n    disabled: true/g" \
--e "/name: brave/s/$/\n    disabled: true/g" \
 -e "/name: lingva/s/$/\n    disabled: true/g" \
 -e "/name: genius/s/$/\n    disabled: true/g" \ 
 -e "/name: wallhaven/s/$/\n    disabled: true/g" \ 
