@@ -70,7 +70,7 @@
         const li = document.createElement("li");
         li.innerText = result;
 
-        searxng.on(li, 'click', () => {
+        searxng.on(li, 'mousedown', () => {
           qinput.value = result;
           const form = d.querySelector("#search");
           form.submit();
