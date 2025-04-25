@@ -142,7 +142,7 @@ button.category_button {
 }
 
 #search_view {
-  padding: 0.5rem 0.3rem 0 0.5rem;
+  padding: 0.5rem @search-padding-horizontal 0 @search-padding-horizontal;
   grid-area: search;
 
   body.results_endpoint & {
@@ -152,7 +152,8 @@ button.category_button {
 
 .search_box {
   border-radius: 0.9rem;
-  width: @search-width;
+  width: 100%;
+  max-width: @search-width;
   display: inline-flex;
   flex-direction: row;
   white-space: nowrap;
@@ -303,8 +304,7 @@ html.no-js #clear_search.hide_if_nojs {
   }
 
   .search_box {
-    width: 98%;
-    display: flex;
+    width: 100%;
   }
 
   #q {
