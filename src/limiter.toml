@@ -1,7 +1,7 @@
 [real_ip]
 
 # Number of values to trust for X-Forwarded-For.
-x_for = 1
+x_for = 2
 
 # The prefix defines the number of leading bits in an address that are compared
 # to determine whether or not an address is part of a (client) network.
