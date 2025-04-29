@@ -10,7 +10,7 @@ BIND_ADDRESS=[::]:8080 \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=20e40ded6db3ed560c05d4158bbc0718238868f4
+UPSTREAM_COMMIT=c20038e7c309ab43582feca2a00f89a9881996aa
 
 COPY ./requirements.txt .
 
