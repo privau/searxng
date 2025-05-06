@@ -50,7 +50,7 @@ jobs:
           grep "OK" input.txt
           curl http://localhost:8080/search?q=github > input.txt
           cat input.txt
-          grep "data-copied-text" input.txt
+          grep "sidebar-end-collapsible" input.txt
           docker rm -f $(docker ps -q --filter ancestor=${{ env.TEST_TAG }}) # Stop the container
 
       - name: Build and push

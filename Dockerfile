@@ -56,8 +56,8 @@ RUN apt-get update \
 && apt-get install -y --no-install-recommends \
     # healthcheck
     wget \
-    # tini
-    tini \
+    # lxml (ARMv7)
+    libxslt1.1 \
     # uwsgi
     libpcre3 \
     libxml2 \
@@ -184,4 +184,4 @@ CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main
 
-CMD ["tini","--","run.sh"]
+CMD ["run.sh"]
