@@ -160,4 +160,7 @@ if [ ! -z "${FOOTER_MESSAGE}" ]; then
     searx/templates/simple/base.html
 fi
 
+sed -i "/master = true/aplugin = python3" \
+    /usr/local/searxng/dockerfiles/uwsgi.ini
+
 exec /usr/local/searxng/venv/bin/uwsgi "/usr/local/searxng/dockerfiles/uwsgi.ini"
