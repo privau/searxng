@@ -1,67 +1,77 @@
 # use alpine as base for searx and set workdir as well as env vars
-FROM alpine:3.20 AS base
+FROM docker.io/library/python:3.13-slim AS builder
 
-ENV GID=991 UID=991 UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= CAPTCHA= AUTHORIZED_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
-GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= \
-OPENMETRICS_PASSWORD= \
-PRIVACYPOLICY= \
-DONATION_URL= \
-BIND_ADDRESS=[::]:8080 \
-CONTACT=https://vojk.au \
-FOOTER_MESSAGE= \
-ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main \
-UPSTREAM_COMMIT=a2fa7de880a06bada1e3a281d2e3652999cd20dd
-
-COPY ./requirements.txt .
+ENV UPSTREAM_COMMIT=a2fa7de880a06bada1e3a281d2e3652999cd20dd
 
 # install build deps and git clone searxng as well as setting the version
-RUN apk -U upgrade \
-&& apk add --no-cache -t build-dependencies \
-    build-base \
-    py3-setuptools \
-    python3-dev \
-    libffi-dev \
-    libxslt-dev \
-    libxml2-dev \
-    openssl-dev \
-    tar \
- && apk add --no-cache \
-    ca-certificates \
-    python3 \
-    py3-pip \
-    libxml2 \
-    libxslt \
-    openssl \
-    tini \
-    uwsgi \
-    uwsgi-python3 \
-    git \
-    brotli \
-&& pip install --no-cache --break-system-packages -r requirements.txt \
-&& apk del build-dependencies \
-&& rm -rf /var/cache/apk/* /root/.cache
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+     build-essential \
+     brotli \
+     git \
+     # lxml
+     libxml2-dev \
+     libxslt1-dev \
+     zlib1g-dev \
+     # uwsgi
+     libpcre3-dev \
+  && rm -rf /var/lib/apt/lists/*
 
-FROM base AS searxng
-
-WORKDIR /usr/local/searxng
+WORKDIR /usr/local/searxng/
 
 # install build deps and git clone searxng as well as setting the version
-RUN addgroup -g ${GID} searxng \
-&& adduser -u ${UID} -D -h /usr/local/searxng -s /bin/sh -G searxng searxng \
-&& git config --global --add safe.directory /usr/local/searxng \
+RUN git config --global --add safe.directory /usr/local/searxng \
 && git clone https://github.com/searxng/searxng . \
-&& git reset --hard ${UPSTREAM_COMMIT} \
-&& chown -R searxng:searxng . \
-&& su searxng -c "/usr/bin/python3 -m searx.version freeze"
+&& git reset --hard ${UPSTREAM_COMMIT}
+
+RUN python -m venv ./venv \
+&& . ./venv/bin/activate \
+&& pip install -r requirements.txt \
+&& pip install "uwsgi~=2.0" \
+&& python -m searx.version freeze
+
+ARG SEARXNG_UID=977
+ARG SEARXNG_GID=977
+
+RUN grep -m1 root /etc/group > /tmp/.searxng.group \
+&& grep -m1 root /etc/passwd > /tmp/.searxng.passwd \
+&& echo "searxng:x:$SEARXNG_GID:" >> /tmp/.searxng.group \
+&& echo "searxng:x:$SEARXNG_UID:$SEARXNG_GID:searxng:/usr/local/searxng:/bin/bash" >> /tmp/.searxng.passwd
 
 # copy custom simple themes
 COPY ./out/css/* searx/static/themes/simple/css/
 COPY ./out/js/* searx/static/themes/simple/js/
 
+#precompile static theme files
+RUN python -m compileall -q searx; \
+    find /usr/local/searxng/searx/static \
+    \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.ttf' -o -name '*.eot' \) \
+    -type f -exec gzip -9 -k {} + -exec brotli --best {} +
+
+FROM docker.io/library/python:3.13-slim
+
+WORKDIR /usr/local/searxng/
+
+RUN apt-get update \
+&& apt-get install -y --no-install-recommends \
+    # healthcheck
+    wget \
+    # tini
+    tini \
+    # uwsgi
+    libpcre3 \
+    libxml2 \
+    mailcap \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --chown=root:root --from=builder /tmp/.searxng.passwd /etc/passwd
+COPY --chown=root:root --from=builder /tmp/.searxng.group /etc/group
+COPY --chown=searxng:searxng --from=builder /usr/local/searxng /usr/local/searxng
+
 # copy run.sh, limiter.toml and favicons.toml
-COPY ./src/run.sh /usr/local/bin/run.sh
-COPY ./src/limiter.toml /etc/searxng/limiter.toml
-COPY ./src/favicons.toml /etc/searxng/favicons.toml
+COPY --chown=searxng:searxng ./src/run.sh /usr/local/bin/run.sh
+COPY --chown=searxng:searxng ./src/limiter.toml /etc/searxng/limiter.toml
+COPY --chown=searxng:searxng ./src/favicons.toml /etc/searxng/favicons.toml
 
 # make our patches to searxng's code to allow for the custom theming
 RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark', 'black'\]/s/choices=\['', 'auto', 'light', 'dark', 'black'\]/choices=\['', 'auto', 'light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night', 'dracula'\]/" /usr/local/searxng/searx/preferences.py \
@@ -69,16 +79,16 @@ RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light',
 && sed -i "s/{%- for name in \['auto', 'light', 'dark', 'black'\] -%}/{%- for name in \['auto', 'light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night', 'dracula'\] -%}/" /usr/local/searxng/searx/templates/simple/preferences/theme.html
 
 # make patch to allow the privacy policy page
-COPY ./src/privacy-policy/privacy-policy.html searx/templates/simple/privacy-policy.html
+COPY --chown=searxng:searxng ./src/privacy-policy/privacy-policy.html searx/templates/simple/privacy-policy.html
 RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ \n@app.route('\/privacy', methods=\['GET'\])\ndef privacy_policy():return render('privacy-policy.html')\n" /usr/local/searxng/searx/webapp.py
 
 # include patches for captcha
-COPY ./src/captcha/captcha.html searx/templates/simple/captcha.html
-COPY ./src/captcha/captcha.py searx/captcha.py
+COPY --chown=searxng:searxng ./src/captcha/captcha.html searx/templates/simple/captcha.html
+COPY --chown=searxng:searxng ./src/captcha/captcha.py searx/captcha.py
 RUN sed -i '/search = SearchWithPlugins(search_query, request.user_plugins, request)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale, render)):\n            return captcha_response\n' /usr/local/searxng/searx/webapp.py
 
 # include patches for authorized api access
-COPY ./src/auth/auth.py searx/auth.py
+COPY --chown=searxng:searxng ./src/auth/auth.py searx/auth.py
 RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a\\        from searx.auth import valid_api_key\\n        if (not valid_api_key(request)):" -e 's|flask.abort(403)|    flask.abort(403)|' /usr/local/searxng/searx/webapp.py \
 && sed -i "/return Response('', mimetype='text\/css')/a \\\\n@app.route('/<key>/search', methods=['GET', 'POST'])\\ndef search_key(key=None):\\n    from searx.auth import auth_search_key\\n    return auth_search_key(request, key)" /usr/local/searxng/searx/webapp.py \
 && sed -i "/3\. If the IP is not in either list, the request is not blocked\./a\\    from searx.auth import valid_api_key\\n    if (valid_api_key(request)):\\n        return None" searx/limiter.py
@@ -90,10 +100,8 @@ RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method 
 RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/simple_search.html
 RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/search.html
 
-
-# make run.sh executable, copy uwsgi server ini, set default settings, precompile static theme files
-RUN cp -r -v dockerfiles/uwsgi.ini /etc/uwsgi/; \
-chmod +x /usr/local/bin/run.sh; \
+# make run.sh executable, set default settings
+RUN chmod +x /usr/local/bin/run.sh; \
 sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
 -e "/autocomplete_min:/s/4/0/g" \
@@ -158,12 +166,22 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
 -e "/engine: startpage/s/$/\n    disabled: true/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
-searx/settings.yml; \
-su searxng -c "/usr/bin/python3 -m compileall -q searx"; \
-find /usr/local/searxng/searx/static -a \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.ttf' -o -name '*.eot' \) \
--type f -exec gzip -9 -k {} \+ -exec brotli --best {} \+
+searx/settings.yml;
 
-# expose port and set tini as CMD; default user is searxng
-USER searxng
+# expose port
 EXPOSE 8080
-CMD ["/sbin/tini","--","run.sh"]
+
+HEALTHCHECK CMD wget --quiet --tries=1 --spider http://localhost:8080/healthz || exit 1
+
+# set env
+ENV UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= CAPTCHA= AUTHORIZED_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
+GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= \
+OPENMETRICS_PASSWORD= \
+PRIVACYPOLICY= \
+DONATION_URL= \
+BIND_ADDRESS=[::]:8080 \
+CONTACT=https://vojk.au \
+FOOTER_MESSAGE= \
+ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main
+
+CMD ["tini","--","run.sh"]

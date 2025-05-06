@@ -54,8 +54,6 @@ jobs:
       run: |
         REMOTE_COMMIT=$(git ls-remote https://github.com/${{ env.SOURCE_REPO }} ${{ env.SOURCE_REPO_BRANCH }} | awk '{print $1}')
         sed -i "/^UPSTREAM_COMMIT=/c\UPSTREAM_COMMIT=${REMOTE_COMMIT}" Dockerfile
-        curl -v -fsSL https://raw.githubusercontent.com/${{ env.SOURCE_REPO }}/${{ env.SOURCE_REPO_BRANCH }}/requirements.txt -o requirements.txt
-        git add requirements.txt
 
     - name: Push changes
       uses: actions-js/push@master

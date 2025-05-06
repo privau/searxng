@@ -105,7 +105,7 @@ fi
 
 # auto gen random key for every unique container if SECRET_KEY not set
 if [ -z "${SECRET_KEY}" ]; then
-    sed -i -e "s/ultrasecretkey/$(openssl rand -hex 16)/g" \
+    sed -i -e "s/ultrasecretkey/$(head -c 24 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9')/g" \
     searx/settings.yml;
 else # set SECRET_KEY
     sed -i -e "s/ultrasecretkey/${SECRET_KEY}/g" \
@@ -160,5 +160,4 @@ if [ ! -z "${FOOTER_MESSAGE}" ]; then
     searx/templates/simple/base.html
 fi
 
-# start uwsgi with SearXNG workload
-exec uwsgi --master --http-socket ${BIND_ADDRESS} "/etc/uwsgi/uwsgi.ini"
+exec /usr/local/searxng/venv/bin/uwsgi "/usr/local/searxng/dockerfiles/uwsgi.ini"
