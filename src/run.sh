@@ -112,9 +112,9 @@ else # set SECRET_KEY
     searx/settings.yml;
 fi
 
-# set OPENMETRICS_PASSWORD if exists
-if [ ! -z "${OPENMETRICS_PASSWORD}" ]; then
-    sed -i -e "s+open_metrics: ''+open_metrics: ${OPENMETRICS_PASSWORD}+g" \
+# set OPENMETRICS if exists
+if [ ! -z "${OPENMETRICS}" ]; then
+    sed -i -e "s+open_metrics: ''+open_metrics: ${OPENMETRICS}+g" \
     searx/settings.yml;
 fi
 
