@@ -160,7 +160,6 @@ if [ ! -z "${FOOTER_MESSAGE}" ]; then
     searx/templates/simple/base.html
 fi
 
-sed -i "/master = true/aplugin = python3" \
-    /usr/local/searxng/dockerfiles/uwsgi.ini
+sed -i "s/if val != \"document\":/if val not in ('document', 'empty'):/" /usr/local/searxng/searx/botdetection/http_sec_fetch.py
 
 exec /usr/local/searxng/venv/bin/uwsgi "/usr/local/searxng/dockerfiles/uwsgi.ini"
