@@ -53,7 +53,7 @@ jobs:
     - name: Update the SHA sum.
       run: |
         REMOTE_COMMIT=$(git ls-remote https://github.com/${{ env.SOURCE_REPO }} ${{ env.SOURCE_REPO_BRANCH }} | awk '{print $1}')
-        sed -i "/^UPSTREAM_COMMIT=/c\UPSTREAM_COMMIT=${REMOTE_COMMIT}" Dockerfile
+        sed -i "/^ENV UPSTREAM_COMMIT=/c\\ENV UPSTREAM_COMMIT=${REMOTE_COMMIT}" Dockerfile
 
     - name: Push changes
       uses: actions-js/push@master
