@@ -80,9 +80,9 @@ When you connect to priv.au over IPv4, the location of your DNS resolver will de
 
 * ```CAPTCHA``` : Enables the captcha for the instance if set. (Default: `false`)
 
-* ```AUTHORIZED_API``` : Set to enable the Authorized API. Allows all search formats, i.e. json,csv,rss behind a token. Token file is located at `/auth_tokens.txt`. Loaded once, you need to restart the container to reload the tokens. (Default: `false`)
+* ```AUTHORIZED_API``` : Set the password for the Authorized API. (Default: empty)
 
-* ```OPENMETRICS``` : Set the password for the OpenMetrics endpoint. (Default: off)
+* ```OPENMETRICS``` : Set the password for the OpenMetrics endpoint. (Default: empty)
 
 * ```GOOGLE_DEFAULT``` : Enable the Google search engine by default. (Default: `true`)
 
