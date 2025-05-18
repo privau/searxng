@@ -54,7 +54,7 @@ jobs:
 
       - name: Test Main Image
         run: |
-          docker run -d -p 8080:8080 ${{ env.TEST_TAG }}
+          docker run -d -p 8080:8080 -e AUTHORIZED_API=test_api_key ${{ env.TEST_TAG }}
           sleep 5 # Give the container some time to start
           curl http://localhost:8080/healthz > input.txt
           cat input.txt
@@ -62,6 +62,10 @@ jobs:
           curl http://localhost:8080/search?q=github > input.txt
           cat input.txt
           grep "sidebar-end-collapsible" input.txt
+          curl -H "Authorization: Basic $(echo -n "user:test_api_key" | base64)" http://localhost:8080/search?q=example&format=json > input.txt
+          cat input.txt
+          grep "number_of_results" input.txt
+          
           docker rm -f $(docker ps -q --filter ancestor=${{ env.TEST_TAG }}) # Stop the container
 
       - name: Build and push
