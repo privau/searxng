@@ -62,7 +62,7 @@ jobs:
           curl http://localhost:8080/search?q=github > input.txt
           cat input.txt
           grep "sidebar-end-collapsible" input.txt
-          curl -H "Authorization: Basic $(echo -n "user:test_api_key" | base64)" http://localhost:8080/search?q=github&format=json > input.txt
+          curl -H "Authorization: Basic $(echo -n "user:test_api_key" | base64)" http://localhost:8080/search\?q\=github\&format\=json > input.txt
           cat input.txt
           grep "number_of_results" input.txt
           
