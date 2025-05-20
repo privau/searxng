@@ -85,7 +85,7 @@ RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ 
 # include patches for captcha
 COPY --chown=searxng:searxng ./src/captcha/captcha.html searx/templates/simple/captcha.html
 COPY --chown=searxng:searxng ./src/captcha/captcha.py searx/captcha.py
-RUN sed -i '/search = SearchWithPlugins(search_query, request.user_plugins, request)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale, render)):\n            return captcha_response\n' /usr/local/searxng/searx/webapp.py
+RUN sed -i '/search_obj = searx.search.SearchWithPlugins(search_query, sxng_request, sxng_request.user_plugins)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(sxng_request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale, render)):\n            return captcha_response\n' /usr/local/searxng/searx/webapp.py
 
 # include patches for authorized api access
 COPY --chown=searxng:searxng ./src/auth/auth.py searx/auth.py
