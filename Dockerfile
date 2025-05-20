@@ -1,7 +1,7 @@
 # use alpine as base for searx and set workdir as well as env vars
 FROM docker.io/library/python:3.13-slim AS builder
 
-ENV UPSTREAM_COMMIT=749de829d5bad6a05ebe1a733a6bd942c1a386ec
+ENV UPSTREAM_COMMIT=ca67f1dffe9cb68be0663f3664ab552ec8e5049f
 
 # install build deps and git clone searxng as well as setting the version
 RUN apt-get update \
