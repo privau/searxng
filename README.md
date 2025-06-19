@@ -20,7 +20,7 @@ Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au [![Better 
 
 ### Where geographically is priv.au hosted?
 
-When you connect to priv.au over IPv4, the location of your DNS resolver will determine which of our instances across the globe you will connect to, generally the closest will be chosen. Connecting over IPv6 will route you to the closest instance via BGP Anycast. You are able to bypass this selection process by connecting directly to a geographic instance, using the links above.
+When you connect to priv.au you are routed to the closest instance via BGP Anycast. You are able to bypass this selection process by connecting directly to a geographic instance, using the links above.
 
 ## Basic Usage
 
