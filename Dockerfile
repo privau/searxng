@@ -1,21 +1,20 @@
 # use alpine as base for searx and set workdir as well as env vars
-FROM docker.io/library/python:3.13-slim AS builder
+FROM docker.io/library/python:3.13-alpine AS builder
 
 ENV UPSTREAM_COMMIT=df76647c52b56101f152c5dec7c1d08f1732ceb7
 
 # install build deps and git clone searxng as well as setting the version
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
-     build-essential \
+RUN apk add --no-cache \
+     build-base \
      brotli \
      git \
      # lxml
      libxml2-dev \
-     libxslt1-dev \
-     zlib1g-dev \
+     libxslt-dev \
+     zlib-dev \
      # uwsgi
-     libpcre3-dev \
-  && rm -rf /var/lib/apt/lists/*
+     pcre-dev \
+     libffi-dev
 
 WORKDIR /usr/local/searxng/
 
@@ -36,7 +35,7 @@ ARG SEARXNG_GID=977
 RUN grep -m1 root /etc/group > /tmp/.searxng.group \
 && grep -m1 root /etc/passwd > /tmp/.searxng.passwd \
 && echo "searxng:x:$SEARXNG_GID:" >> /tmp/.searxng.group \
-&& echo "searxng:x:$SEARXNG_UID:$SEARXNG_GID:searxng:/usr/local/searxng:/bin/bash" >> /tmp/.searxng.passwd
+&& echo "searxng:x:$SEARXNG_UID:$SEARXNG_GID:searxng:/usr/local/searxng:/bin/sh" >> /tmp/.searxng.passwd
 
 # copy custom simple themes
 COPY ./out/css/* searx/static/themes/simple/css/
@@ -48,21 +47,19 @@ RUN python -m compileall -q searx; \
     \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.ttf' -o -name '*.eot' \) \
     -type f -exec gzip -9 -k {} + -exec brotli --best {} +
 
-FROM docker.io/library/python:3.13-slim
+FROM docker.io/library/python:3.13-alpine
 
 WORKDIR /usr/local/searxng/
 
-RUN apt-get update \
-&& apt-get install -y --no-install-recommends \
+RUN apk add --no-cache \
     # healthcheck
     wget \
     # lxml (ARMv7)
-    libxslt1.1 \
+    libxslt \
     # uwsgi
-    libpcre3 \
+    pcre \
     libxml2 \
-    mailcap \
-    && rm -rf /var/lib/apt/lists/*
+    mailcap
 
 COPY --chown=root:root --from=builder /tmp/.searxng.passwd /etc/passwd
 COPY --chown=root:root --from=builder /tmp/.searxng.group /etc/group
@@ -170,8 +167,6 @@ searx/settings.yml;
 
 # expose port
 EXPOSE 8080
-
-HEALTHCHECK CMD wget --quiet --tries=1 --spider http://localhost:8080/healthz || exit 1
 
 # set env
 ENV UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= CAPTCHA= AUTHORIZED_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
