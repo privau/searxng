@@ -3,7 +3,7 @@ FROM docker.io/library/python:3.13-alpine AS builder
 
 ENV UPSTREAM_COMMIT=60be0f453e9e4a5fc48aeb4706e75af0a4047b36
 
-# install build deps and git clone searxng as well as setting the version
+# install build deps
 RUN apk add --no-cache \
      build-base \
      brotli \
@@ -18,7 +18,7 @@ RUN apk add --no-cache \
 
 WORKDIR /usr/local/searxng/
 
-# install build deps and git clone searxng as well as setting the version
+# git clone searxng as well, install python deps and freeze version
 RUN git config --global --add safe.directory /usr/local/searxng \
 && git clone https://github.com/searxng/searxng . \
 && git reset --hard ${UPSTREAM_COMMIT}
@@ -52,8 +52,6 @@ FROM docker.io/library/python:3.13-alpine
 WORKDIR /usr/local/searxng/
 
 RUN apk add --no-cache \
-    # healthcheck
-    wget \
     # lxml (ARMv7)
     libxslt \
     # uwsgi
@@ -93,13 +91,8 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
 RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
 
-# patch for instant autocompletion
-RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/simple_search.html
-RUN sed -i '/<span class="show_if_nojs">{{ _(.*) }}<\/span><\/button>/a\        <div class="autocomplete hide_if_nojs"><ul></ul></div>' searx/templates/simple/search.html
-
-# make run.sh executable, set default settings
-RUN chmod +x /usr/local/bin/run.sh; \
-sed -i -e "/safe_search:/s/0/1/g" \
+# set default settings
+RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/autocomplete:/s/\"\"/\"google\"/g" \
 -e "/autocomplete_min:/s/4/0/g" \
 -e "/favicon_resolver:/s/\"\"/\"google\"/g" \
@@ -165,7 +158,6 @@ sed -i -e "/safe_search:/s/0/1/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
 searx/settings.yml;
 
-# expose port
 EXPOSE 8080
 
 # set env
