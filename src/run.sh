@@ -160,4 +160,4 @@ if [ ! -z "${FOOTER_MESSAGE}" ]; then
     searx/templates/simple/base.html
 fi
 
-exec /usr/local/searxng/venv/bin/uwsgi "/usr/local/searxng/container/config/uwsgi.ini"
+exec /usr/local/searxng/venv/bin/granian searx.webapp:app

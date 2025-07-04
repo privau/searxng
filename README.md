@@ -54,7 +54,9 @@ When you connect to priv.au you are routed to the closest instance via BGP Anyca
 
 * ```BASE_URL``` : Sets the base url (for example: example.org would have `https://example.org/` as base)
 
-* ```BIND_ADDRESS``` : Sets the address that uwsgi will bind to. (default: `[::]:8080`)
+* ```GRANIAN_HOST``` : Sets the address that granian will bind to. (default: `[::]`)
+
+* ```GRANIAN_PORT``` : Sets the port that granian will bind to. (default: `8080`)
 
 * ```NAME``` : Sets the name of the instance, which is for example displayed in the title of the site (for example `SearXNG`)
 

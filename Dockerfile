@@ -11,10 +11,7 @@ RUN apk add --no-cache \
      # lxml
      libxml2-dev \
      libxslt-dev \
-     zlib-dev \
-     # uwsgi
-     pcre-dev \
-     libffi-dev
+     zlib-dev
 
 WORKDIR /usr/local/searxng/
 
@@ -26,7 +23,7 @@ RUN git config --global --add safe.directory /usr/local/searxng \
 RUN python -m venv ./venv \
 && . ./venv/bin/activate \
 && pip install -r requirements.txt \
-&& pip install "uwsgi~=2.0" \
+&& pip install "granian~=2.0" \
 && python -m searx.version freeze
 
 ARG SEARXNG_UID=977
@@ -53,11 +50,7 @@ WORKDIR /usr/local/searxng/
 
 RUN apk add --no-cache \
     # lxml (ARMv7)
-    libxslt \
-    # uwsgi
-    pcre \
-    libxml2 \
-    mailcap
+    libxslt
 
 COPY --chown=root:root --from=builder /tmp/.searxng.passwd /etc/passwd
 COPY --chown=root:root --from=builder /tmp/.searxng.group /etc/group
@@ -161,12 +154,13 @@ searx/settings.yml;
 EXPOSE 8080
 
 # set env
-ENV UWSGI_WORKERS=1 UWSGI_THREADS=16 IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= CAPTCHA= AUTHORIZED_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
+ENV GRANIAN_PROCESS_NAME="searxng" GRANIAN_INTERFACE="wsgi" GRANIAN_HOST="::" GRANIAN_PORT="8080" GRANIAN_WEBSOCKETS="false" GRANIAN_LOOP="uvloop" GRANIAN_BLOCKING_THREADS="4" GRANIAN_WORKERS_KILL_TIMEOUT="30" \
+GRANIAN_BLOCKING_THREADS_IDLE_TIMEOUT="300" GRANIAN_STATIC_PATH_MOUNT="/usr/local/searxng/searx/static/" GRANIAN_STATIC_PATH_EXPIRES="3600" \
+IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= CAPTCHA= AUTHORIZED_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
 GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= \
 OPENMETRICS= \
 PRIVACYPOLICY= \
 DONATION_URL= \
-BIND_ADDRESS=[::]:8080 \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main
