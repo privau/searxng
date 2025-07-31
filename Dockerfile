@@ -150,7 +150,6 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/engine: startpage/s/$/\n    disabled: true/g" \
 -e "/engine: wikipedia/s/$/\n    timeout: 1.0/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
--e "/searx.plugins.calculator.SXNGPlugin:/,/^[^[:space:]]/s/active: true/active: false/" \
 searx/settings.yml;
 
 EXPOSE 8080
