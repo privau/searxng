@@ -8,7 +8,7 @@ from os import environ
 
 from flask import redirect, url_for
 from searx import limiter
-from searx.botdetection import ip_lists, get_real_ip
+from searx.botdetection import ip_lists
 from searx.webutils import new_hmac, is_hmac_of
 
 
@@ -36,7 +36,7 @@ def render_captcha(raw_text_query, search_query, selected_locale, render, captch
 
 def handle_captcha(request, secret_key, raw_text_query, search_query, selected_locale, render):
     # convert IP into bytes
-    ip = ip_address(get_real_ip(request))
+    ip = ip_address(request.remote_addr)
     match, _ = ip_lists.pass_ip(ip, limiter.get_cfg())
 
     # Check if the IP is in the whitelist
