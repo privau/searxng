@@ -1,0 +1,144 @@
+.gruvboxmat-themes() {
+  // Gruvbox Material (dark medium) palette
+  @bg_hard: #1d2021;   // main
+  @bg: #292828;        // main (material)
+  @bg_soft: #32302f;   // accent-inactive
+  @dark1: #3c3836;     // highlight
+  @dark2: #504945;     // border-ish
+  @muted: #7c6f64;     // subtext-ish
+  @fg: #d4be98;        // text
+  @fg_dim: #ebdbb2;    // light1-ish
+
+  // accents
+  @accent: #89b482;    // accent-active
+  @link: #89b482;      // border-active/link
+  @visited: #d3869b;   // banner
+  @accent_blue: #458588; // notification
+  @warning: #d8a657;   // yellow
+  @error: #cc241d;     // notification-error
+  @success: #89b482;   // active green
+
+  --color-base-font: @fg;
+  --color-base-font-rgb: 212, 190, 152;
+  --color-base-background: @bg;
+  --color-base-background-mobile: @bg;
+  --color-url-font: @link;
+  --color-url-visited-font: @visited;
+
+  --color-header-background: @bg_soft;
+  --color-header-border: @dark2;
+  --color-footer-background: @bg_hard;
+  --color-footer-border: @visited;
+  --color-sidebar-border: @accent;
+  --color-sidebar-font: @fg;
+  --color-sidebar-background: @bg_soft;
+
+  --color-backtotop-font: @fg;
+  --color-backtotop-border: @dark2;
+  --color-backtotop-background: @bg_soft;
+
+  --color-btn-background: @accent;
+  --color-btn-font: @bg_hard;
+
+  --color-show-btn-background: @dark1;
+  --color-show-btn-font: @fg;
+  --color-search-border: transparent;
+  --color-search-shadow: 0 2px 8px rgba(40, 40, 40, 0.25);
+  --color-search-background: @bg_hard;
+  --color-search-font: @fg;
+  --color-search-background-hover: @accent_blue;
+
+  --color-error: @error;
+  --color-error-background: @dark1;
+
+  --color-warning: @warning;
+  --color-warning-background: @dark1;
+
+  --color-success: @success;
+  --color-success-background: #3b4439;
+  --color-categories-item-selected-font: @accent;
+  --color-categories-item-border-selected: @accent;
+
+  --color-autocomplete-font: @fg;
+  --color-autocomplete-border: @visited;
+  --color-autocomplete-shadow: 0 2px 8px rgba(40, 40, 40, 0.6);
+  --color-autocomplete-background: @dark2;
+  --color-autocomplete-background-hover: @dark1;
+
+  --color-answer-font: @visited;
+  --color-answer-background: @bg_soft;
+
+  --color-result-keyvalue-col-table: @link;
+  --color-result-keyvalue-odd: @visited;
+  --color-result-keyvalue-even: @success;
+  --color-result-background: @bg_soft;
+  --color-result-border: @dark2;
+  --color-result-url-font: @fg;
+  --color-result-vim-selected: #4e422ecc;
+  --color-result-vim-arrow: @link;
+  --color-result-description-highlight-font: @accent;
+  --color-result-link-font: @link;
+  --color-result-link-font-highlight: @link;
+  --color-result-link-visited-font: @visited;
+  --color-result-publishdate-font: @muted;
+  --color-result-engines-font: @muted;
+  --color-result-search-url-border: @dark2;
+  --color-result-search-url-font: @fg;
+  --color-result-detail-font: @fg;
+  --color-result-detail-label-font: @fg;
+  --color-result-detail-background: @bg_soft;
+  --color-result-detail-hr: @accent;
+  --color-result-detail-link: @link;
+  --color-result-detail-loader-border: rgba(0, 0, 0, .2);
+  --color-result-detail-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-result-image-span-font: @fg;
+  --color-result-image-span-font-selected: @fg_dim;
+  --color-result-image-background: @dark2;
+
+  --color-settings-tr-hover: @dark2;
+  --color-settings-engine-description-font: @fg;
+  --color-settings-engine-group-background: @bg;
+  --color-settings-table-group-background: @bg;
+
+  --color-toolkit-badge-font: @fg_dim;
+  --color-toolkit-badge-background: @bg_soft;
+  --color-toolkit-kbd-font: @fg_dim;
+  --color-toolkit-kbd-background: @bg_hard;
+  --color-toolkit-dialog-border: @accent;
+  --color-toolkit-dialog-background: @bg_soft;
+  --color-toolkit-tabs-label-border: @dark2;
+  --color-toolkit-tabs-section-border: @accent;
+  --color-toolkit-select-background: @bg_soft;
+  --color-toolkit-select-border: @dark2;
+  --color-toolkit-select-background-hover: @dark1;
+  --color-toolkit-input-text-font: @fg_dim;
+  --color-toolkit-checkbox-onoff-off-background: #3f2120;
+  --color-toolkit-checkbox-onoff-on-background: #33381b;
+  --color-toolkit-checkbox-onoff-on-mark-background: @success;
+  --color-toolkit-checkbox-onoff-on-mark-color: @bg_hard;
+  --color-toolkit-checkbox-onoff-off-mark-background: @error;
+  --color-toolkit-checkbox-onoff-off-mark-color: @bg_hard;
+  --color-toolkit-checkbox-label-background: @accent;
+  --color-toolkit-checkbox-label-border: @dark2;
+  --color-toolkit-checkbox-input-border: @success;
+  --color-toolkit-engine-tooltip-border: @dark2;
+  --color-toolkit-engine-tooltip-background: @dark1;
+  --color-toolkit-loader-border: rgba(0, 0, 0, .2);
+  --color-toolkit-loader-borderleft: rgba(0, 0, 0, 0);
+  --color-doc-code: @fg_dim;
+  --color-doc-code-background: @dark1;
+  --color-favicon-background-color: rgba(0, 0, 0, 0);
+  --color-favicon-border-color: rgba(0, 0, 0, 0);
+  --color-image-resolution-background: rgba(0, 0, 0, .5);
+  --color-image-resolution-font: @fg;
+  --color-loading-indicator: rgba(0, 0, 0, .2);
+  --color-loading-indicator-gap: @fg;
+  --color-line-number: @muted;
+}
+
+// Gruvbox Material Theme by preferences
+:root.theme-gruvboxmat {
+  .gruvboxmat-themes();
+}
+
+
