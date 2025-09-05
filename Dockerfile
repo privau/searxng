@@ -62,9 +62,9 @@ COPY --chown=searxng:searxng ./src/limiter.toml /etc/searxng/limiter.toml
 COPY --chown=searxng:searxng ./src/favicons.toml /etc/searxng/favicons.toml
 
 # make our patches to searxng's code to allow for the custom theming
-RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark', 'black'\]/s/choices=\['', 'auto', 'light', 'dark', 'black'\]/choices=\['', 'auto', 'light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night', 'dracula', 'gruvbox', 'gruvboxmat'\]/" searx/preferences.py \
-&& sed -i "s/SIMPLE_STYLE = ('auto', 'light', 'dark', 'black')/SIMPLE_STYLE = ('auto', 'light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night', 'dracula', 'gruvbox', 'gruvboxmat')/" searx/settings_defaults.py \
-&& sed -i "s/{%- for name in \['auto', 'light', 'dark', 'black'\] -%}/{%- for name in \['auto', 'light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night', 'dracula', 'gruvbox', 'gruvboxmat'\] -%}/" searx/templates/simple/preferences/theme.html
+RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light', 'dark', 'black'\]/s/choices=\['', 'auto', 'light', 'dark', 'black'\]/choices=\['', 'auto', 'light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night', 'dracula', 'gruvbox', 'gruvboxmat', 'everforest'\]/" searx/preferences.py \
+&& sed -i "s/SIMPLE_STYLE = ('auto', 'light', 'dark', 'black')/SIMPLE_STYLE = ('auto', 'light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night', 'dracula', 'gruvbox', 'gruvboxmat', 'everforest')/" searx/settings_defaults.py \
+&& sed -i "s/{%- for name in \['auto', 'light', 'dark', 'black'\] -%}/{%- for name in \['auto', 'light', 'dark', 'black', 'paulgo', 'latte', 'frappe', 'macchiato', 'mocha', 'kagi', 'brave', 'moa', 'night', 'dracula', 'gruvbox', 'gruvboxmat', 'everforest'\] -%}/" searx/templates/simple/preferences/theme.html
 
 # make patch to allow the privacy policy page
 COPY --chown=searxng:searxng ./src/privacy-policy/privacy-policy.html searx/templates/simple/privacy-policy.html
@@ -119,6 +119,7 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: wikicommons.images/s/$/\n    disabled: true/g" \
 -e "/name: pinterest/s/$/\n    disabled: true/g" \
 -e "/name: piped/s/$/\n    disabled: true/g" \
+-e "/name: public domain image archive/s/$/\n    disabled: true/g" \
 -e "/name: piped.music/s/$/\n    disabled: true/g" \
 -e "/name: bandcamp/s/$/\n    disabled: true/g" \
 -e "/name: radio browser/s/$/\n    disabled: true/g" \

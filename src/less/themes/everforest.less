@@ -1,0 +1,152 @@
+.everforest-themes() {
+  // Everforest (dark, hard-ish) palette mapping
+  // Base shades
+  @bg_dim: #232A2E;      // Dimmed Background
+  @bg0: #2D353B;         // Default Background
+  @bg1: #343F44;         // Cursor line, status active
+  @bg2: #3D484D;         // Popup/Floating
+  @bg3: #475258;         // Special keys
+  @bg4: #4F585E;         // Splits/whitespace
+  @bg5: #56635f;         // Not used
+  @bg_visual: #543A48;   // Visual selection
+  @bg_red: #514045;      // Error/Diff del bg
+  @bg_yellow: #4D4C43;   // Warning bg
+  @bg_green: #425047;    // Hint/Diff add bg
+  @bg_blue: #3A515D;     // Info/Diff change bg
+  @bg_purple: #4A444E;   // Purple bg
+
+  // Foreground and accents
+  @fg: #D3C6AA;          // Default Foreground
+  @red: #E67E80;         // Errors / critical
+  @orange: #E69875;      // Operators / titles
+  @yellow: #DBBC7F;      // Types / warnings
+  @green: #A7C080;       // Functions / strings
+  @aqua: #83C092;        // Constants / strings
+  @blue: #7FBBB3;        // Identifiers / info
+  @purple: #D699B6;      // Numbers / bool
+  @grey0: #7A8478;       // Secondary text
+  @grey1: #859289;       // Comments / borders
+  @grey2: #9DA9A0;       // Accents subtle
+
+  // Map to SearXNG variables
+  --color-base-font: @fg;
+  --color-base-background: @bg0;
+  --color-base-background-mobile: @bg0;
+  --color-url-font: @blue;
+  --color-url-visited-font: @purple;
+
+  --color-header-background: @bg1;
+  --color-header-border: @bg3;
+
+  --color-footer-background: @bg1;
+  --color-footer-border: @bg3;
+
+  --color-sidebar-border: @bg3;
+  --color-sidebar-font: @fg;
+  --color-sidebar-background: @bg0;
+
+  --color-backtotop-font: @grey1;
+  --color-backtotop-border: @bg3;
+  --color-backtotop-background: @bg2;
+
+  --color-btn-background: @blue;
+  --color-btn-font: @bg0;
+  --color-show-btn-background: @bg3;
+  --color-show-btn-font: @fg;
+
+  --color-search-border: @bg3;
+  --color-search-shadow: 0 2px 8px @bg_dim;
+  --color-search-background: @bg2;
+  --color-search-font: @fg;
+  --color-search-background-hover: @green;
+
+  --color-error: @red;
+  --color-error-background: @bg_red;
+  --color-warning: @yellow;
+  --color-warning-background: @bg_yellow;
+  --color-success: @green;
+  --color-success-background: @bg_green;
+
+  --color-categories-item-selected-font: @blue;
+  --color-categories-item-border-selected: @blue;
+
+  --color-autocomplete-font: @fg;
+  --color-autocomplete-border: @bg3;
+  --color-autocomplete-shadow: 0 2px 8px @bg_dim;
+  --color-autocomplete-background: @bg2;
+  --color-autocomplete-background-hover: @bg3;
+
+  --color-answer-font: @fg;
+  --color-answer-background: @bg1;
+
+  --color-result-background: @bg1;
+  --color-result-border: @bg3;
+  --color-result-url-font: @grey1;
+  --color-result-vim-selected: @bg2;
+  --color-result-vim-arrow: @blue;
+  --color-result-description-highlight-font: @fg;
+  --color-result-link-font: @blue;
+  --color-result-link-font-highlight: @blue;
+  --color-result-link-visited-font: @purple;
+  --color-result-publishdate-font: @grey0;
+  --color-result-engines-font: @grey0;
+  --color-result-search-url-border: @bg3;
+  --color-result-search-url-font: @fg;
+  --color-result-detail-font: @fg;
+  --color-result-detail-label-font: @grey1;
+  --color-result-detail-background: @bg0;
+  --color-result-detail-hr: @bg0;
+  --color-result-detail-link: @blue;
+  --color-result-detail-loader-border: rgb(255 255 255 / 20%);
+  --color-result-detail-loader-borderleft: @bg_dim;
+  --color-result-image-span-font: @fg;
+  --color-result-image-span-font-selected: @bg0;
+  --color-result-image-background: @bg1;
+
+  --color-settings-tr-hover: @bg2;
+  --color-settings-engine-description-font: @fg;
+  --color-settings-engine-group-background: @bg2;
+
+  --color-toolkit-badge-font: @fg;
+  --color-toolkit-badge-background: @bg2;
+  --color-toolkit-kbd-font: @fg;
+  --color-toolkit-kbd-background: @bg1;
+  --color-toolkit-dialog-border: @bg1;
+  --color-toolkit-dialog-background: @bg1;
+  --color-toolkit-tabs-label-border: @bg0;
+  --color-toolkit-tabs-section-border: @bg0;
+  --color-toolkit-select-background: @bg2;
+  --color-toolkit-select-border: @bg2;
+  --color-toolkit-select-background-hover: @bg3;
+  --color-toolkit-input-text-font: @fg;
+  --color-toolkit-checkbox-onoff-off-background: @bg2;
+  --color-toolkit-checkbox-onoff-on-background: @bg2;
+  --color-toolkit-checkbox-onoff-on-mark-background: @blue;
+  --color-toolkit-checkbox-onoff-on-mark-color: @bg0;
+  --color-toolkit-checkbox-onoff-off-mark-background: #ddd;
+  --color-toolkit-checkbox-onoff-off-mark-color: #222;
+  --color-toolkit-checkbox-label-background: @bg0;
+  --color-toolkit-checkbox-label-border: @bg1;
+  --color-toolkit-checkbox-input-border: @blue;
+  --color-toolkit-engine-tooltip-border: @bg2;
+  --color-toolkit-engine-tooltip-background: @bg2;
+  --color-toolkit-loader-border: rgb(255 255 255 / 20%);
+  --color-toolkit-loader-borderleft: @bg_dim;
+  --color-doc-code: @orange;
+  --color-doc-code-background: @bg1;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+  --color-image-resolution-background: rgba(0, 0, 0, .5);
+  --color-image-resolution-font: @fg;
+  --color-loading-indicator: rgba(0, 0, 0, .2);
+  --color-loading-indicator-gap: @fg;
+  --color-line-number: @grey0;
+}
+
+// Everforest Theme by preferences
+:root.theme-everforest {
+  .everforest-themes();
+}
+
+
+
