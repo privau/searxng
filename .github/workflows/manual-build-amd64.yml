@@ -3,7 +3,6 @@ name: build-amd64
 on:
   workflow_dispatch:
 
-
 env:
   TEST_TAG: vojkovic/searxng:test
   LATEST_TAG: vojkovic/searxng:latest
