@@ -1,0 +1,140 @@
+.nord-themes() {
+  // Neutrals
+  @bg: #2e3440;        // base background
+  @surface: #3b4252;   // secondary background
+  @overlay: #434c5e;   // tertiary / separators
+  @border: #4c566a;    // borders / dim fills
+
+  // Text
+  @text: #d8dee9;      // primary text
+  @muted: #e5e9f0;     // secondary text
+  @subtle: #eceff4;    // hints / labels
+
+  // Accent & states
+  @accent: #88c0d0;    // primary accent
+  @visited: #b48ead;   // visited links
+  @error: #bf616a;     // error
+  @warning: #ebcb8b;   // warning
+  @success: #a3be8c;   // success
+
+  // Map to SearXNG variables (dark theme)
+  --color-base-font: @text;
+  --color-base-background: @bg;
+  --color-base-background-mobile: @bg;
+  --color-url-font: @accent;
+  --color-url-visited-font: @visited;
+
+  --color-header-background: @surface;
+  --color-header-border: @overlay;
+  --color-footer-background: @surface;
+  --color-footer-border: @overlay;
+
+  --color-sidebar-border: @overlay;
+  --color-sidebar-font: @text;
+  --color-sidebar-background: @bg;
+
+  --color-backtotop-font: @muted;
+  --color-backtotop-border: @overlay;
+  --color-backtotop-background: @border;
+
+  --color-btn-background: @accent;
+  --color-btn-font: @bg;
+  --color-show-btn-background: @overlay;
+  --color-show-btn-font: @text;
+
+  --color-search-border: @overlay;
+  --color-search-shadow: 0 2px 8px @bg;
+  --color-search-background: @border;
+  --color-search-font: @text;
+  --color-search-background-hover: @accent;
+
+  --color-error: @error;
+  --color-error-background: @overlay;
+  --color-warning: @warning;
+  --color-warning-background: @overlay;
+  --color-success: @success;
+  --color-success-background: @overlay;
+
+  --color-categories-item-selected-font: @accent;
+  --color-categories-item-border-selected: @accent;
+
+  --color-autocomplete-font: @muted;
+  --color-autocomplete-border: @overlay;
+  --color-autocomplete-shadow: 0 2px 8px @bg;
+  --color-autocomplete-background: @border;
+  --color-autocomplete-background-hover: @overlay;
+
+  --color-answer-font: @text;
+  --color-answer-background: @surface;
+
+  --color-result-background: @surface;
+  --color-result-border: @overlay;
+  --color-result-url-font: @muted;
+  --color-result-vim-selected: @border;
+  --color-result-vim-arrow: @accent;
+  --color-result-description-highlight-font: @text;
+  --color-result-link-font: @accent;
+  --color-result-link-font-highlight: @accent;
+  --color-result-link-visited-font: @visited;
+  --color-result-publishdate-font: @border;
+  --color-result-engines-font: @border;
+  --color-result-search-url-border: @overlay;
+  --color-result-search-url-font: @text;
+  --color-result-detail-font: @text;
+  --color-result-detail-label-font: @subtle;
+  --color-result-detail-background: @bg;
+  --color-result-detail-hr: @bg;
+  --color-result-detail-link: @accent;
+  --color-result-detail-loader-border: rgb(255 255 255 / 20%);
+  --color-result-detail-loader-borderleft: @bg;
+  --color-result-image-span-font: @text;
+  --color-result-image-span-font-selected: @text;
+  --color-result-image-background: @surface;
+
+  --color-settings-tr-hover: @border;
+  --color-settings-engine-description-font: @text;
+  --color-settings-engine-group-background: @border;
+
+  --color-toolkit-badge-font: @text;
+  --color-toolkit-badge-background: @border;
+  --color-toolkit-kbd-font: @text;
+  --color-toolkit-kbd-background: @surface;
+  --color-toolkit-dialog-border: @surface;
+  --color-toolkit-dialog-background: @surface;
+  --color-toolkit-tabs-label-border: @bg;
+  --color-toolkit-tabs-section-border: @bg;
+  --color-toolkit-select-background: @border;
+  --color-toolkit-select-border: @border;
+  --color-toolkit-select-background-hover: @overlay;
+  --color-toolkit-input-text-font: @text;
+  --color-toolkit-checkbox-onoff-off-background: @border;
+  --color-toolkit-checkbox-onoff-on-background: @border;
+  --color-toolkit-checkbox-onoff-on-mark-background: @accent;
+  --color-toolkit-checkbox-onoff-on-mark-color: @bg;
+  --color-toolkit-checkbox-onoff-off-mark-background: #ddd;
+  --color-toolkit-checkbox-onoff-off-mark-color: #222;
+  --color-toolkit-checkbox-label-background: @bg;
+  --color-toolkit-checkbox-label-border: @surface;
+  --color-toolkit-checkbox-input-border: @accent;
+  --color-toolkit-engine-tooltip-border: @border;
+  --color-toolkit-engine-tooltip-background: @border;
+  --color-toolkit-loader-border: rgb(255 255 255 / 20%);
+  --color-toolkit-loader-borderleft: @bg;
+  --color-doc-code: #d08770;
+  --color-doc-code-background: @surface;
+  --color-favicon-background-color: #ddd;
+  --color-favicon-border-color: #ccc;
+  --color-image-resolution-background: rgba(0, 0, 0, .5);
+  --color-image-resolution-font: @text;
+  --color-loading-indicator: rgba(0, 0, 0, .2);
+  --color-loading-indicator-gap: @text;
+  --color-line-number: @border;
+}
+
+// Nord Theme by preferences
+:root.theme-nord {
+  .nord-themes();
+}
+
+
+
