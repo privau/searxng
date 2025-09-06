@@ -120,6 +120,15 @@ button.category_button {
     width: 30px;
     height: 30px;
     margin: 0.5rem 0 auto 0;
+    color: var(--color-logo-color, var(--color-logo-fill, var(--color-categories-item-selected-font, var(--color-base-font))));
+  }
+
+  svg :not([fill="none"]) {
+    fill: var(--color-logo-fill, #3050ff);
+  }
+
+  svg :not([stroke="none"]) {
+    stroke: var(--color-logo-fill, #3050ff);
   }
 }
 
