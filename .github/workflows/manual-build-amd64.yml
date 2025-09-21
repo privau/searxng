@@ -43,7 +43,7 @@ jobs:
       - name: Test Main Image
         run: |
           docker run -d -p 8080:8080 ${{ env.TEST_TAG }}
-          sleep 5 # Give the container some time to start
+          sleep 15
           curl http://localhost:8080/healthz > input.txt
           cat input.txt
           grep "OK" input.txt
