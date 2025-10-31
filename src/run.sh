@@ -162,7 +162,7 @@ fi
 
 #set NID cookie
 COOKIE='526=SjnuPhrqWTQ0Sej2kYBWqHlcys5KRYFopIbiGX7UfF2VSpKDkEhW6c5uPTpXE1uw35ksNRQIc5P7gxx4Kf58ySnfcXp-eFne_Nh5e1re-B0-AGVupnNzO6jozanYxSUmh8Aup7xrZEstTPmGoq2EaCIWaq__UAc0-VR1EJVjE9WVZ1nvuucaJHSsPWIJAKP1c1nsJpeCf1KJEcQaV3Dbrqca432PUGsjIo-LzI4OOy6htIte1vn2QOxkxZ-QT4QH'
-sed -i -E 's|(params\['\''cookies'\''\]\["NID"\][[:space:]]*=[[:space:]]*)"[^\"]*"|\1"'"$COOKIE"'"|' /root/searxng/searx/engines/google.py
-grep -q 'params\['\''cookies'\''\]\["NID"\]' /root/searxng/searx/engines/google.py || sed -i '/params\['\''cookies'\''\] = google_info\['\''cookies'\''\]/a\    params['\''cookies'\'']["NID"] = "'"$COOKIE"'"' /root/searxng/searx/engines/google.py
+sed -i -E 's|(params\['\''cookies'\''\]\["NID"\][[:space:]]*=[[:space:]]*)"[^\"]*"|\1"'"$COOKIE"'"|' searx/engines/google.py
+grep -q 'params\['\''cookies'\''\]\["NID"\]' searx/engines/google.py || sed -i '/params\['\''cookies'\''\] = google_info\['\''cookies'\''\]/a\    params['\''cookies'\'']["NID"] = "'"$COOKIE"'"' searx/engines/google.py
 
 exec /usr/local/searxng/venv/bin/granian searx.webapp:app
