@@ -25,7 +25,5 @@ make themes.all
 cd ..
 
 echo "Copy build files into output folder."
-rm -rf out/css/*
-rm -rf out/js/*
-cp -r -v build/searx/static/themes/simple/css/* out/css/
-cp -r -v build/searx/static/themes/simple/js/* out/js/
+rm -rf out/*
+cp -r -v build/searx/static/themes/simple/* out/
