@@ -35,7 +35,7 @@ RUN grep -m1 root /etc/group > /tmp/.searxng.group \
 && echo "searxng:x:$SEARXNG_UID:$SEARXNG_GID:searxng:/usr/local/searxng:/bin/sh" >> /tmp/.searxng.passwd
 
 # copy custom simple themes
-COPY ./out/* searx/static/themes/simple/
+COPY ./out/ searx/static/themes/simple/
 
 #precompile static theme files
 RUN python -m compileall -q searx; \

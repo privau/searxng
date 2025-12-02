@@ -3,35 +3,23 @@
 import { http, listen, settings } from "../toolkit.ts";
 import { assertElement } from "../util/assertElement.ts";
 
-let latestRequestSeq = 0;
-let lastRenderedSeq = 0;
-
-const fetchResults = async (qInput: HTMLInputElement, query: string, requestSeq: number): Promise<void> => {
+const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<void> => {
   try {
     let res: Response;
 
     if (settings.method === "GET") {
-      res = await http("GET", `./autocompleter?q=${encodeURIComponent(query)}`);
+      res = await http("GET", `./autocompleter?q=${query}`);
     } else {
       res = await http("POST", "./autocompleter", { body: new URLSearchParams({ q: query }) });
     }
 
     const results = await res.json();
 
-    // Render only if this response is newer than what is currently rendered
-    if (requestSeq <= lastRenderedSeq) {
-      return;
-    }
-
     const autocomplete = document.querySelector<HTMLElement>(".autocomplete");
-    if (!autocomplete) {
-      return;
-    }
+    assertElement(autocomplete);
 
     const autocompleteList = document.querySelector<HTMLUListElement>(".autocomplete ul");
-    if (!autocompleteList) {
-      return;
-    }
+    assertElement(autocompleteList);
 
     autocomplete.classList.add("open");
     autocompleteList.replaceChildren();
@@ -43,13 +31,12 @@ const fetchResults = async (qInput: HTMLInputElement, query: string, requestSeq:
         textContent: settings.translations?.no_item_found ?? "No results found"
       });
       autocompleteList.append(noItemFoundMessage);
-      lastRenderedSeq = requestSeq;
       return;
     }
 
     const fragment = new DocumentFragment();
 
-    for (const result of results[1] ?? []) {
+    for (const result of results[1]) {
       const li = Object.assign(document.createElement("li"), { textContent: result });
 
       listen("mousedown", li, () => {
@@ -65,38 +52,35 @@ const fetchResults = async (qInput: HTMLInputElement, query: string, requestSeq:
     }
 
     autocompleteList.append(fragment);
-    lastRenderedSeq = requestSeq;
   } catch (error) {
     console.error("Error fetching autocomplete results:", error);
   }
 };
 
-const qInputEl = document.getElementById("q") as HTMLInputElement | null;
+const qInput = document.getElementById("q") as HTMLInputElement | null;
+assertElement(qInput);
 
 let timeoutId: number;
 
-if (qInputEl) {
-  listen("input", qInputEl, () => {
-    clearTimeout(timeoutId);
+listen("input", qInput, () => {
+  clearTimeout(timeoutId);
 
-    const query = qInputEl.value;
-    const minLength = settings.autocomplete_min ?? 2;
+  const query = qInput.value;
+  const minLength = settings.autocomplete_min ?? 2;
 
-    if (query.length < minLength) return;
+  if (query.length < minLength) return;
 
-    timeoutId = window.setTimeout(async () => {
-      if (query === qInputEl.value) {
-        const seq = ++latestRequestSeq;
-        await fetchResults(qInputEl, query, seq);
-      }
-    }, 0);
-  });
-}
+  timeoutId = window.setTimeout(async () => {
+    if (query === qInput.value) {
+      await fetchResults(qInput, query);
+    }
+  }, 0);
+});
 
 const autocomplete: HTMLElement | null = document.querySelector<HTMLElement>(".autocomplete");
 const autocompleteList: HTMLUListElement | null = document.querySelector<HTMLUListElement>(".autocomplete ul");
-if (autocompleteList && qInputEl) {
-  listen("keyup", qInputEl, (event: KeyboardEvent) => {
+if (autocompleteList) {
+  listen("keyup", qInput, (event: KeyboardEvent) => {
     const listItems = [...autocompleteList.children] as HTMLElement[];
 
     const currentIndex = listItems.findIndex((item) => item.classList.contains("active"));
