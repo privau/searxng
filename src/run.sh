@@ -154,6 +154,13 @@ else # set to disabled
     searx/settings.yml;
 fi
 
+# set Marginalia API key
+if [ ! -z "${MARGINALIA_API}" ]; then
+    sed -i -e "/- name: marginalia/,/inactive:/s/# api_key: .*/    api_key: '${MARGINALIA_API}'/" \
+    -e "/- name: marginalia/,/inactive:/s/inactive: true/inactive: false/" \
+    searx/settings.yml;
+fi
+
 # set footer message
 if [ ! -z "${FOOTER_MESSAGE}" ]; then
     sed -i "/<footer>/,/{{/ { /${FOOTER_MESSAGE}/! s|<p>[^{{]*|<p>${FOOTER_MESSAGE}| }" \
