@@ -120,6 +120,7 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: wikiquote/s/$/\n    disabled: true/g" \
 -e "/name: wikisource/s/$/\n    disabled: true/g" \
 -e "/name: wikicommons.images/s/$/\n    disabled: true/g" \
+-e "/name: wikicommons.videos/s/$/\n    disabled: true/g" \
 -e "/name: pinterest/s/$/\n    disabled: true/g" \
 -e "/name: piped/s/$/\n    disabled: true/g" \
 -e "/name: public domain image archive/s/$/\n    disabled: true/g" \
@@ -131,6 +132,13 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: currency/s/$/\n    disabled: true/g" \
 -e "/name: qwant/s/$/\n    disabled: true/g" \
 -e "/name: btdigg/s/$/\n    disabled: true/g" \
+-e "/name: lucide/s/$/\n    disabled: true/g" \
+-e "/name: devicons/s/$/\n    disabled: true/g" \
+-e "/name: pexels/s/$/\n    disabled: true/g" \
+-e "/name: docker hub/s/$/\n    disabled: true/g" \
+-e "/name: github/s/$/\n    disabled: true/g" \
+-e "/name: semantic scholar/s/$/\n    disabled: true/g" \
+-e "/name: openairedatasets/s/$/\n    disabled: true/g" \
 -e "/name: sepiasearch/s/$/\n    disabled: true/g" \
 -e "/name: dailymotion/s/$/\n    disabled: true/g" \
 -e "/name: deviantart/s/$/\n    disabled: true/g" \
