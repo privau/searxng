@@ -19,6 +19,11 @@ if ! grep -q '@import "privacypage.less";' build/client/simple/src/less/style.le
   sed -i 's/@import "definitions.less";/@import "definitions.less";\n@import "privacypage.less";/' build/client/simple/src/less/style.less
 fi
 
+echo "Enable donation page styles."
+if ! grep -q '@import "donationpage.less";' build/client/simple/src/less/style.less; then
+  sed -i 's/@import "privacypage.less";/@import "privacypage.less";\n@import "donationpage.less";/' build/client/simple/src/less/style.less
+fi
+
 echo "Build static files."
 cd build
 make themes.all

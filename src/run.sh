@@ -51,12 +51,6 @@ else # set to 'privacy'
     searx/settings.yml;
 fi
 
-# set donation url
-if [ ! -z "${DONATION_URL}" ]; then
-    sed -i -e "s+donation_url: false+donation_url: ${DONATION_URL}+g" \
-    searx/settings.yml;
-fi
-
 # set contact url
 if [ ! -z "${CONTACT}" ]; then
     sed -i -e "s+contact_url: false+contact_url: ${CONTACT}+g" \
@@ -165,6 +159,19 @@ fi
 if [ ! -z "${FOOTER_MESSAGE}" ]; then
     sed -i "/<footer>/,/{{/ { /${FOOTER_MESSAGE}/! s|<p>[^{{]*|<p>${FOOTER_MESSAGE}| }" \
     searx/templates/simple/base.html
+fi
+
+# set donation page: footer links to /donate
+if [ ! -z "${DONATION_URL}" ]; then
+    sed -i -e "s+donation_url: false+donation_url: donate+g" searx/settings.yml;
+    donation_display=$(echo "${DONATION_URL}" | sed 's|^https\?://||')
+    sed -i -e "s|__DONATION_URL_DISPLAY__|${donation_display}|g" -e "s|__DONATION_URL__|${DONATION_URL}|g" searx/templates/simple/donation.html;
+fi
+if [ ! -z "${MONERO_ADDRESS}" ]; then
+    case "${MONERO_ADDRESS}" in monero:*) monero_uri="${MONERO_ADDRESS}" ;; *) monero_uri="monero:${MONERO_ADDRESS}" ;; esac
+    case "${monero_uri}" in *\?*) ;; *) monero_uri="${monero_uri}?tx_description=PrivAU+Donation" ;; esac
+    monero_display=$(echo "${MONERO_ADDRESS}" | sed 's|^monero:||')
+    sed -i -e "s|__MONERO_URI__|${monero_uri}|g" -e "s|__MONERO_ADDRESS__|${monero_display}|g" searx/templates/simple/donation.html;
 fi
 
 #set NID cookie

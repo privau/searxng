@@ -69,6 +69,11 @@ RUN sed -i "/'simple_style': EnumStringSetting(/,/choices=\['', 'auto', 'light',
 COPY --chown=searxng:searxng ./src/privacy-policy/privacy-policy.html searx/templates/simple/privacy-policy.html
 RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ \n@app.route('\/privacy', methods=\['GET'\])\ndef privacy_policy():return render('privacy-policy.html')\n" searx/webapp.py
 
+# donation page
+COPY --chown=searxng:searxng ./src/donation/donation.html searx/templates/simple/donation.html
+RUN sed -i "/render('privacy-policy.html')/a @app.route('/donate', methods=\['GET'\])" searx/webapp.py && sed -i "/@app.route('\/donate', methods=\['GET'\])/a def donate():return render('donation.html')" searx/webapp.py \
+&& sed -i -e "s+donation_url: false+donation_url: donate+g" searx/settings.yml;
+
 # include patches for captcha
 COPY --chown=searxng:searxng ./src/captcha/captcha.html searx/templates/simple/captcha.html
 COPY --chown=searxng:searxng ./src/captcha/captcha.py searx/captcha.py
@@ -92,7 +97,6 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
 -e "/infinite_scroll:/s/false/true/g" \
 -e "/query_in_title:/s/false/true/g" \
--e "s+donation_url: https://docs.searxng.org/donate.html+donation_url: false+g" \
 -e '/default_lang:/s/ ""/ en/g' \
 -e "/method:/s/\"POST\"/\"GET\"/g" \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
@@ -161,6 +165,7 @@ GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= \
 OPENMETRICS= \
 PRIVACYPOLICY= \
 DONATION_URL= \
+MONERO_ADDRESS= \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main

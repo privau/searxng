@@ -1,0 +1,34 @@
+{% extends "simple/base.html" %}
+{% block content %}
+<div class="box donation-page">
+  <h1>Support PrivAU</h1>
+  <p>
+    Donations are appreciated but not expected - they go only toward covering operational costs and improving the service.
+  </p>
+  <p>
+    PrivAU runs in four continents and costs around ~$70 USD each month. We maintain custom patches (extra themes, instant autocomplete) and our own IP pool for a better search quality. Your support helps keep that running.
+  </p>
+
+  <div class="donation-section">
+    <h2>Ko-fi</h2>
+    <p>Supports PayPal and one-off or monthly contributions.</p>
+    <ul class="donation-list">
+      <li><a class="link" href="__DONATION_URL__">__DONATION_URL_DISPLAY__</a></li>
+    </ul>
+  </div>
+
+  <div class="donation-section">
+    <h2>Monero</h2>
+    <p>XMR is also accepted. </p>
+    <ul class="donation-list">
+      <li><a class="link donation-address" href="__MONERO_URI__">__MONERO_ADDRESS__</a></li>
+    </ul>
+  </div>
+
+  <div class="donation-section">
+    <p>If you donate $20 or more, please email donations [at] vojk [dot] au with either your transaction ID or the email address associated with your Ko-fi donation. We will then send you access to the PrivAU private instance, which runs on a separate IP pool and is less likely to be blocked by search engines.</p>
+  </div>
+
+  <p class="donation-thanks">Thank you for your support.</p>
+</div>
+{% endblock %}
