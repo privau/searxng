@@ -11,7 +11,9 @@ else
 fi
 
 echo "Replace fork simple theme definitions."
-cp -rv src/less/* build/client/simple/src/less/
+cp -v src/less/* build/client/simple/src/less/
+cp -v src/less/themes build/client/simple/src/less/themes
+cp -v src/less/result_types/* build/client/simple/src/less/result_types/
 cp -v src/js/* build/client/simple/src/js/main/
 
 echo "Enable privacy page."

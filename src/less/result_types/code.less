@@ -1,4 +1,6 @@
-@import "../../generated/pygments.less";
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+@import "../../../generated/pygments.less";
 
 .codelines {
   margin: @results-margin 0 0 0;
@@ -18,18 +20,21 @@
       cursor: default;
 
       &::selection {
-        background: transparent; /* WebKit/Blink Browsers */
+        background: transparent;
       }
 
-      &::-moz-selection {
-        background: transparent; /* Gecko Browsers */
-      }
       margin-right: 8px;
       text-align: right;
     }
 
     span.linenos {
-      color: #64708d;
+      color: var(--color-line-number);
+    }
+
+    .err {
+      // The code view in the result list should not act as a code-checker.
+      border: none;
+      color: inherit;
     }
   }
 }
