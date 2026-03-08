@@ -17,10 +17,8 @@ WORKDIR /usr/local/searxng/
 
 # git clone searxng as well, install python deps and freeze version
 RUN git config --global --add safe.directory /usr/local/searxng \
-# && git clone https://github.com/searxng/searxng . \
-# && git reset --hard ${UPSTREAM_COMMIT}
-&& git clone https://github.com/vojkovic/searxng . \
-&& git reset --hard c528180f965869c1e823ee811399cd815f9bf0bf
+&& git clone https://github.com/searxng/searxng . \
+&& git reset --hard ${UPSTREAM_COMMIT}
 
 RUN python -m venv ./venv \
 && . ./venv/bin/activate \
