@@ -179,9 +179,13 @@ if [ ! -z "${FOOTER_MESSAGE}" ]; then
     searx/templates/simple/base.html
 fi
 
-# set donation page: footer links to /donate
-if [ ! -z "${DONATION_URL}" ]; then
+# enable donation page (footer link to /donate)
+if [ "${DONATE}" = "true" ]; then
     sed -i -e "s+donation_url: false+donation_url: donate+g" searx/settings.yml;
+fi
+
+# populate donation page URL placeholders
+if [ ! -z "${DONATION_URL}" ]; then
     donation_display=$(echo "${DONATION_URL}" | sed 's|^https\?://||')
     sed -i -e "s|__DONATION_URL_DISPLAY__|${donation_display}|g" -e "s|__DONATION_URL__|${DONATION_URL}|g" searx/templates/simple/donation.html;
 fi

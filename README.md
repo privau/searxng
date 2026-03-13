@@ -66,7 +66,11 @@ When you connect to priv.au you are routed to the closest instance via BGP Anyca
 
 * ```ISSUE_URL``` : Set the location for users to report issues to. (for example `https://github.com/example/searxng/issues` !Without a trailing /)
 
-* ```DONATION_URL``` : Sets the location for users to donate to. (for example `https://example.org/donate`). Leave empty to disable.
+* ```DONATE``` : Enables the donation page and footer link. Set to `true` to enable. (Default: `false`)
+
+* ```DONATION_URL``` : Sets the Ko-fi or donation link displayed on the donation page. (for example `https://ko-fi.com/privau`)
+
+* ```MONERO_ADDRESS``` : Sets the Monero address displayed on the donation page.
 
 * ```GIT_URL``` : Sets the location of the Git repository. (for example `https://github.com/example/searxng`)
 
@@ -93,3 +97,11 @@ When you connect to priv.au you are routed to the closest instance via BGP Anyca
 * ```BRAVE_DEFAULT``` : Enable the Brave search engine by default. (Default: `false`)
 
 * ```DUCKDUCKGO_DEFAULT``` : Enable the DuckDuckGo search engine by default. (Default: `false`)
+
+* ```WIKIPEDIA_DEFAULT``` : Enable the Wikipedia engine by default. (Default: `false`)
+
+* ```WIKIDATA_DEFAULT``` : Enable the Wikidata engine by default. (Default: `false`)
+
+* ```SEARCH_DEFAULT_LANG``` : Sets the default search language. (for example `en`, Default: `auto`)
+
+* ```MARGINALIA_API``` : Sets the API key for the Marginalia search engine and enables it. (Default: disabled)

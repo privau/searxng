@@ -71,8 +71,7 @@ RUN sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \ 
 
 # donation page
 COPY --chown=searxng:searxng ./src/donation/donation.html searx/templates/simple/donation.html
-RUN sed -i "/render('privacy-policy.html')/a @app.route('/donate', methods=\['GET'\])" searx/webapp.py && sed -i "/@app.route('\/donate', methods=\['GET'\])/a def donate():return render('donation.html')" searx/webapp.py \
-&& sed -i -e "s+donation_url: false+donation_url: donate+g" searx/settings.yml;
+RUN sed -i "/render('privacy-policy.html')/a @app.route('/donate', methods=\['GET'\])" searx/webapp.py && sed -i "/@app.route('\/donate', methods=\['GET'\])/a def donate():return render('donation.html')" searx/webapp.py
 
 # include patches for captcha
 COPY --chown=searxng:searxng ./src/captcha/captcha.html searx/templates/simple/captcha.html
@@ -166,10 +165,11 @@ EXPOSE 8080
 
 # set env
 ENV GRANIAN_PROCESS_NAME="searxng" GRANIAN_INTERFACE="wsgi" GRANIAN_HOST="::" GRANIAN_PORT="8080" GRANIAN_WEBSOCKETS="false" GRANIAN_BLOCKING_THREADS="1" GRANIAN_WORKERS_KILL_TIMEOUT="30" GRANIAN_BLOCKING_THREADS_IDLE_TIMEOUT="300" \
-IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= CAPTCHA= AUTHORIZED_API= MARGINALIA_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
-GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= \
+IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= SECRET_KEY= CAPTCHA= AUTHORIZED_API= MARGINALIA_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= PUBLIC_INSTANCE= \
+GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= WIKIPEDIA_DEFAULT= WIKIDATA_DEFAULT= \
 OPENMETRICS= \
 PRIVACYPOLICY= \
+DONATE= \
 DONATION_URL= \
 MONERO_ADDRESS= \
 CONTACT=https://vojk.au \
