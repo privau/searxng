@@ -3,6 +3,8 @@
 import { http, listen, settings } from "../toolkit.ts";
 import { assertElement } from "../util/assertElement.ts";
 
+let suppressAutocomplete = false;
+
 const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<void> => {
   try {
     let res: Response;
@@ -21,6 +23,7 @@ const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<vo
     const autocompleteList = document.querySelector<HTMLUListElement>(".autocomplete ul");
     assertElement(autocompleteList);
 
+    if (suppressAutocomplete) return;
     autocomplete.classList.add("open");
     autocompleteList.replaceChildren();
 
@@ -62,6 +65,7 @@ let timeoutId: number;
 
 listen("input", qInput, () => {
   clearTimeout(timeoutId);
+  suppressAutocomplete = false;
 
   const query = qInput.value;
   const minLength = settings.autocomplete_min ?? 2;
@@ -80,6 +84,7 @@ const autocompleteList: HTMLUListElement | null = document.querySelector<HTMLULi
 if (autocompleteList) {
   listen("keydown", qInput, (event: KeyboardEvent) => {
     if (event.key === "Escape") {
+      suppressAutocomplete = true;
       autocomplete?.classList.remove("open");
     }
   });
@@ -133,10 +138,12 @@ if (autocompleteList) {
   });
 
   listen("blur", qInput, () => {
+    suppressAutocomplete = true;
     autocomplete?.classList.remove("open");
   });
 
   listen("focus", qInput, () => {
+    suppressAutocomplete = false;
     autocomplete?.classList.add("open");
   });
 }
