@@ -109,6 +109,9 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/static_use_hash:/s/false/true/g" \
 -e "s/    use_mobile_ui: false/    use_mobile_ui: true/g" \
 -e "/disabled: false/d" \
+-e "/name: aol/s/$/\n    disabled: true/g" \
+-e "/name: aol images/s/$/\n    disabled: true/g" \
+-e "/name: aol videos/s/$/\n    disabled: true/g" \
 -e "/name: wikispecies/s/$/\n    disabled: true/g" \
 -e "/name: wikinews/s/$/\n    disabled: true/g" \
 -e "/name: wikibooks/s/$/\n    disabled: true/g" \
