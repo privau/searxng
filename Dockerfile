@@ -112,6 +112,10 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: aol/s/$/\n    disabled: true/g" \
 -e "/name: aol images/s/$/\n    disabled: true/g" \
 -e "/name: aol videos/s/$/\n    disabled: true/g" \
+-e "/name: karmasearch/s/$/\n    disabled: true/g" \
+-e "/name: karmasearch images/s/$/\n    disabled: true/g" \
+-e "/name: karmasearch videos/s/$/\n    disabled: true/g" \
+-e "/name: karmasearch news/s/$/\n    disabled: true/g" \
 -e "/name: wikispecies/s/$/\n    disabled: true/g" \
 -e "/name: wikinews/s/$/\n    disabled: true/g" \
 -e "/name: wikibooks/s/$/\n    disabled: true/g" \
