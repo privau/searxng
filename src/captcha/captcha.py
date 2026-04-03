@@ -12,7 +12,7 @@ from searx.botdetection import ip_lists as _8
 from searx.webutils import new_hmac as _9, is_hmac_of as _A
 
 
-MIN_WAIT_SECONDS = environ.get("CAPTCHA_MIN_WAIT", "1")
+MIN_WAIT_SECONDS = float(environ.get("CAPTCHA_MIN_WAIT", "1.0"))
 
 
 def _B(x):
