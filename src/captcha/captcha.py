@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import base64 as _0
-import hashlib as _1
 import json as _2
 import time as _3
 from ipaddress import ip_address as _4
@@ -13,7 +12,7 @@ from searx.botdetection import ip_lists as _8
 from searx.webutils import new_hmac as _9, is_hmac_of as _A
 
 
-MIN_WAIT_SECONDS = int(environ.get("CAPTCHA_MIN_WAIT", "1"))
+MIN_WAIT_SECONDS = environ.get("CAPTCHA_MIN_WAIT", "1")
 
 
 def _B(x):
@@ -22,10 +21,6 @@ def _B(x):
 
 def _C(x):
     return _0.urlsafe_b64decode(x + "=" * (-len(x) % 4))
-
-
-def _D(r):
-    return _1.sha256(_4(r.remote_addr).packed).hexdigest()
 
 
 def _E(s, o):
@@ -46,7 +41,6 @@ def make_pass_token(secret, request):
         secret,
         {
             "exp": int(_3.time()) + (60 * 60 * 12),
-            "ip": _D(request),
         },
     )
     return f"{x}.{y}"
@@ -60,18 +54,16 @@ def valid_pass_token(secret, request, token):
     return bool(
         z
         and z.get("exp", 0) >= int(_3.time())
-        and z.get("ip") == _D(request)
     )
 
 
 def make_challenge(secret, request):
-    t = int(_3.time())
+    t = int(_3.time() * 1000)
     return _E(
         secret,
         {
-            "iat": t,
-            "exp": t + 300,
-            "ip": _D(request),
+            "iat_ms": t,
+            "exp_ms": t + (300 * 1000),
         },
     )
 
@@ -129,12 +121,11 @@ def handle_captcha(request, secret, raw_text_query, search_query, selected_local
         a = request.values.get("captcha_challenge", "")
         b = request.values.get("captcha_signature", "")
         c = _F(secret, a, b)
-        n = _3.time()
+        n = int(_3.time() * 1000)
 
         if c and (
-            c.get("exp", 0) >= int(n)
-            and c.get("ip") == _D(request)
-            and n >= c.get("iat", 0) + MIN_WAIT_SECONDS
+            c.get("exp_ms", 0) >= n
+            and n >= c.get("iat_ms", 0) + (MIN_WAIT_SECONDS * 1000)
         ):
             return redirect_to_search(make_pass_token(secret, request), request)
 
