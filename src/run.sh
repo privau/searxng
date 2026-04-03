@@ -84,10 +84,19 @@ fi
 
 # set engine suspension timeout if a SearxEngineAccessDenied exception occours
 if [ ! -z "${SEARCH_ENGINE_ACCESS_DENIED}" ]; then
-    sed -i -e "/    SearxEngineAccessDenied/s/86400/${SEARCH_ENGINE_ACCESS_DENIED}/g" \
+    sed -i -e "/    SearxEngineAccessDenied/s/180/${SEARCH_ENGINE_ACCESS_DENIED}/g" \
     searx/settings.yml;
 else # set to 60 seconds
-    sed -i -e "/    SearxEngineAccessDenied/s/86400/60/g" \
+    sed -i -e "/    SearxEngineAccessDenied/s/180/60/g" \
+    searx/settings.yml;
+fi
+
+# set engine suspension timeout if a SearxEngineCaptcha exception occours
+if [ ! -z "${SEARCH_ENGINE_CAPTCHA}" ]; then
+    sed -i -e "/    SearxEngineCaptcha/s/3600/${SEARCH_ENGINE_CAPTCHA}/g" \
+    searx/settings.yml;
+else # set to 60 seconds
+    sed -i -e "/    SearxEngineCaptcha/s/3600/60/g" \
     searx/settings.yml;
 fi
 

@@ -78,6 +78,8 @@ When you connect to priv.au you are routed to the closest instance via BGP Anyca
 
 * ```SEARCH_ENGINE_ACCESS_DENIED``` : Sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_ACCESS_DENIED exception, by default this value is set to ```60``` (i.e. 1 minute)
 
+* ```SEARCH_ENGINE_CAPTCHA``` : Sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_CAPTCHA exception, by default this value is set to ```60``` (i.e. 1 minute)
+
 * ```PUBLIC_INSTANCE``` : Sets the public_instance parameter, which enables features designed for public instances. Requires the limiter to be enabled, which also requires redis. Required to be used on public production instances. Leave empty to disable. (Default: `false`)
 
 * ```SECRET_KEY``` : Sets the secret key for the instance. If not set, a random key will be generated on startup.
