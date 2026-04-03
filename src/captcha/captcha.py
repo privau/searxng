@@ -1,68 +1,148 @@
 #!/usr/bin/env python
-# SPDX-License-Identifier: AGPL-3.0-or-later
-"""This module implements functions needed for the CAPTCHA."""
 
-import hashlib
-from ipaddress import ip_address
+import base64 as _0
+import hashlib as _1
+import json as _2
+import time as _3
+from ipaddress import ip_address as _4
 from os import environ
 
-from flask import redirect, url_for
-from searx import limiter
-from searx.botdetection import ip_lists
-from searx.webutils import new_hmac, is_hmac_of
+from flask import redirect as _5, url_for as _6
+from searx import limiter as _7
+from searx.botdetection import ip_lists as _8
+from searx.webutils import new_hmac as _9, is_hmac_of as _A
 
 
-def redirect_to_search(token, request):
-    form_data = {k: v for k, v in request.form.items() if k != 'captcha_answer'}
-    response = redirect(url_for('search', **form_data))
-    response.set_cookie('captcha_token', token, max_age=60 * 60 * 24 * 365 * 5)  # 5 years
-    return response
+MIN_WAIT_SECONDS = int(environ.get("CAPTCHA_MIN_WAIT", "1"))
 
 
-def render_captcha(raw_text_query, search_query, selected_locale, render, captcha_answer):
-    # Render CAPTCHA question
-    return render(
-        'captcha.html',
-        title="Click to Continue",
-        line1="priv.au is under heavy attack.",
-        line2="This safeguard will be removed once the attack subsides.",
-        button="Continue",
-        captcha_answer=captcha_answer,
-        query=raw_text_query.getQuery(),
-        time_range=search_query.time_range or '',
-        current_language=selected_locale,
+def _B(x):
+    return _0.urlsafe_b64encode(x).rstrip(b"=").decode()
+
+
+def _C(x):
+    return _0.urlsafe_b64decode(x + "=" * (-len(x) % 4))
+
+
+def _D(r):
+    return _1.sha256(_4(r.remote_addr).packed).hexdigest()
+
+
+def _E(s, o):
+    z = _2.dumps(o, separators=(",", ":"), sort_keys=True).encode()
+    return _B(z), _9(s, z)
+
+
+def _F(s, p, g):
+    try:
+        z = _C(p)
+        return _2.loads(z) if _A(s, z, g) else None
+    except Exception:
+        return None
+
+
+def make_pass_token(secret, request):
+    x, y = _E(
+        secret,
+        {
+            "exp": int(_3.time()) + (60 * 60 * 12),
+            "ip": _D(request),
+        },
+    )
+    return f"{x}.{y}"
+
+
+def valid_pass_token(secret, request, token):
+    if not token or "." not in token:
+        return False
+    x, y = token.split(".", 1)
+    z = _F(secret, x, y)
+    return bool(
+        z
+        and z.get("exp", 0) >= int(_3.time())
+        and z.get("ip") == _D(request)
     )
 
 
-def handle_captcha(request, secret_key, raw_text_query, search_query, selected_locale, render):
-    # convert IP into bytes
-    ip = ip_address(request.remote_addr)
-    match, _ = ip_lists.pass_ip(ip, limiter.get_cfg())
+def make_challenge(secret, request):
+    t = int(_3.time())
+    return _E(
+        secret,
+        {
+            "iat": t,
+            "exp": t + 300,
+            "ip": _D(request),
+        },
+    )
 
-    # Check if the IP is in the whitelist
-    if not match and environ.get('CAPTCHA'):
-        # make sure captcha_token is a valid HMAC
-        captcha_token = request.cookies.get('captcha_token')
-        ip_hash = hashlib.sha256(ip.packed).digest()
-        ip_hash_plus_salt = hashlib.sha256(ip_hash + "blahblahblah".encode()).digest()
 
-        # Check if the CAPTCHA token is valid
-        if not captcha_token or not is_hmac_of(secret_key, ip_hash, captcha_token):
+def redirect_to_search(token, request):
+    q = {
+        k: v
+        for k, v in request.values.items()
+        if not (k[:8] == "captcha_" or k == "company")
+    }
+    r = _5(_6("search", **q))
+    r.set_cookie(
+        "captcha_token",
+        token,
+        max_age=(60 * 60 * 12),
+        httponly=True,
+        secure=True,
+        samesite="Lax",
+    )
+    return r
 
-            # Check if the CAPTCHA was answered correctly
-            captcha_answer = request.form.get('captcha_answer')
 
-            if (
-                captcha_answer
-                and request.method == 'POST'
-                and is_hmac_of(secret_key, ip_hash_plus_salt, captcha_answer)
-            ):
-                # Redirect to search page with the new token
-                token = new_hmac(secret_key, ip_hash)
-                return redirect_to_search(token, request)
+def render_captcha(raw_text_query, search_query, selected_locale, render, request, secret):
+    a, b = make_challenge(secret, request)
+    return render(
+        "captcha.html",
+        title="Checking your browser",
+        captcha_wait=MIN_WAIT_SECONDS,
+        captcha_url=_6(
+            "search",
+            captcha_verify="1",
+            captcha_challenge=a,
+            captcha_signature=b,
+            q=raw_text_query.getQuery(),
+            time_range=search_query.time_range or "",
+            language=selected_locale,
+            safesearch=request.values.get("safesearch", ""),
+            theme=request.values.get("theme", ""),
+        ),
+    )
 
-            return render_captcha(
-                raw_text_query, search_query, selected_locale, render, new_hmac(secret_key, ip_hash_plus_salt)
-            )
 
-    return None
+def handle_captcha(request, secret, raw_text_query, search_query, selected_locale, render):
+    u = _4(request.remote_addr)
+    v, _ = _8.pass_ip(u, _7.get_cfg())
+
+    if v or not environ.get("CAPTCHA"):
+        return None
+
+    w = request.cookies.get("captcha_token")
+    if valid_pass_token(secret, request, w):
+        return None
+
+    if request.values.get("captcha_verify"):
+        a = request.values.get("captcha_challenge", "")
+        b = request.values.get("captcha_signature", "")
+        c = _F(secret, a, b)
+        n = _3.time()
+
+        if c and (
+            c.get("exp", 0) >= int(n)
+            and c.get("ip") == _D(request)
+            and n >= c.get("iat", 0) + MIN_WAIT_SECONDS
+        ):
+            return redirect_to_search(make_pass_token(secret, request), request)
+
+    return render_captcha(
+        raw_text_query,
+        search_query,
+        selected_locale,
+        render,
+        request,
+        secret,
+    )

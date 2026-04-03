@@ -1,24 +1,16 @@
 {% extends "simple/base.html" %}
+
+{% block head %}
+{{ super() }}
+<meta http-equiv="refresh" content="{{ captcha_wait }};url={{ captcha_url }}">
+{% endblock %}
+
 {% block content %}
-<div class="dialog-modal">
-    <div class="center">
-        <h1>{{ title }}</h1>
-
-        <form method="POST" class="result">
-            <label>{{ line1 }}</label>
-            <label><h6>{{ line2 }}</h6></label><br>
-
-            <br>
-            <input type="hidden" name="captcha_answer" value="{{ captcha_answer }}">
-            <input type="hidden" name="q" value="{{ query }}">
-            <input type="hidden" name="language" value="{{ current_language }}">
-            <input type="hidden" name="time_range" value="{{ time_range }}">
-            <input type="hidden" name="safesearch" value="{{ safesearch }}">
-            <input type="hidden" name="theme" value="{{ theme }}">
-            <br>
-
-            <button type="submit" id="copy_url" class="category_button"><h3>{{ button }}</h3></button>
-        </form>
+<div class="captcha-check">
+    <div class="captcha-check-box">
+        <p class="content">&#67;&#104;&#101;&#99;&#107;&#105;&#110;&#103;&#32;&#121;&#111;&#117;&#114;&#32;&#98;&#114;&#111;&#119;&#115;&#101;&#114;&#46;&#46;&#46;</p>
+        <div class="captcha-check-bar">
+            <div class="captcha-check-fill"></div>
         </div>
     </div>
 </div>

@@ -88,6 +88,8 @@ When you connect to priv.au you are routed to the closest instance via BGP Anyca
 
 * ```CAPTCHA``` : Enables the captcha for the instance if set. (Default: `false`)
 
+* ```CAPTCHA_MIN_WAIT``` : Time that the user will wait at the captcha. (Default: `1`)
+
 * ```AUTHORIZED_API``` : Set the password for the Authorized API. (Default: empty)
 
 * ```OPENMETRICS``` : Set the password for the OpenMetrics endpoint. (Default: empty)

@@ -1,0 +1,31 @@
+.captcha-check {
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.captcha-check-box {
+    width: 260px;
+    text-align: center;
+    opacity: 0.85;
+}
+
+.captcha-check-bar {
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+}
+
+.captcha-check-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--color-logo-fill);
+    animation: fill 0.5s ease forwards;
+}
+
+@keyframes fill {
+    from { width: 0% }
+    to { width: 100% }
+}
