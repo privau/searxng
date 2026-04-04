@@ -1,82 +1,97 @@
 #!/usr/bin/env python
 
-import base64 as _0
-import json as _2
-import time as _3
-from ipaddress import ip_address as _4
-from os import environ
+import base64
+import json
+import time
+from ipaddress import ip_address
+from urllib.parse import urlencode
 
-from flask import redirect as _5, url_for as _6
-from searx import limiter as _7
-from searx.botdetection import ip_lists as _8
-from searx.webutils import new_hmac as _9, is_hmac_of as _A
-
-
-def _B(x):
-    return _0.urlsafe_b64encode(x).rstrip(b"=").decode()
+from flask import redirect, url_for
+from searx import limiter
+from searx.botdetection import ip_lists
+from searx.webutils import new_hmac, is_hmac_of
 
 
-def _C(x):
-    return _0.urlsafe_b64decode(x + "=" * (-len(x) % 4))
+def _b64e(x):
+    return base64.urlsafe_b64encode(x).rstrip(b"=").decode()
 
 
-def _E(s, o):
-    z = _2.dumps(o, separators=(",", ":"), sort_keys=True).encode()
-    return _B(z), _9(s, z)
+def _b64d(x):
+    return base64.urlsafe_b64decode(x + "=" * (-len(x) % 4))
 
 
-def _F(s, p, g):
+def _pack(secret, obj):
+    raw = json.dumps(obj, separators=(",", ":")).encode()
+    return _b64e(raw), new_hmac(secret, raw)
+
+
+def _unpack(secret, payload, sig):
     try:
-        z = _C(p)
-        return _2.loads(z) if _A(s, z, g) else None
+        raw = _b64d(payload)
+        if not is_hmac_of(secret, raw, sig):
+            return None
+        return json.loads(raw)
     except Exception:
         return None
 
 
-def make_pass_token(secret, request):
-    x, y = _E(
-        secret,
-        {
-            "exp": int(_3.time()) + (60 * 60 * 12),
-        },
-    )
-    return f"{x}.{y}"
+def _params(request):
+    out = []
+    for k, vals in request.args.lists():
+        if k.startswith("captcha_"):
+            continue
+        for v in vals:
+            out.append((k, v))
+    return out
 
 
-def valid_pass_token(secret, request, token):
+def _fix_params(x):
+    out = []
+    for i in x or []:
+        if isinstance(i, (list, tuple)) and len(i) == 2:
+            out.append((i[0], i[1]))
+    return out
+
+
+def _url(params):
+    p = _fix_params(params)
+    u = url_for("search")
+    if not p:
+        return u
+    return u + "?" + urlencode(p, doseq=True)
+
+
+def _pass(secret):
+    a, b = _pack(secret, {"exp": int(time.time()) + 43200})
+    return a + "." + b
+
+
+def _pass_ok(secret, token):
     if not token or "." not in token:
         return False
-    x, y = token.split(".", 1)
-    z = _F(secret, x, y)
-    return bool(
-        z
-        and z.get("exp", 0) >= int(_3.time())
-    )
+    a, b = token.split(".", 1)
+    x = _unpack(secret, a, b)
+    return bool(x and x.get("exp", 0) >= int(time.time()))
 
 
-def make_challenge(secret, request):
-    t = int(_3.time() * 1000)
-    return _E(
+def _challenge(secret, request):
+    now = int(time.time() * 1000)
+    return _pack(
         secret,
         {
-            "iat_ms": t,
-            "exp_ms": t + (300 * 1000),
+            "iat_ms": now,
+            "exp_ms": now + 300000,
+            "params": _params(request),
         },
     )
 
 
-def redirect_to_search(token, request):
-    q = {
-        k: v
-        for k, v in request.values.items()
-        if not (k[:8] == "captcha_" or k == "company")
-        and v != ""
-    }
-    r = _5(_6("search", **q))
+def _go_search(params, token):
+    r = redirect(_url(params), code=302)
     r.set_cookie(
         "captcha_token",
         token,
-        max_age=(60 * 60 * 12),
+        max_age=43200,
         httponly=True,
         secure=True,
         samesite="Strict",
@@ -84,48 +99,33 @@ def redirect_to_search(token, request):
     return r
 
 
-def redirect_to_challenge(raw_text_query, search_query, selected_locale, request, secret):
-    a, b = make_challenge(secret, request)
-    u = request.values.get("theme") or ""
-    z = {
-        "captcha_verify": "1",
-        "captcha_challenge": a,
-        "captcha_signature": b,
-        "q": raw_text_query.getQuery(),
-        "time_range": search_query.time_range or "",
-        "language": selected_locale,
-        # Must be "0".."2": empty safesearch in the URL makes parse_safesearch() raise.
-        "safesearch": str(search_query.safesearch),
-    }
-    if u:
-        z["theme"] = u
-    return _5(_6("search", **z), code=302)
+def _go_challenge(request, secret):
+    a, b = _challenge(secret, request)
+    p = _params(request)
+    p.append(("captcha_challenge", a))
+    p.append(("captcha_signature", b))
+    return redirect(_url(p), code=302)
 
 
-def handle_captcha(request, secret, raw_text_query, search_query, selected_locale):
-    u = _4(request.remote_addr)
-    v, _ = _8.pass_ip(u, _7.get_cfg())
+def handle_captcha(request, secret, *_):
+    ip = ip_address(request.remote_addr)
+    ok, _ = ip_lists.pass_ip(ip, limiter.get_cfg())
 
-    if v or not environ.get("CAPTCHA"):
+    if ok:
         return None
 
-    w = request.cookies.get("captcha_token")
-    if valid_pass_token(secret, request, w):
+    token = request.cookies.get("captcha_token")
+    if _pass_ok(secret, token):
         return None
 
-    if request.values.get("captcha_verify"):
-        a = request.values.get("captcha_challenge", "")
-        b = request.values.get("captcha_signature", "")
-        c = _F(secret, a, b)
-        n = int(_3.time() * 1000)
+    a = request.args.get("captcha_challenge", "")
+    b = request.args.get("captcha_signature", "")
 
-        if c and c.get("exp_ms", 0) >= n >= c.get("iat_ms", 0):
-            return redirect_to_search(make_pass_token(secret, request), request)
+    if a and b:
+        x = _unpack(secret, a, b)
+        now = int(time.time() * 1000)
 
-    return redirect_to_challenge(
-        raw_text_query,
-        search_query,
-        selected_locale,
-        request,
-        secret,
-    )
+        if x and x.get("iat_ms", 0) <= now <= x.get("exp_ms", 0):
+            return _go_search(x.get("params", []), _pass(secret))
+
+    return _go_challenge(request, secret)
