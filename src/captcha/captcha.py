@@ -7,7 +7,7 @@ from ipaddress import ip_address
 from os import environ
 from urllib.parse import urlencode
 
-from flask import redirect, url_for
+from flask import redirect, make_response, url_for
 from searx import limiter
 from searx.auth import valid_api_key
 from searx.botdetection import ip_lists
@@ -76,26 +76,20 @@ def _pass_ok(secret, token):
     return bool(x and x.get("exp", 0) >= int(time.time()))
 
 
-def _challenge(secret, params, stage=0):
+def _challenge(secret, params):
     now = int(time.time() * 1000)
     return _pack(
         secret,
         {
             "iat_ms": now,
             "exp_ms": now + 300000,
-            "stage": stage,
             "params": _fix_params(params),
         },
     )
 
 
-def _go_search(secret, params, token):
-    p = _fix_params(params)
-    a, b = _challenge(secret, p, 1)
-    p.append(("captcha_challenge", a))
-    p.append(("captcha_signature", b))
-
-    r = redirect(_url(p), code=302)
+def _go_search(params, token):
+    r = redirect(_url(params), code=302)
     r.set_cookie(
         "captcha_token",
         token,
@@ -107,12 +101,34 @@ def _go_search(secret, params, token):
     return r
 
 
-def _go_challenge(request, secret):
+def _wait_page(request, secret):
     p = _params(request)
-    a, b = _challenge(secret, p, 0)
+    a, b = _challenge(secret, p)
     p.append(("captcha_challenge", a))
     p.append(("captcha_signature", b))
-    return redirect(_url(p), code=302)
+
+    html = (
+        "<!doctype html>"
+        "<html>"
+        "<head>"
+        '<meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<meta name="color-scheme" content="light dark">'
+        '<meta http-equiv="refresh" content="1;url=' + _url(p) + '">'
+        "<style>"
+        ":root{color-scheme:light dark;}"
+        "html,body{margin:0;padding:0;width:100%;height:100%;background:#ffffff;}"
+        "@media (prefers-color-scheme: dark){html,body{background:#0f1115;}}"
+        "</style>"
+        "</head>"
+        "<body></body>"
+        "</html>"
+    )
+
+    r = make_response(html, 200)
+    r.headers["Content-Type"] = "text/html; charset=utf-8"
+    r.headers["Cache-Control"] = "no-store"
+    return r
 
 
 def handle_captcha(request, secret, *_):
@@ -128,22 +144,22 @@ def handle_captcha(request, secret, *_):
     if ok:
         return None
 
-    a = request.args.get("captcha_challenge", "")
-    b = request.args.get("captcha_signature", "")
-
     token = request.cookies.get("captcha_token")
     if _pass_ok(secret, token):
-        if a and b:
+        if request.args.get("captcha_challenge") or request.args.get("captcha_signature"):
             return redirect(_url(_params(request)), code=302)
         return None
+
+    a = request.args.get("captcha_challenge", "")
+    b = request.args.get("captcha_signature", "")
 
     if a and b:
         x = _unpack(secret, a, b)
         now = int(time.time() * 1000)
 
         if x and x.get("iat_ms", 0) <= now <= x.get("exp_ms", 0):
-            if x.get("stage", 0) == 1:
-                return "Cookies required", 403
-            return _go_search(secret, x.get("params", []), _pass(secret))
+            if now - x.get("iat_ms", 0) < 800:
+                return "Too fast", 403
+            return _go_search(x.get("params", []), _pass(secret))
 
-    return _go_challenge(request, secret)
+    return _wait_page(request, secret)
