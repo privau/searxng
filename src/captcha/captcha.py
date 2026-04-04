@@ -70,6 +70,7 @@ def redirect_to_search(token, request):
         k: v
         for k, v in request.values.items()
         if not (k[:8] == "captcha_" or k == "company")
+        and v != ""
     }
     r = _5(_6("search", **q))
     r.set_cookie(
@@ -85,20 +86,20 @@ def redirect_to_search(token, request):
 
 def redirect_to_challenge(raw_text_query, search_query, selected_locale, request, secret):
     a, b = make_challenge(secret, request)
-    return _5(
-        _6(
-            "search",
-            captcha_verify="1",
-            captcha_challenge=a,
-            captcha_signature=b,
-            q=raw_text_query.getQuery(),
-            time_range=search_query.time_range or "",
-            language=selected_locale,
-            safesearch=request.values.get("safesearch", ""),
-            theme=request.values.get("theme", ""),
-        ),
-        code=302,
-    )
+    u = request.values.get("theme") or ""
+    z = {
+        "captcha_verify": "1",
+        "captcha_challenge": a,
+        "captcha_signature": b,
+        "q": raw_text_query.getQuery(),
+        "time_range": search_query.time_range or "",
+        "language": selected_locale,
+        # Must be "0".."2": empty safesearch in the URL makes parse_safesearch() raise.
+        "safesearch": str(search_query.safesearch),
+    }
+    if u:
+        z["theme"] = u
+    return _5(_6("search", **z), code=302)
 
 
 def handle_captcha(request, secret, raw_text_query, search_query, selected_locale):
