@@ -76,20 +76,26 @@ def _pass_ok(secret, token):
     return bool(x and x.get("exp", 0) >= int(time.time()))
 
 
-def _challenge(secret, request):
+def _challenge(secret, params, stage=0):
     now = int(time.time() * 1000)
     return _pack(
         secret,
         {
             "iat_ms": now,
             "exp_ms": now + 300000,
-            "params": _params(request),
+            "stage": stage,
+            "params": _fix_params(params),
         },
     )
 
 
-def _go_search(params, token):
-    r = redirect(_url(params), code=302)
+def _go_search(secret, params, token):
+    p = _fix_params(params)
+    a, b = _challenge(secret, p, 1)
+    p.append(("captcha_challenge", a))
+    p.append(("captcha_signature", b))
+
+    r = redirect(_url(p), code=302)
     r.set_cookie(
         "captcha_token",
         token,
@@ -102,12 +108,11 @@ def _go_search(params, token):
 
 
 def _go_challenge(request, secret):
-    a, b = _challenge(secret, request)
     p = _params(request)
+    a, b = _challenge(secret, p, 0)
     p.append(("captcha_challenge", a))
     p.append(("captcha_signature", b))
     return redirect(_url(p), code=302)
-
 
 
 def handle_captcha(request, secret, *_):
@@ -123,18 +128,22 @@ def handle_captcha(request, secret, *_):
     if ok:
         return None
 
-    token = request.cookies.get("captcha_token")
-    if _pass_ok(secret, token):
-        return None
-
     a = request.args.get("captcha_challenge", "")
     b = request.args.get("captcha_signature", "")
+
+    token = request.cookies.get("captcha_token")
+    if _pass_ok(secret, token):
+        if a and b:
+            return redirect(_url(_params(request)), code=302)
+        return None
 
     if a and b:
         x = _unpack(secret, a, b)
         now = int(time.time() * 1000)
 
         if x and x.get("iat_ms", 0) <= now <= x.get("exp_ms", 0):
-            return _go_search(x.get("params", []), _pass(secret))
+            if x.get("stage", 0) == 1:
+                return "Cookies required", 403
+            return _go_search(secret, x.get("params", []), _pass(secret))
 
     return _go_challenge(request, secret)
