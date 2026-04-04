@@ -3,6 +3,7 @@
 import base64
 import json
 import time
+from html import escape
 from ipaddress import ip_address
 from os import environ
 from urllib.parse import urlencode
@@ -96,16 +97,47 @@ def _challenge(secret, params):
     )
 
 
-def _go_search(params, token):
-    r = redirect(_search_url(params), code=302)
-    r.set_cookie(
-        "captcha_token",
-        token,
-        max_age=43200,
-        httponly=True,
-        secure=True,
-        samesite="Strict",
+def _grant(secret, params):
+    now = int(time.time() * 1000)
+    return _pack(
+        secret,
+        {
+            "exp_ms": now + 5000,
+            "params": _fix_params(params),
+        },
     )
+
+
+def _grant_ok(secret, request):
+    a = request.args.get("captcha_pass", "")
+    b = request.args.get("captcha_pass_sig", "")
+
+    if not a or not b:
+        return False
+
+    x = _unpack(secret, a, b)
+    now = int(time.time() * 1000)
+
+    if not x or x.get("exp_ms", 0) < now:
+        return False
+
+    return _fix_params(x.get("params", [])) == _params(request)
+
+
+def _redirect_to_search(params, secret, set_pass_cookie=False):
+    p = _fix_params(params)
+    r = redirect(_search_url(p), code=302)
+
+    if set_pass_cookie:
+        r.set_cookie(
+            "captcha_token",
+            _pass(secret),
+            max_age=43200,
+            httponly=True,
+            secure=True,
+            samesite="Strict",
+        )
+
     return r
 
 
@@ -124,7 +156,7 @@ def _wait_page(params, secret):
         '<meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         '<meta name="color-scheme" content="light dark">'
-        '<meta http-equiv="refresh" content="1;url=' + _captcha_url(c) + '">'
+        '<meta http-equiv="refresh" content="1;url=' + escape(_captcha_url(c), quote=True) + '">'
         "<style>"
         ":root{color-scheme:light dark;}"
         "html,body{margin:0;padding:0;width:100%;height:100%;background:#ffffff;}"
@@ -162,6 +194,9 @@ def handle_captcha(request, secret, *_):
     if _pass_ok(secret, token):
         return None
 
+    if _grant_ok(secret, request):
+        return None
+
     return redirect(_captcha_url(_params(request)), code=302)
 
 
@@ -175,6 +210,9 @@ def captcha(request, secret):
     if _pass_ok(secret, token):
         return redirect(_search_url(p), code=302)
 
+    if _grant_ok(secret, request):
+        return redirect(_search_url(p), code=302)
+
     a = request.args.get("captcha_challenge", "")
     b = request.args.get("captcha_signature", "")
 
@@ -185,6 +223,11 @@ def captcha(request, secret):
         if x and x.get("iat_ms", 0) <= now <= x.get("exp_ms", 0):
             if now - x.get("iat_ms", 0) < 800:
                 return "Too fast", 403
-            return _go_search(x.get("params", []), _pass(secret))
+
+            q = _fix_params(x.get("params", []))
+            g, gs = _grant(secret, q)
+            q.append(("captcha_pass", g))
+            q.append(("captcha_pass_sig", gs))
+            return _redirect_to_search(q, secret, set_pass_cookie=True)
 
     return _wait_page(p, secret)
