@@ -75,7 +75,8 @@ RUN sed -i "/render('privacy-policy.html')/a @app.route('/donate', methods=\['GE
 
 # include patches for captcha
 COPY --chown=searxng:searxng ./src/captcha/captcha.py searx/captcha.py
-RUN sed -i '/search_obj = searx.search.SearchWithPlugins(search_query, sxng_request, sxng_request.user_plugins)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(sxng_request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale)):\n            return captcha_response\n' searx/webapp.py
+RUN sed -i '/search_obj = searx.search.SearchWithPlugins(search_query, sxng_request, sxng_request.user_plugins)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(sxng_request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale)):\n            return captcha_response\n' searx/webapp.py \
+&& sed -i "/return Response('OK', mimetype='text\/plain')/a \\\\n@app.route('/captcha', methods=['GET'], endpoint='captcha')\\ndef captcha_view():\\n    from searx.captcha import captcha as captcha_page\\n    return captcha_page(sxng_request, settings['server']['secret_key'])" searx/webapp.py
 
 # include patches for authorized api access
 COPY --chown=searxng:searxng ./src/auth/auth.py searx/auth.py
