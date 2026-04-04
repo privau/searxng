@@ -4,10 +4,12 @@ import base64
 import json
 import time
 from ipaddress import ip_address
+from os import environ
 from urllib.parse import urlencode
 
 from flask import redirect, url_for
 from searx import limiter
+from searx.auth import valid_api_key
 from searx.botdetection import ip_lists
 from searx.webutils import new_hmac, is_hmac_of
 
@@ -107,7 +109,14 @@ def _go_challenge(request, secret):
     return redirect(_url(p), code=302)
 
 
+
 def handle_captcha(request, secret, *_):
+    if not environ.get("CAPTCHA"):
+        return None
+
+    if valid_api_key(request):
+        return None
+
     ip = ip_address(request.remote_addr)
     ok, _ = ip_lists.pass_ip(ip, limiter.get_cfg())
 
