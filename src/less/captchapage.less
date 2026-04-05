@@ -1,0 +1,59 @@
+body:has(.captcha-page) {
+  overflow-x: hidden;
+
+  #links_on_top {
+    z-index: 5000;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  body:has(.captcha-page) #links_on_top {
+    z-index: 1500;
+  }
+}
+
+.captcha-page {
+  .captcha-progress {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 3px;
+    margin: 1px 0 0;
+    pointer-events: none;
+    background: var(--color-base-background);
+  }
+
+  .captcha-progress-track {
+    height: 100%;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+  }
+
+  .captcha-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--color-logo-fill);
+    animation: captcha-progress 1.5s ease-in-out forwards;
+  }
+
+  .search_box button,
+  .search_categories {
+    pointer-events: none;
+  }
+
+  #q[readonly] {
+    cursor: default;
+  }
+}
+
+@keyframes captcha-progress {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}

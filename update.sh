@@ -26,6 +26,11 @@ if ! grep -q '@import "donationpage.less";' build/client/simple/src/less/style.l
   sed -i 's/@import "privacypage.less";/@import "privacypage.less";\n@import "donationpage.less";/' build/client/simple/src/less/style.less
 fi
 
+echo "Enable captcha page styles."
+if ! grep -q '@import "captchapage.less";' build/client/simple/src/less/style.less; then
+  sed -i 's/@import "donationpage.less";/@import "donationpage.less";\n@import "captchapage.less";/' build/client/simple/src/less/style.less
+fi
+
 echo "Build static files."
 cd build
 make themes.all

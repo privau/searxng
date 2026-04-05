@@ -1,0 +1,31 @@
+{% extends "simple/base.html" %}
+{% from 'simple/icons.html' import icon_big %}
+
+{% block head %}
+{{ super() }}
+<meta http-equiv="refresh" content="1;url={{ refresh_url|e }}">
+{% endblock %}
+
+{% block content %}
+<form id="search" class="captcha-page" method="{{ method or 'POST' }}" action="{{ url_for('search') }}" role="search" onsubmit="return false">
+  <div id="search_header">
+    <a id="search_logo" href="{{ url_for('index') }}" tabindex="0" title="{{ _('Display the front page') }}">
+      <span hidden>SearXNG</span>
+      {% include 'simple/searxng-wordmark.min.svg' without context %}
+    </a>
+    <div id="search_view">
+      <div class="search_box">
+        <input id="q" name="q" type="text" placeholder="{{ _('Search for...') }}" tabindex="1" autocomplete="off" autocapitalize="none" spellcheck="false" autocorrect="off" dir="auto" value="{{ q|e }}" readonly>
+        <button id="clear_search" type="button" aria-label="{{ _('clear') }}" class="hide_if_nojs"><span>{{ icon_big('close') }}</span><span class="show_if_nojs">{{ _('clear') }}</span></button>
+        <button id="send_search" type="button" aria-label="{{ _('search') }}"><span class="hide_if_nojs">{{ icon_big('search') }}</span><span class="show_if_nojs">{{ _('search') }}</span></button>
+        <div class="autocomplete hide_if_nojs"><ul></ul></div>
+      </div>
+    </div>
+    {% set display_tooltip = true %}
+    {% include 'simple/categories.html' %}
+  </div>
+  <div class="captcha-progress" aria-hidden="true">
+    <div class="captcha-progress-track"><div class="captcha-progress-fill"></div></div>
+  </div>
+</form>
+{% endblock %}
