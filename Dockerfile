@@ -134,7 +134,7 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: radio browser/s/$/\n    disabled: true/g" \
 -e "/name: mixcloud/s/$/\n    disabled: true/g" \
 -e "/name: hoogle/s/$/\n    disabled: true/g" \
--e "/name: currency/s/$/\n    disabled: true/g" \
+-e "/name: currency/s/$/\n    disabled: false/g" \
 -e "/name: qwant/s/$/\n    disabled: true/g" \
 -e "/name: btdigg/s/$/\n    disabled: true/g" \
 -e "/name: lucide/s/$/\n    disabled: true/g" \
@@ -152,7 +152,7 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: library of congress/s/$/\n    disabled: true/g" \
 -e "/name: dictzone/s/$/\n    disabled: true/g" \
 -e "/name: baidu/s/$/\n    disabled: true/g" \
--e "/name: lingva/s/$/\n    disabled: true/g" \
+-e "/name: lingva/s/$/\n    disabled: fasle/g" \
 -e "/name: genius/s/$/\n    disabled: true/g" \ 
 -e "/name: wallhaven/s/$/\n    disabled: true/g" \ 
 -e "/name: artic/s/$/\n    disabled: true/g" \
