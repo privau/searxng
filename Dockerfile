@@ -20,14 +20,14 @@ RUN git config --global --add safe.directory /usr/local/searxng \
 && git clone https://github.com/searxng/searxng . \
 && git reset --hard ${UPSTREAM_COMMIT}
 
-COPY ./src/google.patch ./google.patch
-RUN git apply ./google.patch && rm -f ./google.patch
-
 RUN python -m venv ./venv \
 && . ./venv/bin/activate \
 && pip install -r requirements.txt \
 && pip install "granian[pname]~=2.0" \
 && python -m searx.version freeze
+
+COPY ./src/google.patch ./google.patch
+RUN git apply ./google.patch && rm -f ./google.patch
 
 ARG SEARXNG_UID=977
 ARG SEARXNG_GID=977
