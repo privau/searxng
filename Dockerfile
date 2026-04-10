@@ -26,9 +26,6 @@ RUN python -m venv ./venv \
 && pip install "granian[pname]~=2.0" \
 && python -m searx.version freeze
 
-COPY ./src/google.patch ./google.patch
-RUN git apply ./google.patch && rm -f ./google.patch
-
 ARG SEARXNG_UID=977
 ARG SEARXNG_GID=977
 
