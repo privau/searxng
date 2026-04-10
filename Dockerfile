@@ -20,6 +20,9 @@ RUN git config --global --add safe.directory /usr/local/searxng \
 && git clone https://github.com/searxng/searxng . \
 && git reset --hard ${UPSTREAM_COMMIT}
 
+COPY ./src/google.patch ./google.patch
+RUN git apply ./google.patch && rm -f ./google.patch
+
 RUN python -m venv ./venv \
 && . ./venv/bin/activate \
 && pip install -r requirements.txt \
