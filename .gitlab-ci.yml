@@ -1,0 +1,173 @@
+stages:
+  - maintenance
+  - build
+
+variables:
+  DOCKER_HOST: "unix:///var/run/docker.sock"
+
+  TEST_TAG: "searxng:test"
+  DOCKER_HUB_LATEST_TAG: "vojkovic/searxng:latest"
+  GITLAB_LATEST_TAG: "$CI_REGISTRY_IMAGE:latest"
+  GITLAB_SHA_TAG: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+
+  SOURCE_REPO: "searxng/searxng"
+  SOURCE_REPO_BRANCH: "master"
+
+update-upstream-commit:
+  stage: maintenance
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache git
+    - git config user.name "gitlab-ci[bot]"
+    - git config user.email "gitlab-ci[bot]@users.noreply.gitlab.com"
+    - git remote set-url origin "https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+    - git fetch origin "$CI_COMMIT_BRANCH"
+    - git checkout -B "$CI_COMMIT_BRANCH" "origin/$CI_COMMIT_BRANCH"
+  script:
+    - |
+      REMOTE_COMMIT="$(git ls-remote "https://github.com/${SOURCE_REPO}" "$SOURCE_REPO_BRANCH" | awk '{print $1}')"
+      LOCAL_COMMIT="$(grep -m1 "UPSTREAM_COMMIT=" Dockerfile | cut -d'=' -f2)"
+
+      echo "Remote commit: $REMOTE_COMMIT"
+      echo "Local commit:  $LOCAL_COMMIT"
+
+      if [ "$REMOTE_COMMIT" = "$LOCAL_COMMIT" ]; then
+        echo "BUILD_REQUIRED=0" > build.env
+        echo "Repository is up to date. Skipping."
+        exit 0
+      fi
+
+      sed -i "/^ENV UPSTREAM_COMMIT=/c\\ENV UPSTREAM_COMMIT=${REMOTE_COMMIT}" Dockerfile
+
+      git add Dockerfile
+      git commit -m "upd: latest upstream commit"
+      git push origin "HEAD:${CI_COMMIT_BRANCH}"
+
+      echo "BUILD_REQUIRED=1" > build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $RUN_UPSTREAM_UPDATE == "1"'
+
+build-theme:
+  stage: maintenance
+  image: ubuntu:24.04
+  before_script:
+    - apt-get update
+    - apt-get install -y git make nodejs npm python3 python3-venv
+    - git config user.name "gitlab-ci[bot]"
+    - git config user.email "gitlab-ci[bot]@users.noreply.gitlab.com"
+    - git remote set-url origin "https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+    - git fetch origin "$CI_COMMIT_BRANCH"
+    - git checkout -B "$CI_COMMIT_BRANCH" "origin/$CI_COMMIT_BRANCH"
+  script:
+    - ./update.sh
+    - |
+      if git diff --quiet -- out; then
+        echo "BUILD_REQUIRED=0" > build.env
+        echo "No theme output changes."
+        exit 0
+      fi
+
+      git add out
+      git commit -m "theme: build out/"
+      git push origin "HEAD:${CI_COMMIT_BRANCH}"
+
+      echo "BUILD_REQUIRED=1" > build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" && $RUN_THEME == "1"'
+
+build-and-push:
+  stage: build
+  timeout: 3h
+  image: docker:latest
+  needs:
+    - job: update-upstream-commit
+      artifacts: true
+      optional: true
+    - job: build-theme
+      artifacts: true
+      optional: true
+  before_script:
+    - docker login -u "vojkovic" -p "$DOCKER_HUB_ACCESS_TOKEN"
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker run --rm --privileged tonistiigi/binfmt --install all
+    - docker buildx rm -f ci-multiarch 2>/dev/null || true
+    - docker rm -f buildx_buildkit_ci-multiarch0 2>/dev/null || true
+    - docker buildx create --name ci-multiarch --driver docker-container --driver-opt network=host --use
+    - docker buildx inspect --bootstrap
+    - |
+      B="$(docker ps -q --filter name=buildx_buildkit_ci-multiarch)"
+      docker inspect "$B" --format 'BuildKit pid={{.State.Pid}} network_mode={{.HostConfig.NetworkMode}}'
+      test "$(docker inspect -f '{{.HostConfig.NetworkMode}}' "$B")" = "host"
+  script:
+    - |
+      if [ "${CI_PIPELINE_SOURCE}" = "schedule" ] || [ "${RUN_UPSTREAM_UPDATE:-0}" = "1" ] || [ "${RUN_THEME:-0}" = "1" ]; then
+        if [ "${BUILD_REQUIRED:-0}" != "1" ]; then
+          echo "No source/theme update happened. Skipping image build."
+          exit 0
+        fi
+
+        git fetch origin "$CI_COMMIT_BRANCH"
+        git reset --hard "origin/$CI_COMMIT_BRANCH"
+      fi
+
+      docker buildx build \
+        --load \
+        --tag "$TEST_TAG" \
+        --file ./Dockerfile \
+        .
+
+      TEST_CONTAINER="searxng-test-${CI_PIPELINE_ID}"
+
+      docker run -d \
+        --name "$TEST_CONTAINER" \
+        -p 8080:8080 \
+        -e AUTHORIZED_API=test_api_key \
+        "$TEST_TAG"
+
+      sleep 15
+
+      docker run --rm --network host curlimages/curl:latest \
+        -fsS http://localhost:8080/healthz | grep "OK"
+
+      docker run --rm --network host curlimages/curl:latest \
+        -fsS "http://localhost:8080/search?q=github" | grep "sidebar-end-collapsible"
+
+      AUTH_HEADER="$(printf 'user:test_api_key' | base64 | tr -d '\n')"
+
+      docker run --rm --network host curlimages/curl:latest \
+        -fsS \
+        -H "Authorization: Basic ${AUTH_HEADER}" \
+        "http://localhost:8080/search?q=github&format=json" | grep "number_of_results"
+
+      docker rm -f "$TEST_CONTAINER"
+
+      docker buildx build \
+        --platform linux/amd64,linux/arm64 \
+        --tag "$DOCKER_HUB_LATEST_TAG" \
+        --tag "$GITLAB_LATEST_TAG" \
+        --tag "$GITLAB_SHA_TAG" \
+        --file ./Dockerfile \
+        --push \
+        .
+  after_script:
+    - docker rm -f "searxng-test-${CI_PIPELINE_ID}" 2>/dev/null || true
+    - docker buildx rm -f ci-multiarch 2>/dev/null || true
+    - docker rm -f buildx_buildkit_ci-multiarch0 2>/dev/null || true
+    - docker logout "$CI_REGISTRY" || true
+    - docker logout || true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"'
+      changes:
+        - src/**/*
+        - out/**/*
+        - Dockerfile
+        - .gitlab-ci.yml
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'

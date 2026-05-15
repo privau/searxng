@@ -1,0 +1,71 @@
+name: build-ghcr
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'out/**'
+      - 'Dockerfile'
+      - '.github/workflows/build-ghcr.yml'
+  workflow_dispatch:
+
+env:
+  TEST_TAG: ghcr.io/privau/searxng:test
+  GITHUB_LATEST_TAG: ghcr.io/privau/searxng:latest
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Test Main Image
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          context: ./
+          file: ./Dockerfile
+          tags: ${{ env.TEST_TAG }}
+
+      - name: Test Main Image
+        run: |
+          docker run -d -p 8080:8080 -e AUTHORIZED_API=test_api_key --name searxng-test ${{ env.TEST_TAG }}
+
+          sleep 15
+
+          curl -fsS http://localhost:8080/healthz | grep "OK"
+          curl -fsS "http://localhost:8080/search?q=github" | grep "sidebar-end-collapsible"
+          curl -fsS \
+            -H "Authorization: Basic $(printf 'user:test_api_key' | base64 | tr -d '\n')" \
+            "http://localhost:8080/search?q=github&format=json" | grep "number_of_results"
+
+          docker rm -f searxng-test
+
+      - name: Build and push GHCR
+        uses: docker/build-push-action@v6
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ${{ env.GITHUB_LATEST_TAG }}
