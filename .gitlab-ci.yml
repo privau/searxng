@@ -51,46 +51,12 @@ update-upstream-commit:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
     - if: '$CI_PIPELINE_SOURCE == "web" && $RUN_UPSTREAM_UPDATE == "1"'
 
-build-theme:
-  stage: maintenance
-  image: ubuntu:24.04
-  before_script:
-    - apt-get update
-    - apt-get install -y git make nodejs npm python3 python3-venv
-    - git config user.name "gitlab-ci[bot]"
-    - git config user.email "gitlab-ci[bot]@users.noreply.gitlab.com"
-    - git remote set-url origin "https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
-    - git fetch origin "$CI_COMMIT_BRANCH"
-    - git checkout -B "$CI_COMMIT_BRANCH" "origin/$CI_COMMIT_BRANCH"
-  script:
-    - ./update.sh
-    - |
-      if git diff --quiet -- out; then
-        echo "BUILD_REQUIRED=0" > build.env
-        echo "No theme output changes."
-        exit 0
-      fi
-
-      git add out
-      git commit -m "theme: build out/"
-      git push origin "HEAD:${CI_COMMIT_BRANCH}"
-
-      echo "BUILD_REQUIRED=1" > build.env
-  artifacts:
-    reports:
-      dotenv: build.env
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "web" && $RUN_THEME == "1"'
-
 build-and-push:
   stage: build
   timeout: 3h
   image: docker:latest
   needs:
     - job: update-upstream-commit
-      artifacts: true
-      optional: true
-    - job: build-theme
       artifacts: true
       optional: true
   before_script:
@@ -107,9 +73,9 @@ build-and-push:
       test "$(docker inspect -f '{{.HostConfig.NetworkMode}}' "$B")" = "host"
   script:
     - |
-      if [ "${CI_PIPELINE_SOURCE}" = "schedule" ] || [ "${RUN_UPSTREAM_UPDATE:-0}" = "1" ] || [ "${RUN_THEME:-0}" = "1" ]; then
+      if [ "${CI_PIPELINE_SOURCE}" = "schedule" ] || [ "${RUN_UPSTREAM_UPDATE:-0}" = "1" ]; then
         if [ "${BUILD_REQUIRED:-0}" != "1" ]; then
-          echo "No source/theme update happened. Skipping image build."
+          echo "No source update happened. Skipping image build."
           exit 0
         fi
 
