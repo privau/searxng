@@ -110,7 +110,7 @@ build-and-push:
       docker run --rm --network host curlimages/curl:latest \
         -fsS \
         -H "Authorization: Basic ${AUTH_HEADER}" \
-        "http://localhost:8080/search?q=github&format=json" | grep "number_of_results"
+        "http://localhost:8080/search?q=github&format=json" | grep '"query"'
 
       docker rm -f "$TEST_CONTAINER"
 
