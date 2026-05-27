@@ -87,7 +87,6 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 
 # wikipedia early timeout (do not block results on slow wikipedia responses)
 COPY --chown=searxng:searxng ./src/search/wikipedia_timeout.py searx/search/wikipedia_timeout.py
-COPY --chown=searxng:searxng ./src/search/google_patch.py searx/search/google_patch.py
 COPY --chown=searxng:searxng ./src/search/privau_wsgi.py searx/privau_wsgi.py
 
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
