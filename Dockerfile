@@ -170,6 +170,7 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: bing news/s/$/\n    disabled: true/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
 -e "/engine: startpage/s/$/\n    disabled: true/g" \
+-e "/name: ddg definitions/,+5{/disabled: true/d;}" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
 searx/settings.yml;
 
