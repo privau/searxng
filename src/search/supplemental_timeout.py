@@ -10,7 +10,6 @@ from flask import copy_current_request_context
 from searx.search.processors import PROCESSORS
 from searx.search.processors.abstract import RequestParams
 
-REFERENCE_ENGINE = "google"
 SUPPLEMENTAL_ENGINES = frozenset({"wikipedia", "wikidata", "ddg definitions"})
 MIN_SUPPLEMENTAL_TIMEOUT = 0.5
 SKIPPED_ERROR = "skipped"
@@ -54,36 +53,28 @@ def search_multiple_requests(
 
     engine_names = {th._engine_name for th in threads}
 
-    if len(engine_names) == 1 and engine_names <= SUPPLEMENTAL_ENGINES:
+    if engine_names <= SUPPLEMENTAL_ENGINES:
         for th in threads:
             join_thread(th)
         return
 
-    reference_thread = None
+    primary_threads: list[threading.Thread] = []
     supplemental_threads: list[threading.Thread] = []
-    other_threads: list[threading.Thread] = []
 
     for th in threads:
-        if th._engine_name == REFERENCE_ENGINE:
-            reference_thread = th
-        elif th._engine_name in SUPPLEMENTAL_ENGINES:
+        if th._engine_name in SUPPLEMENTAL_ENGINES:
             supplemental_threads.append(th)
         else:
-            other_threads.append(th)
+            primary_threads.append(th)
 
-    if reference_thread:
-        join_thread(reference_thread)
-        supplemental_deadline = max(MIN_SUPPLEMENTAL_TIMEOUT, elapsed())
-    else:
-        supplemental_deadline = MIN_SUPPLEMENTAL_TIMEOUT
+    for th in primary_threads:
+        join_thread(th)
 
     if supplemental_threads:
+        supplemental_deadline = max(MIN_SUPPLEMENTAL_TIMEOUT, elapsed())
         deadline = default_timer() + max(0.0, supplemental_deadline - elapsed())
         for th in supplemental_threads:
             join_thread(th, max(0.0, deadline - default_timer()), error_type=SKIPPED_ERROR)
-
-    for th in other_threads:
-        join_thread(th)
 
 
 def apply_supplemental_timeout() -> None:
