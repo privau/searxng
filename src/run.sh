@@ -222,9 +222,4 @@ if [ ! -z "${MONERO_ADDRESS}" ]; then
     sed -i -e "s|__MONERO_URI__|${monero_uri}|g" -e "s|__MONERO_ADDRESS__|${monero_display}|g" searx/templates/simple/donation.html;
 fi
 
-#set NID cookie
-COOKIE='526=fx-9FX7r8tL8RQJORW7KxYbNXyMSnRXHSr1dgBcPYu-3hV3386upQViJeixkmszWhtoaClGra128pUnOMZobEYci3FH2xxnpx6EuDXg5iCoO3_31NhbesjkHH4SPjzl0E3CZa1qhBxdJ3Sg2qrarIo9rye9QuRYcrz-VVSw4mCMd2zJ2AIgura9QcNu0CltPKcZd4TNQsxXgmU1EidRrhvwA4Lyqm0tkC6UyFAKaUGeJAHZt-pCSKcdjtg'
-sed -i -E 's|(params\['\''cookies'\''\]\["NID"\][[:space:]]*=[[:space:]]*)"[^\"]*"|\1"'"$COOKIE"'"|' searx/engines/google.py
-grep -q 'params\['\''cookies'\''\]\["NID"\]' searx/engines/google.py || sed -i '/params\['\''cookies'\''\] = google_info\['\''cookies'\''\]/a\    params['\''cookies'\'']["NID"] = "'"$COOKIE"'"' searx/engines/google.py
-
 exec /usr/local/searxng/venv/bin/granian searx.privau_wsgi:app
