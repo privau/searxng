@@ -102,6 +102,8 @@ When you connect to priv.au you are routed to the closest instance via BGP Anyca
 
 * ```WIKIDATA_DEFAULT``` : Enable the Wikidata engine by default. (Default: `false`)
 
+* ```DDG_DEFINITIONS_DEFAULT``` : Enable the DuckDuckGo definitions engine by default. (Default: `false`)
+
 * ```SEARCH_DEFAULT_LANG``` : Sets the default search language. (for example `en`, Default: `auto`)
 
 * ```MARGINALIA_API``` : Sets the API key for the Marginalia search engine and enables it. (Default: disabled)

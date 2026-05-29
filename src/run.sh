@@ -183,6 +183,15 @@ else # set to disabled
     searx/settings.yml;
 fi
 
+# set DDG_DEFINITIONS_DEFAULT if exists
+if [ ! -z "${DDG_DEFINITIONS_DEFAULT}" ]; then
+    sed -i -e "/name: ddg definitions/s/$/\n    disabled: false/g" \
+    searx/settings.yml;
+else # set to disabled
+    sed -i -e "/name: ddg definitions/s/$/\n    disabled: true/g" \
+    searx/settings.yml;
+fi
+
 # set Marginalia API key
 if [ ! -z "${MARGINALIA_API}" ]; then
     sed -i -e "/- name: marginalia/,/inactive:/s/# api_key: .*/api_key: '${MARGINALIA_API}'/" \

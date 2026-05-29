@@ -85,8 +85,8 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 && sed -i "/return Response('', mimetype='text\/css')/a \\\\n@app.route('/<key>/search', methods=['GET', 'POST'])\\ndef search_key(key=None):\\n    from searx.auth import auth_search_key\\n    return auth_search_key(sxng_request, key)" searx/webapp.py \
 && sed -i "/3\. If the IP is not in either list, the request is not blocked\./a\\    from searx.auth import valid_api_key\\n    if (valid_api_key(sxng_request)):\\n        return None" searx/limiter.py
 
-# wikipedia early timeout (do not block results on slow wikipedia responses)
-COPY --chown=searxng:searxng ./src/search/wikipedia_timeout.py searx/search/wikipedia_timeout.py
+# supplemental engine early timeout (wikipedia, wikidata, ddg definitions)
+COPY --chown=searxng:searxng ./src/search/supplemental_timeout.py searx/search/supplemental_timeout.py
 COPY --chown=searxng:searxng ./src/search/privau_wsgi.py searx/privau_wsgi.py
 
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
@@ -170,7 +170,6 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: bing news/s/$/\n    disabled: true/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
 -e "/engine: startpage/s/$/\n    disabled: true/g" \
--e "/engine: wikipedia/s/$/\n    timeout: 1.0/g" \
 -e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
 searx/settings.yml;
 
@@ -179,7 +178,7 @@ EXPOSE 8080
 # set env
 ENV GRANIAN_PROCESS_NAME="searxng" GRANIAN_INTERFACE="wsgi" GRANIAN_HOST="::" GRANIAN_PORT="8080" GRANIAN_WEBSOCKETS="false" GRANIAN_BLOCKING_THREADS="4" GRANIAN_WORKERS_KILL_TIMEOUT="30" GRANIAN_BLOCKING_THREADS_IDLE_TIMEOUT="300" \
 IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= SECRET_KEY= CAPTCHA= AUTHORIZED_API= MARGINALIA_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= SEARCH_ENGINE_CAPTCHA= PUBLIC_INSTANCE= \
-GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= WIKIPEDIA_DEFAULT= WIKIDATA_DEFAULT= \
+GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= WIKIPEDIA_DEFAULT= WIKIDATA_DEFAULT= DDG_DEFINITIONS_DEFAULT= \
 OPENMETRICS= \
 PRIVACYPOLICY= \
 DONATE= \

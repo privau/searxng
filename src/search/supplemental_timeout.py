@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-"""Early timeout for the Wikipedia engine so it does not block other results."""
+"""Early timeout for supplemental engines so they do not block other results."""
 
 import threading
 from timeit import default_timer
@@ -10,10 +10,10 @@ from flask import copy_current_request_context
 from searx.search.processors import PROCESSORS
 from searx.search.processors.abstract import RequestParams
 
-WIKIPEDIA_REFERENCE_ENGINE = "google"
-WIKIPEDIA_SUPPLEMENTAL_ENGINE = "wikipedia"
-WIKIPEDIA_MIN_TIMEOUT = 0.5
-WIKIPEDIA_SKIPPED_ERROR = "skipped"
+REFERENCE_ENGINE = "google"
+SUPPLEMENTAL_ENGINES = frozenset({"wikipedia", "wikidata", "ddg definitions"})
+MIN_SUPPLEMENTAL_TIMEOUT = 0.5
+SKIPPED_ERROR = "skipped"
 
 
 def search_multiple_requests(
@@ -54,42 +54,42 @@ def search_multiple_requests(
 
     engine_names = {th._engine_name for th in threads}
 
-    if engine_names == {WIKIPEDIA_SUPPLEMENTAL_ENGINE}:
+    if len(engine_names) == 1 and engine_names <= SUPPLEMENTAL_ENGINES:
         for th in threads:
             join_thread(th)
         return
 
     reference_thread = None
-    wikipedia_threads: list[threading.Thread] = []
+    supplemental_threads: list[threading.Thread] = []
     other_threads: list[threading.Thread] = []
 
     for th in threads:
-        if th._engine_name == WIKIPEDIA_REFERENCE_ENGINE:
+        if th._engine_name == REFERENCE_ENGINE:
             reference_thread = th
-        elif th._engine_name == WIKIPEDIA_SUPPLEMENTAL_ENGINE:
-            wikipedia_threads.append(th)
+        elif th._engine_name in SUPPLEMENTAL_ENGINES:
+            supplemental_threads.append(th)
         else:
             other_threads.append(th)
 
     if reference_thread:
         join_thread(reference_thread)
-        reference_elapsed = max(WIKIPEDIA_MIN_TIMEOUT, elapsed())
+        supplemental_deadline = max(MIN_SUPPLEMENTAL_TIMEOUT, elapsed())
     else:
-        reference_elapsed = WIKIPEDIA_MIN_TIMEOUT
+        supplemental_deadline = MIN_SUPPLEMENTAL_TIMEOUT
 
     for th in other_threads:
         join_thread(th)
 
-    for th in wikipedia_threads:
-        remaining = max(0.0, reference_elapsed - elapsed())
-        join_thread(th, remaining, error_type=WIKIPEDIA_SKIPPED_ERROR)
+    for th in supplemental_threads:
+        remaining = max(0.0, supplemental_deadline - elapsed())
+        join_thread(th, remaining, error_type=SKIPPED_ERROR)
 
 
-def apply_wikipedia_timeout() -> None:
+def apply_supplemental_timeout() -> None:
     from flask_babel import gettext
 
     from searx import webutils
     from searx.search import Search
 
-    webutils.exception_classname_to_text[WIKIPEDIA_SKIPPED_ERROR] = gettext("skipped")
+    webutils.exception_classname_to_text[SKIPPED_ERROR] = gettext("skipped")
     Search.search_multiple_requests = search_multiple_requests  # type: ignore[method-assign]
