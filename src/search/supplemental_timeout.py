@@ -77,12 +77,13 @@ def search_multiple_requests(
     else:
         supplemental_deadline = MIN_SUPPLEMENTAL_TIMEOUT
 
+    if supplemental_threads:
+        deadline = default_timer() + max(0.0, supplemental_deadline - elapsed())
+        for th in supplemental_threads:
+            join_thread(th, max(0.0, deadline - default_timer()), error_type=SKIPPED_ERROR)
+
     for th in other_threads:
         join_thread(th)
-
-    for th in supplemental_threads:
-        remaining = max(0.0, supplemental_deadline - elapsed())
-        join_thread(th, remaining, error_type=SKIPPED_ERROR)
 
 
 def apply_supplemental_timeout() -> None:
