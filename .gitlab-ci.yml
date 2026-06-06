@@ -6,9 +6,7 @@ variables:
   DOCKER_HOST: "unix:///var/run/docker.sock"
 
   TEST_TAG: "searxng:test"
-  DOCKER_HUB_LATEST_TAG: "vojkovic/searxng:latest"
   GITLAB_LATEST_TAG: "$CI_REGISTRY_IMAGE:latest"
-  GITLAB_SHA_TAG: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
 
   SOURCE_REPO: "searxng/searxng"
   SOURCE_REPO_BRANCH: "master"
@@ -53,24 +51,14 @@ update-upstream-commit:
 
 build-and-push:
   stage: build
-  timeout: 3h
+  timeout: 45m
   image: docker:latest
   needs:
     - job: update-upstream-commit
       artifacts: true
       optional: true
   before_script:
-    - docker login -u "vojkovic" -p "$DOCKER_HUB_ACCESS_TOKEN"
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-    - docker run --rm --privileged tonistiigi/binfmt --install all
-    - docker buildx rm -f ci-multiarch 2>/dev/null || true
-    - docker rm -f buildx_buildkit_ci-multiarch0 2>/dev/null || true
-    - docker buildx create --name ci-multiarch --driver docker-container --driver-opt network=host --use
-    - docker buildx inspect --bootstrap
-    - |
-      B="$(docker ps -q --filter name=buildx_buildkit_ci-multiarch)"
-      docker inspect "$B" --format 'BuildKit pid={{.State.Pid}} network_mode={{.HostConfig.NetworkMode}}'
-      test "$(docker inspect -f '{{.HostConfig.NetworkMode}}' "$B")" = "host"
   script:
     - |
       if [ "${CI_PIPELINE_SOURCE}" = "schedule" ] || [ "${RUN_UPSTREAM_UPDATE:-0}" = "1" ]; then
@@ -83,10 +71,10 @@ build-and-push:
         git reset --hard "origin/$CI_COMMIT_BRANCH"
       fi
 
-      docker buildx build \
-        --load \
-        --tag "$TEST_TAG" \
-        --file ./Dockerfile \
+      docker build \
+        -f ./Dockerfile \
+        -t "$TEST_TAG" \
+        -t "$GITLAB_LATEST_TAG" \
         .
 
       TEST_CONTAINER="searxng-test-${CI_PIPELINE_ID}"
@@ -114,20 +102,10 @@ build-and-push:
 
       docker rm -f "$TEST_CONTAINER"
 
-      docker buildx build \
-        --platform linux/amd64,linux/arm64 \
-        --tag "$DOCKER_HUB_LATEST_TAG" \
-        --tag "$GITLAB_LATEST_TAG" \
-        --tag "$GITLAB_SHA_TAG" \
-        --file ./Dockerfile \
-        --push \
-        .
+      docker push "$GITLAB_LATEST_TAG"
   after_script:
     - docker rm -f "searxng-test-${CI_PIPELINE_ID}" 2>/dev/null || true
-    - docker buildx rm -f ci-multiarch 2>/dev/null || true
-    - docker rm -f buildx_buildkit_ci-multiarch0 2>/dev/null || true
     - docker logout "$CI_REGISTRY" || true
-    - docker logout || true
   rules:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"'
       changes:

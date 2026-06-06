@@ -14,6 +14,7 @@ on:
 env:
   TEST_TAG: ghcr.io/privau/searxng:test
   GITHUB_LATEST_TAG: ghcr.io/privau/searxng:latest
+  DOCKER_HUB_LATEST_TAG: vojkovic/searxng:latest
 
 jobs:
   build:
@@ -29,6 +30,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: vojkovic
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -60,7 +67,7 @@ jobs:
 
           docker rm -f searxng-test
 
-      - name: Build and push GHCR
+      - name: Build and push GHCR and Docker Hub
         uses: docker/build-push-action@v6
         with:
           context: ./
@@ -69,3 +76,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             ${{ env.GITHUB_LATEST_TAG }}
+            ${{ env.DOCKER_HUB_LATEST_TAG }}
