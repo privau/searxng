@@ -1,0 +1,177 @@
+.evergarden-themes() {
+  // Evergarden (Fall) palette https://evergarden.moe/
+  // Tweaked a little for better contrast with the ui.
+
+  @crust:    #171c1f;   // deepest background
+  @mantle:   #1c2225;   // deep background (fall)
+  @base:     #232a2e;   // main background (fall)
+  @surface0: #2b3337;   // elevated background (cards, panels) (fall)
+  @surface1: #374145;   // higher surface (popups, selection)
+  @surface2: #4a585c;   // border / separator
+  @overlay0: #58686d;   // muted border
+  @overlay1: #6e8591;   // subtle / disabled text (slightly bluer)
+  @overlay2: #829aab;   // muted text (slightly bluer)
+  @subtext0: #95afbe;   // secondary text (slightly bluer)
+  @subtext1: #acc2d2;   // dimmed primary text (slightly bluer)
+
+  // Foreground
+  @text:     #f8f9e8;   // primary text
+
+  // Accent colors
+  @red:      #f57f82;   // errors / danger
+  @orange:   #f7a182;   // operators / code
+  @yellow:   #f5d098;   // warnings / types
+  @lime:     #dbe6af;   // subtle highlights
+  @green:    #cbe3b3;   // primary accent (strings, success)
+  @aqua:     #b3e3ca;   // constants / hints
+  @skye:     #b3e6db;   // secondary teal
+  @snow:     #afd9e6;   // info / snow
+  @blue:     #b2caed;   // links / identifiers
+  @purple:   #d2bdf3;   // visited / keywords
+  @pink:     #f3c0e5;   // numbers / booleans
+  @cherry:   #fae6ef;   // bright highlight
+
+  --var-color-fall-red: #f57f82;
+  --var-color-fall-orange: #f7a182;
+  --var-color-fall-yellow: #f5d098;
+  --var-color-fall-lime: #dbe6af;
+  --var-color-fall-green: #cbe3b3;
+  --var-color-fall-aqua: #b3e3ca;
+  --var-color-fall-skye: #b3e6db;
+  --var-color-fall-snow: #afd9e6;
+  --var-color-fall-blue: #b2caed;
+  --var-color-fall-purple: #d2bdf3;
+  --var-color-fall-pink: #f3c0e5;
+  --var-color-fall-cherry: #fae6ef;
+  --var-color-fall-text: #f8f9e8;
+  --var-color-fall-subtext1: #acc2d2;
+  --var-color-fall-subtext0: #95afbe;
+  --var-color-fall-overlay2: #829aab;
+  --var-color-fall-overlay1: #6e8591;
+  --var-color-fall-overlay0: #58686d;
+  --var-color-fall-surface2: #4a585c;
+  --var-color-fall-surface1: #374145;
+  --var-color-fall-surface0: #2b3337;
+  --var-color-fall-base: #232a2e;
+  --var-color-fall-mantle: #1c2225;
+  --var-color-fall-crust: #171c1f;
+
+  --color-base-font: @text;
+  --color-base-background: @surface0;
+  --color-base-background-mobile: @surface0;
+  --color-url-font: @blue;
+  --color-url-visited-font: @purple;
+
+  --color-header-background: @base;
+  --color-header-border: @surface2;
+
+  --color-footer-background: @surface0;
+  --color-footer-border: @surface2;
+
+  --color-sidebar-border: @surface2;
+  --color-sidebar-font: @text;
+  --color-sidebar-background: @base;
+
+  --color-backtotop-font: @subtext1;
+  --color-backtotop-border: @surface2;
+  --color-backtotop-background: @surface1;
+
+  --color-btn-background: @blue;
+  --color-btn-font: @base;
+  --color-show-btn-background: @surface2;
+  --color-show-btn-font: @text;
+
+  --color-search-border: transparent;
+  --color-search-shadow: none;
+  --color-search-background: @surface1;
+  --color-search-font: @text;
+  --color-search-background-hover: @blue;
+
+  --color-error: @red;
+  --color-error-background: mix(@red, @base, 18%);
+  --color-warning: @yellow;
+  --color-warning-background: mix(@yellow, @base, 18%);
+  --color-success: @lime;
+  --color-success-background: mix(@lime, @base, 18%);
+
+  --color-categories-item-selected-font: @blue;
+  --color-categories-item-border-selected: @blue;
+
+  --color-autocomplete-font: @text;
+  --color-autocomplete-border: @surface2;
+  --color-autocomplete-shadow: 0 2px 8px @crust;
+  --color-autocomplete-background: @surface1;
+  --color-autocomplete-background-hover: @surface2;
+
+  --color-answer-font: @text;
+  --color-answer-background: @surface0;
+
+  --color-result-background: @base;
+  --color-result-border: @surface2;
+  --color-result-url-font: @blue;
+  --color-result-vim-selected: @surface1;
+  --color-result-vim-arrow: @blue;
+  --color-result-description-highlight-font: @text;
+  --color-result-link-font: @text;
+  --color-result-link-font-highlight: @text;
+  --color-result-link-visited-font: @purple;
+  --color-result-publishdate-font: @overlay2;
+  --color-result-engines-font: @overlay2;
+  --color-result-search-url-border: @surface2;
+  --color-result-search-url-font: @text;
+  --color-result-detail-font: @text;
+  --color-result-detail-label-font: @subtext1;
+  --color-result-detail-background: @base;
+  --color-result-detail-hr: @surface0;
+  --color-result-detail-link: @blue;
+  --color-result-detail-loader-border: rgb(255 255 255 / 20%);
+  --color-result-detail-loader-borderleft: @crust;
+  --color-result-image-span-font: @text;
+  --color-result-image-span-font-selected: @base;
+  --color-result-image-background: @surface0;
+
+  --color-settings-tr-hover: @surface1;
+  --color-settings-engine-description-font: @text;
+  --color-settings-engine-group-background: @surface1;
+
+  --color-toolkit-badge-font: @text;
+  --color-toolkit-badge-background: @surface1;
+  --color-toolkit-kbd-font: @text;
+  --color-toolkit-kbd-background: @surface0;
+  --color-toolkit-dialog-border: @surface1;
+  --color-toolkit-dialog-background: @surface0;
+  --color-toolkit-tabs-label-border: @base;
+  --color-toolkit-tabs-section-border: @base;
+  --color-toolkit-select-background: @surface1;
+  --color-toolkit-select-border: @surface2;
+  --color-toolkit-select-background-hover: @surface2;
+  --color-toolkit-input-text-font: @text;
+  --color-toolkit-checkbox-onoff-off-background: @surface1;
+  --color-toolkit-checkbox-onoff-on-background: @surface1;
+  --color-toolkit-checkbox-onoff-on-mark-background: @blue;
+  --color-toolkit-checkbox-onoff-on-mark-color: @base;
+  --color-toolkit-checkbox-onoff-off-mark-background: @subtext0;
+  --color-toolkit-checkbox-onoff-off-mark-color: @base;
+  --color-toolkit-checkbox-label-background: @base;
+  --color-toolkit-checkbox-label-border: @surface0;
+  --color-toolkit-checkbox-input-border: @blue;
+  --color-toolkit-engine-tooltip-border: @surface2;
+  --color-toolkit-engine-tooltip-background: @surface1;
+  --color-toolkit-loader-border: rgb(255 255 255 / 20%);
+  --color-toolkit-loader-borderleft: @crust;
+  --color-doc-code: @yellow;
+  --color-doc-code-background: @surface0;
+  --color-favicon-background-color: @surface2;
+  --color-favicon-border-color: @overlay0;
+  --color-image-resolution-background: rgba(0, 0, 0, .5);
+  --color-image-resolution-font: @text;
+  --color-loading-indicator: rgba(0, 0, 0, .2);
+  --color-loading-indicator-gap: @text;
+  --color-line-number: @overlay1;
+  --color-logo-fill: @blue;
+}
+
+// Evergarden Theme by preferences
+:root.theme-evergarden {
+  .evergarden-themes();
+}
