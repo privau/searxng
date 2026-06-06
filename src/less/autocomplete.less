@@ -27,7 +27,39 @@
   
       > li {
         cursor: pointer;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        > .autocomplete-icon {
+          width: 1.25rem;
+          height: 1.25rem;
+          flex-shrink: 0;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        > .autocomplete-icon-image {
+          border-radius: 0.2rem;
+          object-fit: cover;
+        }
+
+        > .autocomplete-icon-fallback {
+          color: var(--color-search-font);
+          opacity: 0.32;
+
+          svg {
+            width: 1.05rem;
+            height: 1.05rem;
+          }
+        }
+
+        > .autocomplete-text {
+          flex: 1;
+          min-width: 0;
+        }
   
         &.active,
         &:active,
@@ -67,7 +99,7 @@
   @media screen and (max-width: @phone) {
     .autocomplete {
       > ul > li {
-        padding: 1rem;
+        padding: 0.75rem 0.5rem;
       }
     }
   }

@@ -87,6 +87,7 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 
 # supplemental engine early timeout (wikipedia, wikidata, ddg definitions)
 COPY --chown=searxng:searxng ./src/search/supplemental_timeout.py searx/search/supplemental_timeout.py
+COPY --chown=searxng:searxng ./src/search/google_autocomplete_icons.py searx/search/google_autocomplete_icons.py
 COPY --chown=searxng:searxng ./src/search/privau_wsgi.py searx/privau_wsgi.py
 
 # fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
