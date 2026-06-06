@@ -27,13 +27,12 @@
     ]
   },
   "src/js/main/autocomplete.ts": {
-    "file": "chunk/CBuiMK18.min.js",
+    "file": "chunk/BHAnJt9R.min.js",
     "name": "autocomplete",
     "src": "src/js/main/autocomplete.ts",
     "isDynamicEntry": true,
     "imports": [
-      "src/js/index.ts",
-      "_DK4yUVpy.min.js"
+      "src/js/index.ts"
     ]
   },
   "src/js/main/keyboard.ts": {
