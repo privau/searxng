@@ -96,6 +96,12 @@ def apply_google_autocomplete_icons(app) -> None:
 
     @app.after_request
     def add_image_proxy_cache_headers(response):
+        if request.path == '/autocompleter' and request.method == 'GET':
+            if 200 <= response.status_code < 300:
+                response.headers['Cache-Control'] = 'private, max-age=3600, stale-while-revalidate=300'
+                response.headers['Vary'] = 'Cookie'
+            return response
+
         if request.path != '/image_proxy':
             return response
 
