@@ -1,7 +1,7 @@
 # use alpine as base for searx and set workdir as well as env vars
 FROM docker.io/library/python:3.13-alpine AS builder
 
-ENV UPSTREAM_COMMIT=51b6fd4f23f69ebb100cc3f07bd74c001ab7a470
+ENV UPSTREAM_COMMIT=6099b1ee40f9c9488aeef3f201daa757434a2a74
 
 # install build deps
 RUN apk add --no-cache \
@@ -17,7 +17,7 @@ WORKDIR /usr/local/searxng/
 
 # git clone searxng as well, install python deps and freeze version
 RUN git config --global --add safe.directory /usr/local/searxng \
-&& git clone https://github.com/searxng/searxng . \
+&& git clone https://github.com/vojkovic/searxng . \
 && git reset --hard ${UPSTREAM_COMMIT}
 
 RUN python -m venv ./venv \
