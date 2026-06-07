@@ -85,7 +85,19 @@ build-and-push:
         -e AUTHORIZED_API=test_api_key \
         "$TEST_TAG"
 
-      sleep 15
+      echo "Waiting for container to be ready..."
+      for i in $(seq 1 30); do
+        if docker run --rm --network host curlimages/curl:latest \
+          -fsS http://localhost:8080/healthz 2>/dev/null | grep -q "OK"; then
+          echo "Container is ready"
+          break
+        fi
+        if [ "$i" -eq 30 ]; then
+          echo "ERROR: container did not become ready within 60 seconds"
+          exit 1
+        fi
+        sleep 2
+      done
 
       docker run --rm --network host curlimages/curl:latest \
         -fsS http://localhost:8080/healthz | grep "OK"
