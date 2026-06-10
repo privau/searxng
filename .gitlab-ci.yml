@@ -8,8 +8,8 @@ variables:
   TEST_TAG: "searxng:test"
   GITLAB_LATEST_TAG: "$CI_REGISTRY_IMAGE:latest"
 
-  SOURCE_REPO: "vojkovic/searxng"
-  SOURCE_REPO_BRANCH: "fix-startup-race"
+  SOURCE_REPO: "return42/searxng"
+  SOURCE_REPO_BRANCH: "ddl-needs-commit"
 
 update-upstream-commit:
   stage: maintenance
