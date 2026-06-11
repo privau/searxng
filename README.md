@@ -7,8 +7,11 @@ Global Instance - 🌐 Worldwide : https://priv.au
 ---
 
 America, Ausra - 🇺🇸 Kansas City, United States : https://na.priv.au
+
 Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au
+
 Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu.priv.au
+
 Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au
 
 Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
