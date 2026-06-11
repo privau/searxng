@@ -1,26 +1,19 @@
 # SearXNG
 
-Builds a [SearXNG](https://github.com/searxng/searxng) container, a privacy-respecting metasearch engine. Includes a suite of custom themes from catppuccin, paulgoio, kagi, brave, moa, and the default SearXNG themes.
-
-Don't see your favorite theme? [Submit a theme request!](https://github.com/privau/searxng/issues/new?assignees=&labels=bug&projects=&template=theme-request.md)
+Builds a modified [SearXNG](https://github.com/searxng/searxng) container, a privacy respecting metasearch engine. Includes a suite of custom themes and bleeding edge patches that either don't fit upstream or aren't ready yet.
 
 Global Instance - 🌐 Worldwide : https://priv.au
 
 ---
 
 America, Ausra - 🇺🇸 Kansas City, United States : https://na.priv.au
-
 Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au
-
 Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu.priv.au
-
 Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au
 
-## FAQ
+Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
-### Where geographically is priv.au hosted?
-
-When you connect to priv.au you are routed to the closest instance via BGP Anycast. You are able to bypass this selection process by connecting directly to a geographic instance, using the links above.
+---
 
 ## Basic Usage
 
@@ -34,7 +27,7 @@ When you connect to priv.au you are routed to the closest instance via BGP Anyca
 
 * Make your changes to the theme within `src/less`
 
-* Build the static files by running `update.sh`. This step requires python, npm and make. It's recommended to run this within the development container.
+* Build the static files by running `update.sh`.
 
 * You can build the docker container locally by running: ```docker build --pull -f ./Dockerfile -t searxng-dev:latest .```
 
@@ -44,66 +37,66 @@ When you connect to priv.au you are routed to the closest instance via BGP Anyca
 
 ## Environment Variables (all optional: if not set -> using default settings)
 
-* ```IMAGE_PROXY``` : Enables the image proxy in SearXNG. (set this to `true`)
+* ```IMAGE_PROXY``` : enables the image proxy. (set this to `true`)
 
-* ```REDIS_URL``` : Sets the URL of redis server to store data for Limiter plugin (for example `redis://redis:6379/0` or `unix:///usr/local/searxng-redis/run/redis.sock?db=0`)
+* ```REDIS_URL``` : sets the URL of valkey/redis server (for example `redis://redis:6379/0` or `unix:///usr/local/searxng-redis/run/redis.sock?db=0`)
 
 * ```LIMITER``` : limit bot traffic; this option also requires redis to be set up
 
-* ```PROXY``` : list of comma-seperated servers that are applied as round robin for all engines (for example http://127.0.0.1:8080,http://proxy.example.net)
+* ```PROXY``` : list of comma seperated proxies selected round robin for all engines (for example http://127.0.0.1:8080,http://proxy.example.net)
 
-* ```BASE_URL``` : Sets the base url (for example: example.org would have `https://example.org/` as base)
+* ```BASE_URL``` : sets the base url (for example: example.org would have `https://example.org/`)
 
-* ```GRANIAN_HOST``` : Sets the address that granian will bind to. (default: `[::]`)
+* ```GRANIAN_HOST``` : sets the address that granian will bind to. (default: `[::]`)
 
-* ```GRANIAN_PORT``` : Sets the port that granian will bind to. (default: `8080`)
+* ```GRANIAN_PORT``` : sets the port that granian will bind to (default: `8080`)
 
-* ```NAME``` : Sets the name of the instance, which is for example displayed in the title of the site (for example `SearXNG`)
+* ```NAME``` : sets the name of the instance, displayed as the url title - worth changing this as users can't add two instances named the same in Firefox (e.g. `PrivAU`)
 
-* ```PRIVACYPOLICY``` : Sets the location of privacy policy of the instance. (for example `https://example.org/privacy-policy`)
+* ```PRIVACYPOLICY``` : sets the location of privacy policy of the instance (for example `https://example.org/privacy-policy`)
 
-* ```CONTACT``` : Sets the location for users to contact the instance maintainer. (for example `mailto:user@example.org`)
+* ```CONTACT``` : sets the location for users to contact the instance maintainer (for example `mailto:user@example.org`)
 
-* ```ISSUE_URL``` : Set the location for users to report issues to. (for example `https://github.com/example/searxng/issues` !Without a trailing /)
+* ```ISSUE_URL``` : set the location for users to report issues to (for example `https://github.com/example/searxng/issues` !Without a trailing /)
 
-* ```DONATE``` : Enables the donation page and footer link. Set to `true` to enable. (Default: `false`)
+* ```DONATE``` : enable the donation page and footer link. Set to `true` to enable (Default: `false`)
 
-* ```DONATION_URL``` : Sets the Ko-fi or donation link displayed on the donation page. (for example `https://ko-fi.com/privau`)
+* ```DONATION_URL``` : sets kofi or donation link displayed on the donation page (for example `https://ko-fi.com/privau`)
 
-* ```MONERO_ADDRESS``` : Sets the Monero address displayed on the donation page.
+* ```MONERO_ADDRESS``` : sets the Monero address displayed on the donation page.
 
-* ```GIT_URL``` : Sets the location of the Git repository. (for example `https://github.com/example/searxng`)
+* ```GIT_URL``` : sets the location of the Git repository. (for example `https://github.com/privau/searxng`)
 
-* ```GIT_BRANCH``` : Sets the Git branch of the repository specified in `GIT_URL`. (for example `main`)
+* ```GIT_BRANCH``` : sets the Git branch of the repository specified in `GIT_URL`. (for example `main`)
 
-* ```SEARCH_ENGINE_ACCESS_DENIED``` : Sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_ACCESS_DENIED exception, by default this value is set to ```60``` (i.e. 1 minute)
+* ```SEARCH_ENGINE_ACCESS_DENIED``` : sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_ACCESS_DENIED exception (Default: `60`)
 
-* ```SEARCH_ENGINE_CAPTCHA``` : Sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_CAPTCHA exception, by default this value is set to ```60``` (i.e. 1 minute)
+* ```SEARCH_ENGINE_CAPTCHA``` : sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_CAPTCHA exception (Default: `60`)
 
-* ```PUBLIC_INSTANCE``` : Sets the public_instance parameter, which enables features designed for public instances. Requires the limiter to be enabled, which also requires redis. Required to be used on public production instances. Leave empty to disable. (Default: `false`)
+* ```PUBLIC_INSTANCE``` : enables features designed for public instances. Forces image_proxy and limiter set to enabled. Requires redis/valkey.
 
-* ```SECRET_KEY``` : Sets the secret key for the instance. If not set, a random key will be generated on startup.
+* ```SECRET_KEY``` : manually set the secret key for the instance. A random key will be generated on startup if not set.
 
-* ```FOOTER_MESSAGE``` : Sets the footer message of the instance. (Default: empty)
+* ```FOOTER_MESSAGE``` : sets the footer message of the instance (Default: empty)
 
-* ```AUTHORIZED_API``` : Set the password for the Authorized API. (Default: empty)
+* ```AUTHORIZED_API``` : set the password for the Authorized API (Default: empty)
 
-* ```OPENMETRICS``` : Set the password for the OpenMetrics endpoint. (Default: empty)
+* ```OPENMETRICS``` : set the password for the Openmetrics endpoint (Default: empty)
 
-* ```GOOGLE_DEFAULT``` : Enable the Google search engine by default. (Default: `true`)
+* ```GOOGLE_DEFAULT``` : enable the Google search engine by default (Default: `true`)
 
-* ```BING_DEFAULT``` : Enable the Bing search engine by default. (Default: `false`)
+* ```BING_DEFAULT``` : enable the Bing search engine by default (Default: `false`)
 
-* ```BRAVE_DEFAULT``` : Enable the Brave search engine by default. (Default: `false`)
+* ```BRAVE_DEFAULT``` : enable the Brave search engine by default (Default: `false`)
 
-* ```DUCKDUCKGO_DEFAULT``` : Enable the DuckDuckGo search engine by default. (Default: `false`)
+* ```DUCKDUCKGO_DEFAULT``` : enable the DuckDuckGo search engine by default (Default: `false`)
 
-* ```WIKIPEDIA_DEFAULT``` : Enable the Wikipedia engine by default. (Default: `false`)
+* ```WIKIPEDIA_DEFAULT``` : enable the Wikipedia engine by default (Default: `false`)
 
-* ```WIKIDATA_DEFAULT``` : Enable the Wikidata engine by default. (Default: `false`)
+* ```WIKIDATA_DEFAULT``` : enable the Wikidata engine by default (Default: `false`)
 
-* ```DDG_DEFINITIONS_DEFAULT``` : Enable the DuckDuckGo definitions engine by default. (Default: `false`)
+* ```DDG_DEFINITIONS_DEFAULT``` : enable the DuckDuckGo Definitions engine by default (Default: `false`)
 
-* ```SEARCH_DEFAULT_LANG``` : Sets the default search language. (for example `en`, Default: `auto`)
+* ```SEARCH_DEFAULT_LANG``` : sets the default search language (for example `en`, Default: `auto`)
 
-* ```MARGINALIA_API``` : Sets the API key for the Marginalia search engine and enables it. (Default: disabled)
+* ```MARGINALIA_API``` : sets the API key for the Marginalia search engine and enables it (Default: disabled)
