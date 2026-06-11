@@ -2,17 +2,17 @@
 
 Builds a modified [SearXNG](https://github.com/searxng/searxng) container, a privacy respecting metasearch engine. Includes a suite of custom themes and bleeding edge patches that either don't fit upstream or aren't ready yet.
 
-Global Instance - 🌐 Worldwide : https://priv.au
+🌐 Global : https://priv.au
 
 ---
 
-America, Ausra - 🇺🇸 Kansas City, United States : https://na.priv.au
+🇺🇸 Kansas City, United States : https://na.priv.au
 
-Asia, Vultr - 🇸🇬 Singapore, Singapore : https://as.priv.au
+🇸🇬 Singapore, Singapore : https://as.priv.au
 
-Europe, iFog - 🇩🇪 Frankfurt, Germany : https://eu.priv.au
+🇩🇪 Frankfurt, Germany : https://eu.priv.au
 
-Australia, Vultr - 🇦🇺 Melbourne, Australia : https://au.priv.au
+🇦🇺 Melbourne, Australia : https://au.priv.au
 
 Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
