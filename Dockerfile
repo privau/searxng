@@ -1,7 +1,7 @@
 # use alpine as base for searx and set workdir as well as env vars
 FROM docker.io/library/python:3.13-alpine AS builder
 
-ENV UPSTREAM_COMMIT=8522638b00ff055a0797c6cb8c2e8a6f036e4dc8
+ENV UPSTREAM_COMMIT=b48205b384d224483573143c3726d2427acec61d
 
 # install build deps
 RUN apk add --no-cache \
