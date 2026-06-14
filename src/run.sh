@@ -134,7 +134,7 @@ fi
 if [ ! -z "${BING_DEFAULT}" ]; then
     sed -i \
     -e "/shortcut: bi\$/{n;s/.*/    disabled: false/}" \
-    -e "/shortcut: bii\$/{n;s/.*/    disabled: false/}" \
+    -e "/shortcut: bii\$/{n;s/.*/    disabled: true/}" \
     -e "/shortcut: bin\$/{n;s/.*/    disabled: true/}" \
     -e "/shortcut: biv\$/{n;s/.*/    disabled: true/}" \
     searx/settings.yml;
