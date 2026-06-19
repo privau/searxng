@@ -76,7 +76,9 @@ def _autocompleter_with_icons(webapp_module):
     if webapp_module.sxng_request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return webapp_module.Response(json.dumps(results), mimetype='application/json')
     else:
-        suggestions = json.dumps([sug_prefix, results])
+        # chromium only shows 3 suggestions unless we attach relevances
+        relevances = {'google:suggestrelevance': [600 - i for i in range(len(results))]}
+        suggestions = json.dumps([sug_prefix, results, [], [], relevances])
         mimetype = 'application/x-suggestions+json'
 
     suggestions = webapp_module.escape(suggestions, False)
