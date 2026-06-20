@@ -1,13 +1,50 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import { http, listen, settings } from "../toolkit.ts";
+import { listen, settings } from "../toolkit.ts";
 
 let suppressAutocomplete = false;
 
-type SuggestionItem = string | { text?: string; icon?: string };
+type SuggestionItem = string | { text?: string; icon?: string; description?: string };
 
 const getSuggestionText = (item: SuggestionItem): string =>
   typeof item === "string" ? item : (item.text ?? "");
+
+const getSuggestionDescription = (item: SuggestionItem): string | null => {
+  if (typeof item === "string") {
+    return null;
+  }
+
+  return typeof item.description === "string" && item.description.length > 0 ? item.description : null;
+};
+
+const fillSuggestion = (el: HTMLElement, suggestion: string, query: string): void => {
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (words.length === 0) {
+    el.textContent = suggestion;
+    return;
+  }
+  const typed = words[words.length - 1];
+  const complete = new Set(words.slice(0, -1));
+
+  const appendBold = (s: string): void => {
+    if (!s) return;
+    const b = document.createElement("b");
+    b.textContent = s;
+    el.append(b);
+  };
+
+  for (const token of suggestion.split(/(\s+)/)) {
+    const lc = token.toLowerCase();
+    if (token === "" || /\s/.test(token) || complete.has(lc)) {
+      el.append(token);
+    } else if (lc.startsWith(typed)) {
+      el.append(token.slice(0, typed.length));
+      appendBold(token.slice(typed.length));
+    } else {
+      appendBold(token);
+    }
+  }
+};
 
 const getSuggestionIcon = (item: SuggestionItem): string | null => {
   if (typeof item === "string" || settings.autocomplete !== "google") {
@@ -68,13 +105,30 @@ const closeAutocomplete = (): void => {
 };
 
 const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<void> => {
-  try {
-    let res: Response;
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), 30_000);
 
-    if (settings.method === "GET") {
-      res = await http("GET", `./autocompleter?q=${query}`);
-    } else {
-      res = await http("POST", "./autocompleter", { body: new URLSearchParams({ q: query }) });
+  try {
+    const headers = { Accept: "application/json" };
+    const res =
+      settings.method === "GET"
+        ? await fetch(`./autocompleter?q=${encodeURIComponent(query)}`, {
+            method: "GET",
+            headers,
+            signal: controller.signal,
+          })
+        : await fetch("./autocompleter", {
+            method: "POST",
+            headers: {
+              ...headers,
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({ q: query }),
+            signal: controller.signal,
+          });
+
+    if (!res.ok) {
+      throw new Error(res.statusText);
     }
 
     const results = await res.json();
@@ -97,12 +151,24 @@ const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<vo
 
       const li = document.createElement("li");
       const iconUrl = getSuggestionIcon(result);
+      const content = document.createElement("div");
+      content.className = "autocomplete-content";
+
       const text = document.createElement("span");
       text.className = "autocomplete-text";
-      text.textContent = suggestionText;
+      fillSuggestion(text, suggestionText, query);
+      content.append(text);
+
+      const description = getSuggestionDescription(result);
+      if (description) {
+        const desc = document.createElement("span");
+        desc.className = "autocomplete-description";
+        desc.textContent = description;
+        content.append(desc);
+      }
 
       li.append(createAutocompleteIcon(iconUrl));
-      li.append(text);
+      li.append(content);
 
       listen("mousedown", li, () => {
         qInput.value = suggestionText;
@@ -117,6 +183,8 @@ const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<vo
     autocompleteList.append(fragment);
   } catch (error) {
     console.error("Error fetching autocomplete results:", error);
+  } finally {
+    clearTimeout(timeoutId);
   }
 };
 

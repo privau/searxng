@@ -2,10 +2,10 @@
 
 .autocomplete {
     position: absolute;
-    width: @search-width;
-    max-width: calc(100% - 2 * @search-padding-horizontal);
+    width: 100%;
+    max-width: @search-width;
     max-height: 0;
-    overflow-y: hidden;
+    overflow: hidden;
     .ltr-text-align-left();
   
     .rounded-corners;
@@ -31,17 +31,21 @@
         display: flex;
         align-items: center;
         gap: 0.375rem;
+        min-width: 0;
+        overflow: hidden;
 
         > .autocomplete-icon {
           width: 1.75rem;
           height: 1.75rem;
-          flex-shrink: 0;
+          flex: 0 0 1.75rem;
           display: inline-flex;
           align-items: center;
           justify-content: center;
         }
 
         > .autocomplete-icon-image {
+          width: 1.75rem;
+          height: 1.75rem;
           border-radius: 0.2rem;
           object-fit: cover;
         }
@@ -56,9 +60,34 @@
           }
         }
 
-        > .autocomplete-text {
-          flex: 1;
+        > .autocomplete-content {
+          flex: 1 1 0;
           min-width: 0;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .autocomplete-text {
+          display: block;
+          min-width: 0;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          line-height: 1.2;
+        }
+
+        .autocomplete-description {
+          display: block;
+          min-width: 0;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 0.8125rem;
+          line-height: 1.15;
+          opacity: 0.62;
         }
   
         &.active,
@@ -85,6 +114,7 @@
       background-color: var(--color-autocomplete-background);
       color: var(--color-autocomplete-font);
       max-height: 32rem;
+      overflow-x: hidden;
       overflow-y: auto;
       z-index: 5000;
       margin-top: 3.5rem;
@@ -92,14 +122,6 @@
   
       &:empty {
         display: none;
-      }
-    }
-  }
-  
-  @media screen and (max-width: @phone) {
-    .autocomplete {
-      > ul > li {
-        padding: 0.35rem 0.5rem;
       }
     }
   }
