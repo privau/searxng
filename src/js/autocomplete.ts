@@ -4,17 +4,41 @@ import { listen, settings } from "../toolkit.ts";
 
 let suppressAutocomplete = false;
 
-type SuggestionItem = string | { text?: string; icon?: string; description?: string };
+type RichSuggestion = {
+  text?: string;
+  icon?: string;
+  description?: string;
+  trending?: boolean;
+};
 
-const getSuggestionText = (item: SuggestionItem): string =>
+type SuggestionItem = string | RichSuggestion;
+
+const autocomplete = document.querySelector<HTMLElement>(".autocomplete");
+const autocompleteList = document.querySelector<HTMLUListElement>(".autocomplete ul");
+const searchIconTemplate = document.querySelector<SVGElement>("#send_search svg");
+
+const asRich = (item: SuggestionItem): RichSuggestion | null =>
+  typeof item === "string" ? null : item;
+
+const suggestionText = (item: SuggestionItem): string =>
   typeof item === "string" ? item : (item.text ?? "");
 
-const getSuggestionDescription = (item: SuggestionItem): string | null => {
-  if (typeof item === "string") {
-    return null;
-  }
+const suggestionDescription = (item: SuggestionItem): string | null => {
+  const description = asRich(item)?.description;
+  return description ? description : null;
+};
 
-  return typeof item.description === "string" && item.description.length > 0 ? item.description : null;
+const suggestionIcon = (item: SuggestionItem): string | null => {
+  if (settings.autocomplete !== "google") return null;
+  const icon = asRich(item)?.icon;
+  return icon ? icon.replace(/&amp;/g, "&") : null;
+};
+
+const isTrending = (item: SuggestionItem): boolean => asRich(item)?.trending === true;
+
+const shouldFetch = (query: string): boolean => {
+  const minLength = settings.autocomplete_min ?? 2;
+  return query.length === 0 || query.length >= minLength;
 };
 
 const fillSuggestion = (el: HTMLElement, suggestion: string, query: string): void => {
@@ -23,75 +47,73 @@ const fillSuggestion = (el: HTMLElement, suggestion: string, query: string): voi
     el.textContent = suggestion;
     return;
   }
+
   const typed = words[words.length - 1];
   const complete = new Set(words.slice(0, -1));
-
-  const appendBold = (s: string): void => {
-    if (!s) return;
-    const b = document.createElement("b");
-    b.textContent = s;
-    el.append(b);
+  const bold = (text: string): void => {
+    if (!text) return;
+    const node = document.createElement("b");
+    node.textContent = text;
+    el.append(node);
   };
 
   for (const token of suggestion.split(/(\s+)/)) {
-    const lc = token.toLowerCase();
-    if (token === "" || /\s/.test(token) || complete.has(lc)) {
+    const lower = token.toLowerCase();
+    if (token === "" || /\s/.test(token) || complete.has(lower)) {
       el.append(token);
-    } else if (lc.startsWith(typed)) {
+    } else if (lower.startsWith(typed)) {
       el.append(token.slice(0, typed.length));
-      appendBold(token.slice(typed.length));
+      bold(token.slice(typed.length));
     } else {
-      appendBold(token);
+      bold(token);
     }
   }
 };
 
-const getSuggestionIcon = (item: SuggestionItem): string | null => {
-  if (typeof item === "string" || settings.autocomplete !== "google") {
-    return null;
-  }
+const createTrendingIcon = (): HTMLSpanElement => {
+  const icon = document.createElement("span");
+  icon.className = "autocomplete-icon-trending";
+  icon.ariaHidden = "true";
 
-  if (typeof item.icon === "string" && item.icon.length > 0) {
-    return item.icon.replace(/&amp;/g, "&");
-  }
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
 
-  return null;
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", "M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z");
+  svg.append(path);
+  icon.append(svg);
+  return icon;
 };
 
-const autocomplete: HTMLElement | null = document.querySelector<HTMLElement>(".autocomplete");
-const autocompleteList: HTMLUListElement | null = document.querySelector<HTMLUListElement>(".autocomplete ul");
-const searchIconTemplate = document.querySelector<SVGElement>("#send_search svg");
-
-const createFallbackAutocompleteIcon = (): HTMLSpanElement => {
-  const fallback = document.createElement("span");
-  fallback.className = "autocomplete-icon autocomplete-icon-fallback";
-  fallback.ariaHidden = "true";
-
+const createFallbackIcon = (): HTMLSpanElement => {
+  const icon = document.createElement("span");
+  icon.className = "autocomplete-icon-fallback";
+  icon.ariaHidden = "true";
   if (searchIconTemplate) {
-    fallback.append(searchIconTemplate.cloneNode(true));
+    icon.append(searchIconTemplate.cloneNode(true));
   }
-
-  return fallback;
+  return icon;
 };
 
-const createAutocompleteIcon = (iconUrl: string | null): HTMLElement => {
-  const fallback = createFallbackAutocompleteIcon();
+const createIconSlot = (iconUrl: string | null, hasDescription: boolean, trending: boolean): HTMLSpanElement => {
+  const slot = document.createElement("span");
+  slot.className = "autocomplete-icon-slot";
+  if (hasDescription) slot.classList.add("is-entity");
+  if (trending) slot.classList.add("is-trending");
+
   if (!iconUrl) {
-    return fallback;
+    slot.append(trending ? createTrendingIcon() : createFallbackIcon());
+    return slot;
   }
 
   const img = document.createElement("img");
-  img.className = "autocomplete-icon autocomplete-icon-image";
+  img.className = "autocomplete-icon-image";
   img.src = iconUrl;
   img.alt = "";
-
-  listen("load", img, () => {
-    if (fallback.isConnected) {
-      fallback.replaceWith(img);
-    }
-  });
-
-  return fallback;
+  img.decoding = "async";
+  slot.append(img);
+  return slot;
 };
 
 const hideAutocomplete = (): void => {
@@ -104,82 +126,75 @@ const closeAutocomplete = (): void => {
   autocompleteList?.replaceChildren();
 };
 
+const requestAutocomplete = async (query: string, signal: AbortSignal): Promise<Response> => {
+  const headers = { Accept: "application/json" };
+  if (settings.method === "GET") {
+    return fetch(`./autocompleter?q=${encodeURIComponent(query)}`, { method: "GET", headers, signal });
+  }
+  return fetch("./autocompleter", {
+    method: "POST",
+    headers: { ...headers, "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ q: query }),
+    signal,
+  });
+};
+
+const renderSuggestion = (
+  item: SuggestionItem,
+  query: string,
+  qInput: HTMLInputElement,
+): HTMLLIElement => {
+  const text = suggestionText(item);
+  const description = suggestionDescription(item);
+
+  const li = document.createElement("li");
+  const content = document.createElement("div");
+  content.className = "autocomplete-content";
+
+  const title = document.createElement("span");
+  title.className = "autocomplete-text";
+  fillSuggestion(title, text, query);
+  content.append(title);
+
+  if (description) {
+    const subtitle = document.createElement("span");
+    subtitle.className = "autocomplete-description";
+    subtitle.textContent = description;
+    content.append(subtitle);
+  }
+
+  li.append(createIconSlot(suggestionIcon(item), description !== null, isTrending(item)));
+  li.append(content);
+
+  listen("mousedown", li, () => {
+    qInput.value = text;
+    document.querySelector<HTMLFormElement>("#search")?.submit();
+  });
+
+  return li;
+};
+
 const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<void> => {
   const controller = new AbortController();
   const timeoutId = window.setTimeout(() => controller.abort(), 30_000);
 
   try {
-    const headers = { Accept: "application/json" };
-    const res =
-      settings.method === "GET"
-        ? await fetch(`./autocompleter?q=${encodeURIComponent(query)}`, {
-            method: "GET",
-            headers,
-            signal: controller.signal,
-          })
-        : await fetch("./autocompleter", {
-            method: "POST",
-            headers: {
-              ...headers,
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: new URLSearchParams({ q: query }),
-            signal: controller.signal,
-          });
-
-    if (!res.ok) {
-      throw new Error(res.statusText);
-    }
+    const res = await requestAutocomplete(query, controller.signal);
+    if (!res.ok) throw new Error(res.statusText);
 
     const results = await res.json();
-
     if (!autocomplete || !autocompleteList) return;
-
     if (suppressAutocomplete || query !== qInput.value) return;
+
     autocomplete.classList.add("open");
     autocompleteList.replaceChildren();
-
-    if (results?.[1]?.length === 0) {
-      return;
-    }
+    if (!results?.[1]?.length) return;
 
     const fragment = new DocumentFragment();
-
-    for (const result of results[1] as SuggestionItem[]) {
-      const suggestionText = getSuggestionText(result);
-      if (suggestionText.length === 0) continue;
-
-      const li = document.createElement("li");
-      const iconUrl = getSuggestionIcon(result);
-      const content = document.createElement("div");
-      content.className = "autocomplete-content";
-
-      const text = document.createElement("span");
-      text.className = "autocomplete-text";
-      fillSuggestion(text, suggestionText, query);
-      content.append(text);
-
-      const description = getSuggestionDescription(result);
-      if (description) {
-        const desc = document.createElement("span");
-        desc.className = "autocomplete-description";
-        desc.textContent = description;
-        content.append(desc);
-      }
-
-      li.append(createAutocompleteIcon(iconUrl));
-      li.append(content);
-
-      listen("mousedown", li, () => {
-        qInput.value = suggestionText;
-
-        const form = document.querySelector<HTMLFormElement>("#search");
-        form?.submit();
-      });
-
-      fragment.append(li);
+    for (const item of results[1] as SuggestionItem[]) {
+      if (!suggestionText(item)) continue;
+      fragment.append(renderSuggestion(item, query, qInput));
     }
-
     autocompleteList.append(fragment);
   } catch (error) {
     console.error("Error fetching autocomplete results:", error);
@@ -188,100 +203,73 @@ const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<vo
   }
 };
 
-const qInput = document.getElementById("q") as HTMLInputElement | null;
+const qInput = document.getElementById("q");
 if (!(qInput instanceof HTMLInputElement)) {
   throw new Error("Search input #q not found");
 }
 
-const clearSearchButton = document.getElementById("clear_search") as HTMLButtonElement | null;
+const clearSearchButton = document.getElementById("clear_search");
 
-let timeoutId: number;
+let scheduleId: number;
 
-listen("input", qInput, () => {
-  clearTimeout(timeoutId);
-
-  const query = qInput.value;
-  const minLength = settings.autocomplete_min ?? 2;
-
-  if (query.length < minLength) {
+const scheduleAutocomplete = (query: string): void => {
+  clearTimeout(scheduleId);
+  if (!shouldFetch(query)) {
     closeAutocomplete();
     return;
   }
-
   suppressAutocomplete = false;
-
-  timeoutId = window.setTimeout(async () => {
-    if (query === qInput.value) {
-      await fetchResults(qInput, query);
-    }
+  scheduleId = window.setTimeout(() => {
+    if (query === qInput.value) void fetchResults(qInput, query);
   }, 0);
-});
+};
+
+listen("input", qInput, () => scheduleAutocomplete(qInput.value));
+
 if (autocompleteList) {
   if (clearSearchButton) {
-    listen("click", clearSearchButton, () => {
-      closeAutocomplete();
-    });
+    listen("click", clearSearchButton, () => closeAutocomplete());
   }
 
   listen("keydown", qInput, (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      closeAutocomplete();
-    }
+    if (event.key === "Escape") closeAutocomplete();
   });
+
   listen("keyup", qInput, (event: KeyboardEvent) => {
-    const listItems = [...autocompleteList.children] as HTMLElement[];
-    if (listItems.length === 0) {
-      if (event.key === "Enter") {
-        closeAutocomplete();
-      }
+    const items = [...autocompleteList.children] as HTMLElement[];
+    if (items.length === 0) {
+      if (event.key === "Enter") closeAutocomplete();
       return;
     }
 
-    const currentIndex = listItems.findIndex((item) => item.classList.contains("active"));
-    const currentItem = listItems[currentIndex];
-    if (currentItem && currentIndex >= 0) {
-      currentItem.classList.remove("active");
+    const currentIndex = items.findIndex((item) => item.classList.contains("active"));
+    if (currentIndex >= 0) items[currentIndex]?.classList.remove("active");
+
+    let nextIndex = -1;
+    if (event.key === "ArrowUp") {
+      nextIndex = (currentIndex - 1 + items.length) % items.length;
+    } else if (event.key === "ArrowDown") {
+      nextIndex = (currentIndex + 1) % items.length;
+    } else if (event.key === "Enter") {
+      closeAutocomplete();
+      return;
     }
 
-    let newCurrentIndex = -1;
+    if (nextIndex === -1) return;
 
-    switch (event.key) {
-      case "ArrowUp": {
-        // we need to add listItems.length to the index calculation here because the JavaScript modulos
-        // operator doesn't work with negative numbers
-        newCurrentIndex = (currentIndex - 1 + listItems.length) % listItems.length;
-        break;
-      }
-      case "ArrowDown": {
-        newCurrentIndex = (currentIndex + 1) % listItems.length;
-        break;
-      }
-      case "Enter":
-        closeAutocomplete();
-        break;
-      default:
-        break;
-    }
-
-    if (newCurrentIndex !== -1) {
-      const selectedItem = listItems[newCurrentIndex];
-      if (selectedItem) {
-        selectedItem.classList.add("active");
-
-        const suggestionTextElement = selectedItem.querySelector<HTMLElement>(".autocomplete-text");
-        qInput.value = suggestionTextElement?.textContent ?? "";
-      }
-    }
+    const selected = items[nextIndex];
+    selected?.classList.add("active");
+    qInput.value = selected?.querySelector<HTMLElement>(".autocomplete-text")?.textContent ?? "";
   });
 
-  listen("blur", qInput, () => {
-    hideAutocomplete();
-  });
+  listen("blur", qInput, () => hideAutocomplete());
 
   listen("focus", qInput, () => {
     suppressAutocomplete = false;
-    if ((autocompleteList?.children.length ?? 0) > 0) {
+    if ((autocompleteList.children.length ?? 0) > 0) {
       autocomplete?.classList.add("open");
+      return;
     }
+    if (shouldFetch(qInput.value)) scheduleAutocomplete(qInput.value);
   });
 }
