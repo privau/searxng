@@ -55,7 +55,7 @@ def _google_complete_with_icons(query: str, sxng_locale: str) -> list[Suggestion
     url = f'https://{google_info["subdomain"]}/complete/search?{args}'
 
     results: list[Suggestion] = []
-    resp = get(url)
+    resp = get(url, timeout=2.0)
     if not resp or not resp.ok:
         return results
 
@@ -284,7 +284,9 @@ def _autocompleter_with_icons(webapp_module):
 
     if req.headers.get('Accept', '').startswith('application/json'):
         payload = [sug_prefix, [_rich_result(webapp_module, result) for result in results]]
-        return webapp_module.Response(json.dumps(payload), mimetype='application/json')
+        response = webapp_module.Response(json.dumps(payload), mimetype='application/json')
+        response.headers['Cache-Control'] = 'no-store'
+        return response
 
     body = _omnibox_suggestions_json(
         webapp_module,
@@ -316,7 +318,10 @@ def apply_google_autocomplete_icons(app) -> None:
     @app.after_request
     def add_image_proxy_cache_headers(response):
         if request.path == '/autocompleter' and request.method == 'GET' and 200 <= response.status_code < 300:
-            response.headers['Cache-Control'] = 'private, max-age=3600, stale-while-revalidate=300'
+            if request.headers.get('Accept', '').startswith('application/json'):
+                response.headers['Cache-Control'] = 'no-store'
+            else:
+                response.headers['Cache-Control'] = 'private, max-age=3600, stale-while-revalidate=300'
             response.headers['Vary'] = 'Cookie, User-Agent, Accept'
             return response
         if request.path != '/image_proxy':

@@ -126,16 +126,17 @@ const closeAutocomplete = (): void => {
   autocompleteList?.replaceChildren();
 };
 
-const requestAutocomplete = async (query: string, signal: AbortSignal): Promise<Response> => {
+const requestAutocomplete = (query: string): Promise<Response> => {
   const headers = { Accept: "application/json" };
+  const cache: RequestCache = "no-store";
   if (settings.method === "GET") {
-    return fetch(`./autocompleter?q=${encodeURIComponent(query)}`, { method: "GET", headers, signal });
+    return fetch(`./autocompleter?q=${encodeURIComponent(query)}`, { method: "GET", headers, cache });
   }
   return fetch("./autocompleter", {
     method: "POST",
     headers: { ...headers, "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({ q: query }),
-    signal,
+    cache,
   });
 };
 
@@ -174,33 +175,38 @@ const renderSuggestion = (
   return li;
 };
 
-const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<void> => {
-  const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), 30_000);
+let requestCounter = 0;
+let displayedRequestId = 0;
 
-  try {
-    const res = await requestAutocomplete(query, controller.signal);
-    if (!res.ok) throw new Error(res.statusText);
+const fetchResults = (qInput: HTMLInputElement, query: string, requestId: number): void => {
+  requestAutocomplete(query)
+    .then((res) => {
+      if (!res.ok) throw new Error(res.statusText);
+      return res.json();
+    })
+    .then((results) => {
+      if (!autocomplete || !autocompleteList) return;
+      if (suppressAutocomplete) return;
+      if (requestId <= displayedRequestId) return;
+      if (!results?.[1]?.length) return;
 
-    const results = await res.json();
-    if (!autocomplete || !autocompleteList) return;
-    if (suppressAutocomplete || query !== qInput.value) return;
+      displayedRequestId = requestId;
+      autocomplete.classList.add("open");
+      autocompleteList.replaceChildren();
 
-    autocomplete.classList.add("open");
-    autocompleteList.replaceChildren();
-    if (!results?.[1]?.length) return;
-
-    const fragment = new DocumentFragment();
-    for (const item of results[1] as SuggestionItem[]) {
-      if (!suggestionText(item)) continue;
-      fragment.append(renderSuggestion(item, query, qInput));
-    }
-    autocompleteList.append(fragment);
-  } catch (error) {
-    console.error("Error fetching autocomplete results:", error);
-  } finally {
-    clearTimeout(timeoutId);
-  }
+      const highlightQuery = qInput.value;
+      const fragment = new DocumentFragment();
+      for (const item of results[1] as SuggestionItem[]) {
+        if (!suggestionText(item)) continue;
+        fragment.append(renderSuggestion(item, highlightQuery, qInput));
+      }
+      autocompleteList.append(fragment);
+    })
+    .catch((error) => {
+      if (requestId > displayedRequestId && !suppressAutocomplete) {
+        console.error("Error fetching autocomplete results:", error);
+      }
+    });
 };
 
 const qInput = document.getElementById("q");
@@ -210,18 +216,15 @@ if (!(qInput instanceof HTMLInputElement)) {
 
 const clearSearchButton = document.getElementById("clear_search");
 
-let scheduleId: number;
-
 const scheduleAutocomplete = (query: string): void => {
-  clearTimeout(scheduleId);
   if (!shouldFetch(query)) {
     closeAutocomplete();
     return;
   }
   suppressAutocomplete = false;
-  scheduleId = window.setTimeout(() => {
-    if (query === qInput.value) void fetchResults(qInput, query);
-  }, 0);
+  requestCounter += 1;
+  autocomplete?.classList.add("open");
+  void fetchResults(qInput, query, requestCounter);
 };
 
 listen("input", qInput, () => scheduleAutocomplete(qInput.value));
