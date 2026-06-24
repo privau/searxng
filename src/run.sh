@@ -43,11 +43,15 @@ if [ ! -z "${NAME}" ]; then
 fi
 
 # set privacy policy url
-if [ ! -z "${PRIVACYPOLICY}" ]; then
-    sed -i -e "s+privacypolicy_url: false+privacypolicy_url: ${PRIVACYPOLICY}+g" \
+if [ "${PRIVACYPOLICY}" = "/privacy" ]; then
+    sed -i -e "s+privacypolicy_url: false+privacypolicy_url: /privacy+g" \
     searx/settings.yml;
-else # set to 'privacy'
-    sed -i -e "s+privacypolicy_url: false+privacypolicy_url: privacy+g" \
+    sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \\
+@app.route('/privacy', methods=['GET'])\\
+def privacy_policy():return render('privacy-policy.html')\\
+" searx/webapp.py;
+elif [ ! -z "${PRIVACYPOLICY}" ]; then
+    sed -i -e "s+privacypolicy_url: false+privacypolicy_url: ${PRIVACYPOLICY}+g" \
     searx/settings.yml;
 fi
 
@@ -205,9 +209,15 @@ if [ ! -z "${FOOTER_MESSAGE}" ]; then
     searx/templates/simple/base.html
 fi
 
-# enable donation page (footer link to /donate)
-if [ "${DONATE}" = "true" ]; then
-    sed -i -e "s+donation_url: false+donation_url: donate+g" searx/settings.yml;
+# set donation url
+if [ "${DONATE}" = "/donate" ]; then
+    sed -i -e "s+donation_url: false+donation_url: /donate+g" searx/settings.yml;
+    sed -i "/@app\.route('\/client<token>\.css', methods=\['GET', 'POST'\])/i \\
+@app.route('/donate', methods=['GET'])\\
+def donate():return render('donation.html')\\
+" searx/webapp.py;
+elif [ ! -z "${DONATE}" ]; then
+    sed -i -e "s+donation_url: false+donation_url: ${DONATE}+g" searx/settings.yml;
 fi
 
 # populate donation page URL placeholders

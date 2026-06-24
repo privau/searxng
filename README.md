@@ -56,13 +56,13 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```NAME``` : sets the name of the instance, displayed as the url title - worth changing this as users can't add two instances named the same in Firefox (e.g. `PrivAU`)
 
-* ```PRIVACYPOLICY``` : sets the location of privacy policy of the instance (for example `https://example.org/privacy-policy`)
+* ```PRIVACYPOLICY``` : sets the location of the privacy policy of the instance (for example `https://example.org/privacy-policy`)
 
 * ```CONTACT``` : sets the location for users to contact the instance maintainer (for example `mailto:user@example.org`)
 
 * ```ISSUE_URL``` : set the location for users to report issues to (for example `https://github.com/example/searxng/issues` !Without a trailing /)
 
-* ```DONATE``` : enable the donation page and footer link. Set to `true` to enable (Default: `false`)
+* ```DONATE``` : sets the location of the donation page of the instance (Default: unset)
 
 * ```DONATION_URL``` : sets kofi or donation link displayed on the donation page (for example `https://ko-fi.com/privau`)
 
