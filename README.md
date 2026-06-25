@@ -64,10 +64,6 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```DONATE``` : sets the location of the donation page of the instance (Default: unset)
 
-* ```DONATION_URL``` : sets kofi or donation link displayed on the donation page (for example `https://ko-fi.com/privau`)
-
-* ```MONERO_ADDRESS``` : sets the Monero address displayed on the donation page.
-
 * ```GIT_URL``` : sets the location of the Git repository. (for example `https://github.com/privau/searxng`)
 
 * ```GIT_BRANCH``` : sets the Git branch of the repository specified in `GIT_URL`. (for example `main`)

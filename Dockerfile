@@ -180,8 +180,6 @@ GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= WIKIPEDIA_D
 OPENMETRICS= \
 PRIVACYPOLICY= \
 DONATE= \
-DONATION_URL= \
-MONERO_ADDRESS= \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main
