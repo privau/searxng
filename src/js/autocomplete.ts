@@ -177,30 +177,48 @@ const renderSuggestion = (
 
 let requestCounter = 0;
 let displayedRequestId = 0;
+let cachedTrendingResults: SuggestionItem[] | null = null;
+
+const displayResults = (
+  qInput: HTMLInputElement,
+  items: SuggestionItem[],
+  requestId: number,
+): void => {
+  if (!autocomplete || !autocompleteList) return;
+  if (suppressAutocomplete) return;
+  if (requestId <= displayedRequestId) return;
+  if (items.length === 0) return;
+
+  displayedRequestId = requestId;
+  autocomplete.classList.add("open");
+  autocompleteList.replaceChildren();
+
+  const highlightQuery = qInput.value;
+  const fragment = new DocumentFragment();
+  for (const item of items) {
+    if (!suggestionText(item)) continue;
+    fragment.append(renderSuggestion(item, highlightQuery, qInput));
+  }
+  autocompleteList.append(fragment);
+};
 
 const fetchResults = (qInput: HTMLInputElement, query: string, requestId: number): void => {
+  if (query.length === 0 && cachedTrendingResults !== null) {
+    displayResults(qInput, cachedTrendingResults, requestId);
+    return;
+  }
+
   requestAutocomplete(query)
     .then((res) => {
       if (!res.ok) throw new Error(res.statusText);
       return res.json();
     })
     .then((results) => {
-      if (!autocomplete || !autocompleteList) return;
-      if (suppressAutocomplete) return;
-      if (requestId <= displayedRequestId) return;
-      if (!results?.[1]?.length) return;
-
-      displayedRequestId = requestId;
-      autocomplete.classList.add("open");
-      autocompleteList.replaceChildren();
-
-      const highlightQuery = qInput.value;
-      const fragment = new DocumentFragment();
-      for (const item of results[1] as SuggestionItem[]) {
-        if (!suggestionText(item)) continue;
-        fragment.append(renderSuggestion(item, highlightQuery, qInput));
+      const items = (results?.[1] ?? []) as SuggestionItem[];
+      if (query.length === 0 && items.length > 0) {
+        cachedTrendingResults = items;
       }
-      autocompleteList.append(fragment);
+      displayResults(qInput, items, requestId);
     })
     .catch((error) => {
       if (requestId > displayedRequestId && !suppressAutocomplete) {
