@@ -90,6 +90,8 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```DUCKDUCKGO_DEFAULT``` : enable the DuckDuckGo search engine by default (Default: `false`)
 
+* ```STARTPAGE_DEFAULT``` : enable the Startpage search engine by default (Default: `false`)
+
 * ```WIKIPEDIA_DEFAULT``` : enable the Wikipedia engine by default (Default: `false`)
 
 * ```WIKIDATA_DEFAULT``` : enable the Wikidata engine by default (Default: `false`)
