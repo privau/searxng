@@ -101,7 +101,6 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e '/default_lang:/s/ ""/ en/g' \
 -e "/method:/s/\"POST\"/\"GET\"/g" \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
--e "s/# max_request_timeout: 10.0/max_request_timeout: 5.0/g" \
 -e "/X-Content-Type-Options: nosniff/d" \
 -e "/X-XSS-Protection: 1; mode=block/d" \
 -e "/X-Robots-Tag: noindex, nofollow/d" \
@@ -177,7 +176,8 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: presearch/s/$/\n    disabled: true/g" \
 -e "/name: yandex/s/$/\n    disabled: true/g" \
 -e "/name: swisscows/s/$/\n    disabled: true/g" \
--e "/name: dogpile/s/$/\n    disabled: true/g" \
+-e "/name: dogpile\$/s/$/\n    disabled: true/g" \
+-e "/name: dogpile images\$/,/disabled:/{s/disabled: .*/disabled: false/;}" \
 -e "/name: privacywall/s/$/\n    disabled: true/g" \
 -e "/name: vuhuv/s/$/\n    disabled: true/g" \
 -e "/name: gmx/s/$/\n    disabled: true/g" \
@@ -192,7 +192,7 @@ EXPOSE 8080
 
 # set env
 ENV GRANIAN_PROCESS_NAME="searxng" GRANIAN_INTERFACE="wsgi" GRANIAN_HOST="::" GRANIAN_PORT="8080" GRANIAN_WEBSOCKETS="false" GRANIAN_BLOCKING_THREADS="4" GRANIAN_WORKERS_KILL_TIMEOUT="30" GRANIAN_BLOCKING_THREADS_IDLE_TIMEOUT="300" \
-IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= SECRET_KEY= CAPTCHA= AUTHORIZED_API= MARGINALIA_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= SEARCH_ENGINE_CAPTCHA= PUBLIC_INSTANCE= \
+IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= SECRET_KEY= CAPTCHA= AUTHORIZED_API= MARGINALIA_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= SEARCH_ENGINE_CAPTCHA= ENGINE_TIMEOUT= PUBLIC_INSTANCE= \
 GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= STARTPAGE_DEFAULT= WIKIPEDIA_DEFAULT= WIKIDATA_DEFAULT= DDG_DEFINITIONS_DEFAULT= \
 LUXXLE_DEFAULT= ISEEK_DEFAULT= PRESEARCH_DEFAULT= YANDEX_DEFAULT= SWISSCOWS_DEFAULT= DOGPILE_DEFAULT= PRIVACYWALL_DEFAULT= VUHUV_DEFAULT= GMX_DEFAULT= DUCKDUCKGO_WEB_DEFAULT= RESULTHUNTER_DEFAULT= TUSKSEARCH_DEFAULT= \
 OPENMETRICS= \

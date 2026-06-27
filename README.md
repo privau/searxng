@@ -72,6 +72,8 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```SEARCH_ENGINE_CAPTCHA``` : sets the suspension timeout in seconds if a search engine throws a SEARCH_ENGINE_CAPTCHA exception (Default: `60`)
 
+* ```ENGINE_TIMEOUT``` : sets the default engine request timeout and hard cap in seconds (Default: `2`)
+
 * ```PUBLIC_INSTANCE``` : enables features designed for public instances. Forces image_proxy and limiter set to enabled. Requires redis/valkey.
 
 * ```SECRET_KEY``` : manually set the secret key for the instance. A random key will be generated on startup if not set.

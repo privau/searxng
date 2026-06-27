@@ -97,6 +97,14 @@ else # set to 60 seconds
     searx/settings.yml;
 fi
 
+# set engine request timeout (default: 2 seconds)
+if [ -z "${ENGINE_TIMEOUT}" ]; then
+    ENGINE_TIMEOUT=2
+fi
+sed -i -e "s/  request_timeout: .*/  request_timeout: ${ENGINE_TIMEOUT}/" \
+-e "s/  #* *max_request_timeout: .*/  max_request_timeout: ${ENGINE_TIMEOUT}/" \
+searx/settings.yml;
+
 # enable public_instance mode
 if [ ! -z "${PUBLIC_INSTANCE}" ]; then
     sed -i -e "/public_instance:/s/false/true/g" \
