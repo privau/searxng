@@ -146,19 +146,19 @@ fi
 
 # set BRAVE_DEFAULT if exists
 if [ ! -z "${BRAVE_DEFAULT}" ]; then
-    sed -i -e "/name: brave/s/$/\n    disabled: false/g" \
+    sed -i -e "/- name: brave\$/s/$/\n    disabled: false/g" \
     searx/settings.yml;
 else # set to disabled
-    sed -i -e "/name: brave/s/$/\n    disabled: true/g" \
+    sed -i -e "/- name: brave\$/s/$/\n    disabled: true/g" \
     searx/settings.yml;
 fi
 
 # set DUCKDUCKGO_DEFAULT if exists
 if [ ! -z "${DUCKDUCKGO_DEFAULT}" ]; then
-    sed -i -e "/name: duckduckgo/s/$/\n    disabled: false/g" \
+    sed -i -e "/- name: duckduckgo\$/s/$/\n    disabled: false/g" \
     searx/settings.yml;
 else # set to disabled
-    sed -i -e "/name: duckduckgo/s/$/\n    disabled: true/g" \
+    sed -i -e "/- name: duckduckgo\$/s/$/\n    disabled: true/g" \
     searx/settings.yml;
 fi
 
@@ -186,6 +186,126 @@ if [ ! -z "${DDG_DEFINITIONS_DEFAULT}" ]; then
     searx/settings.yml;
 else # set to disabled
     sed -i -e "/name: ddg definitions/s/$/\n    disabled: true/g" \
+    searx/settings.yml;
+fi
+
+# set LUXXLE_DEFAULT if exists
+if [ ! -z "${LUXXLE_DEFAULT}" ]; then
+    sed -i \
+    -e "/- name: luxxle\$/,/inactive:/{s/disabled: true/disabled: false/;}" \
+    -e "/- name: luxxle\$/,/inactive:/{s/inactive: true/inactive: false/;}" \
+    searx/settings.yml;
+else
+    sed -i \
+    -e "/- name: luxxle\$/,/inactive:/{s/disabled: false/disabled: true/;}" \
+    -e "/- name: luxxle\$/,/inactive:/{s/inactive: false/inactive: true/;}" \
+    searx/settings.yml;
+fi
+
+# set ISEEK_DEFAULT if exists
+if [ ! -z "${ISEEK_DEFAULT}" ]; then
+    sed -i \
+    -e "/- name: iseek\$/,/inactive:/{s/disabled: true/disabled: false/;}" \
+    -e "/- name: iseek\$/,/inactive:/{s/inactive: true/inactive: false/;}" \
+    searx/settings.yml;
+else
+    sed -i \
+    -e "/- name: iseek\$/,/inactive:/{s/disabled: false/disabled: true/;}" \
+    -e "/- name: iseek\$/,/inactive:/{s/inactive: false/inactive: true/;}" \
+    searx/settings.yml;
+fi
+
+# set SWISSCOWS_DEFAULT if exists
+if [ ! -z "${SWISSCOWS_DEFAULT}" ]; then
+    sed -i \
+    -e "/- name: swisscows\$/,/inactive:/{s/disabled: true/disabled: false/;}" \
+    -e "/- name: swisscows\$/,/inactive:/{s/inactive: true/inactive: false/;}" \
+    searx/settings.yml;
+else
+    sed -i \
+    -e "/- name: swisscows\$/,/inactive:/{s/disabled: false/disabled: true/;}" \
+    -e "/- name: swisscows\$/,/inactive:/{s/inactive: false/inactive: true/;}" \
+    searx/settings.yml;
+fi
+
+# set PRESEARCH_DEFAULT if exists
+if [ ! -z "${PRESEARCH_DEFAULT}" ]; then
+    sed -i -e "/- name: presearch\$/,/disabled:/{s/disabled: true/disabled: false/;}" \
+    searx/settings.yml;
+else
+    sed -i -e "/- name: presearch\$/,/disabled:/{s/disabled: false/disabled: true/;}" \
+    searx/settings.yml;
+fi
+
+# set YANDEX_DEFAULT if exists
+if [ ! -z "${YANDEX_DEFAULT}" ]; then
+    sed -i -e "/- name: yandex\$/,/disabled:/{s/disabled: true/disabled: false/;}" \
+    searx/settings.yml;
+else
+    sed -i -e "/- name: yandex\$/,/disabled:/{s/disabled: false/disabled: true/;}" \
+    searx/settings.yml;
+fi
+
+# set DOGPILE_DEFAULT if exists
+if [ ! -z "${DOGPILE_DEFAULT}" ]; then
+    sed -i -e "/- name: dogpile\$/,/disabled:/{s/disabled: true/disabled: false/;}" \
+    searx/settings.yml;
+else
+    sed -i -e "/- name: dogpile\$/,/disabled:/{s/disabled: false/disabled: true/;}" \
+    searx/settings.yml;
+fi
+
+# set PRIVACYWALL_DEFAULT if exists
+if [ ! -z "${PRIVACYWALL_DEFAULT}" ]; then
+    sed -i -e "/- name: privacywall\$/,/disabled:/{s/disabled: true/disabled: false/;}" \
+    searx/settings.yml;
+else
+    sed -i -e "/- name: privacywall\$/,/disabled:/{s/disabled: false/disabled: true/;}" \
+    searx/settings.yml;
+fi
+
+# set VUHUV_DEFAULT if exists
+if [ ! -z "${VUHUV_DEFAULT}" ]; then
+    sed -i -e "/- name: vuhuv\$/,/disabled:/{s/disabled: true/disabled: false/;}" \
+    searx/settings.yml;
+else
+    sed -i -e "/- name: vuhuv\$/,/disabled:/{s/disabled: false/disabled: true/;}" \
+    searx/settings.yml;
+fi
+
+# set GMX_DEFAULT if exists
+if [ ! -z "${GMX_DEFAULT}" ]; then
+    sed -i -e "/- name: gmx\$/,/disabled:/{s/disabled: true/disabled: false/;}" \
+    searx/settings.yml;
+else
+    sed -i -e "/- name: gmx\$/,/disabled:/{s/disabled: false/disabled: true/;}" \
+    searx/settings.yml;
+fi
+
+# set DUCKDUCKGO_WEB_DEFAULT if exists
+if [ ! -z "${DUCKDUCKGO_WEB_DEFAULT}" ]; then
+    sed -i -e "/- name: duckduckgo web\$/,/disabled:/{s/disabled: true/disabled: false/;}" \
+    searx/settings.yml;
+else
+    sed -i -e "/- name: duckduckgo web\$/,/disabled:/{s/disabled: false/disabled: true/;}" \
+    searx/settings.yml;
+fi
+
+# set RESULTHUNTER_DEFAULT if exists
+if [ ! -z "${RESULTHUNTER_DEFAULT}" ]; then
+    sed -i -e "/- name: resulthunter\$/,/disabled:/{s/disabled: true/disabled: false/;}" \
+    searx/settings.yml;
+else
+    sed -i -e "/- name: resulthunter\$/,/disabled:/{s/disabled: false/disabled: true/;}" \
+    searx/settings.yml;
+fi
+
+# set TUSKSEARCH_DEFAULT if exists
+if [ ! -z "${TUSKSEARCH_DEFAULT}" ]; then
+    sed -i -e "/- name: tusksearch\$/,/disabled:/{s/disabled: true/disabled: false/;}" \
+    searx/settings.yml;
+else
+    sed -i -e "/- name: tusksearch\$/,/disabled:/{s/disabled: false/disabled: true/;}" \
     searx/settings.yml;
 fi
 

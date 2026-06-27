@@ -96,6 +96,30 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```DDG_DEFINITIONS_DEFAULT``` : enable the DuckDuckGo Definitions engine by default (Default: `false`)
 
+* ```LUXXLE_DEFAULT``` : enable the Luxxle search engine by default (Default: `false`)
+
+* ```ISEEK_DEFAULT``` : enable the iSeek search engine by default (Default: `false`)
+
+* ```PRESEARCH_DEFAULT``` : enable the Presearch search engine by default (Default: `false`)
+
+* ```YANDEX_DEFAULT``` : enable the Yandex search engine by default (Default: `false`)
+
+* ```SWISSCOWS_DEFAULT``` : enable the Swisscows search engine by default (Default: `false`)
+
+* ```DOGPILE_DEFAULT``` : enable the Dogpile search engine by default (Default: `false`)
+
+* ```PRIVACYWALL_DEFAULT``` : enable the PrivacyWall search engine by default (Default: `false`)
+
+* ```VUHUV_DEFAULT``` : enable the Vuhuv search engine by default (Default: `false`)
+
+* ```GMX_DEFAULT``` : enable the GMX search engine by default (Default: `false`)
+
+* ```DUCKDUCKGO_WEB_DEFAULT``` : enable the DuckDuckGo Web search engine by default (Default: `false`)
+
+* ```RESULTHUNTER_DEFAULT``` : enable the ResultHunter search engine by default (Default: `false`)
+
+* ```TUSKSEARCH_DEFAULT``` : enable the Tusksearch search engine by default (Default: `false`)
+
 * ```SEARCH_DEFAULT_LANG``` : sets the default search language (for example `en`, Default: `auto`)
 
 * ```MARGINALIA_API``` : sets the API key for the Marginalia search engine and enables it (Default: disabled)
