@@ -197,4 +197,13 @@ if [ ! -z "${DONATE}" ]; then
     sed -i -e "s+donation_url: false+donation_url: ${DONATE}+g" searx/settings.yml;
 fi
 
+# AI overview
+if [ -n "${AIOVERVIEW}" ]; then
+    if ! grep -q 'ai_overview.SXNGPlugin' searx/settings.yml; then
+        python3 -c "import pathlib,re;p=pathlib.Path('searx/settings.yml');t=p.read_text();t,n=re.subn(r'(  searx\.plugins\.infinite_scroll\.SXNGPlugin:\n    active: \w+\n)',r'\1\n  searx.plugins.ai_overview.SXNGPlugin:\n    active: false\n',t,1);exit(1) if n!=1 else p.write_text(t)"
+    fi
+    sed -i "s|</head>|<meta name=\"ai-overview\" content=\"${AIOVERVIEW}\"></head>|" \
+        searx/templates/simple/base.html
+fi
+
 exec /usr/local/searxng/venv/bin/granian searx.privau_wsgi:app

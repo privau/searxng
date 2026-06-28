@@ -1,0 +1,112 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+#results #sidebar #ai-overview-slot {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--color-sidebar-border);
+  border-radius: 0.75em;
+  background: var(--color-answer-background);
+  color: var(--color-answer-font);
+  font-size: 0.9em;
+
+  .ai-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .ai-overview-body {
+    line-height: 1.4;
+    overflow-wrap: break-word;
+
+    p {
+      margin: 0 0 0.35em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    p + p {
+      margin-top: 0.45em;
+    }
+
+    .ai-overview-highlight {
+      background: color-mix(in srgb, var(--color-result-link-font) 18%, transparent);
+      padding: 0.05em 0.2em;
+      border-radius: 0.15em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    a {
+      color: var(--color-result-link-font);
+      text-decoration: underline;
+      text-underline-offset: 0.1em;
+    }
+  }
+
+  .ai-overview-disclaimer {
+    font-size: 0.7em;
+    opacity: 0.65;
+    margin: 0.35em 0 0;
+    line-height: 1.25;
+  }
+
+  .ai-overview--loading .ai-overview-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    span {
+      display: block;
+      height: 0.65rem;
+      border-radius: 0.25rem;
+      background: linear-gradient(
+        90deg,
+        var(--color-sidebar-border) 25%,
+        var(--color-answer-background) 50%,
+        var(--color-sidebar-border) 75%
+      );
+      background-size: 200% 100%;
+      animation: ai-overview-shimmer 1.2s ease-in-out infinite;
+
+      &:nth-child(1) {
+        width: 95%;
+      }
+
+      &:nth-child(2) {
+        width: 85%;
+      }
+
+      &:nth-child(3) {
+        width: 70%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @tablet) {
+  #main_results #results #sidebar #ai-overview-slot {
+    .ltr-margin-left(2%);
+    .ltr-margin-right(2%);
+    width: 96%;
+    max-width: 96%;
+  }
+}
+
+@keyframes ai-overview-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
