@@ -5,8 +5,9 @@ when:
 
 steps:
   publish:
-    image: docker.io/woodpeckerci/plugin-docker-buildx:latest
+    image: docker.io/woodpeckerci/plugin-docker-buildx:6.1.0
     settings:
+      driver: docker
       dockerfile: Dockerfile
       repo: codeberg.org/privau/searxng
       tags: latest
