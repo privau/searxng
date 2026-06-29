@@ -8,7 +8,7 @@ steps:
     image: docker.io/woodpeckerci/plugin-docker-buildx:latest
     settings:
       dockerfile: Dockerfile
-      repo: codeberg.org/${CI_REPO_OWNER}/searxng
+      repo: codeberg.org/privau/searxng
       registry: codeberg.org
       tags: latest
       platforms: linux/amd64
