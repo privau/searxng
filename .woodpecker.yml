@@ -5,15 +5,12 @@ when:
 
 steps:
   publish:
-    image: docker.io/woodpeckerci/plugin-docker-buildx:6.1.0
+    image: docker.io/woodpeckerci/plugin-kaniko:2.3.2
     settings:
-      driver: docker
       dockerfile: Dockerfile
-      repo: codeberg.org/privau/searxng
+      registry: https://codeberg.org
+      repo: privau/searxng
       tags: latest
-      platforms: linux/amd64
-      logins:
-        - registry: https://codeberg.org
-          username: vojkovic
-          password:
-            from_secret: cb_token
+      username: vojkovic
+      password:
+        from_secret: cb_token
