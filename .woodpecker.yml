@@ -9,9 +9,10 @@ steps:
     settings:
       dockerfile: Dockerfile
       repo: codeberg.org/privau/searxng
-      registry: codeberg.org
       tags: latest
       platforms: linux/amd64
-      username: vojkovic
-      password:
-        from_secret: cb_token
+      logins:
+        - registry: https://codeberg.org
+          username: vojkovic
+          password:
+            from_secret: cb_token
