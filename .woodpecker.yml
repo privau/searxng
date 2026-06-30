@@ -8,7 +8,7 @@ steps:
     image: docker.io/woodpeckerci/plugin-kaniko:2.3.2
     settings:
       dockerfile: Dockerfile
-      registry: https://codeberg.org
+      registry: codeberg.org
       repo: privau/searxng
       tags: latest
       username: vojkovic
