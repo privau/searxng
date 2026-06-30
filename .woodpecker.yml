@@ -9,7 +9,7 @@ steps:
     settings:
       dockerfile: Dockerfile
       registry: codeberg.org
-      repo: privau/searxng
+      repo: vojkovic/searxng
       tags: latest
       username: vojkovic
       password:
