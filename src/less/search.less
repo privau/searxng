@@ -329,6 +329,38 @@ html.no-js #clear_search.hide_if_nojs {
       "categories categories";
   }
 
+  #main_index,
+  #main_results,
+  body.captcha_endpoint {
+    #categories {
+      padding: 0.4em 10px;
+      box-sizing: border-box;
+      background: var(--color-header-background);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #categories_container {
+      display: flex;
+      width: max-content;
+      min-width: 100%;
+    }
+
+    .category_checkbox,
+    button.category_button {
+      flex: 1 0 auto;
+      margin: 0 !important;
+    }
+
+    button.category_button {
+      justify-content: center;
+    }
+
+    .category_checkbox label {
+      justify-content: center;
+    }
+  }
+
   .search_logo {
     padding: 0;
   }
@@ -529,4 +561,13 @@ article.category-images {
 
 .altlink {
   display: none;
+}
+
+@media screen and (max-width: @tablet) {
+  #links_on_top {
+    .link_on_top_about,
+    .link_on_top_donate {
+      display: none;
+    }
+  }
 }
