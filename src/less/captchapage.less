@@ -1,6 +1,4 @@
 body:has(.captcha-page) {
-  overflow-x: hidden;
-
   #links_on_top {
     z-index: 5000;
   }
@@ -12,6 +10,17 @@ body:has(.captcha-page) {
   }
 }
 
+body.captcha_endpoint #search_view {
+  padding: 0.5rem 2.8rem 0 0;
+}
+
+@media screen and (min-width: @phone) and (max-width: @tablet) {
+  body.captcha_endpoint #search_header {
+    .ltr-padding-left(calc((100% - @results-width) / 2 - 3rem));
+    column-gap: 0.5em;
+  }
+}
+
 .captcha-page {
   .captcha-progress {
     position: relative;
@@ -19,21 +28,18 @@ body:has(.captcha-page) {
     transform: translateX(-50%);
     width: 100vw;
     height: 3px;
-    margin: 1px 0 0;
+    margin: 0 0 calc(0.6rem + 2.4rem - 3px);
     pointer-events: none;
-    background: var(--color-base-background);
   }
 
   .captcha-progress-track {
     height: 100%;
-    border-radius: 0;
     background: rgba(255, 255, 255, 0.12);
     overflow: hidden;
   }
 
   .captcha-progress-fill {
     height: 100%;
-    width: 0%;
     background: var(--color-logo-fill);
     animation: captcha-progress 1.2s ease-in-out forwards;
   }
