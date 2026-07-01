@@ -15,7 +15,7 @@
   background: var(--color-header-background);
   border-bottom: 1px solid var(--color-header-border);
   display: grid;
-  gap: 0.7rem 1.2rem;
+  gap: 0.7rem 0.5em;
   grid-template-columns: 3rem 1fr;
   grid-template-areas:
     "logo search"
@@ -163,6 +163,7 @@ button.category_button {
   border-radius: 0.9rem;
   width: 100%;
   max-width: @search-width;
+  position: relative;
   display: inline-flex;
   flex-direction: row;
   white-space: nowrap;
@@ -279,6 +280,20 @@ html.no-js #clear_search.hide_if_nojs {
   #categories {
     font-size: 90%;
     clear: both;
+  }
+}
+
+@media screen and (min-width: @phone) and (max-width: @tablet) {
+  body.results_endpoint {
+    #search_header {
+      .ltr-padding-left(calc((100% - @results-width) / 2 - 3rem));
+      column-gap: 0.5em;
+    }
+
+    .search_filters {
+      .ltr-margin-left(calc((100% - @results-width) / 2 + 0.5em));
+      width: calc(@results-width - 1em);
+    }
   }
 }
 
