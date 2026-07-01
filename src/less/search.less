@@ -246,7 +246,9 @@ html.no-js #clear_search.hide_if_nojs {
   margin-top: 0.6rem;
   .ltr-margin-right(0);
   margin-bottom: 0;
-  .ltr-margin-left(@results-offset + 0.6rem);
+  .ltr-margin-left(calc(@results-offset + 0.5em));
+  width: calc(@results-width - 1em);
+  box-sizing: border-box;
   display: flex;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
@@ -328,6 +330,7 @@ html.no-js #clear_search.hide_if_nojs {
   .search_filters {
     margin: 0 10px;
     padding: 0.5rem 0;
+    width: auto;
   }
 
   .category {
@@ -409,6 +412,12 @@ article.result {
   border-radius: 0.75em;
   padding: 0.75em;
   margin: 0.5em;
+  width: auto;
+}
+
+#results #answers {
+  .ltr-margin-left(0.5em);
+  .ltr-margin-right(0.5em);
 }
 
 .infobox {
