@@ -4,9 +4,14 @@ body:has(.captcha-page) {
   }
 }
 
-@media screen and (max-width: 50em) {
+@media screen and (max-width: @tablet) {
   body:has(.captcha-page) #links_on_top {
     z-index: 1500;
+
+    .link_on_top_about,
+    .link_on_top_donate {
+      display: none;
+    }
   }
 }
 
