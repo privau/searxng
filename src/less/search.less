@@ -164,21 +164,30 @@ button.category_button {
   width: 100%;
   max-width: @search-width;
   position: relative;
-  display: inline-flex;
-  flex-direction: row;
+  display: inline-grid;
+  margin-inline: auto;
+  grid-template-columns: 1fr auto;
   white-space: nowrap;
   border: 1px solid var(--color-search-border);
   box-shadow: var(--color-search-shadow);
+  background: var(--color-search-background);
+  overflow: hidden;
 }
 
 #clear_search {
-  display: block;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-collapse: separate;
   box-sizing: border-box;
   width: 1.8rem;
+  height: 3.1rem;
   margin: 0;
-  padding: 0.8rem 0.2rem;
-  background: none repeat scroll 0 0 var(--color-search-background);
+  padding: 0;
+  background: transparent;
   border: none;
   outline: none;
   color: var(--color-search-font);
@@ -189,11 +198,8 @@ button.category_button {
     color: var(--color-search-background-hover);
   }
 
-  &.empty * {
-    display: none;
-  }
-
   &.empty {
+    visibility: hidden;
     pointer-events: none;
   }
 }
@@ -202,12 +208,22 @@ html.no-js #clear_search.hide_if_nojs {
   display: none;
 }
 
+html.no-js #send_search .hide_if_nojs,
+html.no-js #clear_search .hide_if_nojs {
+  display: inline-block !important;
+}
+
+html.no-js #send_search .show_if_nojs,
+html.no-js #clear_search .show_if_nojs {
+  display: none !important;
+}
+
 #q,
 #send_search {
   display: block;
   margin: 0;
   padding: 0.8rem;
-  background: none repeat scroll 0 0 var(--color-search-background);
+  background: transparent;
   border: none;
   outline: none;
   color: var(--color-search-font);
@@ -216,9 +232,14 @@ html.no-js #clear_search.hide_if_nojs {
 }
 
 #q {
+  grid-column: 1;
+  grid-row: 1;
   width: 100%;
+  min-width: 0;
+  height: 3.1rem;
+  box-sizing: border-box;
   .ltr-padding-left(1rem);
-  .ltr-padding-right(0) !important;
+  .ltr-padding-right(1.8rem) !important;
   .ltr-rounded-left-corners(0.8rem);
 }
 
@@ -228,6 +249,15 @@ html.no-js #clear_search.hide_if_nojs {
 }
 
 #send_search {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  box-sizing: border-box;
+  overflow: hidden;
   .ltr-rounded-right-corners(0.8rem);
 
   &:hover {
@@ -235,12 +265,6 @@ html.no-js #clear_search.hide_if_nojs {
     background-color: var(--color-search-background-hover);
     color: var(--color-search-background);
   }
-}
-
-.no-js #clear_search,
-.no-js #send_search {
-  width: auto !important;
-  .ltr-border-left(1px solid var(--color-search-border));
 }
 
 .search_filters {
@@ -421,11 +445,6 @@ html.no-js #clear_search.hide_if_nojs {
         box-shadow: none;
       }
     }
-  }
-
-  #main_results #q:placeholder-shown ~ #send_search {
-    .ltr-margin-right(2.6rem);
-    transition: margin 0.1s;
   }
 }
 
