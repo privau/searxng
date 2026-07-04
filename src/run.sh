@@ -178,6 +178,7 @@ set_engine_default gmx "${GMX_DEFAULT}"
 set_engine_default "duckduckgo web" "${DUCKDUCKGO_WEB_DEFAULT}"
 set_engine_default resulthunter "${RESULTHUNTER_DEFAULT}"
 set_engine_default tusksearch "${TUSKSEARCH_DEFAULT}"
+set_engine_default "google cse" "${GOOGLE_CSE_DEFAULT}"
 
 # set Marginalia API key
 if [ ! -z "${MARGINALIA_API}" ]; then
