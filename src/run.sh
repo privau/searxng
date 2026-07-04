@@ -159,7 +159,7 @@ set_engine_default() {
     searx/settings.yml;
 }
 
-set_engine_default google "${GOOGLE_DEFAULT}"
+#set_engine_default google "${GOOGLE_DEFAULT}"
 set_engine_default startpage "${STARTPAGE_DEFAULT}"
 set_engine_default brave "${BRAVE_DEFAULT}"
 set_engine_default duckduckgo "${DUCKDUCKGO_DEFAULT}"
