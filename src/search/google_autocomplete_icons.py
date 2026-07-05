@@ -48,9 +48,12 @@ def _fields_from_google_meta(meta: dict[str, t.Any]) -> dict[str, t.Any]:
 
 def _google_complete_with_icons(query: str, sxng_locale: str) -> list[Suggestion]:
     from searx.autocomplete import get
+    from searx.data import ENGINE_TRAITS
+    from searx.enginelib.traits import EngineTraits
     from searx.engines import engines, google
 
-    google_info = google.get_google_info({'searxng_locale': sxng_locale}, engines['google'].traits)
+    traits = engines['google'].traits if 'google' in engines else EngineTraits(**ENGINE_TRAITS['google'])
+    google_info = google.get_google_info({'searxng_locale': sxng_locale}, traits)
     args = urlencode({'q': query, 'client': 'gws-wiz', 'hl': google_info['params']['hl']})
     url = f'https://{google_info["subdomain"]}/complete/search?{args}'
 
