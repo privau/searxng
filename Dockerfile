@@ -55,9 +55,15 @@ COPY --chown=root:root --from=builder /tmp/.searxng.passwd /etc/passwd
 COPY --chown=root:root --from=builder /tmp/.searxng.group /etc/group
 COPY --chown=searxng:searxng --from=builder /usr/local/searxng /usr/local/searxng
 
-# copy run.sh and limiter.toml
+# copy run.sh
 COPY --chown=searxng:searxng ./src/run.sh /usr/local/bin/run.sh
-COPY --chown=searxng:searxng ./src/limiter.toml /etc/searxng/limiter.toml
+
+# block larger prefixes
+RUN cp searx/limiter.toml /etc/searxng/limiter.toml \
+&& sed -i \
+-e 's/^ipv4_prefix = 32/ipv4_prefix = 24/' \
+-e 's/^ipv6_prefix = 48/ipv6_prefix = 40/' \
+/etc/searxng/limiter.toml
 
 # enable all favicon resolvers
 RUN cp searx/favicons/favicons.toml /etc/searxng/favicons.toml \
