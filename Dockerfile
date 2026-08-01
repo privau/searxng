@@ -59,20 +59,18 @@ COPY --chown=searxng:searxng --from=builder /usr/local/searxng /usr/local/searxn
 COPY --chown=searxng:searxng ./src/run.sh /usr/local/bin/run.sh
 
 # block larger prefixes
-RUN cp searx/limiter.toml /etc/searxng/limiter.toml \
-&& sed -i \
+RUN sed -i \
 -e 's/^ipv4_prefix = 32/ipv4_prefix = 24/' \
 -e 's/^ipv6_prefix = 48/ipv6_prefix = 40/' \
-/etc/searxng/limiter.toml
+searx/limiter.toml
 
 # enable all favicon resolvers
-RUN cp searx/favicons/favicons.toml /etc/searxng/favicons.toml \
-&& sed -i \
+RUN sed -i \
 -e 's/^# \[favicons.proxy.resolver_map\]/[favicons.proxy.resolver_map]/' \
 -e 's/^# \(".*" = "searx\.favicons\.resolvers\..*"\)/\1/' \
 -e 's/^# HOLD_TIME = .*/HOLD_TIME = 5184000/' \
 -e 's/^# LIMIT_TOTAL_BYTES = .*/LIMIT_TOTAL_BYTES = 2147483648/' \
-/etc/searxng/favicons.toml
+searx/favicons/favicons.toml
 
 # make our patches to searxng's code to allow for the custom theming
 RUN sed -i "/'simple_style': EnumStringSetting(/,/center_alignment/ s/choices=\[\"\", \"auto\", \"light\", \"dark\", \"black\"\]/choices=[\"\", \"auto\", \"light\", \"dark\", \"black\", \"paulgo\", \"latte\", \"frappe\", \"macchiato\", \"mocha\", \"kagi\", \"brave\", \"moa\", \"night\", \"dracula\", \"gruvbox\", \"gruvboxmat\", \"everforest\", \"nord\", \"matcha\", \"evergarden\"]/" searx/preferences.py \
