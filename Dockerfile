@@ -55,10 +55,18 @@ COPY --chown=root:root --from=builder /tmp/.searxng.passwd /etc/passwd
 COPY --chown=root:root --from=builder /tmp/.searxng.group /etc/group
 COPY --chown=searxng:searxng --from=builder /usr/local/searxng /usr/local/searxng
 
-# copy run.sh, limiter.toml and favicons.toml
+# copy run.sh and limiter.toml
 COPY --chown=searxng:searxng ./src/run.sh /usr/local/bin/run.sh
 COPY --chown=searxng:searxng ./src/limiter.toml /etc/searxng/limiter.toml
-COPY --chown=searxng:searxng ./src/favicons.toml /etc/searxng/favicons.toml
+
+# enable all favicon resolvers
+RUN cp searx/favicons/favicons.toml /etc/searxng/favicons.toml \
+&& sed -i \
+-e 's/^# \[favicons.proxy.resolver_map\]/[favicons.proxy.resolver_map]/' \
+-e 's/^# \(".*" = "searx\.favicons\.resolvers\..*"\)/\1/' \
+-e 's/^# HOLD_TIME = .*/HOLD_TIME = 5184000/' \
+-e 's/^# LIMIT_TOTAL_BYTES = .*/LIMIT_TOTAL_BYTES = 2147483648/' \
+/etc/searxng/favicons.toml
 
 # make our patches to searxng's code to allow for the custom theming
 RUN sed -i "/'simple_style': EnumStringSetting(/,/center_alignment/ s/choices=\[\"\", \"auto\", \"light\", \"dark\", \"black\"\]/choices=[\"\", \"auto\", \"light\", \"dark\", \"black\", \"paulgo\", \"latte\", \"frappe\", \"macchiato\", \"mocha\", \"kagi\", \"brave\", \"moa\", \"night\", \"dracula\", \"gruvbox\", \"gruvboxmat\", \"everforest\", \"nord\", \"matcha\", \"evergarden\"]/" searx/preferences.py \
