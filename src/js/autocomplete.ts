@@ -127,16 +127,10 @@ const closeAutocomplete = (): void => {
 };
 
 const requestAutocomplete = (query: string): Promise<Response> => {
-  const headers = { Accept: "application/json" };
-  const cache: RequestCache = "no-store";
-  if (settings.method === "GET") {
-    return fetch(`./autocompleter?q=${encodeURIComponent(query)}`, { method: "GET", headers, cache });
-  }
-  return fetch("./autocompleter", {
-    method: "POST",
-    headers: { ...headers, "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ q: query }),
-    cache,
+  return fetch(`./autocompleter?q=${encodeURIComponent(query)}`, {
+    method: "GET",
+    headers: { Accept: "application/json" },
+    cache: "no-store",
   });
 };
 

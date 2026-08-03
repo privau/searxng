@@ -90,7 +90,7 @@ RUN sed -i '/search_obj = searx.search.SearchWithPlugins(search_query, sxng_requ
 # include patches for authorized api access
 COPY --chown=searxng:searxng ./src/auth/auth.py searx/auth.py
 RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a\\        from searx.auth import valid_api_key\\n        if (not valid_api_key(sxng_request)):" -e 's|flask.abort(403)|    flask.abort(403)|' searx/webapp.py \
-&& sed -i "/return Response('', mimetype='text\/css')/a \\\\n@app.route('/<key>/search', methods=['GET', 'POST'])\\ndef search_key(key=None):\\n    from searx.auth import auth_search_key\\n    return auth_search_key(sxng_request, key)" searx/webapp.py \
+&& sed -i "/return Response('', mimetype='text\/css'/a \\\\n@app.route('/<key>/search', methods=['GET', 'POST'])\\ndef search_key(key=None):\\n    from searx.auth import auth_search_key\\n    return auth_search_key(sxng_request, key)" searx/webapp.py \
 && sed -i "/3\. If the IP is not in either list, the request is not blocked\./a\\    from searx.auth import valid_api_key\\n    if (valid_api_key(sxng_request)):\\n        return None" searx/limiter.py
 
 # supplemental engine early timeout (wikipedia, wikidata, ddg definitions)
@@ -98,9 +98,6 @@ COPY --chown=searxng:searxng ./src/search/supplemental_timeout.py searx/search/s
 COPY --chown=searxng:searxng ./src/search/google_autocomplete_icons.py searx/search/google_autocomplete_icons.py
 COPY --chown=searxng:searxng ./src/search/privau_wsgi.py searx/privau_wsgi.py
 COPY --chown=searxng:searxng ./src/plugins/ai_overview.py searx/plugins/ai_overview.py
-
-# fix opensearch autocompleter (force method of autocompleter to use GET reuqests)
-RUN sed -i '/{% if autocomplete %}/,/{% endif %}/s|method="{{ opensearch_method }}"|method="GET"|g' searx/templates/simple/opensearch.xml
 
 # set default settings
 RUN sed -i -e "/safe_search:/s/0/1/g" \
