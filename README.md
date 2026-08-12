@@ -104,8 +104,6 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```ISEEK_DEFAULT``` : enable the iSeek search engine by default (Default: `false`)
 
-* ```PRESEARCH_DEFAULT``` : enable the Presearch search engine by default (Default: `false`)
-
 * ```YANDEX_DEFAULT``` : enable the Yandex search engine by default (Default: `false`)
 
 * ```SWISSCOWS_DEFAULT``` : enable the Swisscows search engine by default (Default: `false`)
@@ -129,3 +127,5 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 * ```SEARCH_DEFAULT_LANG``` : sets the default search language (for example `en`, Default: `auto`)
 
 * ```MARGINALIA_API``` : sets the API key for the Marginalia search engine and enables it (Default: disabled)
+
+* ```JINA_API``` : sets the API key for the Jina search engine and enables it (Default: disabled)

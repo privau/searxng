@@ -169,7 +169,6 @@ set_engine_default "ddg definitions" "${DDG_DEFINITIONS_DEFAULT}"
 set_engine_default luxxle "${LUXXLE_DEFAULT}"
 set_engine_default iseek "${ISEEK_DEFAULT}"
 set_engine_default swisscows "${SWISSCOWS_DEFAULT}"
-set_engine_default presearch "${PRESEARCH_DEFAULT}"
 set_engine_default yandex "${YANDEX_DEFAULT}"
 set_engine_default dogpile "${DOGPILE_DEFAULT}"
 set_engine_default privacywall "${PRIVACYWALL_DEFAULT}"
@@ -184,6 +183,13 @@ set_engine_default "google cse" "${GOOGLE_CSE_DEFAULT}"
 if [ ! -z "${MARGINALIA_API}" ]; then
     sed -i -e "/- name: marginalia/,/inactive:/s/# api_key: .*/api_key: '${MARGINALIA_API}'/" \
     -e "/- name: marginalia/,/inactive:/s/inactive: true/inactive: false/" \
+    searx/settings.yml;
+fi
+
+# set Jina API key
+if [ ! -z "${JINA_API}" ]; then
+    sed -i -e "/- name: jina$/,/inactive:/s/api_key: .*/api_key: '${JINA_API}'/" \
+    -e "/- name: jina$/,/inactive:/s/inactive: true/inactive: false/" \
     searx/settings.yml;
 fi
 
