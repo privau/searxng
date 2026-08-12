@@ -23,7 +23,8 @@ RUN git config --global --add safe.directory /usr/local/searxng \
 RUN python -m venv ./venv \
 && . ./venv/bin/activate \
 && pip install -r requirements.txt \
-&& pip install "granian[pname]==2.7.9" \
+&& pip install "python-socks>=2.4.3,<3" \
+&& pip install "granian[pname]~=2.0" \
 && python -m searx.version freeze
 
 ARG SEARXNG_UID=977
