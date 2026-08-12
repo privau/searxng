@@ -102,15 +102,14 @@ COPY --chown=searxng:searxng ./src/plugins/ai_overview.py searx/plugins/ai_overv
 
 # set default settings
 RUN sed -i -e "/safe_search:/s/0/1/g" \
--e "/autocomplete:/s/\"\"/\"google\"/g" \
+-e '/^[[:space:]]*autocomplete:/s/:[[:space:]]*.*/: "google"/' \
 -e "/autocomplete_min:/s/4/0/g" \
--e "/favicon_resolver:/s/\"\"/\"google\"/g" \
+-e '/^[[:space:]]*favicon_resolver:/s/:[[:space:]]*.*/: "google"/' \
 -e "/port:/s/8888/8080/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
 -e '/searx\.plugins\.infinite_scroll\.SXNGPlugin:/{n;s/active: false/active: true/;}' \
 -e "/query_in_title:/s/false/true/g" \
 -e '/default_lang:/s/ ""/ en/g' \
--e "/method:/s/\"POST\"/\"GET\"/g" \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
 -e "/X-Content-Type-Options: nosniff/d" \
 -e "/X-XSS-Protection: 1; mode=block/d" \

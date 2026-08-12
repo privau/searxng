@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-"""Runtime patch Google autocomplete icons for the autocompleter responses."""
+"""Runtime patch rich autocomplete icons for the autocompleter responses."""
 
 import base64
 import html
@@ -67,6 +67,49 @@ def _google_complete_with_icons(query: str, sxng_locale: str) -> list[Suggestion
         meta = item[3] if len(item) > 3 and isinstance(item[3], dict) else {}
         entry: Result = {'text': text, **_fields_from_google_meta(meta)}
         results.append(_compact_suggestion(entry))
+    return results
+
+
+def _fields_from_kagi_item(item: dict[str, t.Any]) -> dict[str, t.Any]:
+    fields: dict[str, t.Any] = {}
+    if isinstance(item.get('img'), str) and (icon := _normalize_icon_url(item['img'])):
+        fields['icon'] = icon
+    if isinstance(item.get('txt'), str) and item['txt']:
+        fields['description'] = html.unescape(item['txt'])
+    return fields
+
+
+def _kagi_complete_with_icons(query: str, _sxng_locale: str) -> list[Suggestion]:
+    from searx.autocomplete import get
+
+    args = urlencode({'q': query})
+    headers = {'Accept': '*/*', 'Referer': 'https://kagi.com/'}
+    results: list[Suggestion] = []
+
+    resp = get(f'https://kagi.com/autosuggest?{args}', timeout=2.0, headers=headers)
+    if resp and resp.ok:
+        try:
+            data = resp.json()
+        except json.JSONDecodeError:
+            data = None
+        if isinstance(data, list):
+            for item in data:
+                if not isinstance(item, dict) or not isinstance(item.get('t'), str) or not item['t']:
+                    continue
+                entry: Result = {'text': item['t'], **_fields_from_kagi_item(item)}
+                results.append(_compact_suggestion(entry))
+            if results:
+                return results
+
+    resp = get(f'https://kagisuggest.com/api/autosuggest?{args}', timeout=2.0, headers=headers)
+    if not resp or not resp.ok:
+        return results
+    try:
+        data = resp.json()
+    except json.JSONDecodeError:
+        return results
+    if isinstance(data, list) and len(data) > 1 and isinstance(data[1], list):
+        results.extend(text for text in data[1] if isinstance(text, str) and text)
     return results
 
 
@@ -232,13 +275,19 @@ def _omnibox_suggestions_json(
     return json.dumps([omnibox_prefix, texts, descriptions, [], extras])
 
 
+RICH_BACKENDS: dict[str, t.Callable[[str, str], list[Suggestion]]] = {
+    'google': _google_complete_with_icons,
+    'kagi': _kagi_complete_with_icons,
+}
+
+
 def _call_autocomplete_backend(backend: str, query: str, locale: str) -> list[Suggestion]:
     from httpx import HTTPError
 
     from searx.autocomplete import backends
     from searx.exceptions import SearxEngineResponseException
 
-    fn = _google_complete_with_icons if backend == 'google' else backends.get(backend)
+    fn = RICH_BACKENDS.get(backend) or backends.get(backend)
     if fn is None:
         return []
     try:
@@ -308,11 +357,11 @@ def apply_google_autocomplete_icons(app) -> None:
     upstream_search_autocomplete = sx_autocomplete.search_autocomplete
 
     def search_autocomplete(backend_name: str, query: str, sxng_locale: str) -> list:
-        if backend_name == 'google':
-            return _google_complete_with_icons(query, sxng_locale)
+        if backend_name in RICH_BACKENDS:
+            return RICH_BACKENDS[backend_name](query, sxng_locale)
         return upstream_search_autocomplete(backend_name, query, sxng_locale)
 
-    sx_autocomplete.backends['google'] = _google_complete_with_icons
+    sx_autocomplete.backends.update(RICH_BACKENDS)
     sx_autocomplete.search_autocomplete = search_autocomplete
     if hasattr(sx_autocomplete, 'google_complete'):
         sx_autocomplete.google_complete = _google_complete_with_icons

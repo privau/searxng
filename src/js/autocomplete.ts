@@ -29,7 +29,6 @@ const suggestionDescription = (item: SuggestionItem): string | null => {
 };
 
 const suggestionIcon = (item: SuggestionItem): string | null => {
-  if (settings.autocomplete !== "google") return null;
   const icon = asRich(item)?.icon;
   return icon ? icon.replace(/&amp;/g, "&") : null;
 };
