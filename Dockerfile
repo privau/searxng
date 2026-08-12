@@ -104,7 +104,7 @@ COPY --chown=searxng:searxng ./src/plugins/ai_overview.py searx/plugins/ai_overv
 RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e '/^[[:space:]]*autocomplete:/s/:[[:space:]]*.*/: "google"/' \
 -e "/autocomplete_min:/s/4/0/g" \
--e '/^[[:space:]]*favicon_resolver:/s/:[[:space:]]*.*/: "google"/' \
+-e '/^[[:space:]]*favicon_resolver:/s/:[[:space:]]*.*/: "kagi"/' \
 -e "/port:/s/8888/8080/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
 -e '/searx\.plugins\.infinite_scroll\.SXNGPlugin:/{n;s/active: false/active: true/;}' \
