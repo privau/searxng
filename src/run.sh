@@ -56,14 +56,13 @@ fi
 
 # set default search lang
 if [ ! -z "${SEARCH_DEFAULT_LANG}" ]; then
-    sed -i -e "s+default_lang: \"auto\"+default_lang: \"${SEARCH_DEFAULT_LANG}\"+g" \
+    sed -i -e "/^[[:space:]]*default_lang:/s/:[[:space:]]*.*/: \"${SEARCH_DEFAULT_LANG}\"/" \
     searx/settings.yml;
 fi
 
 # set issue url
 if [ ! -z "${ISSUE_URL}" ]; then
     sed -i -e "s+issue_url: https://github.com/searxng/searxng/issues+issue_url: ${ISSUE_URL}+g" \
-    -e "s+new_issue_url: https://github.com/searxng/searxng/issues/new+new_issue_url: ${ISSUE_URL}/new+g" \
     searx/settings.yml;
 fi
 
@@ -128,20 +127,16 @@ fi
 
 # set BING_DEFAULT if exists
 if [ ! -z "${BING_DEFAULT}" ]; then
-    sed -i \
-    -e "/shortcut: bi\$/{n;s/.*/    disabled: false/}" \
-    -e "/shortcut: bii\$/{n;s/.*/    disabled: true/}" \
-    -e "/shortcut: bin\$/{n;s/.*/    disabled: true/}" \
-    -e "/shortcut: biv\$/{n;s/.*/    disabled: true/}" \
-    searx/settings.yml;
-else # set to disabled
-    sed -i \
-    -e "/shortcut: bi\$/{n;s/.*/    disabled: true/}" \
-    -e "/shortcut: bii\$/{n;s/.*/    disabled: true/}" \
-    -e "/shortcut: bin\$/{n;s/.*/    disabled: true/}" \
-    -e "/shortcut: biv\$/{n;s/.*/    disabled: true/}" \
-    searx/settings.yml;
+    bing_web_disabled=false
+else
+    bing_web_disabled=true
 fi
+sed -i \
+-e "/- name: bing\$/,/^  - name: /s/^    disabled: .*/    disabled: ${bing_web_disabled}/" \
+-e "/- name: bing images\$/s/\$/\n    disabled: true/" \
+-e "/- name: bing news\$/s/\$/\n    disabled: true/" \
+-e "/- name: bing videos\$/s/\$/\n    disabled: true/" \
+searx/settings.yml;
 
 # toggle engines via *_DEFAULT env vars
 set_engine_default() {
@@ -171,6 +166,7 @@ set_engine_default iseek "${ISEEK_DEFAULT}"
 set_engine_default swisscows "${SWISSCOWS_DEFAULT}"
 set_engine_default yandex "${YANDEX_DEFAULT}"
 set_engine_default dogpile "${DOGPILE_DEFAULT}"
+set_engine_default "dogpile images" "${DOGPILE_DEFAULT}"
 set_engine_default privacywall "${PRIVACYWALL_DEFAULT}"
 set_engine_default vuhuv "${VUHUV_DEFAULT}"
 set_engine_default gmx "${GMX_DEFAULT}"

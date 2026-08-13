@@ -109,25 +109,14 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/simple_style:/s/auto/macchiato/g" \
 -e '/searx\.plugins\.infinite_scroll\.SXNGPlugin:/{n;s/active: false/active: true/;}' \
 -e "/query_in_title:/s/false/true/g" \
--e '/default_lang:/s/ ""/ en/g' \
+-e '/^[[:space:]]*default_lang:/s/:[[:space:]]*.*/: "en"/' \
 -e "/http_protocol_version:/s/1.0/1.1/g" \
 -e "/X-Content-Type-Options: nosniff/d" \
--e "/X-XSS-Protection: 1; mode=block/d" \
 -e "/X-Robots-Tag: noindex, nofollow/d" \
 -e "/Referrer-Policy: no-referrer/d" \
--e "/news:/{n;s/.*//}" \
--e "/files:/d" \
--e "/social media:/d" \
--e "/static_use_hash:/s/false/true/g" \
--e "s/    use_mobile_ui: false/    use_mobile_ui: true/g" \
--e "/disabled: false/d" \
--e "/name: aol/s/$/\n    disabled: true/g" \
--e "/name: aol images/s/$/\n    disabled: true/g" \
--e "/name: aol videos/s/$/\n    disabled: true/g" \
--e "/name: karmasearch/s/$/\n    disabled: true/g" \
--e "/name: karmasearch images/s/$/\n    disabled: true/g" \
--e "/name: karmasearch videos/s/$/\n    disabled: true/g" \
--e "/name: karmasearch news/s/$/\n    disabled: true/g" \
+-e "/^  map:/d" \
+-e "/^  files:/d" \
+-e "/^  social media:/d" \
 -e "/name: wikispecies/s/$/\n    disabled: true/g" \
 -e "/name: wikinews/s/$/\n    disabled: true/g" \
 -e "/name: wikibooks/s/$/\n    disabled: true/g" \
@@ -163,9 +152,9 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: library of congress/s/$/\n    disabled: true/g" \
 -e "/name: dictzone/s/$/\n    disabled: true/g" \
 -e "/name: baidu/s/$/\n    disabled: true/g" \
--e "/name: lingva/s/$/\n    disabled: fasle/g" \
--e "/name: genius/s/$/\n    disabled: true/g" \ 
--e "/name: wallhaven/s/$/\n    disabled: true/g" \ 
+-e "/name: lingva/s/$/\n    disabled: true/g" \
+-e "/name: genius/s/$/\n    disabled: true/g" \
+-e "/name: wallhaven/s/$/\n    disabled: true/g" \
 -e "/name: artic/s/$/\n    disabled: true/g" \
 -e "/name: flickr/s/$/\n    disabled: true/g" \
 -e "/name: unsplash/s/$/\n    disabled: true/g" \
@@ -187,7 +176,7 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: yandex/s/$/\n    disabled: true/g" \
 -e "/name: swisscows/s/$/\n    disabled: true/g" \
 -e "/name: dogpile\$/s/$/\n    disabled: true/g" \
--e "/name: dogpile images\$/,/disabled:/{s/disabled: .*/disabled: false/;}" \
+-e "/name: dogpile images\$/s/$/\n    disabled: true/g" \
 -e "/name: privacywall/s/$/\n    disabled: true/g" \
 -e "/name: vuhuv/s/$/\n    disabled: true/g" \
 -e "/name: gmx/s/$/\n    disabled: true/g" \
