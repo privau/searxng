@@ -82,7 +82,6 @@ build-and-push:
       docker run -d \
         --name "$TEST_CONTAINER" \
         -p 8080:8080 \
-        -e AUTHORIZED_API=test_api_key \
         "$TEST_TAG"
 
       echo "Waiting for container to be ready..."
@@ -105,12 +104,8 @@ build-and-push:
       docker run --rm --network host curlimages/curl:latest \
         -fsS "http://localhost:8080/search?q=github" | grep "sidebar-end-collapsible"
 
-      AUTH_HEADER="$(printf 'user:test_api_key' | base64 | tr -d '\n')"
-
       docker run --rm --network host curlimages/curl:latest \
-        -fsS \
-        -H "Authorization: Basic ${AUTH_HEADER}" \
-        "http://localhost:8080/search?q=github&format=json" | grep '"query"'
+        -fsS "http://localhost:8080/search?q=github&format=json" | grep '"query"'
 
       docker rm -f "$TEST_CONTAINER"
 

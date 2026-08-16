@@ -55,15 +55,13 @@ jobs:
 
       - name: Test Main Image
         run: |
-          docker run -d -p 8080:8080 -e AUTHORIZED_API=test_api_key --name searxng-test ${{ env.TEST_TAG }}
+          docker run -d -p 8080:8080 --name searxng-test ${{ env.TEST_TAG }}
 
           sleep 15
 
           curl -fsS http://localhost:8080/healthz | grep "OK"
           curl -fsS "http://localhost:8080/search?q=github" | grep "sidebar-end-collapsible"
-          curl -fsS \
-            -H "Authorization: Basic $(printf 'user:test_api_key' | base64 | tr -d '\n')" \
-            "http://localhost:8080/search?q=github&format=json" | grep '"query"'
+          curl -fsS "http://localhost:8080/search?q=github&format=json" | grep '"query"'
 
           docker rm -f searxng-test
 

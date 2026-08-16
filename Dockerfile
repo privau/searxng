@@ -1,9 +1,9 @@
-# use alpine as base for searx and set workdir as well as env vars
+# alpine as base
 FROM docker.io/library/python:3.13-alpine AS builder
 
 ENV UPSTREAM_COMMIT=b2da6b90f2f8446557c91f67d6be5064ab785ecd
 
-# install build deps
+# build deps
 RUN apk add --no-cache \
      build-base \
      brotli \
@@ -15,11 +15,11 @@ RUN apk add --no-cache \
 
 WORKDIR /usr/local/searxng/
 
-# git clone searxng as well, install python deps and freeze version
 RUN git config --global --add safe.directory /usr/local/searxng \
 && git clone https://github.com/searxng/searxng . \
 && git reset --hard ${UPSTREAM_COMMIT}
 
+# freeze version string
 RUN python -m venv ./venv \
 && . ./venv/bin/activate \
 && pip install -r requirements.txt \
@@ -35,10 +35,10 @@ RUN grep -m1 root /etc/group > /tmp/.searxng.group \
 && echo "searxng:x:$SEARXNG_GID:" >> /tmp/.searxng.group \
 && echo "searxng:x:$SEARXNG_UID:$SEARXNG_GID:searxng:/usr/local/searxng:/bin/sh" >> /tmp/.searxng.passwd
 
-# copy custom simple themes
+# copy modified simple themes
 COPY ./out/ searx/static/themes/simple/
 
-#precompile static theme files
+# precompile static files
 RUN python -m compileall -q searx; \
     find searx/static \
     \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.ttf' -o -name '*.eot' \) \
@@ -87,12 +87,6 @@ COPY --chown=searxng:searxng ./src/captcha/captcha.py searx/captcha.py
 COPY --chown=searxng:searxng ./src/captcha/captcha.html searx/templates/simple/captcha.html
 RUN sed -i '/search_obj = searx.search.SearchWithPlugins(search_query, sxng_request, sxng_request.user_plugins)/i\        from searx.captcha import handle_captcha\n        if (captcha_response := handle_captcha(sxng_request, settings["server"]["secret_key"], raw_text_query, search_query, selected_locale)):\n            return captcha_response\n' searx/webapp.py \
 && sed -i "/return Response('OK', mimetype='text\/plain')/a \\\\n@app.route('/captcha', methods=['GET', 'POST'], endpoint='captcha')\\ndef captcha_view():\\n    from searx.captcha import captcha as captcha_page\\n    return captcha_page(sxng_request, settings['server']['secret_key'])" searx/webapp.py
-
-# include patches for authorized api access
-COPY --chown=searxng:searxng ./src/auth/auth.py searx/auth.py
-RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a\\        from searx.auth import valid_api_key\\n        if (not valid_api_key(sxng_request)):" -e 's|flask.abort(403)|    flask.abort(403)|' searx/webapp.py \
-&& sed -i "/return Response('', mimetype='text\/css'/a \\\\n@app.route('/<key>/search', methods=['GET', 'POST'])\\ndef search_key(key=None):\\n    from searx.auth import auth_search_key\\n    return auth_search_key(sxng_request, key)" searx/webapp.py \
-&& sed -i "/3\. If the IP is not in either list, the request is not blocked\./a\\    from searx.auth import valid_api_key\\n    if (valid_api_key(sxng_request)):\\n        return None" searx/limiter.py
 
 # supplemental engine early timeout (wikipedia, wikidata, ddg definitions)
 COPY --chown=searxng:searxng ./src/search/supplemental_timeout.py searx/search/supplemental_timeout.py
@@ -191,7 +185,7 @@ EXPOSE 8080
 
 # set env
 ENV GRANIAN_PROCESS_NAME="searxng" GRANIAN_INTERFACE="wsgi" GRANIAN_HOST="::" GRANIAN_PORT="8080" GRANIAN_WEBSOCKETS="false" GRANIAN_BLOCKING_THREADS="4" GRANIAN_WORKERS_KILL_TIMEOUT="30" GRANIAN_BLOCKING_THREADS_IDLE_TIMEOUT="300" \
-IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= SECRET_KEY= CAPTCHA= AUTHORIZED_API= MARGINALIA_API= JINA_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= SEARCH_ENGINE_CAPTCHA= ENGINE_TIMEOUT= PUBLIC_INSTANCE= \
+IMAGE_PROXY=true PROXY= REDIS_URL= LIMITER= BASE_URL= SECRET_KEY= CAPTCHA= MARGINALIA_API= JINA_API= NAME= SEARCH_DEFAULT_LANG= SEARCH_ENGINE_ACCESS_DENIED= SEARCH_ENGINE_CAPTCHA= ENGINE_TIMEOUT= PUBLIC_INSTANCE= \
 GOOGLE_DEFAULT=true BING_DEFAULT= BRAVE_DEFAULT= DUCKDUCKGO_DEFAULT= STARTPAGE_DEFAULT= WIKIPEDIA_DEFAULT= WIKIDATA_DEFAULT= DDG_DEFINITIONS_DEFAULT= \
 LUXXLE_DEFAULT= ISEEK_DEFAULT= YANDEX_DEFAULT= SWISSCOWS_DEFAULT= DOGPILE_DEFAULT= PRIVACYWALL_DEFAULT= VUHUV_DEFAULT= GMX_DEFAULT= DUCKDUCKGO_WEB_DEFAULT= RESULTHUNTER_DEFAULT= TUSKSEARCH_DEFAULT= GOOGLE_CSE_DEFAULT= \
 OPENMETRICS= \

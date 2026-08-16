@@ -80,8 +80,6 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```FOOTER_MESSAGE``` : sets the footer message of the instance (Default: empty)
 
-* ```AUTHORIZED_API``` : set the password for the Authorized API (Default: empty)
-
 * ```OPENMETRICS``` : set the password for the Openmetrics endpoint (Default: empty)
 
 * ```GOOGLE_DEFAULT``` : enable the Google search engine by default (Default: `true`)
