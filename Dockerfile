@@ -22,9 +22,7 @@ RUN git config --global --add safe.directory /usr/local/searxng \
 # freeze version string
 RUN python -m venv ./venv \
 && . ./venv/bin/activate \
-&& pip install -r requirements.txt \
-&& pip install "python-socks>=2.4.3,<3" \
-&& pip install "granian[pname]~=2.0" \
+&& pip install -r requirements.txt -r requirements-server.txt \
 && python -m searx.version freeze
 
 ARG SEARXNG_UID=977
@@ -53,7 +51,8 @@ RUN apk add --no-cache \
 
 COPY --chown=root:root --from=builder /tmp/.searxng.passwd /etc/passwd
 COPY --chown=root:root --from=builder /tmp/.searxng.group /etc/group
-COPY --chown=searxng:searxng --from=builder /usr/local/searxng /usr/local/searxng
+COPY --chown=searxng:searxng --from=builder /usr/local/searxng/venv ./venv
+COPY --chown=searxng:searxng --from=builder /usr/local/searxng/searx ./searx
 
 # copy run.sh
 COPY --chown=searxng:searxng ./src/run.sh /usr/local/bin/run.sh
@@ -194,4 +193,5 @@ CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main
 
+USER searxng
 CMD ["run.sh"]
