@@ -49,7 +49,6 @@ FROM docker.io/library/python:3.13-alpine
 WORKDIR /usr/local/searxng/
 
 RUN apk add --no-cache \
-    # lxml (ARMv7)
     libxslt
 
 COPY --chown=root:root --from=builder /tmp/.searxng.passwd /etc/passwd

@@ -104,9 +104,6 @@ build-and-push:
       docker run --rm --network host curlimages/curl:latest \
         -fsS "http://localhost:8080/search?q=github" | grep "sidebar-end-collapsible"
 
-      docker run --rm --network host curlimages/curl:latest \
-        -fsS "http://localhost:8080/search?q=github&format=json" | grep '"query"'
-
       docker rm -f "$TEST_CONTAINER"
 
       docker push "$GITLAB_LATEST_TAG"

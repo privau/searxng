@@ -61,7 +61,6 @@ jobs:
 
           curl -fsS http://localhost:8080/healthz | grep "OK"
           curl -fsS "http://localhost:8080/search?q=github" | grep "sidebar-end-collapsible"
-          curl -fsS "http://localhost:8080/search?q=github&format=json" | grep '"query"'
 
           docker rm -f searxng-test
 

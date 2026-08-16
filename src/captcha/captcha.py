@@ -3,9 +3,9 @@
 # Stub file
 
 def handle_captcha(request, secret, *_):
-    return None
+    return False
 
 def captcha(request, secret):
-    from searx.webapp import render
+    from flask import Response
 
-    return render("captcha.html")
+    return Response('', status=404)
