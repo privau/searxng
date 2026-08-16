@@ -98,7 +98,6 @@ RUN sed -i -e "/if output_format not in settings\\['search'\\]\\['formats'\\]:/a
 COPY --chown=searxng:searxng ./src/search/supplemental_timeout.py searx/search/supplemental_timeout.py
 COPY --chown=searxng:searxng ./src/search/google_autocomplete_icons.py searx/search/google_autocomplete_icons.py
 COPY --chown=searxng:searxng ./src/search/privau_wsgi.py searx/privau_wsgi.py
-COPY --chown=searxng:searxng ./src/plugins/ai_overview.py searx/plugins/ai_overview.py
 
 # set default settings
 RUN sed -i -e "/safe_search:/s/0/1/g" \
