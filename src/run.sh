@@ -18,9 +18,17 @@ if [ ! -z "${PROXY}" ]; then
     done
 fi
 
-# set redis if REDIS_URL contains URL
-if [ ! -z "${REDIS_URL}" ]; then
-    sed -i -e "s+  url: false+  url: ${REDIS_URL}+g" \
+# set valkey URL (REDIS_URL is deprecated)
+if [ ! -z "${VALKEY_URL}" ]; then
+    valkey_url="${VALKEY_URL}"
+elif [ ! -z "${REDIS_URL}" ]; then
+    echo "warning: REDIS_URL is deprecated, use VALKEY_URL" >&2
+    valkey_url="${REDIS_URL}"
+else
+    valkey_url=""
+fi
+if [ ! -z "${valkey_url}" ]; then
+    sed -i -e "s+  url: false+  url: ${valkey_url}+g" \
     searx/settings.yml;
 fi
 

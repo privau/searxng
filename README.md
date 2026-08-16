@@ -42,9 +42,9 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```IMAGE_PROXY``` : enables the image proxy. (set this to `true`)
 
-* ```REDIS_URL``` : sets the URL of valkey/redis server (for example `redis://redis:6379/0` or `unix:///usr/local/searxng-redis/run/redis.sock?db=0`)
+* ```VALKEY_URL``` : sets the URL of the valkey server (for example `valkey://valkey:6379/0`)
 
-* ```LIMITER``` : limit bot traffic; this option also requires redis to be set up
+* ```LIMITER``` : limit bot traffic; this option also requires valkey to be set up
 
 * ```PROXY``` : list of comma seperated proxies selected round robin for all engines (for example http://127.0.0.1:8080,http://proxy.example.net)
 
@@ -74,7 +74,7 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```ENGINE_TIMEOUT``` : sets the default engine request timeout and hard cap in seconds (Default: `2`)
 
-* ```PUBLIC_INSTANCE``` : enables features designed for public instances. Forces image_proxy and limiter set to enabled. Requires redis/valkey.
+* ```PUBLIC_INSTANCE``` : enables features designed for public instances. Forces image_proxy and limiter set to enabled. Requires valkey.
 
 * ```SECRET_KEY``` : manually set the secret key for the instance. A random key will be generated on startup if not set.
 
