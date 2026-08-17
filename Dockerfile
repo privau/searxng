@@ -1,7 +1,7 @@
 # alpine as base
 FROM docker.io/library/python:3.13-alpine AS builder
 
-ENV UPSTREAM_COMMIT=374939b888c8644b408b793fe42d584454631cec
+ENV UPSTREAM_COMMIT=03672989d6aea9aa63c5643322542915759759da
 
 # build deps
 RUN apk add --no-cache \
@@ -16,7 +16,7 @@ RUN apk add --no-cache \
 WORKDIR /usr/local/searxng/
 
 RUN git config --global --add safe.directory /usr/local/searxng \
-&& git clone https://github.com/searxng/searxng . \
+&& git clone https://github.com/vojkovic/searxng . \
 && git reset --hard ${UPSTREAM_COMMIT}
 
 # freeze version string
@@ -174,8 +174,7 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: duckduckgo web/s/$/\n    disabled: true/g" \
 -e "/name: resulthunter/s/$/\n    disabled: true/g" \
 -e "/name: tusksearch/s/$/\n    disabled: true/g" \
--e "/name: ddg definitions/,+5{/disabled: true/d;}" \
--e "/shortcut: fd/{n;s/.*/    disabled: false/}" \
+-e "/name: ddg definitions/s/$/\n    disabled: true/g" \
 -e "/name: jina$/s/$/\n    jina_engine: google/g" \
 searx/settings.yml;
 
