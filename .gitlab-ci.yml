@@ -9,7 +9,7 @@ variables:
   GITLAB_LATEST_TAG: "$CI_REGISTRY_IMAGE:latest"
 
   SOURCE_REPO: "vojkovic/searxng"
-  SOURCE_REPO_BRANCH: "master"
+  SOURCE_REPO_BRANCH: "google-fix"
 
 update-upstream-commit:
   stage: maintenance
