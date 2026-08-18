@@ -120,7 +120,7 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```TUSKSEARCH_DEFAULT``` : enable the Tusksearch search engine by default (Default: `false`)
 
-* ```GOOGLE_CSE_DEFAULT``` : enable the Google CSE engine by default (Default: `false`)
+* ```GOOGLE_CSE_DEFAULT``` : enable the Google CSE and Google CSE Images engines by default (Default: `false`)
 
 * ```SEARCH_DEFAULT_LANG``` : sets the default search language (for example `en`, Default: `auto`)
 

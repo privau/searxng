@@ -157,6 +157,7 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: tineye/s/$/\n    disabled: true/g" \
 -e "/name: google/s/$/\n    disabled: true/g" \
 -e "/name: google cse/s/$/\n    disabled: true/g" \
+-e "/name: google cse images/s/$/\n    disabled: true/g" \
 -e "/name: startpage/s/$/\n    disabled: true/g" \
 -e "/name: brave/s/$/\n    disabled: true/g" \
 -e "/name: duckduckgo\$/s/$/\n    disabled: true/g" \
