@@ -203,7 +203,7 @@ const fetchResults = (qInput: HTMLInputElement, query: string, requestId: number
 
   requestAutocomplete(query)
     .then((res) => {
-      if (!res.ok) throw new Error(res.statusText);
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`.trim());
       return res.json();
     })
     .then((results) => {

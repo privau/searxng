@@ -14,69 +14,126 @@ Result = dict[str, t.Any]
 Suggestion = t.Union[str, Result]
 
 
-def _slice_google_json(text: str) -> str:
+def _first_json_array(text: str) -> t.Any:
     start = text.find('[')
     if start < 0:
-        return '[]'
-    blob = text[start:]
+        return []
     depth = 0
-    for index, char in enumerate(blob):
-        if char == '[':
-            depth += 1
-        elif char == ']':
-            depth -= 1
-            if depth == 0:
-                return blob[: index + 1]
-    return blob
+    for index, char in enumerate(text[start:], start):
+        depth += (char == '[') - (char == ']')
+        if depth == 0:
+            return json.loads(text[start : index + 1])
+    return []
 
 
-def _is_trending_meta(meta: dict[str, t.Any]) -> bool:
-    zp = meta.get('zp')
-    return isinstance(zp, dict) and zp.get('gs_ss') == '1'
+def _hl(locale: str) -> str:
+    lang = (locale or 'en').replace('_', '-')
+    if lang.lower() in ('', 'all', 'auto'):
+        return 'en'
+    primary, _, region = lang.partition('-')
+    if primary.lower() == 'zh':
+        return f'zh-{region.upper()}' if region else 'zh-CN'
+    return primary.lower()
 
 
-def _fields_from_google_meta(meta: dict[str, t.Any]) -> dict[str, t.Any]:
+def _normalize_icon_url(url: str) -> str | None:
+    url = url.strip()
+    if url.startswith('data:'):
+        return url
+    if url.startswith('//'):
+        url = f'https:{url}'
+    if not url.startswith(('http://', 'https://')):
+        return None
+    if 'encrypted-tbn0.gstatic.com' in url and '&s=' in url:
+        return re.sub(r'&s=\d+', '&s=64', url)
+    return url
+
+
+def _rich_fields(*, icon: t.Any = None, description: t.Any = None, trending: bool = False) -> dict[str, t.Any]:
     fields: dict[str, t.Any] = {}
-    if isinstance(meta.get('zs'), str) and (icon := _normalize_icon_url(meta['zs'])):
-        fields['icon'] = icon
-    if isinstance(meta.get('zi'), str) and meta['zi']:
-        fields['description'] = html.unescape(meta['zi'])
-    if _is_trending_meta(meta):
+    if isinstance(icon, str) and (url := _normalize_icon_url(icon)):
+        fields['icon'] = url
+    if isinstance(description, str) and description:
+        fields['description'] = html.unescape(description)
+    if trending:
         fields['trending'] = True
     return fields
 
 
+def _compact(entry: Result) -> Suggestion:
+    return entry if len(entry) > 1 else entry['text']
+
+
+def _as_result(result: Suggestion) -> Result:
+    if isinstance(result, str):
+        return {'text': result}
+    item: Result = {'text': result.get('text', '')}
+    for key in ('icon', 'description', 'trending'):
+        if value := result.get(key):
+            item[key] = value
+    return item
+
+
 def _google_complete_with_icons(query: str, sxng_locale: str) -> list[Suggestion]:
     from searx.autocomplete import get
-    from searx.data import ENGINE_TRAITS
-    from searx.enginelib.traits import EngineTraits
-    from searx.engines import engines, google
 
-    traits = engines['google'].traits if 'google' in engines else EngineTraits(**ENGINE_TRAITS['google'])
-    google_info = google.get_google_info({'searxng_locale': sxng_locale}, traits)
-    args = urlencode({'q': query, 'client': 'gws-wiz', 'hl': google_info['params']['hl']})
-    url = f'https://{google_info["subdomain"]}/complete/search?{args}'
+    args = urlencode({'q': query, 'client': 'gws-wiz', 'hl': _hl(sxng_locale)})
+    resp = get(f'https://www.google.com/complete/search?{args}')
+    if not resp.ok:
+        return []
+
+    payload = _first_json_array(resp.text)
+    if not isinstance(payload, list) or not payload or not isinstance(payload[0], list):
+        return []
 
     results: list[Suggestion] = []
-    resp = get(url, timeout=2.0)
-    if not resp or not resp.ok:
-        return results
-
-    for item in json.loads(_slice_google_json(resp.text))[0]:
-        text = lxml.html.fromstring(item[0]).text_content()
+    for item in payload[0]:
+        if not isinstance(item, list) or not item or not isinstance(item[0], str):
+            continue
+        try:
+            text = lxml.html.fromstring(item[0]).text_content()
+        except Exception:
+            text = item[0]
+        if not text:
+            continue
         meta = item[3] if len(item) > 3 and isinstance(item[3], dict) else {}
-        entry: Result = {'text': text, **_fields_from_google_meta(meta)}
-        results.append(_compact_suggestion(entry))
+        zp = meta.get('zp')
+        results.append(
+            _compact(
+                {
+                    'text': text,
+                    **_rich_fields(
+                        icon=meta.get('zs'),
+                        description=meta.get('zi'),
+                        trending=isinstance(zp, dict) and zp.get('gs_ss') == '1',
+                    ),
+                }
+            )
+        )
     return results
 
 
-def _fields_from_kagi_item(item: dict[str, t.Any]) -> dict[str, t.Any]:
-    fields: dict[str, t.Any] = {}
-    if isinstance(item.get('img'), str) and (icon := _normalize_icon_url(item['img'])):
-        fields['icon'] = icon
-    if isinstance(item.get('txt'), str) and item['txt']:
-        fields['description'] = html.unescape(item['txt'])
-    return fields
+def _suggestions_from_kagi(resp) -> list[Suggestion]:
+    if not resp or not resp.ok:
+        return []
+    try:
+        data = resp.json()
+    except json.JSONDecodeError:
+        return []
+    if not isinstance(data, list) or not data:
+        return []
+    if isinstance(data[0], dict):
+        results: list[Suggestion] = []
+        for item in data:
+            if not isinstance(item, dict) or not isinstance(item.get('t'), str) or not item['t']:
+                continue
+            results.append(
+                _compact({'text': item['t'], **_rich_fields(icon=item.get('img'), description=item.get('txt'))})
+            )
+        return results
+    if len(data) > 1 and isinstance(data[1], list):
+        return [text for text in data[1] if isinstance(text, str) and text]
+    return []
 
 
 def _kagi_complete_with_icons(query: str, _sxng_locale: str) -> list[Suggestion]:
@@ -84,62 +141,17 @@ def _kagi_complete_with_icons(query: str, _sxng_locale: str) -> list[Suggestion]
 
     args = urlencode({'q': query})
     headers = {'Accept': '*/*', 'Referer': 'https://kagi.com/'}
-    results: list[Suggestion] = []
-
-    resp = get(f'https://kagi.com/autosuggest?{args}', timeout=2.0, headers=headers)
-    if resp and resp.ok:
+    for url in (
+        f'https://kagi.com/autosuggest?{args}',
+        f'https://kagisuggest.com/api/autosuggest?{args}',
+    ):
         try:
-            data = resp.json()
-        except json.JSONDecodeError:
-            data = None
-        if isinstance(data, list):
-            for item in data:
-                if not isinstance(item, dict) or not isinstance(item.get('t'), str) or not item['t']:
-                    continue
-                entry: Result = {'text': item['t'], **_fields_from_kagi_item(item)}
-                results.append(_compact_suggestion(entry))
-            if results:
-                return results
-
-    resp = get(f'https://kagisuggest.com/api/autosuggest?{args}', timeout=2.0, headers=headers)
-    if not resp or not resp.ok:
-        return results
-    try:
-        data = resp.json()
-    except json.JSONDecodeError:
-        return results
-    if isinstance(data, list) and len(data) > 1 and isinstance(data[1], list):
-        results.extend(text for text in data[1] if isinstance(text, str) and text)
-    return results
-
-
-def _compact_suggestion(entry: Result) -> Suggestion:
-    return entry if len(entry) > 1 else entry['text']
-
-
-def _normalize_icon_url(url: str) -> str | None:
-    url = url.strip()
-    if not url:
-        return None
-    if url.startswith('data:'):
-        return url
-    if url.startswith('//'):
-        url = f'https:{url}'
-    if url.startswith(('http://', 'https://')):
-        return _sharpen_google_thumb(url)
-    return None
-
-
-def _sharpen_google_thumb(url: str) -> str:
-    if 'encrypted-tbn0.gstatic.com' in url and '&s=' in url:
-        return re.sub(r'&s=\d+', '&s=64', url)
-    return url
-
-
-def _is_usable_icon(icon: t.Any) -> bool:
-    return isinstance(icon, str) and (
-        icon.startswith('data:') or icon.startswith(('http://', 'https://'))
-    )
+            results = _suggestions_from_kagi(get(url, headers=headers))
+        except Exception:
+            results = []
+        if results:
+            return results
+    return []
 
 
 def _external_root(webapp_module: t.Any) -> str:
@@ -156,33 +168,19 @@ def _external_root(webapp_module: t.Any) -> str:
 def _proxy_icon(webapp_module: t.Any, url: str, *, absolute: bool = False) -> str:
     if url.startswith('data:'):
         return url
-    url = _sharpen_google_thumb(url)
     h = webapp_module.new_hmac(webapp_module.settings['server']['secret_key'], url.encode())
     path = f'{webapp_module.url_for("image_proxy")}?{urlencode({"url": url.encode(), "h": h})}'
     return f'{_external_root(webapp_module)}{path}' if absolute else path
 
 
-def _as_result(result: Suggestion) -> Result:
-    if isinstance(result, str):
-        return {'text': result}
-    return {
-        'text': result.get('text', ''),
-        **{
-            key: value
-            for key in ('icon', 'description', 'trending')
-            if (value := result.get(key)) not in (None, '', False)
-        },
-    }
-
-
 def _rich_result(webapp_module: t.Any, result: Suggestion) -> Suggestion:
     item = _as_result(result)
     icon = item.get('icon')
-    if _is_usable_icon(icon) and not str(icon).startswith('data:'):
-        item['icon'] = _proxy_icon(webapp_module, str(icon))
-    elif icon and not _is_usable_icon(icon):
+    if isinstance(icon, str) and icon.startswith(('http://', 'https://')):
+        item['icon'] = _proxy_icon(webapp_module, icon)
+    elif icon and not (isinstance(icon, str) and icon.startswith('data:')):
         item.pop('icon', None)
-    return _compact_suggestion(item)
+    return _compact(item)
 
 
 def _encode_varint(value: int) -> bytes:
@@ -224,25 +222,21 @@ def _is_ungoogled_chromium(headers: t.Mapping[str, str]) -> bool:
     return 'Chromium' in sec_ch_ua
 
 
-def _firefox_suggest_detail(webapp_module: t.Any, item: Result) -> dict[str, str]:
+def _omnibox_detail(webapp_module: t.Any, item: Result, *, firefox: bool) -> dict[str, str]:
     icon = item.get('icon')
-    if not _is_usable_icon(icon):
+    if not isinstance(icon, str) or not icon.startswith(('http://', 'https://', 'data:')):
         return {}
-    detail: dict[str, str] = {'i': _proxy_icon(webapp_module, str(icon), absolute=True)}
-    if description := item.get('description'):
-        detail['a'] = str(description)
-    return detail
-
-
-def _chromium_suggest_detail(webapp_module: t.Any, item: Result) -> dict[str, str]:
-    icon = item.get('icon')
-    if not _is_usable_icon(icon):
-        return {}
+    proxied = _proxy_icon(webapp_module, icon, absolute=True)
+    if firefox:
+        detail = {'i': proxied}
+        if description := item.get('description'):
+            detail['a'] = str(description)
+        return detail
     return {
         'google:suggesttemplate': _suggest_template_b64(
-            image_url=_proxy_icon(webapp_module, str(icon), absolute=True),
+            image_url=proxied,
             description=str(item.get('description', '')),
-        ),
+        )
     }
 
 
@@ -256,22 +250,22 @@ def _omnibox_suggestions_json(
     items = [_as_result(result) for result in results]
     texts = [item['text'] for item in items]
     extras: dict[str, t.Any] = {'google:suggestrelevance': [600 - i for i in range(len(texts))]}
+    firefox = 'Firefox' in user_agent
 
-    if 'Firefox' in user_agent:
-        details = [_firefox_suggest_detail(webapp_module, item) for item in items]
-        if any(details):
-            extras['google:suggestdetail'] = details
+    if firefox:
+        details = [_omnibox_detail(webapp_module, item, firefox=True) for item in items]
         descriptions = [str(item.get('description', '')) for item in items]
     else:
         extras['google:verbatimrelevance'] = 1300
         extras['google:suggesttype'] = ['QUERY'] * len(texts)
+        details = []
         if not _is_ungoogled_chromium(webapp_module.sxng_request.headers):
             extras['google:clientdata'] = {'bpc': False, 'tlw': False}
-            details = [_chromium_suggest_detail(webapp_module, item) for item in items]
-            if any(details):
-                extras['google:suggestdetail'] = details
+            details = [_omnibox_detail(webapp_module, item, firefox=False) for item in items]
         descriptions = [''] * len(texts)
 
+    if any(details):
+        extras['google:suggestdetail'] = details
     return json.dumps([omnibox_prefix, texts, descriptions, [], extras])
 
 
@@ -281,38 +275,21 @@ RICH_BACKENDS: dict[str, t.Callable[[str, str], list[Suggestion]]] = {
 }
 
 
-def _call_autocomplete_backend(backend: str, query: str, locale: str) -> list[Suggestion]:
-    from httpx import HTTPError
-
+def _search_autocomplete(backend_name: str, query: str, sxng_locale: str) -> list[Suggestion]:
     from searx.autocomplete import backends
-    from searx.exceptions import SearxEngineResponseException
 
-    fn = RICH_BACKENDS.get(backend) or backends.get(backend)
+    fn = RICH_BACKENDS.get(backend_name) or backends.get(backend_name)
     if fn is None:
         return []
     try:
-        return fn(query, locale)
-    except (HTTPError, SearxEngineResponseException):
+        return fn(query, sxng_locale)
+    except Exception:
         return []
-
-
-def _fields_from_backend_result(result: Suggestion) -> dict[str, t.Any]:
-    if isinstance(result, str):
-        return {}
-    fields: dict[str, t.Any] = {}
-    if isinstance(result.get('icon'), str) and (icon := _normalize_icon_url(result['icon'])):
-        fields['icon'] = icon
-    if isinstance(result.get('description'), str) and result['description']:
-        fields['description'] = result['description']
-    if result.get('trending'):
-        fields['trending'] = True
-    return fields
 
 
 def _autocompleter_with_icons(webapp_module):
     req = webapp_module.sxng_request
-    disabled_engines = req.preferences.engines.get_disabled()
-    raw_text_query = webapp_module.RawTextQuery(req.form.get('q', ''), disabled_engines)
+    raw_text_query = webapp_module.RawTextQuery(req.form.get('q', ''), req.preferences.engines.get_disabled())
     sug_prefix = raw_text_query.getQuery()
     results: list[Suggestion] = []
 
@@ -321,32 +298,36 @@ def _autocompleter_with_icons(webapp_module):
             results.append(obj.answer)
 
     if not raw_text_query.autocomplete_list:
-        backend = req.preferences.get_value('autocomplete')
-        locale = req.preferences.get_value('language')
-        for result in _call_autocomplete_backend(backend, sug_prefix, locale):
-            text = result if isinstance(result, str) else result.get('text', '')
-            entry: Result = {
-                'text': raw_text_query.changeQuery(text).getFullQuery(),
-                **_fields_from_backend_result(result),
-            }
-            results.append(_compact_suggestion(entry))
+        for result in _search_autocomplete(
+            req.preferences.get_value('autocomplete'),
+            sug_prefix,
+            req.preferences.get_value('language'),
+        ):
+            item = _as_result(result)
+            if not item['text']:
+                continue
+            item['text'] = raw_text_query.changeQuery(item['text']).getFullQuery()
+            results.append(_compact(item))
 
-    for autocomplete_text in raw_text_query.autocomplete_list:
-        results.append(raw_text_query.get_autocomplete_full_query(autocomplete_text))
+    results.extend(raw_text_query.get_autocomplete_full_query(text) for text in raw_text_query.autocomplete_list)
 
     if req.headers.get('Accept', '').startswith('application/json'):
-        payload = [sug_prefix, [_rich_result(webapp_module, result) for result in results]]
-        response = webapp_module.Response(json.dumps(payload), mimetype='application/json')
+        response = webapp_module.Response(
+            json.dumps([sug_prefix, [_rich_result(webapp_module, result) for result in results]]),
+            mimetype='application/json',
+        )
         response.headers['Cache-Control'] = 'no-store'
         return response
 
-    body = _omnibox_suggestions_json(
-        webapp_module,
-        req.form.get('q', ''),
-        results,
-        user_agent=req.headers.get('User-Agent', ''),
+    return webapp_module.Response(
+        _omnibox_suggestions_json(
+            webapp_module,
+            req.form.get('q', ''),
+            results,
+            user_agent=req.headers.get('User-Agent', ''),
+        ),
+        mimetype='application/x-suggestions+json',
     )
-    return webapp_module.Response(body, mimetype='application/x-suggestions+json')
 
 
 def apply_google_autocomplete_icons(app) -> None:
@@ -354,34 +335,25 @@ def apply_google_autocomplete_icons(app) -> None:
     from searx import autocomplete as sx_autocomplete
     from searx import webapp as sx_webapp
 
-    upstream_search_autocomplete = sx_autocomplete.search_autocomplete
-
-    def search_autocomplete(backend_name: str, query: str, sxng_locale: str) -> list:
-        if backend_name in RICH_BACKENDS:
-            return RICH_BACKENDS[backend_name](query, sxng_locale)
-        return upstream_search_autocomplete(backend_name, query, sxng_locale)
-
     sx_autocomplete.backends.update(RICH_BACKENDS)
-    sx_autocomplete.search_autocomplete = search_autocomplete
+    sx_autocomplete.search_autocomplete = _search_autocomplete
     if hasattr(sx_autocomplete, 'google_complete'):
         sx_autocomplete.google_complete = _google_complete_with_icons
-    sx_webapp.search_autocomplete = search_autocomplete
+    sx_webapp.search_autocomplete = _search_autocomplete
 
     @app.after_request
     def add_image_proxy_cache_headers(response):
         if request.path == '/autocompleter' and request.method == 'GET' and 200 <= response.status_code < 300:
-            if request.headers.get('Accept', '').startswith('application/json'):
-                response.headers['Cache-Control'] = 'no-store'
-            else:
-                response.headers['Cache-Control'] = 'private, max-age=3600, stale-while-revalidate=300'
+            json_ui = request.headers.get('Accept', '').startswith('application/json')
+            response.headers['Cache-Control'] = (
+                'no-store' if json_ui else 'private, max-age=3600, stale-while-revalidate=300'
+            )
             response.headers['Vary'] = 'Cookie, User-Agent, Accept'
-            return response
-        if request.path != '/image_proxy':
-            return response
-        if 200 <= response.status_code < 300:
-            response.headers['Cache-Control'] = 'public, max-age=86400'
-        elif response.status_code in (404, 410):
-            response.headers['Cache-Control'] = 'public, max-age=300'
+        elif request.path == '/image_proxy':
+            if 200 <= response.status_code < 300:
+                response.headers['Cache-Control'] = 'public, max-age=86400'
+            elif response.status_code in (404, 410):
+                response.headers['Cache-Control'] = 'public, max-age=300'
         return response
 
     def patched_autocompleter():
