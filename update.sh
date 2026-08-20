@@ -1,17 +1,22 @@
 #!/bin/sh
+set -e
+
+UPSTREAM_COMMIT="$(grep -m1 "UPSTREAM_COMMIT=" Dockerfile | cut -d'=' -f2)"
+UPSTREAM_REPO="$(sed -n 's/.*git clone \(https:[^ ]*\) .*/\1/p' Dockerfile | head -n1)"
 
 if [ ! -d build ]
 then
-    git clone https://github.com/searxng/searxng.git build
-else
-    cd build
-    git restore .
-    git pull https://github.com/searxng/searxng.git
-    cd ..
+    git clone "$UPSTREAM_REPO" build
 fi
 
+cd build
+git fetch "$UPSTREAM_REPO" "$UPSTREAM_COMMIT"
+git clean -fd
+git reset --hard "$UPSTREAM_COMMIT"
+cd ..
+
 echo "Replace fork simple theme definitions."
-cp -v src/less/* build/client/simple/src/less/
+cp -v src/less/*.less build/client/simple/src/less/
 mkdir -p build/client/simple/src/less/themes && cp -v src/less/themes/* build/client/simple/src/less/themes/
 mkdir -p build/client/simple/src/less/result_types && cp -v src/less/result_types/* build/client/simple/src/less/result_types/
 cp -v src/js/autocomplete.ts build/client/simple/src/js/main/autocomplete.ts
