@@ -8,9 +8,6 @@ variables:
   TEST_TAG: "searxng:test"
   GITLAB_LATEST_TAG: "$CI_REGISTRY_IMAGE:latest"
 
-  SOURCE_REPO: "vojkovic/searxng"
-  SOURCE_REPO_BRANCH: "google-fix"
-
 update-upstream-commit:
   stage: maintenance
   image: alpine:latest
@@ -23,9 +20,11 @@ update-upstream-commit:
     - git checkout -B "$CI_COMMIT_BRANCH" "origin/$CI_COMMIT_BRANCH"
   script:
     - |
-      REMOTE_COMMIT="$(git ls-remote "https://github.com/${SOURCE_REPO}" "$SOURCE_REPO_BRANCH" | awk '{print $1}')"
+      UPSTREAM_REPO="$(sed -n 's/.*git clone \(https:[^ ]*\) .*/\1/p' Dockerfile | head -n1)"
       LOCAL_COMMIT="$(grep -m1 "UPSTREAM_COMMIT=" Dockerfile | cut -d'=' -f2)"
+      REMOTE_COMMIT="$(git ls-remote "$UPSTREAM_REPO" HEAD | awk '{print $1}')"
 
+      echo "Upstream repo: $UPSTREAM_REPO"
       echo "Remote commit: $REMOTE_COMMIT"
       echo "Local commit:  $LOCAL_COMMIT"
 

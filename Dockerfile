@@ -1,7 +1,7 @@
 # alpine as base
 FROM docker.io/library/python:3.13-alpine AS builder
 
-ENV UPSTREAM_COMMIT=e46241f5c25953c523b1849fa91e4373a1850701
+ENV UPSTREAM_COMMIT=777ba8fa48583d0c5f3ed735c7a6b91a48e16e81
 
 # build deps
 RUN apk add --no-cache \
@@ -16,7 +16,7 @@ RUN apk add --no-cache \
 WORKDIR /usr/local/searxng/
 
 RUN git config --global --add safe.directory /usr/local/searxng \
-&& git clone https://github.com/vojkovic/searxng . \
+&& git clone https://github.com/searxng/searxng . \
 && git reset --hard ${UPSTREAM_COMMIT}
 
 # freeze version string
