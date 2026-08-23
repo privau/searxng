@@ -20,11 +20,13 @@ update-upstream-commit:
     - git checkout -B "$CI_COMMIT_BRANCH" "origin/$CI_COMMIT_BRANCH"
   script:
     - |
-      UPSTREAM_REPO="$(sed -n 's/.*git clone \(https:[^ ]*\) .*/\1/p' Dockerfile | head -n1)"
+      UPSTREAM_REPO="$(sed -n 's/.*git clone.* \(https:[^ ]*\).*/\1/p' Dockerfile | head -n1)"
+      UPSTREAM_BRANCH="$(sed -n 's/.*--branch \([^ ]*\).*/\1/p' Dockerfile | head -n1)"
       LOCAL_COMMIT="$(grep -m1 "UPSTREAM_COMMIT=" Dockerfile | cut -d'=' -f2)"
-      REMOTE_COMMIT="$(git ls-remote "$UPSTREAM_REPO" HEAD | awk '{print $1}')"
+      REMOTE_COMMIT="$(git ls-remote "$UPSTREAM_REPO" "${UPSTREAM_BRANCH:-HEAD}" | awk '{print $1}')"
 
       echo "Upstream repo: $UPSTREAM_REPO"
+      echo "Upstream branch: ${UPSTREAM_BRANCH:-HEAD}"
       echo "Remote commit: $REMOTE_COMMIT"
       echo "Local commit:  $LOCAL_COMMIT"
 

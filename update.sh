@@ -2,7 +2,7 @@
 set -e
 
 UPSTREAM_COMMIT="$(grep -m1 "UPSTREAM_COMMIT=" Dockerfile | cut -d'=' -f2)"
-UPSTREAM_REPO="$(sed -n 's/.*git clone \(https:[^ ]*\) .*/\1/p' Dockerfile | head -n1)"
+UPSTREAM_REPO="$(sed -n 's/.*git clone.* \(https:[^ ]*\).*/\1/p' Dockerfile | head -n1)"
 
 if [ ! -d build ]
 then
