@@ -202,6 +202,14 @@ if [ ! -z "${JINA_API}" ]; then
     searx/settings.yml;
 fi
 
+# set Brave Search API key
+if [ ! -z "${BRAVE_API}" ]; then
+    sed -i -e "/- name: braveapi$/,/inactive:/s/api_key: .*/api_key: '${BRAVE_API}'/" \
+    -e "/- name: braveapi$/,/inactive:/s/inactive: true/inactive: false/" \
+    -e "/- name: braveapi$/,/inactive:/s/disabled: .*/disabled: false/" \
+    searx/settings.yml;
+fi
+
 # set footer message
 if [ ! -z "${FOOTER_MESSAGE}" ]; then
     sed -i "/<footer>/,/{{/ { /${FOOTER_MESSAGE}/! s|<p>[^{{]*|<p>${FOOTER_MESSAGE}| }" \

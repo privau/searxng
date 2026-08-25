@@ -129,3 +129,5 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 * ```MARGINALIA_API``` : sets the API key for the Marginalia search engine and enables it (Default: disabled)
 
 * ```JINA_API``` : sets the API key for the Jina search engine and enables it (Default: disabled)
+
+* ```BRAVE_API``` : sets the API key for the Brave API engine and enables it (Default: disabled)
