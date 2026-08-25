@@ -104,6 +104,8 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```YANDEX_DEFAULT``` : enable the Yandex search engine by default (Default: `false`)
 
+* ```YAHOO_DEFAULT``` : enable the Yahoo search engine by default (Default: `false`)
+
 * ```SWISSCOWS_DEFAULT``` : enable the Swisscows search engine by default (Default: `false`)
 
 * ```DOGPILE_DEFAULT``` : enable the Dogpile search engine by default (Default: `false`)
