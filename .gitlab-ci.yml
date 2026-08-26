@@ -83,27 +83,52 @@ build-and-push:
       docker run -d \
         --name "$TEST_CONTAINER" \
         -p 8080:8080 \
+        -e AUTHORISED_API=test_api_key \
         "$TEST_TAG"
+
+      curl_host() {
+        docker run --rm --network host curlimages/curl:latest "$@"
+      }
+
+      dump_logs() {
+        echo "==== container logs ===="
+        docker logs "$TEST_CONTAINER" || true
+      }
+      trap dump_logs ERR
 
       echo "Waiting for container to be ready..."
       for i in $(seq 1 30); do
-        if docker run --rm --network host curlimages/curl:latest \
-          -fsS http://localhost:8080/healthz 2>/dev/null | grep -q "OK"; then
+        if curl_host -fsS http://localhost:8080/healthz 2>/dev/null | grep -q "OK"; then
           echo "Container is ready"
           break
         fi
         if [ "$i" -eq 30 ]; then
           echo "ERROR: container did not become ready within 60 seconds"
+          docker logs "$TEST_CONTAINER" || true
           exit 1
         fi
         sleep 2
       done
 
-      docker run --rm --network host curlimages/curl:latest \
-        -fsS http://localhost:8080/healthz | grep "OK"
+      curl_host -fsS http://localhost:8080/healthz | grep "OK"
 
-      docker run --rm --network host curlimages/curl:latest \
-        -fsS "http://localhost:8080/search?q=github" | grep "sidebar-end-collapsible"
+      curl_host -fsS --max-time 60 "http://localhost:8080/search?q=github" | grep "sidebar-end-collapsible"
+
+      unauth_status="$(curl_host -sS -o /dev/null -w '%{http_code}' --max-time 15 \
+        "http://localhost:8080/search?q=github&format=json")"
+      [ "$unauth_status" = "403" ]
+
+      badauth_status="$(curl_host -sS -o /dev/null -w '%{http_code}' --max-time 15 \
+        -u 'user:wrong_key' "http://localhost:8080/search?q=github&format=json")"
+      [ "$badauth_status" = "403" ]
+
+      curl_host -fsS --max-time 60 -u 'user:test_api_key' \
+        "http://localhost:8080/search?q=github&format=json" | grep '"query"'
+
+      bearer_out="$(curl_host -sS -w 'HTTPSTATUS:%{http_code}' --max-time 15 \
+        -H "Authorization: Bearer test_api_key" "http://localhost:8080/search?format=json")"
+      echo "$bearer_out" | grep -q '"error"'
+      echo "$bearer_out" | grep -q 'HTTPSTATUS:400'
 
       docker rm -f "$TEST_CONTAINER"
 

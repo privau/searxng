@@ -3,6 +3,7 @@
 
 import os
 
+from searx.auth import apply_authorised_api
 from searx.search.supplemental_timeout import apply_supplemental_timeout
 from searx.search.google_autocomplete_icons import apply_google_autocomplete_icons
 
@@ -21,3 +22,4 @@ if os.environ.get('DONATE') == '/donate':
         return render('donation.html')
 
 apply_google_autocomplete_icons(app)
+apply_authorised_api(app)
