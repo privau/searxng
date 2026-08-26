@@ -4,8 +4,6 @@
 
 import base64
 from os import environ
-from threading import Lock
-from time import monotonic
 
 
 def _keys():
@@ -64,29 +62,36 @@ def apply_authorised_api(app):
         return
 
     from flask import Response, abort
-    from searx import limiter, settings, webapp as sx_webapp
+    from searx import limiter, settings, valkeydb, valkeylib, webapp as sx_webapp
     from searx.extended_types import sxng_request
 
     if not isinstance(settings['search']['formats'], _Formats):
         settings['search']['formats'] = _Formats(settings['search']['formats'], keys)
 
-    hits, lock = {}, Lock()
     original = app.view_functions['search']
+
+    def _ratelimit(resp, limit, remaining, retry=None):
+        body = resp[0] if isinstance(resp, tuple) else resp
+        body.headers['X-RateLimit-Limit'] = str(limit)
+        body.headers['X-RateLimit-Remaining'] = str(max(0, remaining))
+        if retry is not None:
+            body.headers['Retry-After'] = str(retry)
+        return resp
 
     def search(*args, **kwargs):
         key = _match(sxng_request, keys) if sxng_request.form.get('format', 'html') != 'html' else None
         if key and (limit := keys[key]):
-            now = monotonic()
-            with lock:
-                start, count = hits.get(key, (now, 0))
-                if now - start >= 86400:
-                    start, count = now, 0
-                if count >= limit:
-                    retry = max(1, int(start + 86400 - now) + 1)
-                    response = Response('{"error": "Too Many Requests"}', 429, mimetype='application/json')
-                    response.headers['Retry-After'] = str(retry)
-                    abort(response)
-                hits[key] = (start, count + 1)
+            client = valkeydb.client()
+            if client is None:
+                abort(503)
+            name = f'authorised_api:{key}'
+            count = valkeylib.incr_counter(client, name, expire=86400)
+            remaining = limit - count
+            if count > limit:
+                ttl = client.ttl('SearXNG_counter_' + valkeylib.secret_hash(name))
+                response = Response('{"error": "Too Many Requests"}', 429, mimetype='application/json')
+                abort(_ratelimit(response, limit, 0, ttl if ttl and ttl > 0 else 86400))
+            return _ratelimit(original(*args, **kwargs), limit, remaining)
         return original(*args, **kwargs)
 
     app.view_functions['search'] = sx_webapp.search = search
