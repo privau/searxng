@@ -224,4 +224,15 @@ if [ ! -z "${DONATE}" ]; then
     sed -i -e "s+donation_url: false+donation_url: ${DONATE}+g" searx/settings.yml;
 fi
 
+# set API docs page url in footer
+if [ ! -z "${API}" ]; then
+    sed -i \
+    -e 's|^  # custom:|  custom:|' \
+    -e 's|^  #   # Custom entries in the footer: \[title\]: \[link\]|    # Custom entries in the footer: [title]: [link]|' \
+    -e 's|^  #   links:|    links:|' \
+    -e "s|^  #     Uptime: .*|      API: ${API}|" \
+    -e '/^  #     About:/d' \
+    searx/settings.yml;
+fi
+
 exec /usr/local/searxng/venv/bin/granian searx.privau_wsgi:app

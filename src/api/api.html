@@ -1,0 +1,32 @@
+{% extends "simple/base.html" %}
+{% block content %}
+<div class="box">
+<h1>PrivAU API</h1>
+<p>Unfortunately, I cannot make the priv.au API public as bots would immediately burn through the IP pool, so I hand out keys manually.</p>
+
+<p>With a key, you can request the JSON / CSV / RSS formats from <code>/search</code>.</p>
+
+<p>You have three choices for auth depending on whatever is easiest for you:</p>
+
+<pre>curl -u ":KEY" 'https://priv.au/search?q=abc&amp;format=json'
+
+curl -H "Authorization: Bearer KEY" 'https://priv.au/search?q=abc&amp;format=json'
+
+curl -H "X-API-Key: KEY" 'https://priv.au/search?q=abc&amp;format=json'</pre>
+
+<p>You will receive these headers to know how much of your limit remains:</p>
+
+<pre>
+X-RateLimit-Limit: 200
+X-RateLimit-Remaining: 199
+</pre>
+<p>
+If you reach the cap, you will get a 429 with a <code>Retry-After</code> header.
+</p>
+
+<p>
+I hand out keys strictly only for academic/personal use. If this sounds like you, please contact me with a description of your use case and an approximate number of searches you expect to do per day.
+</p>
+
+</div>
+{% endblock %}

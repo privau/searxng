@@ -21,5 +21,10 @@ if os.environ.get('DONATE') == '/donate':
     def privau_donate():
         return render('donation.html')
 
+if os.environ.get('API') == '/api':
+    @app.route('/api', methods=['GET'])
+    def privau_api():
+        return render('api.html')
+
 apply_google_autocomplete_icons(app)
 apply_authorised_api(app)

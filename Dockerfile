@@ -79,6 +79,7 @@ RUN sed -i "/'simple_style': EnumStringSetting(/,/center_alignment/ s/choices=\[
 # privacy policy and donation page templates
 COPY --chown=searxng:searxng ./src/privacy-policy/privacy-policy.html searx/templates/simple/privacy-policy.html
 COPY --chown=searxng:searxng ./src/donation/donation.html searx/templates/simple/donation.html
+COPY --chown=searxng:searxng ./src/api/api.html searx/templates/simple/api.html
 
 # include patches for captcha
 COPY --chown=searxng:searxng ./src/captcha/captcha.py searx/captcha.py
@@ -192,6 +193,7 @@ LUXXLE_DEFAULT= ISEEK_DEFAULT= YANDEX_DEFAULT= YAHOO_DEFAULT= SWISSCOWS_DEFAULT=
 OPENMETRICS= \
 PRIVACYPOLICY= \
 DONATE= \
+API= \
 CONTACT=https://vojk.au \
 FOOTER_MESSAGE= \
 ISSUE_URL=https://github.com/privau/searxng/issues GIT_URL=https://github.com/privau/searxng GIT_BRANCH=main
