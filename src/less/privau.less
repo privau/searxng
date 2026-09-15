@@ -70,6 +70,12 @@ button.category_button {
   box-sizing: border-box;
 }
 
+@media screen and (max-width: @tablet) {
+  .search_filters {
+    width: auto;
+  }
+}
+
 @media screen and (min-width: @phone) and (max-width: @tablet) {
   body.results_endpoint {
     #search_header {
@@ -79,7 +85,6 @@ button.category_button {
 
     .search_filters {
       .ltr-margin-left(calc((100% - @results-width) / 2 + 0.5em));
-      width: calc(@results-width - 1em);
     }
   }
 }
@@ -134,13 +139,13 @@ button.category_button {
   }
 
   .search_filters {
+    margin: 0 10px;
     width: calc(100% - 20px);
     min-width: 0;
     overflow-x: hidden;
     flex-wrap: wrap;
 
     select {
-      flex: 1 1 6rem;
       min-width: 0;
       .ltr-margin-right(0.5rem);
       margin-bottom: 0.25rem;
