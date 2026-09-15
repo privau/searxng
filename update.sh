@@ -36,6 +36,11 @@ if ! grep -q '@import "captchapage.less";' build/client/simple/src/less/style.le
   sed -i 's/@import "donationpage.less";/@import "donationpage.less";\n@import "captchapage.less";/' build/client/simple/src/less/style.less
 fi
 
+echo "Enable PrivAU overrides."
+if ! grep -q '@import "privau.less";' build/client/simple/src/less/style.less; then
+  sed -i 's/@import "search.less";/@import "search.less";\n@import "privau.less";/' build/client/simple/src/less/style.less
+fi
+
 echo "Build static files."
 cd build
 make themes.all

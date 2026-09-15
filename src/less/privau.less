@@ -1,0 +1,229 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// PrivAU theme overrides (kept separate from upstream search.less)
+
+#search_header {
+  gap: 0.7rem 0.5em;
+}
+
+.category_checkbox label {
+  .category_name {
+    padding-left: 0.2rem;
+    padding-right: 0.13rem;
+  }
+
+  svg {
+    padding-right: 0;
+  }
+}
+
+button.category_button {
+  margin: 4px !important;
+  margin-bottom: 6px !important;
+  padding: 8px !important;
+  border-radius: 8px;
+  border-bottom: none;
+
+  .category_name {
+    padding-left: 0.2rem;
+    padding-right: 0.13rem;
+  }
+
+  svg {
+    padding-right: 0;
+  }
+
+  @media screen and (min-width: @phone) {
+    &:first-child {
+      margin-left: 0 !important;
+    }
+  }
+
+  &.selected,
+  &:active,
+  &:focus-within {
+    color: var(--color-categories-item-selected-font);
+    background: var(--color-search-background);
+    border-bottom: none;
+  }
+}
+
+#search_logo svg {
+  color: var(--color-logo-color, var(--color-logo-fill, var(--color-categories-item-selected-font, var(--color-base-font))));
+
+  :not([fill="none"]) {
+    fill: var(--color-logo-fill, #3050ff);
+  }
+
+  :not([stroke="none"]) {
+    stroke: var(--color-logo-fill, #3050ff);
+  }
+}
+
+#q::-ms-clear,
+#q::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search_filters {
+  .ltr-margin-left(calc(@results-offset + 0.5em));
+  width: calc(@results-width - 1em);
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: @phone) and (max-width: @tablet) {
+  body.results_endpoint {
+    #search_header {
+      .ltr-padding-left(calc((100% - @results-width) / 2 - 3rem));
+      column-gap: 0.5em;
+    }
+
+    .search_filters {
+      .ltr-margin-left(calc((100% - @results-width) / 2 + 0.5em));
+      width: calc(@results-width - 1em);
+    }
+  }
+}
+
+@media screen and (max-width: @tablet) and (hover: none) {
+  #main_index,
+  #main_results {
+    #categories {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+}
+
+@media screen and (max-width: @phone) {
+  #main_index,
+  #main_results,
+  body.captcha_endpoint {
+    #categories {
+      padding: 0.4em 10px;
+      box-sizing: border-box;
+      background: var(--color-header-background);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #categories_container {
+      display: flex;
+      width: max-content;
+      min-width: 100%;
+    }
+
+    .category_checkbox,
+    button.category_button {
+      flex: 1 0 auto;
+      margin: 0 !important;
+      padding: 8px !important;
+    }
+
+    button.category_button {
+      justify-content: center;
+    }
+
+    .category_checkbox label {
+      justify-content: center;
+      padding: 0.2rem 0 !important;
+      margin: 0 !important;
+    }
+
+    .category svg {
+      display: initial;
+    }
+  }
+
+  .search_filters {
+    width: calc(100% - 20px);
+    min-width: 0;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+
+    select {
+      flex: 1 1 6rem;
+      min-width: 0;
+      .ltr-margin-right(0.5rem);
+      margin-bottom: 0.25rem;
+    }
+  }
+}
+
+@media screen and (width <= calc(@small-phone + 3.5em)) {
+  .category_name {
+    display: none;
+  }
+}
+
+@media screen and (max-width: @ultra-small-phone) {
+  #search_box {
+    border-radius: 0;
+  }
+}
+
+#categories {
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+article.result {
+  background-color: var(--color-result-background);
+  border-radius: 0.75em;
+  padding: 0.75em;
+  margin: 0.5em;
+  width: auto;
+}
+
+#results #answers {
+  .ltr-margin-left(0.5em);
+  .ltr-margin-right(0.5em);
+}
+
+.infobox {
+  background-color: var(--color-result-background) !important;
+  border-radius: 0.75em;
+  padding: 0.75em;
+  margin: 0.5em;
+}
+
+article.category-images {
+  padding-bottom: 4em;
+}
+
+@supports ((background-position-x: 100%) and ((appearance: none) or (-webkit-appearance: none) or (-moz-appearance: none))) {
+  html.theme-paulgo select,
+  html.theme-frappe select,
+  html.theme-macchiato select,
+  html.theme-mocha select,
+  html.theme-kagi select,
+  html.theme-brave select,
+  html.theme-moa select,
+  html.theme-night select,
+  html.theme-dracula select,
+  html.theme-gruvbox select,
+  html.theme-gruvboxmat select,
+  html.theme-everforest select,
+  html.theme-evergarden select,
+  html.theme-nord select,
+  html.theme-matcha select {
+    background-image: data-uri('image/svg+xml;charset=UTF-8', @select-dark-svg-path);
+  }
+}
+
+.favicon img {
+  border-radius: 17%;
+}
+
+.altlink {
+  display: none;
+}
+
+@media screen and (max-width: @tablet) {
+  #main_results #links_on_top {
+    .link_on_top_about,
+    .link_on_top_donate {
+      display: none;
+    }
+  }
+}
