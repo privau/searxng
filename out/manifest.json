@@ -60,7 +60,7 @@
     ]
   },
   "src/js/main/results.ts": {
-    "file": "chunk/od7pNHfk.min.js",
+    "file": "chunk/BVVCO4vX.min.js",
     "name": "results",
     "src": "src/js/main/results.ts",
     "isDynamicEntry": true,
@@ -70,7 +70,7 @@
     ]
   },
   "src/js/main/search.ts": {
-    "file": "chunk/5Ako-qGW.min.js",
+    "file": "chunk/6liDwPCz.min.js",
     "name": "search",
     "src": "src/js/main/search.ts",
     "isDynamicEntry": true,
@@ -80,7 +80,7 @@
     ]
   },
   "src/js/plugin/Calculator.ts": {
-    "file": "chunk/BhYx0_Gb.min.js",
+    "file": "chunk/CdVmyKrK.min.js",
     "name": "calculator",
     "src": "src/js/plugin/Calculator.ts",
     "isDynamicEntry": true,
@@ -102,7 +102,7 @@
     ]
   },
   "src/js/plugin/MapView.ts": {
-    "file": "chunk/Dms-nhjX.min.js",
+    "file": "chunk/CFmKEewG.min.js",
     "name": "mapview",
     "src": "src/js/plugin/MapView.ts",
     "isDynamicEntry": true,
@@ -112,6 +112,15 @@
     "css": [
       "sxng-mapview.min.css"
     ]
+  },
+  "src/less/noscript.less": {
+    "file": "sxng-noscript.min.css",
+    "name": "noscript",
+    "names": [
+      "noscript.css"
+    ],
+    "src": "src/less/noscript.less",
+    "isEntry": true
   },
   "src/less/rss.less": {
     "file": "sxng-rss.min.css",
