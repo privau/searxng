@@ -16,6 +16,10 @@ env:
   GITHUB_LATEST_TAG: ghcr.io/privau/searxng:latest
   DOCKER_HUB_LATEST_TAG: vojkovic/searxng:latest
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest

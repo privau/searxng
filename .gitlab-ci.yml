@@ -1,3 +1,10 @@
+workflow:
+  auto_cancel:
+    on_new_commit: interruptible
+
+default:
+  interruptible: true
+
 stages:
   - maintenance
   - build
