@@ -162,11 +162,20 @@ set_engine_default() {
     searx/settings.yml;
 }
 
+set_inactive_engine() {
+    engine_name="$1"
+    env_value="$2"
+
+    if [ ! -z "$env_value" ]; then
+        set_engine_default "$engine_name" "$env_value"
+    fi
+}
+
 set_engine_default google "${GOOGLE_DEFAULT}"
 set_engine_default "google images" "${GOOGLE_DEFAULT}"
 set_engine_default "google news" "${GOOGLE_DEFAULT}"
 set_engine_default "google videos" "${GOOGLE_DEFAULT}"
-set_engine_default startpage "${STARTPAGE_DEFAULT}"
+set_inactive_engine startpage "${STARTPAGE_DEFAULT}"
 set_engine_default brave "${BRAVE_DEFAULT}"
 set_engine_default "brave.images" "${BRAVE_DEFAULT}"
 set_engine_default "brave.videos" "${BRAVE_DEFAULT}"
@@ -175,13 +184,13 @@ set_engine_default duckduckgo "${DUCKDUCKGO_DEFAULT}"
 set_engine_default wikipedia "${WIKIPEDIA_DEFAULT}"
 set_engine_default wikidata "${WIKIDATA_DEFAULT}"
 set_engine_default "ddg definitions" "${DDG_DEFINITIONS_DEFAULT}"
-set_engine_default luxxle "${LUXXLE_DEFAULT}"
-set_engine_default iseek "${ISEEK_DEFAULT}"
-set_engine_default swisscows "${SWISSCOWS_DEFAULT}"
+set_inactive_engine luxxle "${LUXXLE_DEFAULT}"
+set_inactive_engine iseek "${ISEEK_DEFAULT}"
+set_inactive_engine swisscows "${SWISSCOWS_DEFAULT}"
 set_engine_default yandex "${YANDEX_DEFAULT}"
 set_engine_default yahoo "${YAHOO_DEFAULT}"
-set_engine_default dogpile "${DOGPILE_DEFAULT}"
-set_engine_default "dogpile images" "${DOGPILE_DEFAULT}"
+set_inactive_engine dogpile "${DOGPILE_DEFAULT}"
+set_inactive_engine "dogpile images" "${DOGPILE_DEFAULT}"
 set_engine_default privacywall "${PRIVACYWALL_DEFAULT}"
 set_engine_default vuhuv "${VUHUV_DEFAULT}"
 set_engine_default gmx "${GMX_DEFAULT}"

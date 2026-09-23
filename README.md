@@ -94,7 +94,7 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```DUCKDUCKGO_DEFAULT``` : enable the DuckDuckGo search engine by default (Default: `false`)
 
-* ```STARTPAGE_DEFAULT``` : enable the Startpage search engine by default (Default: `false`)
+* ```STARTPAGE_DEFAULT``` : enable the Startpage search engine by default (Default: inactive)
 
 * ```WIKIPEDIA_DEFAULT``` : enable the Wikipedia engine by default (Default: `false`)
 
@@ -102,17 +102,17 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```DDG_DEFINITIONS_DEFAULT``` : enable the DuckDuckGo Definitions engine by default (Default: `false`)
 
-* ```LUXXLE_DEFAULT``` : enable the Luxxle search engine by default (Default: `false`)
+* ```LUXXLE_DEFAULT``` : enable the Luxxle search engine by default (Default: inactive)
 
-* ```ISEEK_DEFAULT``` : enable the iSeek search engine by default (Default: `false`)
+* ```ISEEK_DEFAULT``` : enable the iSeek search engine by default (Default: inactive)
 
 * ```YANDEX_DEFAULT``` : enable the Yandex search engine by default (Default: `false`)
 
 * ```YAHOO_DEFAULT``` : enable the Yahoo search engine by default (Default: `false`)
 
-* ```SWISSCOWS_DEFAULT``` : enable the Swisscows search engine by default (Default: `false`)
+* ```SWISSCOWS_DEFAULT``` : enable the Swisscows search engine by default (Default: inactive)
 
-* ```DOGPILE_DEFAULT``` : enable the Dogpile search engine by default (Default: `false`)
+* ```DOGPILE_DEFAULT``` : enable the Dogpile search engine by default (Default: inactive)
 
 * ```PRIVACYWALL_DEFAULT``` : enable the PrivacyWall search engine by default (Default: `false`)
 
