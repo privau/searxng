@@ -68,7 +68,7 @@ RUN sed -i \
 -e 's/^# \[favicons.proxy.resolver_map\]/[favicons.proxy.resolver_map]/' \
 -e 's/^# \(".*" = "searx\.favicons\.resolvers\..*"\)/\1/' \
 -e 's/^# HOLD_TIME = .*/HOLD_TIME = 5184000/' \
--e 's/^# LIMIT_TOTAL_BYTES = .*/LIMIT_TOTAL_BYTES = 2147483648/' \
+-e 's/^# LIMIT_TOTAL_BYTES = .*/LIMIT_TOTAL_BYTES = 201326592/' \
 searx/favicons/favicons.toml
 
 # make our patches to searxng's code to allow for the custom theming
