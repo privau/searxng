@@ -128,6 +128,14 @@ Use the [Looking Glass](https://lg.as44354.net/) to find the closest one to you.
 
 * ```GOOGLE_CSE_DEFAULT``` : enable the Google CSE and Google CSE Images engines by default (Default: `false`)
 
+* ```MWMBL_DEFAULT``` : enable the Mwmbl engine by default (Default: `false`)
+
+* ```FYND_DEFAULT``` : enable the Fynd engine by default (Default: `false`)
+
+* ```WIBY_DEFAULT``` : enable the Wiby engine by default (Default: `false`)
+
+* ```YEP_DEFAULT``` : enable the Yep engine by default (Default: `false`)
+
 * ```SEARCH_DEFAULT_LANG``` : sets the default search language (for example `en`, Default: `auto`)
 
 * ```MARGINALIA_API``` : sets the API key for the Marginalia search engine and enables it (Default: disabled)

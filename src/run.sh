@@ -199,6 +199,10 @@ set_engine_default resulthunter "${RESULTHUNTER_DEFAULT}"
 set_engine_default tusksearch "${TUSKSEARCH_DEFAULT}"
 set_engine_default "google cse" "${GOOGLE_CSE_DEFAULT}"
 set_engine_default "google cse images" "${GOOGLE_CSE_DEFAULT}"
+set_engine_default mwmbl "${MWMBL_DEFAULT}"
+set_engine_default fynd "${FYND_DEFAULT}"
+set_engine_default wiby "${WIBY_DEFAULT}"
+set_engine_default yep "${YEP_DEFAULT}"
 
 # set Marginalia API key
 if [ ! -z "${MARGINALIA_API}" ]; then
