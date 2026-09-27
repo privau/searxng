@@ -110,6 +110,53 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/^  map:/d" \
 -e "/^  files:/d" \
 -e "/^  social media:/d" \
+-e "/name: 500px\$/s/$/\n    inactive: true/g" \
+-e "/name: artic\$/s/$/\n    inactive: true/g" \
+-e "/name: artstation\$/s/$/\n    inactive: true/g" \
+-e "/name: baidu images\$/s/$/\n    inactive: true/g" \
+-e "/name: bing images\$/s/$/\n    inactive: true/g" \
+-e "/name: openverse\$/s/$/\n    inactive: true/g" \
+-e "/name: deviantart\$/s/$/\n    inactive: true/g" \
+-e "/name: 1x\$/s/$/\n    inactive: true/g" \
+-e "/name: findborg images\$/s/$/\n    inactive: true/g" \
+-e "/name: findfiles images\$/s/$/\n    inactive: true/g" \
+-e "/name: findthatmeme\$/s/$/\n    inactive: true/g" \
+-e "/name: flickr\$/s/$/\n    inactive: true/g" \
+-e "/name: flickr_api\$/s/$/\n    inactive: true/g" \
+-e "/name: frinkiac\$/s/$/\n    inactive: true/g" \
+-e "/name: giphy\$/s/$/\n    inactive: true/g" \
+-e "/name: imgur\$/s/$/\n    inactive: true/g" \
+-e "/name: ipernity\$/s/$/\n    inactive: true/g" \
+-e "/name: luxxle images\$/s/$/\n    inactive: true/g" \
+-e "/name: magnific\$/s/$/\n    inactive: true/g" \
+-e "/name: openclipart\$/s/$/\n    inactive: true/g" \
+-e "/name: pexels\$/s/$/\n    inactive: true/g" \
+-e "/name: picjumbo\$/s/$/\n    inactive: true/g" \
+-e "/name: pinterest\$/s/$/\n    inactive: true/g" \
+-e "/name: pixabay images\$/s/$/\n    inactive: true/g" \
+-e "/name: pixiv\$/s/$/\n    inactive: true/g" \
+-e "/name: public domain image archive\$/s/$/\n    inactive: true/g" \
+-e "/name: quark images\$/s/$/\n    inactive: true/g" \
+-e "/name: qwant images\$/s/$/\n    inactive: true/g" \
+-e "/name: searchrockit images\$/s/$/\n    inactive: true/g" \
+-e "/name: shopify stock\$/s/$/\n    inactive: true/g" \
+-e "/name: sogou images\$/s/$/\n    inactive: true/g" \
+-e "/name: stocksnap\$/s/$/\n    inactive: true/g" \
+-e "/name: privacywall images\$/s/$/\n    inactive: true/g" \
+-e "/name: startpage images\$/s/$/\n    inactive: true/g" \
+-e "/name: tonline images\$/s/$/\n    inactive: true/g" \
+-e "/name: tusksearch images\$/s/$/\n    inactive: true/g" \
+-e "/name: unsplash\$/s/$/\n    inactive: true/g" \
+-e "/name: yandex images\$/s/$/\n    inactive: true/g" \
+-e "/name: wikicommons\.images\$/s/$/\n    inactive: true/g" \
+-e "/name: mojeek images\$/s/$/\n    inactive: true/g" \
+-e "/name: naver images\$/s/$/\n    inactive: true/g" \
+-e "/name: yacy images\$/s/$/\n    inactive: true/g" \
+-e "/name: resulthunter images\$/s/$/\n    inactive: true/g" \
+-e "/name: startpagina images\$/s/$/\n    inactive: true/g" \
+-e "/name: swisscows images\$/s/$/\n    inactive: true/g" \
+-e "/name: vuhuv images\$/s/$/\n    inactive: true/g" \
+-e "/name: wallhaven\$/s/$/\n    inactive: true/g" \
 -e "/name: wikispecies/s/$/\n    disabled: true/g" \
 -e "/name: wikinews/s/$/\n    disabled: true/g" \
 -e "/name: wikibooks/s/$/\n    disabled: true/g" \
@@ -130,8 +177,6 @@ RUN sed -i -e "/safe_search:/s/0/1/g" \
 -e "/name: currency/s/$/\n    disabled: false/g" \
 -e "/name: qwant/s/$/\n    disabled: true/g" \
 -e "/name: btdigg/s/$/\n    disabled: true/g" \
--e "/name: lucide/s/$/\n    disabled: true/g" \
--e "/name: devicons/s/$/\n    disabled: true/g" \
 -e "/name: pexels/s/$/\n    disabled: true/g" \
 -e "/name: docker hub/s/$/\n    disabled: true/g" \
 -e "/name: github/s/$/\n    disabled: true/g" \
