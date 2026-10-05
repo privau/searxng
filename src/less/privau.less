@@ -47,6 +47,21 @@ button.category_button {
   }
 }
 
+// recolor logo based on theme
+.index .title,
+.page_with_header .logo {
+  background: var(--color-logo-fill, var(--color-btn-background, #3050ff));
+  -webkit-mask: url("./img/searxng.png") no-repeat center;
+  mask: url("./img/searxng.png") no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.page_with_header .logo {
+  object-fit: none;
+  object-position: -9999px 0;
+}
+
 #search_logo svg {
   color: var(--color-logo-color, var(--color-logo-fill, var(--color-categories-item-selected-font, var(--color-base-font))));
 
