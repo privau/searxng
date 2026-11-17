@@ -1,7 +1,7 @@
 # alpine as base
 FROM docker.io/library/python:3.13-alpine AS builder
 
-ENV UPSTREAM_COMMIT=cf3c20177b661d37c1b20562944861c962e8261a
+ENV UPSTREAM_COMMIT=d3a35cf455094764a6d2f78bd64e1892264da2c7
 
 # build deps
 RUN apk add --no-cache \
